@@ -1,5 +1,10 @@
 package com.boram.myPage.view;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -7,17 +12,19 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.boram.member.vo.Member;
 import com.boram.shopping.view.MainView;
-import java.awt.event.ActionListener;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
 
 public class WB_MyPage_Main extends JFrame {
+	
+	
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
-	
+	private ArrayList<Member> mList = new ArrayList<>();
 	private JPanel contentPane;
 
+	
+	
 	public WB_MyPage_Main() {
 		
 		contentPane = new JPanel();
@@ -64,7 +71,11 @@ public class WB_MyPage_Main extends JFrame {
 		JLabel lblMyCart = new JLabel("My Page");
 		lblMyCart.setBounds(0,0, 700,112);
 		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMyCart.setFont(new Font("Segoe Script", Font.ITALIC, 50));
+		lblMyCart.setFont(new Font("±¼¸²", Font.ITALIC, 50));
 		contentPane.add(lblMyCart);
+		
+		JLabel lblNewLabel = new JLabel("´ÔÀÇ Á¤º¸´Â");
+		lblNewLabel.setBounds(78, 149, 507, 40);
+		contentPane.add(lblNewLabel);
 	}
 }

@@ -54,11 +54,11 @@ public class WB_MyPageView extends JFrame {
 
 		JLabel lblMyCart = new JLabel("My Page");
 		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMyCart.setFont(new Font("Segoe Script", Font.ITALIC, 50));
+		lblMyCart.setFont(new Font("±¼¸²", Font.ITALIC, 50));
 		panel.add(lblMyCart);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.DARK_GRAY);
+		panel_2.setBackground(Color.LIGHT_GRAY);
 		panel_2.setBounds(0, 91, 718, 370);
 
 		getContentPane().add(panel_2);
@@ -158,6 +158,10 @@ public class WB_MyPageView extends JFrame {
 		JTextArea ta = new JTextArea();
 		ta.setBounds(250, 72, 440, 170);
 		panel_2.add(ta);
+		
+		JButton btnPre = new JButton("Pre");
+		btnPre.setBounds(265, 300, 105, 27);
+		panel_2.add(btnPre);
 		
 		
 	}
