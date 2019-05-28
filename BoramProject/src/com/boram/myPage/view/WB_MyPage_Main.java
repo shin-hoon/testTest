@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import com.boram.member.vo.Member;
-import com.boram.shopping.view.MainView;
 
 public class WB_MyPage_Main extends JFrame {
 	public static final int FWID = 718;
@@ -37,7 +36,6 @@ public class WB_MyPage_Main extends JFrame {
 		btnNewButton.setBounds(78, 371, 103, 94);
 		contentPane.add(btnNewButton);
 		
-		MainView.frame.getContentPane().add(contentPane);
 		
 		JButton button = new JButton("장바구니");
 		button.addActionListener(new ActionListener() {

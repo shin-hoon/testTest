@@ -1,6 +1,5 @@
 package com.boram.shopping.view;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,11 +22,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import com.boram.member.view.MemberView1;
-import com.boram.myPage.view.WB_MyPage_Main;
+import com.boram.myPage.view.WB_MyPageView;
 import com.boram.shopping.controller.MainMouseEvent;
 
 public class MainView{
-	public static JFrame frame= new JFrame();
+	JFrame frame;
 /*   
   	 menu          subMenu
 	JLabel         JPanel 
@@ -39,23 +38,25 @@ public class MainView{
 	 acc         accSubMenu
 	
  */
-	// 고정 페이지(위쪽, 서브메뉴, 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
+	// 고정 페이지 JPanel(맨 위쪽)
+	JPanel mainMenu;
+	// 고정 페이지 JPanel에 담기는 JLabel(맨 위쪽 => 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
 	JLabel kategorie, logo, search, login, myPage, adminPage;	
-	// 메뉴 목록
-	JLabel outer, top, shirt, pants, shoes, acc;
-	// 서브메뉴 목록
-	JPanel outerSubMenu, topSubMenu, shirtSubMenu, pantsSubMenu, shoesSubMenu, accSubMenu;
-	// 메뉴 목록과 서브메뉴 목록을 담고있는 JPanel 
+	// 서브메뉴 목록과 서브메뉴 상세 분류를 담고있는 JPanel. kategorie를 누르면 나오는 메뉴
 	JPanel subMenu;
+	// 서브메뉴 목록
+	JLabel outer, top, shirt, pants, shoes, acc;
+	// 서브메뉴 상세 분류 목록
+	JPanel outerSubMenu, topSubMenu, shirtSubMenu, pantsSubMenu, shoesSubMenu, accSubMenu;
 	// subMenu 닫기
 	JLabel subMenuClose;
 	// subMenu 스크롤
 	JScrollPane subMenuScroll;
 	// 바뀌는 페이지 
-	public static final JPanel mainPage = new JPanel();
+	JPanel mainPage;
 	// 바뀌는 페이지 스크롤
 	JScrollPane mainPageScroll;
-	
+	// 파일 경로 세팅을 위한 변수
 	public static final String PATH;
 	
 	static {
@@ -70,7 +71,7 @@ public class MainView{
 	 * 메인 페이지
 	 */
 	public MainView() {
-		//frame = new JFrame();
+		frame = new JFrame();
 		frame.setTitle("대한민국 NO.1 쇼핑몰 Boram닷컴");
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBackground(new Color(255, 255, 255));
@@ -79,66 +80,24 @@ public class MainView{
 		frame.setLocationRelativeTo(null); 
 		
 		// 고정 페이지(위쪽, 서브 메뉴)
-			this.fixedSubMenu();
-		
-		// 고정 페이지(위쪽, 메인 베너,로그인,마이페이지,관리자 페이지,검색)
-			this.fixedMainMenu();
+		this.fixedSubMenu();
+		// 고정 페이지 JPanel(위쪽, 서브메뉴, 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
+		this.fixedMainMenu();
 		// 바뀌는 페이지(아래쪽, JPanel)
-			this.changePage();
-
-			
-			
-
-		subMenuClose.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll) );	
-		
-		kategorie.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				subMenuScroll.setVisible(true);
-				subMenu.setVisible(true);
-				new Thread() {
-					public void run() {
-						try {
-							for(int i = -376; i <= 0; i++) {
-								subMenu.setLocation(i,0);
-								subMenuScroll.setLocation(i,0);
-								Thread.sleep(1);
-							}
-						} catch (Exception e) {
-							System.out.println("서브메뉴 오류 : "+e.getMessage());
-						}
-					}
-				}.start();
-			}
-		});
-
-		logo.addMouseListener(new MouseAdapter() {
-			@Override
-        	public void mouseClicked(MouseEvent e) {
-        		mainPage.setVisible(true);
-        	}
-		});
-		
-        login.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		mainPage.setVisible(false);
-        		new MemberView1();
-        	}
-        	
-		});
-        myPage.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				mainPage.setVisible(false);
-				new WB_MyPage_Main();
-			}
-		});
-        
-       
-        
-        
+		this.changePage();
+		// 이벤트 처리 
+		this.mainMouseEvent();
 
 		
+        mainPageScroll = new JScrollPane();
+		mainPageScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		mainPageScroll.getVerticalScrollBar().setUnitIncrement(16);// 스크롤 속도 
+		mainPageScroll.setBorder(null);
+		mainPageScroll.setBounds(0, 80, 700, 975);
+
+		mainPage.setPreferredSize(new Dimension(450, 1000));
+		mainPageScroll.setViewportView(mainPage);
+		frame.getContentPane().add(mainPageScroll); 
 		
 		frame.setVisible(true);
 		frame.setResizable(true);
@@ -147,10 +106,13 @@ public class MainView{
 	
 	
 	/**
-	 *  고정 페이지(위쪽, 서브메뉴)
+	 *  고정 페이지 JPanel(맨 위쪽)
+	 *  메뉴 목록과 서브메뉴 목록을 담고있는 JPanel subMenu; 
+	 *  서브메뉴 목록과 서브메뉴 상세 분류를 담고있는 JPanel. kategorie를 누르면 나오는 메뉴
 	 */
 	public void fixedSubMenu() {
 		subMenu = new JPanel();
+		subMenu.setBackground(Color.WHITE);
 		subMenu.setBounds(0,0,228,1015);
 		subMenu.setLayout(null);
 		subMenu.setVisible(true);
@@ -171,6 +133,7 @@ public class MainView{
 		
 		// OUTER 서브메뉴
 		outerSubMenu = new JPanel();
+		outerSubMenu.setBackground(Color.WHITE);
 		outerSubMenu.setBounds(40, 124, 116, 121); 
 		outerSubMenu.setLayout(null);
 		subMenu.add(outerSubMenu);
@@ -207,6 +170,7 @@ public class MainView{
 		
 		// TOP 서브메뉴
 		topSubMenu = new JPanel();
+		topSubMenu.setBackground(Color.WHITE);
 		topSubMenu.setLayout(null);
 		topSubMenu.setBounds(40, 300, 133, 147);
 		subMenu.add(topSubMenu);
@@ -248,6 +212,7 @@ public class MainView{
 		
 		// SHIRT 서브메뉴
 		JPanel shirtSubMenu = new JPanel();
+		shirtSubMenu.setBackground(Color.WHITE);
 		shirtSubMenu.setBounds(40, 504, 80, 84);
 		subMenu.add(shirtSubMenu);
 		shirtSubMenu.setLayout(null);
@@ -279,6 +244,7 @@ public class MainView{
 		
 		// PANTS 서브메뉴
 		JPanel pantsSubMenu = new JPanel();
+		pantsSubMenu.setBackground(Color.WHITE);
 		pantsSubMenu.setBounds(40, 639, 125, 176);
 		subMenu.add(pantsSubMenu);
 		pantsSubMenu.setLayout(null);
@@ -325,6 +291,7 @@ public class MainView{
 		
 		// SHOES 서브메뉴
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(40, 865, 140, 84);
 		subMenu.add(panel);
 		panel.setLayout(null);
@@ -362,10 +329,11 @@ public class MainView{
 	
 	
 	/**
-	 *   고정 페이지(위쪽, 로그인&마이페이지&관리자 페이지,검색)
+	 *   고정 페이지 JPanel(맨 위쪽, 서브메뉴, 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
+	 *   고정 페이지 JPanel에 담기는 JLabel(맨 위쪽 => 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
 	 */
 	public void fixedMainMenu() {
-		JPanel mainMenu = new JPanel();
+		mainMenu = new JPanel();
 		mainMenu.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		mainMenu.setBackground(new Color(255, 255, 255));
 		mainMenu.setBounds(-16, 0, 729, 79);
@@ -413,13 +381,12 @@ public class MainView{
 	/**
 	 * 	바뀌는 페이지(아래쪽, JPanel)
 	 */
-	public void changePage() {
-        //mainPage = new JPanel();
+	public JPanel changePage() {
+        mainPage = new JPanel();
         mainPage.setBackground(new Color(255, 255, 255));
 		mainPage.setBounds(0, 259, 700, 490);
 		mainPage.setLayout(null);
 		mainPage.setVisible(true);
-		
 		
 		Image image = null;
 		Image image2 = null;
@@ -463,15 +430,58 @@ public class MainView{
         label_4.setBounds(361, 460, 87, 18);
         mainPage.add(label_4);
        
-        mainPageScroll = new JScrollPane();
-        mainPageScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        mainPageScroll.getVerticalScrollBar().setUnitIncrement(16);// 스크롤 속도 
-        mainPageScroll.setBorder(null);
-        mainPageScroll.setBounds(0, 80, 700, 975);
-        
-        mainPage.setPreferredSize(new Dimension(450, 1000));
-        mainPageScroll.setViewportView(mainPage);
-        frame.getContentPane().add(mainPageScroll); 
-
+        return mainPage;
 	} // end changePage method
+
+	public void mainMouseEvent() {
+		
+		kategorie.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴열기") );	
+		subMenuClose.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴닫기") );	
+
+		logo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPage.removeAll();
+
+				mainPageScroll.setViewportView(null);
+				mainPage = changePage();
+				mainPage.setPreferredSize(new Dimension(450, 1000));
+				mainPageScroll.setViewportView(mainPage);
+
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
+
+		login.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPage.setVisible(false);
+				
+				mainPageScroll.setViewportView(null);
+				mainPage = new MemberView1().getLoginView();
+				mainPage.setPreferredSize(new Dimension(450, 1000));
+				mainPageScroll.setViewportView(mainPage);
+
+				frame.revalidate();
+				frame.repaint();
+			}
+
+		});
+		myPage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPage.removeAll();
+
+				mainPageScroll.setViewportView(null);
+				mainPage = new WB_MyPageView().getmyPageView();
+				mainPage.setPreferredSize(new Dimension(450, 1000));
+				mainPageScroll.setViewportView(mainPage);
+
+				frame.revalidate();
+				frame.repaint();
+			}
+		});
+
+	}
 }

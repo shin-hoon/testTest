@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -19,76 +18,63 @@ import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
 import com.boram.shopping.view.MainView;
 
-public class MemberView1 extends JFrame{
+public class MemberView1{
 
-	private JFrame frmLogin;
+	private JPanel frmLogin;
 	private JTextField id;
 	private JTextField pwd;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MemberView1 window = new MemberView1();
-					window.frmLogin.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	// 메인 페이지 호출을 위한 JPanel 반환
+	public JPanel getLoginView() {
+		return this.frmLogin;
 	}
 
 	/**
 	 * Create the application.
 	 */
 	public MemberView1() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		MemberDao md = new MemberDao();
 		ArrayList<Member> mArr = md.fileRead();
-		frmLogin = new JFrame();
-		frmLogin.getContentPane().setBackground(new Color(255, 255, 255));
-		frmLogin.setTitle("LOGIN");
-		frmLogin.setBounds(100, 100, 570, 710);
-		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLogin.getContentPane().setLayout(null);
+		frmLogin = new JPanel();
+		frmLogin.setBackground(new Color(255, 255, 255));
+		frmLogin.setBounds(550, 0, 647, 596);
+		frmLogin.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(73, 40, 515, 528);
+		panel.setLayout(null);
+		frmLogin.add(panel);
 		
 		JLabel BORAMLABEL = new JLabel("BORAM");
 		BORAMLABEL.setBounds(40, 75, 234, 83);
 		BORAMLABEL.setFont(new Font("굴림", Font.BOLD, 54));
-		frmLogin.getContentPane().add(BORAMLABEL);
+		panel.add(BORAMLABEL);
 		
 		JLabel MEMLABEL = new JLabel("MEMBERSHIP LOGIN");
 		MEMLABEL.setFont(new Font("굴림", Font.BOLD, 23));
 		MEMLABEL.setBounds(42, 147, 340, 27);
-		frmLogin.getContentPane().add(MEMLABEL);
+		panel.add(MEMLABEL);
 		
 		JLabel IDLABEL = new JLabel("ID*");
 		IDLABEL.setFont(new Font("굴림", Font.PLAIN, 26));
 		IDLABEL.setBounds(46, 227, 109, 44);
-		frmLogin.getContentPane().add(IDLABEL);
+		panel.add(IDLABEL);
 		
 		id = new JTextField();
 		id.setBounds(208, 227, 303, 39);
-		frmLogin.getContentPane().add(id);
+		panel.add(id);
 		id.setColumns(10);
 		
 		JLabel PWDLABEL = new JLabel("Password*");
 		PWDLABEL.setFont(new Font("굴림", Font.PLAIN, 26));
 		PWDLABEL.setBounds(48, 302, 207, 39);
-		frmLogin.getContentPane().add(PWDLABEL);
+		panel.add(PWDLABEL);
 		
 		pwd = new JPasswordField();
 		pwd.setBounds(208, 302, 303, 39);
-		frmLogin.getContentPane().add(pwd);
+		panel.add(pwd);
 		pwd.setColumns(10);
 		
 		JButton logIn = new JButton("\uB85C\uADF8\uC778"); // 로그인 버튼
@@ -119,12 +105,8 @@ public class MemberView1 extends JFrame{
 		});
 		
 		
-		frmLogin.setVisible(true);
-		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
 		logIn.setBounds(66, 370, 189, 44);
-		frmLogin.getContentPane().add(logIn);
+		panel.add(logIn);
 		
 		JButton join = new JButton("\uD68C\uC6D0\uAC00\uC785"); // 회원가입 버튼
 		join.addActionListener(new ActionListener() {
@@ -172,13 +154,13 @@ public class MemberView1 extends JFrame{
 		
 		
 		join.setBounds(301, 370, 199, 44);
-		frmLogin.getContentPane().add(join);
+		panel.add(join);
 		
 		JButton searchId = new JButton("\uC544\uC774\uB514 \uCC3E\uAE30"); // 아이디 찾기 버튼
 		searchId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 아이디찾기 버튼 클릭하면
-				frmLogin.setVisible(false); // 로그인 창 끄기
+				panel.setVisible(false); // 로그인 창 끄기
 				
 				
 				
@@ -188,24 +170,19 @@ public class MemberView1 extends JFrame{
 			}
 		});
 		searchId.setBounds(144, 496, 130, 27);
-		frmLogin.getContentPane().add(searchId);
+		panel.add(searchId);
 		
 		JButton searchPwd = new JButton("\uBE44\uBC00\uBC88\uD638 \uCC3E\uAE30"); // 비밀번호 찾기 버튼
 		searchPwd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호찾기 버튼 클릭하면
-				frmLogin.setVisible(false); // 로그인 창 끄기
-				
-				
-				
-				
-				
-				
-				
+				panel.setVisible(false); // 로그인 창 끄기
 			}
 		});
 		searchPwd.setBounds(287, 496, 130, 27);
-		frmLogin.getContentPane().add(searchPwd);
+		panel.add(searchPwd);
+		
+		
 	}
 }
 

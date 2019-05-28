@@ -7,9 +7,10 @@ import javax.swing.*;
 
 import com.boram.member.vo.Member;
 
-public class WB_MyPageView extends JFrame {
+public class WB_MyPageView{
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
+	private JPanel myPageView;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -22,35 +23,26 @@ public class WB_MyPageView extends JFrame {
 	{
 		MemberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
 	}
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WB_MyPageView frame = new WB_MyPageView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	// 메인 페이지 호출을 위한 JPanel 반환
+	public JPanel getmyPageView() {
+		return this.myPageView;
 	}
+	
 	/**
 	 * Create the frame.
 	 */
-
 	public WB_MyPageView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, FWID, FHIT);
-		getContentPane().setLayout(null);
+		myPageView = new JPanel();
+		myPageView.setBackground(Color.WHITE);
+		myPageView.setBounds(0, 0, FWID, FHIT);
+		myPageView.setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setForeground(Color.WHITE);
 		panel.setBounds(0, 0, FWID, 90);
-		getContentPane().add(panel);
+		myPageView.add(panel);
 
 		JLabel lblMyCart = new JLabel("My Page");
 		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
@@ -61,7 +53,7 @@ public class WB_MyPageView extends JFrame {
 		panel_2.setBackground(Color.LIGHT_GRAY);
 		panel_2.setBounds(0, 91, 718, 370);
 
-		getContentPane().add(panel_2);
+		myPageView.add(panel_2);
 		panel_2.setLayout(null);
 
 		JLabel label = new JLabel("idChange : ");
