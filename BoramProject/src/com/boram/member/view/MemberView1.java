@@ -106,8 +106,12 @@ public class MemberView1 extends JFrame{
 				
 				if(result == 1) {
 					//로그인 성공
+					MainView mv = new MainView(); // 메인창뜨기
+					frmLogin.setVisible(false); // 로그인 창 끄기
+					
 				}else if(result == 0) {
 					//로그인 실패
+					
 				}else {
 					//관리자 로그인
 				}
@@ -126,13 +130,9 @@ public class MemberView1 extends JFrame{
 		join.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//회원가입 버튼 클릭하면
-				frmLogin.setVisible(true);
-				frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frmLogin.setVisible(false); // 로그인 창 끄기
 			
 				JPanel joinPanel = new JPanel();
-				
-				MainView.frame.add(joinPanel);
-
 				
 				joinPanel.add(new JLabel("이름 : "));
 				JTextField name = new JTextField(10);
@@ -146,9 +146,12 @@ public class MemberView1 extends JFrame{
 				JTextField id = new JTextField(10);
 				joinPanel.add(id);
 				
-				//아이디 중복확인
+				//아이디 중복확인 결과 라벨
 				JLabel idCheck = new JLabel();
 				joinPanel.add(idCheck);
+				
+				
+				
 				
 				joinPanel.add(new JLabel("비밀번호 : "));
 				JTextField pwd = new JTextField(10);
@@ -162,7 +165,8 @@ public class MemberView1 extends JFrame{
 				JTextField address = new JTextField(10);
 				joinPanel.add(address);
 				
-	
+				
+				
 			}
 		});
 		
@@ -174,8 +178,7 @@ public class MemberView1 extends JFrame{
 		searchId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 아이디찾기 버튼 클릭하면
-				frmLogin.setVisible(true);
-				frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frmLogin.setVisible(false); // 로그인 창 끄기
 				
 				
 				
@@ -191,8 +194,7 @@ public class MemberView1 extends JFrame{
 		searchPwd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호찾기 버튼 클릭하면
-				frmLogin.setVisible(true);
-				frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frmLogin.setVisible(false); // 로그인 창 끄기
 				
 				
 				
@@ -206,3 +208,4 @@ public class MemberView1 extends JFrame{
 		frmLogin.getContentPane().add(searchPwd);
 	}
 }
+

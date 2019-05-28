@@ -27,7 +27,7 @@ import com.boram.myPage.view.WB_MyPage_Main;
 import com.boram.shopping.controller.MainMouseEvent;
 
 public class MainView{
-	public static JFrame frame;
+	public static JFrame frame= new JFrame();
 /*   
   	 menu          subMenu
 	JLabel         JPanel 
@@ -52,7 +52,7 @@ public class MainView{
 	// subMenu 스크롤
 	JScrollPane subMenuScroll;
 	// 바뀌는 페이지 
-	JPanel mainPage;
+	public static final JPanel mainPage = new JPanel();
 	// 바뀌는 페이지 스크롤
 	JScrollPane mainPageScroll;
 	
@@ -70,7 +70,7 @@ public class MainView{
 	 * 메인 페이지
 	 */
 	public MainView() {
-		frame = new JFrame();
+		//frame = new JFrame();
 		frame.setTitle("대한민국 NO.1 쇼핑몰 Boram닷컴");
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBackground(new Color(255, 255, 255));
@@ -414,7 +414,7 @@ public class MainView{
 	 * 	바뀌는 페이지(아래쪽, JPanel)
 	 */
 	public void changePage() {
-        mainPage = new JPanel();
+        //mainPage = new JPanel();
         mainPage.setBackground(new Color(255, 255, 255));
 		mainPage.setBounds(0, 259, 700, 490);
 		mainPage.setLayout(null);
