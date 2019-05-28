@@ -1,5 +1,6 @@
 package com.boram.shopping.view;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -132,6 +133,8 @@ public class MainView{
 				new WB_MyPage_Main();
 			}
 		});
+        
+       
         
         
 
@@ -416,6 +419,7 @@ public class MainView{
 		mainPage.setBounds(0, 259, 700, 490);
 		mainPage.setLayout(null);
 		mainPage.setVisible(true);
+		
 		
 		Image image = null;
 		Image image2 = null;

@@ -1,29 +1,19 @@
 package com.boram.myPage.view;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 import com.boram.member.vo.Member;
 import com.boram.shopping.view.MainView;
 
 public class WB_MyPage_Main extends JFrame {
-	
-	
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
 	private ArrayList<Member> mList = new ArrayList<>();
 	private JPanel contentPane;
-
-	
 	
 	public WB_MyPage_Main() {
 		
