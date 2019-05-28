@@ -106,7 +106,7 @@ public class MemberView1 extends JFrame{
 				
 				if(result == 1) {
 					//로그인 성공
-					MainView mv = new MainView(); // 메인창뜨
+					MainView mv = new MainView(); // 메인창뜨기
 					frmLogin.setVisible(false); // 로그인 창 끄기
 					
 				}else if(result == 0) {
@@ -146,9 +146,12 @@ public class MemberView1 extends JFrame{
 				JTextField id = new JTextField(10);
 				joinPanel.add(id);
 				
-				//아이디 중복확인
+				//아이디 중복확인 결과 라벨
 				JLabel idCheck = new JLabel();
 				joinPanel.add(idCheck);
+				
+				
+				
 				
 				joinPanel.add(new JLabel("비밀번호 : "));
 				JTextField pwd = new JTextField(10);
@@ -162,7 +165,8 @@ public class MemberView1 extends JFrame{
 				JTextField address = new JTextField(10);
 				joinPanel.add(address);
 				
-				MainView.frame.add(joinPanel);
+				
+				
 			}
 		});
 		
