@@ -25,13 +25,13 @@ public class Member implements Serializable{
 	}
 	
 	
-	public Member(int mNo, String name, String id, String pwd, int grant) {
+	public Member(int mNo, String name, String id, String pwd/*, int grant*/) {
 		super();
 		this.mNo = mNo;
 		this.name = name;
 		this.id = id;
 		this.pwd = pwd;
-		this.grant = grant;
+		//this.grant = mNo;
 	}
 
 

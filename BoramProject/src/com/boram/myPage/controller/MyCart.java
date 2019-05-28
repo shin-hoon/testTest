@@ -1,9 +1,18 @@
 package com.boram.myPage.controller;
 
-import java.io.*;
-import java.util.*;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 
+import com.boram.manager.vo.Order;
 import com.boram.manager.vo.Product;
+import com.boram.member.controller.MemberController;
+import com.boram.member.vo.Member;
 
 public class MyCart extends Product implements Serializable {
 	/**
@@ -11,6 +20,11 @@ public class MyCart extends Product implements Serializable {
 	 */
 	private static final long serialVersionUID = 4623389045564207219L;
 	ArrayList<Product> CList = new ArrayList<>();
+	ArrayList<Order> OList= new ArrayList<>();
+	ArrayList<Integer> pNo =new ArrayList<>();
+	ArrayList<Integer> amount = new ArrayList<>();
+	MemberController mc= new MemberController();
+	Member m = mc.nugu(); 
 	// product 에서 몇개만 뽑아서 장바구니리스트 만들어야함.
 	// -> 그냥다 추가해서 몇개만뽑음.
 	// 장바구니리스트에 추가하는건 상품쪽에서.
@@ -75,13 +89,9 @@ public class MyCart extends Product implements Serializable {
 		CList.clear();
 	}
 
-	/**
-	 * 임시변수들 확인할것! 주문목록txt만들어서 그리옮기고 주문완료출력 비어있을경우엔 장바구니 비어있다고 출력. if CList == null
-	 * return 0. 주문 완료시 장바구니 초기화. 주문파일 생성실패 0 주문파일 생성완료 되었으나 장바구니 파일 또는 리스트 삭제되지않음 1
-	 * 주문파일생성완료후 장바구니파일 및 리스트 삭제완료 2
-	 */
+	
 	public int cartOrder() {
-		int result = 0;
+		/*int result = 0;
 		if (CList.isEmpty()) {
 			result = 0;
 		} else {// 임시변수!
@@ -108,6 +118,32 @@ public class MyCart extends Product implements Serializable {
 				result = 2;//
 			}
 		}
+		return result;*/
+		int result =0;
+		
+		if (CList.isEmpty()) {
+			result = 0;
+		}else {
+			int oNo =OList.size()+1;
+			String oId = m.getId();
+			String oAdd=m.getAddress();
+			//CList의 pNo리스트
+			for(Product i:CList) {
+				pNo.add(i.getpNo());
+			}
+			for(Product i : CList) {
+				amount.add(i.getpNo());
+			}
+			int state =0;
+			int payment=0;
+			for(Product i:CList) {
+				payment+=i.getPrice();
+			}
+			OList.add(new Order(oNo,oId,oAdd,pNo,amount,state,payment));
+			
+		}
+			
+		
 		return result;
 	}
 

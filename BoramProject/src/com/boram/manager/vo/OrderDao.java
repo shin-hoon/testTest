@@ -18,7 +18,7 @@ public class OrderDao {
 	public void fileSave(ArrayList<Order> list) {
 		
 		
-		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("orderList.txt"));){
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("orderList.txt",true));){
 			
 			for (int i = 0; i < list.size(); i++) {
 						oos.writeObject(list.get(i));
@@ -35,7 +35,7 @@ public class OrderDao {
 	}
 
 	public ArrayList<Order> fileRead() {
-
+		int count=0;
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("orderList.txt"));) {
 			while (true) {
 				try {
@@ -55,7 +55,6 @@ public class OrderDao {
 				e1.printStackTrace();
 			}
 		} catch (EOFException e) {
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
