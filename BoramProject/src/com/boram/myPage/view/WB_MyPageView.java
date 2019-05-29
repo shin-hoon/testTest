@@ -8,7 +8,7 @@ import javax.swing.*;
 import com.boram.myPage.controller.*;
 import com.boram.member.vo.Member;
 
-public class WB_MyPageView{
+public class WB_MyPageView {
 	ChangeMember cm = new ChangeMember();
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
@@ -21,22 +21,27 @@ public class WB_MyPageView{
 	private JTextField textField_5;
 	private JTextArea ta;
 	private ArrayList<Member> MemberList = new ArrayList<>();
-	private int gran = /*mem.getGrant()*/0;
-	//초기 임시데이터.
-		/*{
-			//0,"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
-			MemberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
-			MemberList.add(new Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
-			MemberList.add(new Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
-			MemberList.add(new Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
-			MemberList.add(new Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com"));
-		}*/
-	
+	private int gran = /* mem.getGrant() */0;
+	// 초기 임시데이터.
+	/*
+	 * { //0,"name1",950417,"id1","pwd2","01029346330","seoul","email.com"
+	 * MemberList.add(new
+	 * Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
+	 * MemberList.add(new
+	 * Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
+	 * MemberList.add(new
+	 * Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
+	 * MemberList.add(new
+	 * Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
+	 * MemberList.add(new
+	 * Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com")); }
+	 */
+
 	// 메인 페이지 호출을 위한 JPanel 반환
 	public JPanel getmyPageView() {
 		return this.myPageView;
 	}
-	
+
 	public WB_MyPageView() {
 		myPageView = new JPanel();
 		myPageView.setBackground(Color.WHITE);
@@ -135,19 +140,17 @@ public class WB_MyPageView{
 		});
 		btnChange.setBounds(81, 711, 97, 23);
 		panel_2.add(btnChange);
-		
-		
 
 		JLabel lblResult = new JLabel("Result : ");
 		lblResult.setBounds(94, 457, 57, 15);
 		panel_2.add(lblResult);
 
-		//사용자가 수정불가능하게 수정할것.
+		// 사용자가 수정불가능하게 수정할것.
 		JTextArea ta = new JTextArea();
 		ta.setBackground(Color.WHITE);
 		ta.setBounds(81, 472, 440, 170);
 		panel_2.add(ta);
-		
+
 		JButton btnPre = new JButton("Pre");
 		btnPre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -155,27 +158,24 @@ public class WB_MyPageView{
 		});
 		btnPre.setBounds(252, 709, 105, 27);
 		panel_2.add(btnPre);
-		
-		//회원정보 출력 temp
+
+		// 회원정보 출력 temp
 		JButton btnTemp_1 = new JButton("Temp");
 		btnTemp_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(Member i:MemberList) {
+				for (Member i : MemberList) {
 					ta.append(i.toString());
 				}
 			}
 		});
 		btnTemp_1.setBounds(416, 709, 105, 27);
 		panel_2.add(btnTemp_1);
-		
-				
+
 	}
 
 	/**
-	 * 입력한 항목만 수정진행.
-	 * 수정된 갯수 textArea에 출력
-	 * 수정할 사항이없으면textArea에 수정사항없음출력.
-	 * 밑에 변경메소드에서 textArea에 무엇이 변경되엇는지 출력.
+	 * 입력한 항목만 수정진행. 수정된 갯수 textArea에 출력 수정할 사항이없으면textArea에 수정사항없음출력. 밑에 변경메소드에서
+	 * textArea에 무엇이 변경되엇는지 출력.
 	 */
 	public void btnChange() {
 		String nId = textField.getText();
@@ -229,92 +229,83 @@ public class WB_MyPageView{
 			 */
 	}
 
+	
 	/**
-	 * @param newId 바꿀아이디.
-	 * @return 실패0, 성공1
+	 * @param newId 바꿀아이디
+	 * 성공/실패 ta(TextArea)에 기록
 	 */
-	public int idChange(String newId) {
-		cm.idChange(newId);
-		return 0;
+	public void idChange(String newId) {
+		int result = cm.idChange(newId);
+		if (result == 0) {
+			ta.append("나이 변경에 실패하였습니다.");
+		} else {
+			ta.append("나이 변경에 성공하였습니다.");
+		}
+	}
+
+	
+	/**
+	 * @param newId 바꿀비밀번호
+	 * 성공/실패 ta(TextArea)에 기록
+	 */
+	public void pwChange(String newPw) {
+		int result = cm.pwChange(newPw);
+		if (result == 0) {
+			ta.append("나이 변경에 실패하였습니다.");
+		} else {
+			ta.append("나이 변경에 성공하였습니다.");
+		}
 	}
 
 	/**
-	 * @param newPw 바꿀 비밀번호
-	 * @return 실패0, 성공1
+	 * @param newId 바꿀 전화번호
+	 * 성공/실패 ta(TextArea)에 기록
 	 */
-	public int pwChange(String newPw) {
-		int result = 0;
-		try {
-			MemberList.get(gran).setPwd(newPw);
-			result = 1;
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("2잘못된 값입니다!");
-			result = 0;
+	public void phoneChange(String newPh) {
+		int result = cm.phoneChange(newPh);
+		if (result == 0) {
+			ta.append("나이 변경에 실패하였습니다.");
+		} else {
+			ta.append("나이 변경에 성공하였습니다.");
 		}
-		return result;
 	}
 
 	/**
-	 * @param newPh 변경할 폰번호
-	 * @return 실패0, 성공1
+	 * @param newId 바꿀주소
+	 * 성공/실패 ta(TextArea)에 기록
 	 */
-	public int phoneChange(String newPh) {
-		int result = 0;
-		try {
-			MemberList.get(gran).setPhone(newPh);
-			result = 1;
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("3잘못된 값입니다!");
-			result = 0;
+	public void addressChange(String newAdd) {
+		int result = cm.addressChange(newAdd);
+		if (result == 0) {
+			ta.append("나이 변경에 실패하였습니다.");
+		} else {
+			ta.append("나이 변경에 성공하였습니다.");
 		}
-		return result;
 	}
 
 	/**
-	 * @param newAdd 바꿀주소
-	 * @return 실패0, 성공1
+	 * @param newId 바꿀이메일
+	 * 성공/실패 ta(TextArea)에 기록
 	 */
-	public int addressChange(String newAdd) {
-		int result = 0;
-		try {
-			MemberList.get(gran).setAddress(newAdd);
-			result = 1;
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("4잘못된 값입니다!");
-			result = 0;
+	public void emailChange(String newEmail) {
+		int result = cm.emailChange(newEmail);
+		if (result == 0) {
+			ta.append("나이 변경에 실패하였습니다.");
+		} else {
+			ta.append("나이 변경에 성공하였습니다.");
 		}
-		return result;
 	}
 
 	/**
-	 * @param newEmail 바꿀이메일
-	 * @return 실패0, 성공1
+	 * @param newId 바꿀나이
+	 * 성공/실패 ta(TextArea)에 기록
 	 */
-	public int emailChange(String newEmail) {
-		int result = 0;
-		try {
-			MemberList.get(gran).setEmail(newEmail);
-			result = 1;
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("5잘못된 값입니다!");
-			result = 0;
+	public void ageChange(int newAge) {
+		int result = cm.ageChange(newAge);
+		if (result == 0) {
+			ta.append("나이 변경에 실패하였습니다.");
+		} else {
+			ta.append("나이 변경에 성공하였습니다.");
 		}
-		return result;
-	}
-
-	/**
-	 * @param newAge 바꿀 나이
-	 * @return 실패0, 성공1
-	 */
-	public int ageChange(int newAge) {
-		int result = 0;
-		try {
-			MemberList.get(gran).setAge(newAge);
-			result = 1;
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("6잘못된 값입니다!");
-			result = 0;
-		}
-		return result;
 	}
 }

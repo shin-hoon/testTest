@@ -14,7 +14,7 @@ public class MemberController {
 	Member m= new Member();
 	//md.fileSave(memberList);
 	{//초기임시데이터 추가 : 용준
-		//0,"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
+		//"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
 		memberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
 		memberList.add(new Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
 		memberList.add(new Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));

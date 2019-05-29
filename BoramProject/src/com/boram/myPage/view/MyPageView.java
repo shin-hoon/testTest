@@ -81,7 +81,7 @@ public class MyPageView {
 		sc.nextLine();
 		System.out.print("변경할  id를 입력해주세요 : ");
 		String newinp = sc.nextLine();
-		int result = cm.idChange(mNo, newinp);
+		int result = cm.idChange(newinp);
 		if (result == 0) {
 			System.out.println("ID 변경에 실패하였습니다.");
 		} else {
@@ -95,7 +95,7 @@ public class MyPageView {
 		sc.nextLine();
 		System.out.print("변경할  비밀번호를 입력해주세요 : ");
 		String newinp = sc.nextLine();
-		int result = cm.pwChange(mNo, newinp);
+		int result = cm.pwChange(newinp);
 		if (result == 0) {
 			System.out.println("비밀번호 변경에 실패하였습니다.");
 		} else {
@@ -109,7 +109,7 @@ public class MyPageView {
 		sc.nextLine();
 		System.out.print("변경할  휴대폰번호를 입력해주세요 : ");
 		String newinp = sc.nextLine();
-		int result = cm.phoneChange(mNo, newinp);
+		int result = cm.phoneChange(newinp);
 		if (result == 0) {
 			System.out.println("휴대폰번호 변경에 실패하였습니다.");
 		} else {
@@ -123,7 +123,7 @@ public class MyPageView {
 		sc.nextLine();
 		System.out.print("변경할  주소를 입력해주세요 : ");
 		String newinp = sc.nextLine();
-		int result = cm.addressChange(mNo, newinp);
+		int result = cm.addressChange(newinp);
 		if (result == 0) {
 			System.out.println("주소 변경에 실패하였습니다.");
 		} else {
@@ -137,7 +137,7 @@ public class MyPageView {
 		sc.nextLine();
 		System.out.print("변경할  이메일을 입력해주세요 : ");
 		String newinp = sc.nextLine();
-		int result = cm.emailChange(mNo, newinp);
+		int result = cm.emailChange(newinp);
 		if (result == 0) {
 			System.out.println("이메일 변경에 실패하였습니다.");
 		} else {
@@ -152,7 +152,7 @@ public class MyPageView {
 		System.out.print("변경할  나이를 입력해주세요 : ");
 		int newinp = sc.nextInt();
 		sc.nextLine();
-		int result = cm.ageChange(mNo, newinp);
+		int result = cm.ageChange(newinp);
 		if (result == 0) {
 			System.out.println("나이 변경에 실패하였습니다.");
 		} else {
