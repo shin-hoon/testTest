@@ -122,4 +122,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/java,windows,eclipse
-/BoramProject/
+# git rm -r --cached .
+# git add .
+# git commit -m "fix gitignore"
+
