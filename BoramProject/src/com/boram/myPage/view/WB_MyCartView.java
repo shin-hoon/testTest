@@ -3,42 +3,52 @@ package com.boram.myPage.view;
 import java.awt.*;
 import javax.swing.*;
 
-public class WB_MyCartView extends JFrame {
+public class WB_MyCartView  {
+	private JPanel myCartView;
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
-	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WB_MyCartView frame = new WB_MyCartView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	public JPanel getMyCartView() {
+		return this.myCartView;
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public WB_MyCartView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, FWID,FHIT);
-		getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, FWID, 90);
-		getContentPane().add(panel);
+		myCartView = new JPanel();
+		myCartView.setBackground(Color.white);
+		myCartView.setBounds(0, 0, FWID, 800);
+		myCartView.setLayout(null);
+		//getContentPane().add(myCartView);
 		
-		JLabel lblMyCart = new JLabel("My Cart");
-		lblMyCart.setFont(new Font("Segoe Script", Font.ITALIC, 50));
-		panel.add(lblMyCart);
+		JPanel panel1 = new JPanel();
+		
+		panel1.setBackground(Color.WHITE);
+		panel1.setForeground(Color.WHITE);
+		panel1.setBounds(0, 0, FWID, 90);
+		myCartView.add(panel1);
+		
+		
+		JLabel lblMyCart = new JLabel("My Cart ");
+		panel1.add(lblMyCart);
+		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMyCart.setFont(new Font("±¼¸²", Font.ITALIC, 50));
+		//lblMyCart.setBounds(0,0,55,100);
+		
+		JPanel panel2 = new JPanel();
+		panel2.setBackground(Color.WHITE);
+		panel2.setForeground(Color.WHITE);
+		panel2.setBounds(0,90, FWID, 710);
+		myCartView.add(panel2);
+		
+		
 	}
-}
+
+	}
+

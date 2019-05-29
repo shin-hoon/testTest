@@ -5,9 +5,11 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
+import com.boram.myPage.controller.*;
 import com.boram.member.vo.Member;
 
 public class WB_MyPageView{
+	ChangeMember cm = new ChangeMember();
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
 	private JPanel myPageView;
@@ -20,22 +22,25 @@ public class WB_MyPageView{
 	private JTextArea ta;
 	private ArrayList<Member> MemberList = new ArrayList<>();
 	private int gran = /*mem.getGrant()*/0;
-	{
-		MemberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
-	}
+	//초기 임시데이터.
+		{
+			//0,"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
+			MemberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
+			MemberList.add(new Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
+			MemberList.add(new Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
+			MemberList.add(new Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
+			MemberList.add(new Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com"));
+		}
 	
 	// 메인 페이지 호출을 위한 JPanel 반환
 	public JPanel getmyPageView() {
 		return this.myPageView;
 	}
 	
-	/**
-	 * Create the frame.
-	 */
 	public WB_MyPageView() {
 		myPageView = new JPanel();
 		myPageView.setBackground(Color.WHITE);
-		myPageView.setBounds(0, 0, FWID, FHIT);
+		myPageView.setBounds(0, 0, FWID, 1000);
 		myPageView.setLayout(null);
 
 		JPanel panel = new JPanel();
@@ -44,76 +49,80 @@ public class WB_MyPageView{
 		panel.setBounds(0, 0, FWID, 90);
 		myPageView.add(panel);
 
-		JLabel lblMyCart = new JLabel("My Page");
-		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMyCart.setFont(new Font("굴림", Font.ITALIC, 50));
-		panel.add(lblMyCart);
+		JLabel lblMyPage = new JLabel("My Page ");
+		lblMyPage.setBackground(Color.BLACK);
+		lblMyPage.setForeground(Color.BLACK);
+		lblMyPage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMyPage.setFont(new Font("굴림", Font.ITALIC, 50));
+		panel.add(lblMyPage);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.LIGHT_GRAY);
-		panel_2.setBounds(0, 91, 718, 370);
+		panel_2.setBounds(0, 90, 718, 955);
 
 		myPageView.add(panel_2);
 		panel_2.setLayout(null);
 
-		JLabel label = new JLabel("idChange : ");
-		label.setBounds(12, 36, 80, 15);
+		JLabel label = new JLabel("아이디 변경 :");
+		label.setFont(new Font("굴림", Font.PLAIN, 20));
+		label.setBounds(138, 51, 121, 27);
 		panel_2.add(label);
 
-		JLabel label_0 = new JLabel("pwChange : ");
-		label_0.setBounds(12, 72, 80, 15);
+		JLabel label_0 = new JLabel("비밀번호 변경 :");
+		label_0.setBounds(159, 137, 80, 15);
 		panel_2.add(label_0);
 
-		JLabel label_1 = new JLabel("ageChange : ");
-		label_1.setBounds(12, 102, 80, 15);
+		JLabel label_1 = new JLabel("나이 변경 :");
+		label_1.setBounds(159, 209, 80, 15);
 		panel_2.add(label_1);
 
-		JLabel label_2 = new JLabel("addressChange : ");
-		label_2.setBounds(12, 132, 80, 15);
+		JLabel label_2 = new JLabel("주소 변경 :");
+		label_2.setBounds(159, 282, 80, 15);
 		panel_2.add(label_2);
 
-		JLabel label_3 = new JLabel("emailChange : ");
-		label_3.setBounds(12, 162, 80, 15);
+		JLabel label_3 = new JLabel("이메일 변경 :");
+		label_3.setBounds(159, 337, 80, 15);
 		panel_2.add(label_3);
 
-		JLabel label_4 = new JLabel("phoneChange : ");
-		label_4.setBounds(12, 192, 80, 15);
+		JLabel label_4 = new JLabel("전화번호 변경 :");
+		label_4.setBounds(159, 405, 80, 15);
 		panel_2.add(label_4);
 
 		// id
 		textField = new JTextField();
-		textField.setBounds(114, 36, 116, 21);
+		textField.setBackground(Color.WHITE);
+		textField.setBounds(268, 46, 220, 40);
 		panel_2.add(textField);
 		textField.setColumns(10);
 
 		// pw
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(114, 72, 116, 21);
+		textField_1.setBounds(268, 112, 220, 40);
 		panel_2.add(textField_1);
 
 		// age
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(114, 102, 116, 21);
+		textField_2.setBounds(268, 184, 220, 40);
 		panel_2.add(textField_2);
 
 		// address
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(114, 132, 116, 21);
+		textField_3.setBounds(268, 257, 220, 40);
 		panel_2.add(textField_3);
 
 		// email
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(114, 162, 116, 21);
+		textField_4.setBounds(268, 324, 220, 40);
 		panel_2.add(textField_4);
 
 		// phone
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(114, 192, 116, 21);
+		textField_5.setBounds(268, 392, 220, 40);
 		panel_2.add(textField_5);
 
 		JButton btnChange = new JButton("Change!");
@@ -124,38 +133,42 @@ public class WB_MyPageView{
 				btnChange();
 			}
 		});
-		btnChange.setBounds(111, 302, 97, 23);
+		btnChange.setBounds(81, 711, 97, 23);
 		panel_2.add(btnChange);
 		
 		
-		//회원정보출력 temp.
-		JButton btnTemp = new JButton("Temp!");
 
-		btnTemp.addActionListener(new ActionListener() {
+		JLabel lblResult = new JLabel("Result : ");
+		lblResult.setBounds(94, 457, 57, 15);
+		panel_2.add(lblResult);
 
+		//사용자가 수정불가능하게 수정할것.
+		JTextArea ta = new JTextArea();
+		ta.setBackground(Color.WHITE);
+		ta.setBounds(81, 472, 440, 170);
+		panel_2.add(ta);
+		
+		JButton btnPre = new JButton("Pre");
+		btnPre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnPre.setBounds(252, 709, 105, 27);
+		panel_2.add(btnPre);
+		
+		//회원정보 출력 temp
+		JButton btnTemp_1 = new JButton("Temp");
+		btnTemp_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for(Member i:MemberList) {
 					ta.append(i.toString());
 				}
 			}
 		});
-		btnChange.setBounds(150, 302, 97, 23);
-		panel_2.add(btnTemp);
-
-		JLabel lblResult = new JLabel("Result : ");
-		lblResult.setBounds(250, 51, 57, 15);
-		panel_2.add(lblResult);
-
-		//사용자가 수정불가능하게 수정할것.
-		JTextArea ta = new JTextArea();
-		ta.setBounds(250, 72, 440, 170);
-		panel_2.add(ta);
+		btnTemp_1.setBounds(416, 709, 105, 27);
+		panel_2.add(btnTemp_1);
 		
-		JButton btnPre = new JButton("Pre");
-		btnPre.setBounds(265, 300, 105, 27);
-		panel_2.add(btnPre);
-		
-		
+				
 	}
 
 	/**
@@ -221,16 +234,8 @@ public class WB_MyPageView{
 	 * @return 실패0, 성공1
 	 */
 	public int idChange(String newId) {
-		int result = 0;
-		try {
-			MemberList.get(gran).setId(newId);
-			result = 1;
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("1잘못된 값입니다!");
-			result = 0;
-		}
-
-		return result;
+		cm.idChange(1, newId);
+		return 0;
 	}
 
 	/**

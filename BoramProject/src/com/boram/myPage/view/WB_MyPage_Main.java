@@ -1,6 +1,7 @@
 package com.boram.myPage.view;
 
 import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,12 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.boram.member.vo.Member;
-
+import com.boram.shopping.view.*;
 public class WB_MyPage_Main{
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
-	private ArrayList<Member> mList = new ArrayList<>();
 	private JPanel contentPane;
 	
 	
@@ -38,8 +37,7 @@ public class WB_MyPage_Main{
 		JButton btnNewButton = new JButton("<HTML><Center> 회원정보<br>수정</HTML>");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.setVisible(false);
-				new WB_MyPageView();
+				MainView.setMainPage(new WB_MyPageView().getmyPageView());
 				
 			}
 		});
@@ -50,8 +48,7 @@ public class WB_MyPage_Main{
 		JButton button = new JButton("장바구니");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.setVisible(false);
-				new WB_MyCartView();
+				MainView.setMainPage(new WB_MyCartView().getMyCartView());
 			}
 		});
 		button.setBounds(215, 371, 103, 94);
