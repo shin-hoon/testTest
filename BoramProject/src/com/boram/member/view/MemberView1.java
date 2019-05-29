@@ -138,6 +138,23 @@ public class MemberView1 {
 				idLb.setBounds(41, 164, 102, 28);
 				joinPanel.add(idLb);
 				
+				JButton idcheckBtn = new JButton("ID CHECK");
+				idcheckBtn.setForeground(Color.WHITE);
+				idcheckBtn.setBackground(Color.BLACK);
+				idcheckBtn.setFont(new Font("굴림", Font.PLAIN, 20));
+				idcheckBtn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
+						
+						
+						
+						
+						
+					}
+				});
+				idcheckBtn.setBounds(500, 164, 150, 25);
+				joinPanel.add(idcheckBtn);
+				
 				JLabel pwdLb = new JLabel("\uBE44\uBC00\uBC88\uD638 * ");
 				pwdLb.setFont(new Font("굴림", Font.PLAIN, 18));
 				pwdLb.setBounds(40, 217, 103, 36);
@@ -169,6 +186,8 @@ public class MemberView1 {
 				joinPanel.add(emailLb);
 				
 				JButton joinBtn = new JButton("\uD68C\uC6D0\uAC00\uC785");
+				joinBtn.setForeground(Color.WHITE);
+				joinBtn.setBackground(Color.BLACK);
 				joinBtn.setFont(new Font("굴림", Font.PLAIN, 22));
 				joinBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
