@@ -1,34 +1,26 @@
 package com.boram.myPage.controller;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 import com.boram.manager.vo.Order;
+import com.boram.manager.vo.OrderDao;
 import com.boram.manager.vo.Product;
 import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 
 public class MyCart extends Product implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4623389045564207219L;
-	ArrayList<Product> CList = new ArrayList<>();
-	ArrayList<Order> OList= new ArrayList<>();
-	ArrayList<Integer> pNo =new ArrayList<>();
-	ArrayList<Integer> amount = new ArrayList<>();
+	ArrayList<Product> CList = new ArrayList<>();//장바구니리스트
+	ArrayList<Order> OList= new ArrayList<>();//주문리스트
+	ArrayList<Integer> pNo =new ArrayList<>();//주문리스트속  상품번호들
+	ArrayList<Integer> amount = new ArrayList<>();//주문리스트 속 주문수량
+	OrderDao od=new OrderDao();//주문정보 Output
+	//로그인하면서 누가 로그인했는지 회원정보 가져옴.
 	MemberController mc= new MemberController();
 	Member m = mc.nugu(); 
-	// product 에서 몇개만 뽑아서 장바구니리스트 만들어야함.
-	// -> 그냥다 추가해서 몇개만뽑음.
-	// 장바구니리스트에 추가하는건 상품쪽에서.
-
+	
+//초기 임시데이터
 	{
 		// 1,1,"hat",35000,one,1,1.
 		CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
@@ -90,8 +82,13 @@ public class MyCart extends Product implements Serializable {
 	}
 
 	
+	/**
+	 * @return 실패0, 성공1
+	 */
 	public int cartOrder() {
-		/*int result = 0;
+		//
+		/*
+		int result = 0;
 		if (CList.isEmpty()) {
 			result = 0;
 		} else {// 임시변수!
@@ -118,19 +115,22 @@ public class MyCart extends Product implements Serializable {
 				result = 2;//
 			}
 		}
-		return result;*/
+		return result;
+		*/
 		int result =0;
-		
+		//장바구니 비어있으면 0리턴.
 		if (CList.isEmpty()) {
 			result = 0;
 		}else {
-			int oNo =OList.size()+1;
-			String oId = m.getId();
-			String oAdd=m.getAddress();
-			//CList의 pNo리스트
+			//CList+Member => OList만들기.
+			int oNo =OList.size()+1;//마지막order번호 +1
+			String oId = m.getId();//주문자 id
+			String oAdd=m.getAddress();//주문자 주소.
+			//CList안 상품의 pNo목록을 ArrayList<Integer> pNo로 넣음.
 			for(Product i:CList) {
 				pNo.add(i.getpNo());
 			}
+			//pNo별 수량체크 손볼것!!
 			for(Product i : CList) {
 				amount.add(i.getpNo());
 			}
@@ -139,8 +139,11 @@ public class MyCart extends Product implements Serializable {
 			for(Product i:CList) {
 				payment+=i.getPrice();
 			}
-			OList.add(new Order(oNo,oId,oAdd,pNo,amount,state,payment));
 			
+			OList.add(new Order(oNo,oId,oAdd,pNo,amount,state,payment));
+		
+			od.fileSave(OList);
+			result =1;
 		}
 			
 		
@@ -156,8 +159,8 @@ public class MyCart extends Product implements Serializable {
 		if (CList.isEmpty()) {
 			// System.out.println("Empty");
 			result = 0;
-		} else {// 임시변수확인!!!!!!
-			try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(result + "MyCart.txt"))) {
+		} else {
+			try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(m.getmNo()+ "MyCart.txt"))) {
 				for (Product i : CList) {
 					oos.writeObject(i);
 					result = 1;
@@ -180,15 +183,13 @@ public class MyCart extends Product implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void loadCart() {// 잘 작동하는지 확인할것.
 		int result = 0;// 임시변수확인!!
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(result + "MyCart.txt"))) {
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(m.getmNo()+ "MyCart.txt"))) {
+			CList.clear();
 			while (true) {
 //				CList = (ArrayList<Product>) ois.readObject();
-				CList.clear();
 				CList.add((Product)ois.readObject());
 				result = 1;
-			
 			}
-
 		} catch (EOFException e) {
 			// e.printStackTrace();
 			System.out.println("불러오기 완료.");

@@ -3,7 +3,7 @@ package com.boram.myPage.view;
 import java.awt.*;
 import javax.swing.*;
 
-public class WB_MyCart extends JFrame {
+public class WB_MyCartView extends JFrame {
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
 	private JPanel contentPane;
@@ -15,7 +15,7 @@ public class WB_MyCart extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WB_MyCart frame = new WB_MyCart();
+					WB_MyCartView frame = new WB_MyCartView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -27,7 +27,7 @@ public class WB_MyCart extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public WB_MyCart() {
+	public WB_MyCartView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, FWID,FHIT);
 		getContentPane().setLayout(null);

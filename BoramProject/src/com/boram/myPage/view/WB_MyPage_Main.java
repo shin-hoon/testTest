@@ -51,7 +51,7 @@ public class WB_MyPage_Main{
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.setVisible(false);
-				new WB_MyCart();
+				new WB_MyCartView();
 			}
 		});
 		button.setBounds(215, 371, 103, 94);
