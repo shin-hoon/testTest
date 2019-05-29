@@ -76,7 +76,12 @@ public class MemberView1 {
 		panel.add(pwd);
 		pwd.setColumns(10);
 
-		JButton logIn = new JButton("\uB85C\uADF8\uC778"); // 로그인 버튼
+		
+		
+		/* 로그인 버튼 */
+		JButton logIn = new JButton("\uB85C\uADF8\uC778"); 
+		logIn.setForeground(Color.WHITE);
+		logIn.setBackground(Color.BLACK);
 		logIn.addActionListener(new ActionListener() {
 
 			@Override
@@ -106,7 +111,12 @@ public class MemberView1 {
 		logIn.setBounds(66, 370, 189, 44);
 		panel.add(logIn);
 
-		JButton join = new JButton("\uD68C\uC6D0\uAC00\uC785"); // 회원가입 버튼
+		
+		
+		/* 회원가입 버튼 */
+		JButton join = new JButton("\uD68C\uC6D0\uAC00\uC785"); 
+		join.setForeground(Color.WHITE);
+		join.setBackground(Color.BLACK);
 		join.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 회원가입 버튼 클릭하면
@@ -160,6 +170,16 @@ public class MemberView1 {
 				
 				JButton joinBtn = new JButton("\uD68C\uC6D0\uAC00\uC785");
 				joinBtn.setFont(new Font("굴림", Font.PLAIN, 22));
+				joinBtn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// 정보입력후 회원가입 버튼 누르면
+						
+						
+						
+						
+						
+					}
+				});
 				joinBtn.setBounds(202, 609, 160, 52);
 				joinPanel.add(joinBtn);
 				
@@ -197,13 +217,21 @@ public class MemberView1 {
 				addressText.setBounds(100, 399, 377, 43);
 				joinPanel.add(addressText);
 				addressText.setColumns(10);
+				
+				MainView.setMainPage(joinPanel);
 			}
 		});
 
 		join.setBounds(301, 370, 199, 44);
 		panel.add(join);
 
-		JButton searchId = new JButton("\uC544\uC774\uB514 \uCC3E\uAE30"); // 아이디 찾기 버튼
+	
+		
+		
+		/* 아이디 찾기 버튼 */
+		JButton searchId = new JButton("\uC544\uC774\uB514 \uCC3E\uAE30"); 
+		searchId.setForeground(Color.WHITE);
+		searchId.setBackground(Color.BLACK);
 		searchId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 아이디찾기 버튼 클릭하면
@@ -246,7 +274,8 @@ public class MemberView1 {
 				idSearchPanel.add(emailtext);
 
 				JButton confirmBtn = new JButton("\uD655  \uC778");
-				confirmBtn.setForeground(Color.DARK_GRAY);
+				confirmBtn.setForeground(Color.WHITE);
+				confirmBtn.setBackground(Color.BLACK);
 				confirmBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// 아이디 찾기 확인 버튼 누르면
@@ -261,13 +290,20 @@ public class MemberView1 {
 				});
 				confirmBtn.setBounds(217, 342, 119, 54);
 				idSearchPanel.add(confirmBtn);
+				
+				MainView.setMainPage(idSearchPanel);
 
 			}
 		});
 		searchId.setBounds(144, 496, 130, 27);
 		panel.add(searchId);
-
-		JButton searchPwd = new JButton("\uBE44\uBC00\uBC88\uD638 \uCC3E\uAE30"); // 비밀번호 찾기 버튼
+		
+		
+		
+		/*비밀번호 찾기 버튼*/
+		JButton searchPwd = new JButton("\uBE44\uBC00\uBC88\uD638 \uCC3E\uAE30");
+		searchPwd.setBackground(Color.BLACK);
+		searchPwd.setForeground(Color.WHITE);
 		searchPwd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호찾기 버튼 클릭하면
@@ -311,7 +347,8 @@ public class MemberView1 {
 				pwdSearchPanel.add(emailtext);
 
 				JButton confirmBtn = new JButton("\uD655  \uC778");
-				confirmBtn.setForeground(Color.DARK_GRAY);
+				confirmBtn.setForeground(Color.WHITE);
+				confirmBtn.setBackground(Color.BLACK);
 				confirmBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// 비밀번호 찾기 확인버튼 누르면
@@ -326,6 +363,7 @@ public class MemberView1 {
 				confirmBtn.setBounds(217, 342, 119, 54);
 				pwdSearchPanel.add(confirmBtn);
 
+				MainView.setMainPage(pwdSearchPanel);
 			}
 		});
 		searchPwd.setBounds(287, 496, 130, 27);
