@@ -7,11 +7,11 @@ import java.util.Scanner;
 import com.boram.manager.vo.Product;
 import com.boram.myPage.controller.MyCart;
 
-public class MyCartView {
+public class CUI_MyCartView {
 	Scanner sc = new Scanner(System.in);
 	MyCart mc = new MyCart();
 
-	public MyCartView() {
+	public CUI_MyCartView() {
 	}
 
 	public void cartMenu() {
@@ -36,7 +36,7 @@ public class MyCartView {
 			// sc.nextLine();
 			switch (inp) {
 			case 1:
-				cartPrint();
+				cartList();
 				break;
 			case 2:
 				cartDelete();
@@ -64,8 +64,8 @@ public class MyCartView {
 	 * 비어있지않으면
 	 * 상품명, 카테고리, 사이즈, 가격 출력
 	 */
-	public void cartPrint() {
-		ArrayList<Product> p = mc.cartPrint();
+	public void cartList() {
+		ArrayList<Product> p = mc.cartList();
 		if (p.isEmpty()) {
 			System.out.println("장바구니가 비어있습니다.");
 		} else {

@@ -33,7 +33,7 @@ public class MemberController {
 
 			// 저장된 아이디랑 패스워드가 입력한 아이다랑 패스워드랑 같으면
 			if (memberList.get(i).getId().equals(id) && memberList.get(i).getPwd().equals(pwd)) {
-				//grant=memberList.get(i).getmNo();
+
 				//memberList.get(i)를 리턴함과동시에 nugu메소드를통해 누가 로그인햇는지 알려줌.
 				m = memberList.get(i);
 				//로그인과 동시에 저장해놓앗던 장바구니 불러오기.

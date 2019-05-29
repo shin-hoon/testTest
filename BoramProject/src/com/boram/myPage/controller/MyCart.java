@@ -21,7 +21,8 @@ public class MyCart extends Product implements Serializable {
 	Member m = mc.nugu(); 
 	
 //초기 임시데이터
-	{
+	{	
+		//pNo, category, productName, price, size, stock, count(조회수)
 		// 1,1,"hat",35000,one,1,1.
 		CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
 		CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
@@ -39,6 +40,7 @@ public class MyCart extends Product implements Serializable {
 	 * @param product
 	 *            장바구니 추가될 product객체리스트.
 	 */
+	//중복시 수량증가 해야되나?
 	public void addCart(Product product) {
 		CList.add(product);
 	}
@@ -48,7 +50,7 @@ public class MyCart extends Product implements Serializable {
 	 * 
 	 * @return 전체리스트 리턴 후 View에서 출력.
 	 */
-	public ArrayList<Product> cartPrint() {
+	public ArrayList<Product> cartList() {
 		return CList;
 	}
 

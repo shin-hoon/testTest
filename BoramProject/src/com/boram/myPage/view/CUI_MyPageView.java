@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 import com.boram.myPage.controller.ChangeMember;
 
-public class MyPageView {
+public class CUI_MyPageView {
 	Scanner sc = new Scanner(System.in);
 	ChangeMember cm = new ChangeMember();
 
-	public MyPageView() {
+	public CUI_MyPageView() {
 	}
 
 	public void mainMenu() {//조회용 임시메뉴 7 번 삭제할것.
