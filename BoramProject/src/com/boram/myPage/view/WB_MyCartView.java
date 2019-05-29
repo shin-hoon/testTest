@@ -3,11 +3,21 @@ package com.boram.myPage.view;
 import java.awt.*;
 import javax.swing.*;
 
+import com.boram.member.controller.MemberController;
+import com.boram.member.vo.Member;
+
 public class WB_MyCartView  {
 	private JPanel myCartView;
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
+	private JTable table;
+	
+	
+	private MemberController mc = new MemberController();
+	Member m =mc.nugu();
 
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -47,7 +57,32 @@ public class WB_MyCartView  {
 		panel2.setBounds(0,90, FWID, 710);
 		myCartView.add(panel2);
 		
+		table = new JTable();
+		table.setForeground(new Color(0, 0, 0));
+		table.setBackground(Color.LIGHT_GRAY);
+		JScrollPane sp = new JScrollPane();
+		panel2.add(sp);
+		sp.add(table);
 		
+		//버튼 : 삭제, 주문하기, 수량변경, 이전메뉴
+		
+		
+	}
+	
+	/**
+	 * https://m.blog.naver.com/highkrs/220584897023
+	 * 장바구니 보여주는 테이블.
+	 * @return 테이블 내용 테이블콘텐츠.
+	 * [장바구니사이즈][콤보박스,번호,사진파일주소, 품목이름, 수량 , 가격](6)
+	 * 
+	 */
+	public String[][] tableCont(){
+		
+	
+		String[][] tc = null;
+		
+		
+		return tc;
 	}
 
 	}
