@@ -9,6 +9,7 @@ public class ChangeMember {
 	private ArrayList<Member> MemberList = new ArrayList<>();
 	MemberController mc= new MemberController();
 	Member m = mc.nugu(); 
+	int mNo = m.getmNo();
 	public ChangeMember() {
 	}
 
@@ -20,7 +21,7 @@ public class ChangeMember {
 	 * @return 성공시1, 실패시0반환.
 	 */
 	// id
-	public int idChange(int mNo, String newId) {
+	public int idChange(String newId) {
 		int result = 0;
 		try {
 			MemberList.get(mNo).setId(newId);
@@ -34,7 +35,7 @@ public class ChangeMember {
 	}
 
 	// pwd
-	public int pwChange(int mNo, String newPw) {
+	public int pwChange(String newPw) {
 		int result = 0;
 		try {
 			MemberList.get(mNo).setPwd(newPw);
@@ -47,7 +48,7 @@ public class ChangeMember {
 	}
 
 	// phone
-	public int phoneChange(int mNo, String newPhone) {
+	public int phoneChange(String newPhone) {
 		int result = 0;
 		try {
 			MemberList.get(mNo).setPhone(newPhone);
@@ -60,7 +61,7 @@ public class ChangeMember {
 	}
 
 	// address
-	public int addressChange(int mNo, String newAddress) {
+	public int addressChange(String newAddress) {
 		int result = 0;
 		try {
 			MemberList.get(mNo).setAddress(newAddress);
@@ -73,7 +74,7 @@ public class ChangeMember {
 	}
 
 	// email
-	public int emailChange(int mNo, String newEmail) {
+	public int emailChange(String newEmail) {
 		int result = 0;
 		try {
 			MemberList.get(mNo).setEmail(newEmail);
@@ -86,7 +87,7 @@ public class ChangeMember {
 	}
 
 	// age
-	public int ageChange(int mNo, int newAge) {
+	public int ageChange(int newAge) {
 		int result = 0;
 		try {
 			MemberList.get(mNo).setAge(newAge);

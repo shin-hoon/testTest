@@ -23,14 +23,14 @@ public class WB_MyPageView{
 	private ArrayList<Member> MemberList = new ArrayList<>();
 	private int gran = /*mem.getGrant()*/0;
 	//초기 임시데이터.
-		{
+		/*{
 			//0,"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
 			MemberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
 			MemberList.add(new Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
 			MemberList.add(new Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
 			MemberList.add(new Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
 			MemberList.add(new Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com"));
-		}
+		}*/
 	
 	// 메인 페이지 호출을 위한 JPanel 반환
 	public JPanel getmyPageView() {
@@ -234,7 +234,7 @@ public class WB_MyPageView{
 	 * @return 실패0, 성공1
 	 */
 	public int idChange(String newId) {
-		cm.idChange(1, newId);
+		cm.idChange(newId);
 		return 0;
 	}
 
