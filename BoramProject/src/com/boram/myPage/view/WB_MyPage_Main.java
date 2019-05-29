@@ -1,25 +1,35 @@
 package com.boram.myPage.view;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import com.boram.member.vo.Member;
 
-public class WB_MyPage_Main extends JFrame {
+public class WB_MyPage_Main{
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
 	private ArrayList<Member> mList = new ArrayList<>();
 	private JPanel contentPane;
+	
+	
+	// 메인 페이지 호출을 위한 JPanel 반환
+	public JPanel myPageMain() {
+		return this.contentPane;
+	}
 	
 	public WB_MyPage_Main() {
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBounds(0,0,FWID,FHIT);
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.setVisible(true);
 		

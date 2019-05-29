@@ -22,11 +22,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import com.boram.member.view.MemberView1;
-import com.boram.myPage.view.WB_MyPageView;
+import com.boram.myPage.view.WB_MyPage_Main;
 import com.boram.shopping.controller.MainMouseEvent;
 
 public class MainView{
-	JFrame frame;
+	public static JFrame frame;
 /*   
   	 menu          subMenu
 	JLabel         JPanel 
@@ -53,9 +53,9 @@ public class MainView{
 	// subMenu 스크롤
 	JScrollPane subMenuScroll;
 	// 바뀌는 페이지 
-	JPanel mainPage;
+	public static JPanel mainPage;
 	// 바뀌는 페이지 스크롤
-	JScrollPane mainPageScroll;
+	public static JScrollPane mainPageScroll;
 	// 파일 경로 세팅을 위한 변수
 	public static final String PATH;
 	
@@ -437,7 +437,6 @@ public class MainView{
 		
 		kategorie.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴열기") );	
 		subMenuClose.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴닫기") );	
-
 		logo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -452,36 +451,30 @@ public class MainView{
 				frame.repaint();
 			}
 		});
-
 		login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mainPage.setVisible(false);
-				
-				mainPageScroll.setViewportView(null);
-				mainPage = new MemberView1().getLoginView();
-				mainPage.setPreferredSize(new Dimension(450, 1000));
-				mainPageScroll.setViewportView(mainPage);
-
-				frame.revalidate();
-				frame.repaint();
+				setMainPage(new MemberView1().getLoginView());
 			}
-
 		});
 		myPage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mainPage.removeAll();
-
-				mainPageScroll.setViewportView(null);
-				mainPage = new WB_MyPageView().getmyPageView();
-				mainPage.setPreferredSize(new Dimension(450, 1000));
-				mainPageScroll.setViewportView(mainPage);
-
-				frame.revalidate();
-				frame.repaint();
+				setMainPage(new WB_MyPage_Main().myPageMain());
 			}
 		});
 
+	}
+	
+	public static void setMainPage(JPanel panel) {
+		mainPage.removeAll();
+
+		mainPageScroll.setViewportView(null);
+		mainPage = panel;
+		mainPage.setPreferredSize(new Dimension(450, 1000));
+		mainPageScroll.setViewportView(mainPage);
+
+		frame.revalidate();
+		frame.repaint();
 	}
 }
