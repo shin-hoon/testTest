@@ -3,22 +3,22 @@ package com.boram.manager.controller;
 import java.util.ArrayList;
 
 import com.boram.manager.vo.Product;
-import com.boram.member.vo.Member;
+import com.boram.member.vo.MemberDao;
 
 public class MemberController {
 	
 	private ArrayList<Product> list = new ArrayList<Product>();
 	private MemberDao md = new MemberDao();
 	
-	public Member[] selectMemberList() {
+	public /*Member[]*/void selectMemberList() {
 		
-		return md.fildRead();
+//		return md.fildRead();
 		
 	}
 	
 	public void addProduct(int pNo, int category, String productName, int price, String size, int stock) {
 		
-		list.add(new Product(pNo, category, productName, price, size, stock));
+//		list.add(new Product(pNo, category, productName, price, size, stock));
 	}
 	
 	public int updateProduct(int category, String productName, int price, String size, int stock) {
@@ -26,7 +26,7 @@ public class MemberController {
 		int result = 0;
 		for(int i=0; i<list.size(); i++) {
 			
-			if(list.get(i).getpNo().contain(pNo)){
+			/*if(list.get(i).getpNo().contain(pNo)){
 				
 				list.get(i).setCategory(category);
 				list.get(i).setProductName(productName);
@@ -36,9 +36,9 @@ public class MemberController {
 				
 				result = 1;
 				
-			}
+			}*/
 		}
-		return result;
+		return /*result*/0;
 		
 		
 	}
@@ -49,12 +49,13 @@ public class MemberController {
 		
 		for(int i=0; i<list.size(); i++) {
 			
-			if(list.get(i).getpNo().equals(pNo)) {
+			/*if(list.get(i).getpNo().equals(pNo)) {
 				
 				list.remove(i);
 				result = 1;
-			}
+			}*/
 		}
+		return result;
 		
 	}
 

@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -24,6 +26,8 @@ import javax.swing.border.MatteBorder;
 import com.boram.member.view.MemberView1;
 import com.boram.myPage.view.WB_MyPage_Main;
 import com.boram.shopping.controller.MainMouseEvent;
+import com.boram.shopping.controller.ShoppingParsing;
+import com.boram.shopping.vo.ShoopingVO;
 
 public class MainView{
 	public static JFrame frame;
@@ -388,26 +392,39 @@ public class MainView{
 		mainPage.setLayout(null);
 		mainPage.setVisible(true);
 		
-		Image image = null;
-		Image image2 = null;
+		//ShoppingParsing
+		List<ShoopingVO> list = new ShoppingParsing().testParsing();
+		int width = 15;
+		int height = 0;
+		JLabel[] label = new JLabel[list.size()];
 		
-        try {
-            URL url = new URL("https://m.mutnam.com/web/product/medium/201905/fc7e31fe79e7108dfc8882cfba71da4d.gif");
-            URL ur2 = new URL("https://m.mutnam.com/web/product/medium/201905/0c774c7b53fa9f91cd60ccb96502a97e.gif");
-            image = ImageIO.read(url).getScaledInstance(450, 430, Image.SCALE_SMOOTH);
-            image2 = ImageIO.read(ur2).getScaledInstance(450, 430, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-        	System.out.println("이미지 불러오기 에러 : " + e.getMessage());
-        }
-        
-        JLabel label = new JLabel(new ImageIcon(image));
-        label.setBounds(15, 0, 325, 432);
-        JLabel label2 = new JLabel(new ImageIcon(image2));
-        label2.setBounds(359, 0, 325, 432);
-        
-        mainPage.add(label);
-        mainPage.add(label2);
-        
+		for(int i = 0 ; i < list.size(); i++) {
+			Image image = null;
+			
+			try {
+				URL url = new URL(list.get(i).getImage());
+				image = ImageIO.read(url).getScaledInstance(450, 430, Image.SCALE_SMOOTH);
+			} catch (IOException e) {
+				System.out.println("이미지 불러오기 에러 : " + e.getMessage());
+			}
+			height += 200;
+			/*if(i%2==0) {
+				width = 15;
+				
+				height += 200;
+			}
+			else {
+				
+				width += 344;
+			}*/
+			JLabel mainImage1 = new JLabel(new ImageIcon(image));
+			mainImage1.setBounds(15, height, 325, 432);
+			/*JLabel mainImage2 = new JLabel(new ImageIcon(image2));
+			mainImage2.setBounds(359, 0, 325, 432);
+			*/
+			mainPage.add(mainImage1);
+		}
+		
         JLabel label_1 = new JLabel("썸머나이트 틴 자켓");
         label_1.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
         label_1.setBounds(15, 436, 150, 18);
@@ -433,6 +450,9 @@ public class MainView{
         return mainPage;
 	} // end changePage method
 
+	
+	
+	// 이벤트 처리
 	public void mainMouseEvent() {
 		
 		kategorie.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴열기") );	
@@ -464,8 +484,12 @@ public class MainView{
 			}
 		});           
 
-	}
+	} // end mainMouseEvent method
 	
+	
+	
+	
+	// 바뀌는 페이지를 세팅 해주는 메소드
 	public static void setMainPage(JPanel panel) {
 		mainPage.removeAll();
 
@@ -476,5 +500,5 @@ public class MainView{
 
 		frame.revalidate();
 		frame.repaint();
-	}
-}
+	} // end setMainPage method
+} // end class
