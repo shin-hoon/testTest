@@ -10,7 +10,7 @@ public class ChangeMember {
 	private ArrayList<Member> MemberList = new ArrayList<>();
 	private MemberDao md = new MemberDao();
 	private MemberController mc = new MemberController();
-	//private Member m = mc.nugu();
+	private Member chM = mc.nugu();
 	//private int mNo = m.getmNo();
 	private int mNo = mc.nugu().getmNo();
 
@@ -115,16 +115,11 @@ public class ChangeMember {
 	}
 
 	public void saveChange() {
-		MemberList.clear();
-		ArrayList<Member> m1 = new ArrayList<Member>(md.fileRead());
-		MemberList.addAll(m1);
-		for(Member i: MemberList) {
-			if(i.getmNo()==mNo) {
-				
-			}
-			
-		}
-		
+		//MemberList는 이미 변경되어있음.
+		// *Change 에서 nugu.get(i).*change 에서 본인이 로그인한 것만 변경해놓음.
+		//그렇기때문에 MemberList를 dao를 통해 그냥 덮어씌워주면됨.
+		md.fileSave(MemberList);
+	
 	}
 
 	/**

@@ -175,9 +175,6 @@ public class WB_MyPageView {
 			public void actionPerformed(ActionEvent e) {
 				String member = cm.printMem();
 				ta.append(member+"\n");
-				
-			
-			
 			}
 		});
 		btnTemp_1.setBounds(416, 709, 105, 27);
@@ -235,10 +232,14 @@ public class WB_MyPageView {
 		if (count == 0) {
 			// 텍스트 에어리어에 "수정할 사항이 없습니다." 출력
 			ta.append("수정할 사항이 없습니다!\n");
-		} /*
-			 * else { // 텍스트에어리어에 // count +" 개의 수정사항이 완료되었습니다." ta.append(count +
-			 * " 개의 수정사항이 완료되었습니다."); }
-			 */
+		}else {
+			totResult();
+		}
+		
+		/*
+		 * else { // 텍스트에어리어에 // count +" 개의 수정사항이 완료되었습니다." ta.append(count +
+		 * " 개의 수정사항이 완료되었습니다."); }
+		 */
 	}
 
 	
@@ -308,6 +309,8 @@ public class WB_MyPageView {
 		}
 	}
 
+	
+	
 	/**
 	 * @param newId 바꿀나이
 	 * 성공/실패 ta(TextArea)에 기록
@@ -319,5 +322,9 @@ public class WB_MyPageView {
 		} else {
 			ta.append("나이 변경에 성공하였습니다.\n");
 		}
+	}
+	public void totResult() {
+		cm.saveChange();
+		ta.append("수정사항을 저장하였습니다.\n");
 	}
 }

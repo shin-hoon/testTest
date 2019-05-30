@@ -17,14 +17,14 @@ public class MemberController {
 	ArrayList<Member> memberList = md.fileRead();
 	static Member m= new Member();
 	//md.fileSave(memberList);
-	{//초기임시데이터 추가 : 용준
-		//"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
-		memberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
-		memberList.add(new Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
-		memberList.add(new Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
-		memberList.add(new Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
-		memberList.add(new Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com"));
-	}
+//	{//초기임시데이터 추가 : 용준
+//		//"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
+//		memberList.add(new Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
+//		memberList.add(new Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
+//		memberList.add(new Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
+//		memberList.add(new Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
+//		memberList.add(new Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com"));
+//	}
 	
 	public void join(String name, int age, String id, String pwd, String phone, String address, String email) {
 		
@@ -85,7 +85,6 @@ public class MemberController {
 		String pwd = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
-
 			if (memberList.get(i).getEmail().equals(emailtext.getText()) && (memberList.get(i).getName().equals(nametext.getText()))) { // 저장된 회원 정보
 				pwd = memberList.get(i).getPwd();
 			}
