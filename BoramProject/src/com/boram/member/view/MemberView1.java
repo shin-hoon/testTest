@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.boram.manager.controller.ManagerController2;
+import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
 import com.boram.shopping.view.MainView;
@@ -92,57 +92,49 @@ public class MemberView1 {
 				String userId = id.getText();
 				String userPwd = pwd.getText();
 
-				ManagerController2 mc = new ManagerController2();
+				MemberController mc = new MemberController();
 
-				int result = mc.checkLogin(userId, userPwd);
+				Member result = mc.logIn(userId , userPwd);
 
-				if (result == 1) {
-					// 로그인 성공
-					MainView mv = new MainView(); // 메인창뜨기
 					Login.setVisible(false); // 로그인 창 끄기
 
-				} else if (result == 0) {
-					// 로그인 실패
-					
-					// 실패 창 뜸
-					JFrame loginCheck = new JFrame();
-					
-					loginCheck.setBackground(Color.BLACK);
-					loginCheck.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					loginCheck.setBounds(100, 100, 450, 300);
-					JPanel contentPane = new JPanel();
-					contentPane.setBackground(Color.WHITE);
-					contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-					loginCheck.setContentPane(contentPane);
-					contentPane.setLayout(null);
-					
-					JButton checkBtn = new JButton("\uD655\uC778");
-					checkBtn.setForeground(Color.WHITE);
-					checkBtn.setBackground(Color.BLACK);
-					checkBtn.setFont(new Font("굴림", Font.PLAIN, 20));
-					checkBtn.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							// 확인하는 버튼 누르면 창 닫아지기
-							loginCheck.setVisible(false);
-							
-						}
-					});
-					checkBtn.setBounds(139, 172, 167, 27);
-					contentPane.add(checkBtn);
-					
-					JLabel label = new JLabel("\uAC00\uC785\uB418\uC9C0 \uC54A\uC740 \uD68C\uC6D0\uC785\uB2C8\uB2E4. ");
-					label.setFont(new Font("굴림", Font.BOLD, 18));
-					label.setBounds(106, 40, 241, 48);
-					contentPane.add(label);
-					
-					JLabel lblNewLabel = new JLabel("\uB2E4\uC2DC \uC785\uB825\uD558\uC138\uC694.");
-					lblNewLabel.setFont(new Font("굴림", Font.BOLD, 18));
-					lblNewLabel.setBounds(149, 100, 167, 27);
-					contentPane.add(lblNewLabel);
+//					// 로그인 실패
+//					// 실패 창 뜸
+//					JFrame loginCheck = new JFrame();
+//					
+//					loginCheck.setBackground(Color.BLACK);
+//					loginCheck.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//					loginCheck.setBounds(100, 100, 450, 300);
+//					JPanel contentPane = new JPanel();
+//					contentPane.setBackground(Color.WHITE);
+//					contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+//					loginCheck.setContentPane(contentPane);
+//					contentPane.setLayout(null);
+//					
+//					JButton checkBtn = new JButton("\uD655\uC778");
+//					checkBtn.setForeground(Color.WHITE);
+//					checkBtn.setBackground(Color.BLACK);
+//					checkBtn.setFont(new Font("굴림", Font.PLAIN, 20));
+//					checkBtn.addActionListener(new ActionListener() {
+//						public void actionPerformed(ActionEvent e) {
+//							// 확인하는 버튼 누르면 창 닫아지기
+//							loginCheck.setVisible(false);
+//							
+//						}
+//					});
+//					checkBtn.setBounds(139, 172, 167, 27);
+//					contentPane.add(checkBtn);
+//					
+//					JLabel label = new JLabel("\uAC00\uC785\uB418\uC9C0 \uC54A\uC740 \uD68C\uC6D0\uC785\uB2C8\uB2E4. ");
+//					label.setFont(new Font("굴림", Font.BOLD, 18));
+//					label.setBounds(106, 40, 241, 48);
+//					contentPane.add(label);
+//					
+//					JLabel lblNewLabel = new JLabel("\uB2E4\uC2DC \uC785\uB825\uD558\uC138\uC694.");
+//					lblNewLabel.setFont(new Font("굴림", Font.BOLD, 18));
+//					lblNewLabel.setBounds(149, 100, 167, 27);
+//					contentPane.add(lblNewLabel);
 
-				} else {
-					// 관리자 로그인
-				}
 			}
 		});
 
