@@ -103,6 +103,7 @@ public class WB_MyCartView {
 		
 		
 		JCheckBox[] chk = new JCheckBox[CList.size()];
+		
 		for (int i = 0; i < CList.size(); i++) {
 			
 			// 체크박스 이렇게 넣으면됨?
