@@ -111,11 +111,9 @@ public class ChangeMember {
 	/**
 	 * 조회용 임시메뉴 
 	 */
-	public void printMem() {
-		for(Member i:MemberList) {
-			
-			System.out.println(i);
-		}
-			
+	public String printMem() {
+		String r=MemberList.get(mNo).toString();
+		
+		return r;	
 	}
 }
