@@ -29,9 +29,15 @@ public class MemberController {
 	public void join(String name, int age, String id, String pwd, String phone, String address, String email) {
 		
 		memberList.add(new Member(name, age, id, pwd, phone, address, email));
+		System.out.println(memberList.size());
+		for(int i=0; i<memberList.size(); i++) {
+			System.out.println(memberList.get(i));
+		}
+		md.fileSave(memberList);
 	}
 
 	public Member logIn(String id, String pwd) {
+		
 
 		for (int i = 0; i < memberList.size(); i++) {
 			// 저장된 아이디랑 패스워드가 입력한 아이다랑 패스워드랑 같으면
@@ -108,5 +114,7 @@ public class MemberController {
 		}
 		return result;
 		}
+	
+
 	
 }

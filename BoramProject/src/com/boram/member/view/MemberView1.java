@@ -25,7 +25,7 @@ public class MemberView1{
 
 	private JPanel Login;
 	private JTextField id;
-	private JTextField pwd;
+	private JPasswordField pwd;
 
 	// 메인 페이지 호출을 위한 JPanel 반환
 	public JPanel getLoginView() {
@@ -92,19 +92,17 @@ public class MemberView1{
 			public void actionPerformed(ActionEvent e) {
 				// 로그인 버튼 클릭하면
 				String userId = id.getText();
-				String userPwd = pwd.getText();
-
+				String userPwd = "";
+				char[] pwd1 = pwd.getPassword();
+				for(int i=0; i<pwd1.length; i++) {
+					userPwd += pwd1[i];
+				}
+				
 				MemberController mc = new MemberController(); 
 				Member result = mc.logIn(userId , userPwd);
 				
 					Login.setVisible(false); // 로그인 창 끄기
 					
-					//
-					
-					
-					
-					
-
 					// 로그인 실패하면 확인 팝업창
 					if(result == null) {
 					JFrame frame = new JFrame();
@@ -254,10 +252,6 @@ public class MemberView1{
 					
 					public void actionPerformed(ActionEvent e) {
 						// 정보입력후 회원가입 버튼 누르면
-						JFrame frame = new JFrame();
-						JOptionPane.showMessageDialog(frame, "회원가입이 완료 되었습니다.");
-						Login.setVisible(true); // 회원가입 완료 확인창 뜨고
-					
 						String name = nameText.getText();
 						int age = birthText.getColumns();
 						String id = idText.getText();
@@ -268,6 +262,11 @@ public class MemberView1{
 						
 						MemberController mc = new MemberController();
 						mc.join(name, age, id, pwd, phone, address, email); // 멤버컨틀롤러 회원리스트에 추가
+						System.out.println("ddd");
+						
+						JFrame frame = new JFrame();
+						JOptionPane.showMessageDialog(frame, "회원가입이 완료 되었습니다.");
+						Login.setVisible(true); // 회원가입 완료 확인창 뜨고
 						
 						// 회원가입창 끄기
 						joinPanel.setVisible(false);
