@@ -173,7 +173,6 @@ public class WB_MyPageView {
 		JButton btnTemp_1 = new JButton("Temp");
 		btnTemp_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("??");
 				String member = cm.printMem();
 				ta.append(member+"\n");
 				
