@@ -119,7 +119,7 @@ public class MemberView {
 		System.out.print("이메일 : ");
 		String email = sc.nextLine();
 
-		 String id =mc.searchId(name, email);
+		 String id = mc.searchId(name, email);
 
 		if (id==null) {
 			System.out.println("아이디를 찾을 수 없습니다.");

@@ -193,7 +193,7 @@ public class MemberView1{
 							// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
 							// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
 							MemberController mc = new MemberController();
-							int result = mc.idCheck(id);
+							int result = mc.idCheck(idText);
 					
 							//같은 아이디가 존재하면
 							if(result == 1) {
@@ -203,7 +203,7 @@ public class MemberView1{
 							}
 				
 							// 저장된 아이디랑 다르면 사용가능
-							else {
+							else if(result == 0) {
 							JFrame frame2 = new JFrame();
 							JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
 							joinPanel.setVisible(true);
@@ -347,8 +347,7 @@ public class MemberView1{
 						MemberController mc = new MemberController();
 						mc.searchId(nametext, emailtext);
 						
-						
-						
+					
 						
 						
 					}
