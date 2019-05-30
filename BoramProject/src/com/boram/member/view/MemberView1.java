@@ -178,42 +178,6 @@ public class MemberView1{
 				joinPanel.add(idText);
 				idText.setColumns(10);
 				
-				JButton idcheckBtn = new JButton("ID CHECK");
-				idcheckBtn.setForeground(Color.WHITE);
-				idcheckBtn.setBackground(Color.BLACK);
-				idcheckBtn.setFont(new Font("굴림", Font.PLAIN, 20));
-				
-				idcheckBtn.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-					
-							// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
-							// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
-							MemberController mc = new MemberController();
-							int result = mc.idCheck(idText);
-					
-							//같은 아이디가 존재하면
-							if(result == 1) {
-							JFrame frame = new JFrame();
-							JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
-							joinPanel.setVisible(true);
-							}
-				
-							// 저장된 아이디랑 다르면 사용가능
-							else if(result == 0) {
-							JFrame frame2 = new JFrame();
-							JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
-							joinPanel.setVisible(true);
-							}
-						
-					}
-				});
-			
-				
-				idcheckBtn.setBounds(500, 164, 150, 25);
-				joinPanel.add(idcheckBtn);
-				
 				JTextField pwdText = new JTextField();
 				pwdText.setColumns(10);
 				pwdText.setBounds(301, 225, 176, 36);
@@ -244,25 +208,40 @@ public class MemberView1{
 				joinPanel.add(addressText);
 				addressText.setColumns(10);
 				
+				
+				/*
+				 * 회원가입 확인 버튼
+				 */
 				JButton joinBtn = new JButton("\uD68C\uC6D0\uAC00\uC785");
 				joinBtn.setForeground(Color.WHITE);
 				joinBtn.setBackground(Color.BLACK);
 				joinBtn.setFont(new Font("굴림", Font.PLAIN, 22));
+				joinBtn.setEnabled(false);
 				joinBtn.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
 						// 정보입력후 회원가입 버튼 누르면
 						String name = nameText.getText();
-						int age = birthText.getColumns();
+						int age = 0;
+						try {
+						age = Integer.parseInt(birthText.getText());
+						}catch(NumberFormatException e1) {
+							
+						}
 						String id = idText.getText();
 						String pwd = pwdText.getText();
 						String phone = phoneText.getText();
 						String address = addressText.getText();
 						String email = emailText.getText();
 						
+						System.out.println(age);
+						if(name == null || age == 0 || id == null || pwd == null || phone == null || address == null || email == null) {
+							JOptionPane.showMessageDialog(null, "정보를 모두 입력하세요.");
+							
+						}else {
+						
 						MemberController mc = new MemberController();
 						mc.join(name, age, id, pwd, phone, address, email); // 멤버컨틀롤러 회원리스트에 추가
-						System.out.println("ddd");
 						
 						JFrame frame = new JFrame();
 						JOptionPane.showMessageDialog(frame, "회원가입이 완료 되었습니다.");
@@ -274,11 +253,52 @@ public class MemberView1{
 						// 로그인창 뜨기
 						MainView.setMainPage(Login);
 						Login.add(panel);
-						
+						}
 					}
 				});
 				joinBtn.setBounds(202, 609, 160, 52);
 				joinPanel.add(joinBtn);
+				
+				/*
+				 * 아이디 체크 버튼
+				 */
+				JButton idcheckBtn = new JButton("ID CHECK");
+				idcheckBtn.setForeground(Color.WHITE);
+				idcheckBtn.setBackground(Color.BLACK);
+				idcheckBtn.setFont(new Font("굴림", Font.PLAIN, 20));
+				
+				idcheckBtn.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+					
+							// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
+							// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
+							MemberController mc = new MemberController();
+							int result = mc.idCheck(idText);
+					
+							//같은 아이디가 존재하면
+							if(result == 1) {
+							JFrame frame = new JFrame();
+							JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
+							joinPanel.setVisible(true);
+							joinBtn.setEnabled(false);
+							}
+				
+							// 저장된 아이디랑 다르면 사용가능
+							else if(result == 0) {
+							JFrame frame2 = new JFrame();
+							JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
+							joinPanel.setVisible(true);
+							joinBtn.setEnabled(true);
+							}
+						
+					}
+				});
+			
+				
+				idcheckBtn.setBounds(500, 164, 150, 25);
+				joinPanel.add(idcheckBtn);
 				
 				MainView.setMainPage(joinPanel);
 			}
