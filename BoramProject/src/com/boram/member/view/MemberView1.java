@@ -98,43 +98,45 @@ public class MemberView1 {
 
 					Login.setVisible(false); // 로그인 창 끄기
 
-//					// 로그인 실패
-//					// 실패 창 뜸
-//					JFrame loginCheck = new JFrame();
-//					
-//					loginCheck.setBackground(Color.BLACK);
-//					loginCheck.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//					loginCheck.setBounds(100, 100, 450, 300);
-//					JPanel contentPane = new JPanel();
-//					contentPane.setBackground(Color.WHITE);
-//					contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//					loginCheck.setContentPane(contentPane);
-//					contentPane.setLayout(null);
-//					
-//					JButton checkBtn = new JButton("\uD655\uC778");
-//					checkBtn.setForeground(Color.WHITE);
-//					checkBtn.setBackground(Color.BLACK);
-//					checkBtn.setFont(new Font("굴림", Font.PLAIN, 20));
-//					checkBtn.addActionListener(new ActionListener() {
-//						public void actionPerformed(ActionEvent e) {
-//							// 확인하는 버튼 누르면 창 닫아지기
-//							loginCheck.setVisible(false);
-//							
-//						}
-//					});
-//					checkBtn.setBounds(139, 172, 167, 27);
-//					contentPane.add(checkBtn);
-//					
-//					JLabel label = new JLabel("\uAC00\uC785\uB418\uC9C0 \uC54A\uC740 \uD68C\uC6D0\uC785\uB2C8\uB2E4. ");
-//					label.setFont(new Font("굴림", Font.BOLD, 18));
-//					label.setBounds(106, 40, 241, 48);
-//					contentPane.add(label);
-//					
-//					JLabel lblNewLabel = new JLabel("\uB2E4\uC2DC \uC785\uB825\uD558\uC138\uC694.");
-//					lblNewLabel.setFont(new Font("굴림", Font.BOLD, 18));
-//					lblNewLabel.setBounds(149, 100, 167, 27);
-//					contentPane.add(lblNewLabel);
-
+					// 로그인 실패
+					// 실패 창 뜸
+					if(!result.equals(mc)) {
+						JFrame loginCheck = new JFrame();
+					
+					loginCheck.setBackground(Color.BLACK);
+					loginCheck.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					loginCheck.setBounds(100, 100, 450, 300);
+					JPanel contentPane = new JPanel();
+					contentPane.setBackground(Color.WHITE);
+					contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+					loginCheck.setContentPane(contentPane);
+					contentPane.setLayout(null);
+					
+					JButton checkBtn = new JButton("\uD655\uC778");
+					checkBtn.setForeground(Color.WHITE);
+					checkBtn.setBackground(Color.BLACK);
+					checkBtn.setFont(new Font("굴림", Font.PLAIN, 20));
+					checkBtn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							// 확인하는 버튼 누르면 창 닫아지기
+							loginCheck.setVisible(false);
+						
+							
+						}
+					});
+					checkBtn.setBounds(139, 172, 167, 27);
+					contentPane.add(checkBtn);
+					
+					JLabel label = new JLabel("\uAC00\uC785\uB418\uC9C0 \uC54A\uC740 \uD68C\uC6D0\uC785\uB2C8\uB2E4. ");
+					label.setFont(new Font("굴림", Font.BOLD, 18));
+					label.setBounds(106, 40, 241, 48);
+					contentPane.add(label);
+					
+					JLabel lblNewLabel = new JLabel("\uB2E4\uC2DC \uC785\uB825\uD558\uC138\uC694.");
+					lblNewLabel.setFont(new Font("굴림", Font.BOLD, 18));
+					lblNewLabel.setBounds(149, 100, 167, 27);
+					contentPane.add(lblNewLabel);
+					}
 			}
 		});
 
