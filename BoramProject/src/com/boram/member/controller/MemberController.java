@@ -2,6 +2,8 @@ package com.boram.member.controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JTextField;
+
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
 import com.boram.myPage.controller.MyCart;
@@ -55,13 +57,13 @@ public class MemberController {
 		return null;
 	}
 
-	public String searchId(String name, String email) {
+	public String searchId(JTextField nametext, JTextField emailtext) {
 
 		String id = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
 
-			if (memberList.get(i).getEmail().equals(email) && (memberList.get(i).getName().equals(name))) { // 저장된 회원 정보
+			if (memberList.get(i).getEmail().equals(emailtext) && (memberList.get(i).getName().equals(nametext))) { // 저장된 회원 정보
 				id = memberList.get(i).getId();
 			}
 		}
@@ -70,13 +72,13 @@ public class MemberController {
 
 	}
 
-	public String searchPwd(String name, String email) {
+	public String searchPwd(JTextField nametext, JTextField emailtext) {
 
 		String pwd = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
 
-			if (memberList.get(i).getEmail().equals(email) && (memberList.get(i).getName().equals(name))) { // 저장된 회원 정보
+			if (memberList.get(i).getEmail().equals(emailtext) && (memberList.get(i).getName().equals(nametext))) { // 저장된 회원 정보
 				pwd = memberList.get(i).getPwd();
 			}
 		}
