@@ -6,6 +6,7 @@ import java.util.*;
 import javax.swing.*;
 
 import com.boram.myPage.controller.*;
+import com.boram.shopping.view.MainView;
 import com.boram.member.vo.Member;
 
 public class WB_MyPageView {
@@ -154,6 +155,9 @@ public class WB_MyPageView {
 		JButton btnPre = new JButton("Pre");
 		btnPre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			MainView.setMainPage(new WB_MyPage_Main().myPageMain());
+			
+			
 			}
 		});
 		btnPre.setBounds(252, 709, 105, 27);

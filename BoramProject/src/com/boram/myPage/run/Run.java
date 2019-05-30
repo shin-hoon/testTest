@@ -7,10 +7,10 @@ public class Run {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		MyPageView mp=new MyPageView();
-//		mp.mainMenu();
-		CUI_MyCartView mc=new CUI_MyCartView();
-		mc.cartMenu();
+		CUI_MyPageView mp=new CUI_MyPageView();
+		mp.mainMenu();
+//		CUI_MyCartView mc=new CUI_MyCartView();
+//		mc.cartMenu();
 		
 	}
 

@@ -13,7 +13,7 @@ public class MemberController {
 //	MyCart ca=new MyCart();
 
 	ArrayList<Member> memberList = md.fileRead();
-	Member m= new Member();
+	static Member m= new Member();
 	//md.fileSave(memberList);
 	{//초기임시데이터 추가 : 용준
 		//"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 

@@ -10,19 +10,20 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import com.boram.member.controller.MemberController;
 import com.boram.member.view.MemberView1;
 import com.boram.myPage.view.WB_MyPage_Main;
 import com.boram.shopping.controller.MainMouseEvent;
@@ -30,6 +31,7 @@ import com.boram.shopping.controller.ShoppingParsing;
 import com.boram.shopping.vo.ShoopingVO;
 
 public class MainView{
+	private MemberController mc = new MemberController();
 	public static JFrame frame;
 /*   
   	 menu          subMenu
@@ -480,7 +482,11 @@ public class MainView{
 		myPage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(mc.nugu().getName()==null) {
+					JOptionPane.showMessageDialog(null, "로그인 먼저 해주세요", "LogIn Error", JOptionPane.WARNING_MESSAGE);	
+				}else {
 				setMainPage(new WB_MyPage_Main().myPageMain());
+				}
 			}
 		});           
 
