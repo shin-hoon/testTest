@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -368,6 +370,7 @@ public class MainView{
 		logo.addMouseListener(new MainMouseEvent("메인") );
 		login.addMouseListener(new MainMouseEvent("로그인") );
 		myPage.addMouseListener(new MainMouseEvent("마이페이지") );
+		adminPage.addMouseListener(new MainMouseEvent("관리자페이지"));
 
 	} // end mainMouseEvent method
 	

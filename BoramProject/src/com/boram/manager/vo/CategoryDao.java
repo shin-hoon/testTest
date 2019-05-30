@@ -14,6 +14,10 @@ public class CategoryDao {
 
 	private ArrayList<Category> cArr = new ArrayList<Category>();
 	public CategoryDao() {
+		
+	}
+	
+	public void fileWrite() {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("category.txt", true));) {
 
 			oos.writeObject(new Category(11, "ÄÚÆ®"));
@@ -46,6 +50,7 @@ public class CategoryDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	public ArrayList<Category> fileRead() {
 		int count=0;
