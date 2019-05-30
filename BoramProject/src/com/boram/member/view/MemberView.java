@@ -119,7 +119,7 @@ public class MemberView {
 		System.out.print("이메일 : ");
 		String email = sc.nextLine();
 
-		 String id = mc.searchId(name, email);
+		/* String id = mc.searchId(name, email);
 
 		if (id==null) {
 			System.out.println("아이디를 찾을 수 없습니다.");
@@ -128,7 +128,7 @@ public class MemberView {
 
 			System.out.println("찾으시는 ID는 " +  id + " 입니다.");
 		}
-
+		 */
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class MemberView {
 		System.out.print("이메일 : ");
 		String email = sc.nextLine();
 		
-		String pwd = mc.searchPwd(name, email);
+		/*String pwd = mc.searchPwd(name, email);
 
 		if (pwd==null) {
 			System.out.println("아이디를 찾을 수 없습니다.");
@@ -153,6 +153,6 @@ public class MemberView {
 
 			System.out.println("찾으시는 PWD는 " +  pwd + " 입니다.");
 		}
-		
+		*/
 	}
 }
