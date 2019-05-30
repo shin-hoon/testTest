@@ -18,7 +18,6 @@ import javax.swing.SwingConstants;
 import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
-import com.boram.myPage.controller.MyCart;
 import com.boram.shopping.view.MainView;
 
 public class MemberView1{
@@ -94,9 +93,9 @@ public class MemberView1{
 				String userId = id.getText();
 				String userPwd = pwd.getText();
 
-				MemberController mc = new MemberController();
-
+				MemberController mc = new MemberController(); 
 				Member result = mc.logIn(userId , userPwd);
+				
 					Login.setVisible(false); // 로그인 창 끄기
 
 					// 로그인 실패하면 확인 팝업창
@@ -118,6 +117,7 @@ public class MemberView1{
 		join.setForeground(Color.WHITE);
 		join.setBackground(Color.BLACK);
 		join.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				// 회원가입 버튼 클릭하면
 				Login.setVisible(false); // 로그인 창 끄기
@@ -143,6 +143,7 @@ public class MemberView1{
 				idcheckBtn.setBackground(Color.BLACK);
 				idcheckBtn.setFont(new Font("굴림", Font.PLAIN, 20));
 				idcheckBtn.addActionListener(new ActionListener() {
+					
 					public void actionPerformed(ActionEvent e) {
 						// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
 						
@@ -185,32 +186,15 @@ public class MemberView1{
 				emailLb.setBounds(41, 526, 80, 28);
 				joinPanel.add(emailLb);
 				
-				JButton joinBtn = new JButton("\uD68C\uC6D0\uAC00\uC785");
-				joinBtn.setForeground(Color.WHITE);
-				joinBtn.setBackground(Color.BLACK);
-				joinBtn.setFont(new Font("굴림", Font.PLAIN, 22));
-				joinBtn.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						// 정보입력후 회원가입 버튼 누르면
-						
-						
-						
-						
-						
-					}
-				});
-				joinBtn.setBounds(202, 609, 160, 52);
-				joinPanel.add(joinBtn);
-				
 				JTextField idText = new JTextField();
 				idText.setBounds(301, 162, 176, 36);
 				joinPanel.add(idText);
 				idText.setColumns(10);
 				
-				JTextField pweText = new JTextField();
-				pweText.setColumns(10);
-				pweText.setBounds(301, 225, 176, 36);
-				joinPanel.add(pweText);
+				JTextField pwdText = new JTextField();
+				pwdText.setColumns(10);
+				pwdText.setBounds(301, 225, 176, 36);
+				joinPanel.add(pwdText);
 				
 				JTextField nameText = new JTextField();
 				nameText.setColumns(10);
@@ -237,6 +221,41 @@ public class MemberView1{
 				joinPanel.add(addressText);
 				addressText.setColumns(10);
 				
+				JButton joinBtn = new JButton("\uD68C\uC6D0\uAC00\uC785");
+				joinBtn.setForeground(Color.WHITE);
+				joinBtn.setBackground(Color.BLACK);
+				joinBtn.setFont(new Font("굴림", Font.PLAIN, 22));
+				joinBtn.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e) {
+						// 정보입력후 회원가입 버튼 누르면
+						JFrame frame = new JFrame();
+						JOptionPane.showMessageDialog(frame, "회원가입이 완료 되었습니다.");
+						Login.setVisible(true); // 회원가입 완료 확인창 뜨고
+					
+						String name = nameText.getText();
+						int age = birthText.getColumns();
+						String id = idText.getText();
+						String pwd = pwdText.getText();
+						String phone = phoneText.getText();
+						String address = addressText.getText();
+						String email = emailText.getText();
+						
+						MemberController mc = new MemberController();
+						mc.join(name, age, id, pwd, phone, address, email); // 멤버컨틀롤러 회원리스트에 추가
+						
+						// 회원가입창 끄기
+						joinPanel.setVisible(false);
+						
+						// 로그인창 뜨기
+						MainView.setMainPage(Login);
+						Login.add(panel);
+						
+					}
+				});
+				joinBtn.setBounds(202, 609, 160, 52);
+				joinPanel.add(joinBtn);
+				
 				MainView.setMainPage(joinPanel);
 			}
 		});
@@ -252,6 +271,7 @@ public class MemberView1{
 		searchId.setForeground(Color.WHITE);
 		searchId.setBackground(Color.BLACK);
 		searchId.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				// 아이디찾기 버튼 클릭하면
 				panel.setVisible(false); // 로그인 창 끄기
@@ -324,6 +344,7 @@ public class MemberView1{
 		searchPwd.setBackground(Color.BLACK);
 		searchPwd.setForeground(Color.WHITE);
 		searchPwd.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호찾기 버튼 클릭하면
 				panel.setVisible(false); // 로그인 창 끄기
