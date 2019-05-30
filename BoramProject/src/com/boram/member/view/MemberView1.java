@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.boram.manager.controller.ManagerController2;
 import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
@@ -138,24 +139,6 @@ public class MemberView1{
 				idLb.setBounds(41, 164, 102, 28);
 				joinPanel.add(idLb);
 				
-				JButton idcheckBtn = new JButton("ID CHECK");
-				idcheckBtn.setForeground(Color.WHITE);
-				idcheckBtn.setBackground(Color.BLACK);
-				idcheckBtn.setFont(new Font("굴림", Font.PLAIN, 20));
-				idcheckBtn.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent e) {
-						// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
-						
-						
-						
-						
-						
-					}
-				});
-				idcheckBtn.setBounds(500, 164, 150, 25);
-				joinPanel.add(idcheckBtn);
-				
 				JLabel pwdLb = new JLabel("\uBE44\uBC00\uBC88\uD638 * ");
 				pwdLb.setFont(new Font("굴림", Font.PLAIN, 18));
 				pwdLb.setBounds(40, 217, 103, 36);
@@ -190,6 +173,36 @@ public class MemberView1{
 				idText.setBounds(301, 162, 176, 36);
 				joinPanel.add(idText);
 				idText.setColumns(10);
+				
+				JButton idcheckBtn = new JButton("ID CHECK");
+				idcheckBtn.setForeground(Color.WHITE);
+				idcheckBtn.setBackground(Color.BLACK);
+				idcheckBtn.setFont(new Font("굴림", Font.PLAIN, 20));
+				idcheckBtn.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e) {
+						// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
+						// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
+		
+						
+						// 입력한 아이디와 저장된 아이디가 같으면
+//					if(.equals(idText)) {
+//						JFrame frame = new JFrame();
+//						JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다.");
+//						joinPanel.setVisible(true);
+//						
+//					}else { // 저장된 아이디랑 다르면 사용가능
+//						JFrame frame2 = new JFrame();
+//						JOptionPane.showMessageDialog(frame2, "사용가능");
+//						joinPanel.setVisible(true);
+//					}
+						
+				
+					}
+				});
+				
+				idcheckBtn.setBounds(500, 164, 150, 25);
+				joinPanel.add(idcheckBtn);
 				
 				JTextField pwdText = new JTextField();
 				pwdText.setColumns(10);
@@ -318,9 +331,9 @@ public class MemberView1{
 				confirmBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// 아이디 찾기 확인 버튼 누르면
-						
-						
-						
+	
+						MemberController mc = new MemberController();
+						mc.searchId(nametext, emailtext);
 						
 						
 						
@@ -348,7 +361,6 @@ public class MemberView1{
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호찾기 버튼 클릭하면
 				panel.setVisible(false); // 로그인 창 끄기
-
 				
 				JPanel pwdSearchPanel = new JPanel();
 				
@@ -393,7 +405,8 @@ public class MemberView1{
 					public void actionPerformed(ActionEvent e) {
 						// 비밀번호 찾기 확인버튼 누르면
 						
-						
+						MemberController mc = new MemberController();
+						mc.searchPwd(nametext, emailtext);
 						
 						
 						
