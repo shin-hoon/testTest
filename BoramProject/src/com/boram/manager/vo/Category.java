@@ -1,11 +1,20 @@
 package com.boram.manager.vo;
 
-public class Category {
+import java.io.Serializable;
+
+
+public class Category implements Serializable {
 	
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -849903049153422482L;
 	
 	private int num;
 	private String kind;
+	
 	
 	
 	
@@ -28,7 +37,7 @@ public class Category {
 	}
 	@Override
 	public String toString() {
-		return "Category [num=" + num + ", kind=" + kind + "]";
+		return  num + " : " + kind ;
 	}
 	
 	
