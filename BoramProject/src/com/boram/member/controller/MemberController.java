@@ -78,7 +78,7 @@ public class MemberController {
 
 		for (int i = 0; i < memberList.size(); i++) {
 
-			if (memberList.get(i).getEmail().equals(emailtext) && (memberList.get(i).getName().equals(nametext))) { // 저장된 회원 정보
+			if (memberList.get(i).getEmail().equals(emailtext.getText()) && (memberList.get(i).getName().equals(nametext.getText()))) { // 저장된 회원 정보
 				pwd = memberList.get(i).getPwd();
 			}
 		}
@@ -90,6 +90,15 @@ public class MemberController {
 	public Member nugu() {
 		return m;
 	}
-
-
+	
+	public int idCheck(JTextField id) {
+		
+		for(int i=0; i<memberList.size(); i++) {
+			if(memberList.get(i).getId().equals(id.getText())) {
+				return 1; // 동일한 아이디가 존재
+			}
+		}
+		return -1; // 동일한 아이디 없다
+		}
+	
 }
