@@ -22,22 +22,25 @@ public class ShoppingParsing {
 			Document doc = Jsoup.connect("https://m.mutnam.com/product/list.html?cate_no=50").get();
 			Elements img = doc.select("div.thumbnail a img");
 			Elements title = doc.select("div.description strong.name a");
-			Elements price = doc.select("div.spec p.price");
+			Elements price = doc.select("div.description div.spec p.price");
 			
-			/*System.out.println("https:"+img);
-			System.out.println(title);
-			System.out.println(price);*/
+			int cnt = 0;
 			for(int i = 0; i < img.size(); i++) {
 				Element imgTmp = img.get(i);
 				Element titleTmp = title.get(i);
-				Element priceTmp = price.get(i);
-				System.out.println(imgTmp.attr("src"));
+				Element priceTmp = price.get(cnt);
+			/*	
+				System.out.println("https:"+imgTmp.attr("src"));
 				System.out.println(titleTmp.text());
 				System.out.println(priceTmp.text());
-				
-				dataList.get(i).setImage(imgTmp.attr("src"));
-				dataList.get(i).setTitle(titleTmp.text());
-				dataList.get(i).setTitle(priceTmp.text());
+				System.out.println();
+			*/	
+				ShoopingVO vo = new ShoopingVO();
+				vo.setImage("https:"+imgTmp.attr("src"));
+				vo.setTitle(titleTmp.text());
+				vo.setPrice(priceTmp.text());
+				dataList.add(vo);
+				cnt += 2;
 			}
 		} catch(Exception e) {
 			System.out.println("파싱에러 : " + e.getMessage());
@@ -55,32 +58,5 @@ public class ShoppingParsing {
 		
 		return dataList;
 	}
-	*/
-	
-	
-	
-	
-	/*
-	
-		Image image = null;
-		Image image2 = null;
-		
-        try {
-            URL url = new URL("https://m.mutnam.com/web/product/medium/201905/fc7e31fe79e7108dfc8882cfba71da4d.gif");
-            URL ur2 = new URL("https://m.mutnam.com/web/product/medium/201905/0c774c7b53fa9f91cd60ccb96502a97e.gif");
-            image = ImageIO.read(url).getScaledInstance(450, 430, Image.SCALE_SMOOTH);
-            image2 = ImageIO.read(ur2).getScaledInstance(450, 430, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-        	System.out.println("이미지 불러오기 에러 : " + e.getMessage());
-        }
-        
-        JLabel label = new JLabel(new ImageIcon(image));
-        label.setBounds(15, 0, 325, 432);
-        JLabel label2 = new JLabel(new ImageIcon(image2));
-        label2.setBounds(359, 0, 325, 432);
-        
-	
-	
-	
 	*/
 }

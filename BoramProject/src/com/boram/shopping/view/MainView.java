@@ -97,11 +97,11 @@ public class MainView{
 		
         mainPageScroll = new JScrollPane();
 		mainPageScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		mainPageScroll.getVerticalScrollBar().setUnitIncrement(16);// 스크롤 속도 
+		mainPageScroll.getVerticalScrollBar().setUnitIncrement(36);// 스크롤 속도 
 		mainPageScroll.setBorder(null);
 		mainPageScroll.setBounds(0, 80, 700, 975);
 
-		mainPage.setPreferredSize(new Dimension(450, 1000));
+		mainPage.setPreferredSize(new Dimension(450, 3000));
 		mainPageScroll.setViewportView(mainPage);
 		frame.getContentPane().add(mainPageScroll); 
 		
@@ -321,7 +321,7 @@ public class MainView{
 		
 		subMenuScroll = new JScrollPane();
 		subMenuScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		subMenuScroll.getVerticalScrollBar().setUnitIncrement(16);// 스크롤 속도 
+		subMenuScroll.getVerticalScrollBar().setUnitIncrement(36);// 스크롤 속도 
 		subMenuScroll.setBorder(null);
 		subMenuScroll.setBounds(0, 80, 246, 975);
 		subMenuScroll.setVisible(false);
@@ -396,59 +396,60 @@ public class MainView{
 		
 		//ShoppingParsing
 		List<ShoopingVO> list = new ShoppingParsing().testParsing();
-		int width = 15;
-		int height = 0;
-		JLabel[] label = new JLabel[list.size()];
+		int imgWidth = 15;
+		int imgHeight = 0;
+		int priceWidth_1 = 15;
+		int priceHeight_1 = 436;
+		int priceWidth_2 = 15;
+		int priceHeight_2 = 460;
+		
+		int cnt = 1;
 		
 		for(int i = 0 ; i < list.size(); i++) {
 			Image image = null;
 			
 			try {
+				System.out.println(list.get(i).getImage());
 				URL url = new URL(list.get(i).getImage());
-				image = ImageIO.read(url).getScaledInstance(450, 430, Image.SCALE_SMOOTH);
+				image = ImageIO.read(url).getScaledInstance(325, 430, Image.SCALE_SMOOTH);
 			} catch (IOException e) {
 				System.out.println("이미지 불러오기 에러 : " + e.getMessage());
 			}
-			height += 200;
-			/*if(i%2==0) {
-				width = 15;
-				
-				height += 200;
+			
+			if( cnt % 2 == 0 ) {
+				imgWidth += 344;
+				priceWidth_1 += 344;
+				priceWidth_2 += 344;
 			}
-			else {
-				
-				width += 344;
-			}*/
+			
 			JLabel mainImage1 = new JLabel(new ImageIcon(image));
-			mainImage1.setBounds(15, height, 325, 432);
-			/*JLabel mainImage2 = new JLabel(new ImageIcon(image2));
-			mainImage2.setBounds(359, 0, 325, 432);
-			*/
+			mainImage1.setBounds(imgWidth, imgHeight, 325, 432);
 			mainPage.add(mainImage1);
+			
+			JLabel label_1 = new JLabel(list.get(i).getTitle());
+			label_1.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
+			label_1.setBounds(priceWidth_1, priceHeight_1, 150, 18);
+			mainPage.add(label_1);
+
+			JLabel label_2 = new JLabel(list.get(i).getPrice());
+			label_2.setForeground(new Color(255, 153, 0));
+			label_2.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
+			label_2.setBounds(priceWidth_2, priceHeight_2, 87, 18);
+			mainPage.add(label_2);
+
+			if( cnt % 2 == 0 ) {
+				imgHeight += 500;
+				priceHeight_1 += 500;
+				priceHeight_2 += 500;
+				imgWidth = 15;
+				priceWidth_1 = 15;
+				priceWidth_2 = 15;
+			}
+			cnt++;
 		}
 		
-        JLabel label_1 = new JLabel("썸머나이트 틴 자켓");
-        label_1.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
-        label_1.setBounds(15, 436, 150, 18);
-        mainPage.add(label_1);
+   
         
-        JLabel label_2 = new JLabel("42,000");
-        label_2.setForeground(new Color(255, 153, 0));
-        label_2.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
-        label_2.setBounds(19, 460, 87, 18);
-        mainPage.add(label_2);
-        
-        JLabel label_3 = new JLabel("헤이든 린넨 블레이져");
-        label_3.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
-        label_3.setBounds(357, 436, 150, 18);
-        mainPage.add(label_3);
-        
-        JLabel label_4 = new JLabel("72,000");
-        label_4.setForeground(new Color(255, 153, 0));
-        label_4.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
-        label_4.setBounds(361, 460, 87, 18);
-        mainPage.add(label_4);
-       
         return mainPage;
 	} // end changePage method
 
@@ -466,7 +467,7 @@ public class MainView{
 
 				mainPageScroll.setViewportView(null);
 				mainPage = changePage();
-				mainPage.setPreferredSize(new Dimension(450, 1000));
+				mainPage.setPreferredSize(new Dimension(450, 3000));
 				mainPageScroll.setViewportView(mainPage);
 
 				frame.revalidate();
@@ -501,7 +502,7 @@ public class MainView{
 
 		mainPageScroll.setViewportView(null);
 		mainPage = panel;
-		mainPage.setPreferredSize(new Dimension(450, 1000));
+		mainPage.setPreferredSize(new Dimension(450, 3000));
 		mainPageScroll.setViewportView(mainPage);
 
 		frame.revalidate();

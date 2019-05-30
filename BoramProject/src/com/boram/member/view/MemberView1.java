@@ -1,9 +1,12 @@
 package com.boram.member.view;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -15,7 +18,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.boram.manager.controller.ManagerController2;
 import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
@@ -98,6 +100,12 @@ public class MemberView1{
 				Member result = mc.logIn(userId , userPwd);
 				
 					Login.setVisible(false); // 로그인 창 끄기
+					
+					//
+					
+					
+					
+					
 
 					// 로그인 실패하면 확인 팝업창
 					if(result == null) {
@@ -178,28 +186,53 @@ public class MemberView1{
 				idcheckBtn.setForeground(Color.WHITE);
 				idcheckBtn.setBackground(Color.BLACK);
 				idcheckBtn.setFont(new Font("굴림", Font.PLAIN, 20));
-				idcheckBtn.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent e) {
-						// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
-						// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
-		
-						
-						// 입력한 아이디와 저장된 아이디가 같으면
-//					if(.equals(idText)) {
-//						JFrame frame = new JFrame();
-//						JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다.");
-//						joinPanel.setVisible(true);
-//						
-//					}else { // 저장된 아이디랑 다르면 사용가능
-//						JFrame frame2 = new JFrame();
-//						JOptionPane.showMessageDialog(frame2, "사용가능");
-//						joinPanel.setVisible(true);
-//					}
-						
 				
+				idcheckBtn.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						 	// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
+							// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
+						
+							JFrame frame = new JFrame();
+							JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
+							joinPanel.setVisible(true);
+							
+				
+							// 저장된 아이디랑 다르면 사용가능
+						
+//							JFrame frame2 = new JFrame();
+//							JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
+//							joinPanel.setVisible(true);
+//							
 					}
 				});
+				/*
+				 * 	// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
+						// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
+						JFrame frame1 = new JFrame();
+						JOptionPane.showMessageDialog(frame1, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
+						MemberController mc = new MemberController();
+						int result = mc.idCheck(id);
+				
+						//같은 아이디가 존재하면
+						if(result == 1) {
+						JFrame frame = new JFrame();
+						JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
+						joinPanel.setVisible(true);
+						}
+			
+						// 저장된 아이디랑 다르면 사용가능
+						else {
+						JFrame frame2 = new JFrame();
+						JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
+						joinPanel.setVisible(true);
+						}
+					
+				 * 
+				 * 
+				 * 
+				 */
 				
 				idcheckBtn.setBounds(500, 164, 150, 25);
 				joinPanel.add(idcheckBtn);
@@ -334,6 +367,7 @@ public class MemberView1{
 	
 						MemberController mc = new MemberController();
 						mc.searchId(nametext, emailtext);
+						
 						
 						
 						
