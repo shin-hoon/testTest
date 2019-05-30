@@ -12,12 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.boram.member.controller.MemberController;
 import com.boram.shopping.view.*;
 public class WB_MyPage_Main{
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
 	private JPanel contentPane;
-	
+	MemberController mc = new MemberController();
 	
 	// 메인 페이지 호출을 위한 JPanel 반환
 	public JPanel myPageMain() {
@@ -69,7 +70,9 @@ public class WB_MyPage_Main{
 		lblMyCart.setFont(new Font("굴림", Font.ITALIC, 50));
 		contentPane.add(lblMyCart);
 		
-		JLabel lblNewLabel = new JLabel("님의 정보는");
+		String st = mc.nugu().toString();
+		System.out.println(mc.nugu().toString());
+		JLabel lblNewLabel = new JLabel("님의 정보는"+st.toString());
 		lblNewLabel.setBounds(78, 149, 507, 40);
 		contentPane.add(lblNewLabel);
 	}
