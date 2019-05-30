@@ -2,6 +2,8 @@ package com.boram.member.controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JTextField;
+
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
 import com.boram.myPage.controller.MyCart;
@@ -13,7 +15,7 @@ public class MemberController {
 //	MyCart ca=new MyCart();
 
 	ArrayList<Member> memberList = md.fileRead();
-	Member m= new Member();
+	static Member m= new Member();
 	//md.fileSave(memberList);
 	{//초기임시데이터 추가 : 용준
 		//"name1",950417,"id1","pwd2","01029346330","seoul","email.com" 
@@ -55,13 +57,13 @@ public class MemberController {
 		return null;
 	}
 
-	public String searchId(String name, String email) {
+	public String searchId(JTextField nametext, JTextField emailtext) {
 
 		String id = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
 
-			if (memberList.get(i).getEmail().equals(email) && (memberList.get(i).getName().equals(name))) { // 저장된 회원 정보
+			if (memberList.get(i).getEmail().equals(emailtext) && (memberList.get(i).getName().equals(nametext))) { // 저장된 회원 정보
 				id = memberList.get(i).getId();
 			}
 		}
@@ -70,13 +72,13 @@ public class MemberController {
 
 	}
 
-	public String searchPwd(String name, String email) {
+	public String searchPwd(JTextField nametext, JTextField emailtext) {
 
 		String pwd = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
 
-			if (memberList.get(i).getEmail().equals(email) && (memberList.get(i).getName().equals(name))) { // 저장된 회원 정보
+			if (memberList.get(i).getEmail().equals(emailtext.getText()) && (memberList.get(i).getName().equals(nametext.getText()))) { // 저장된 회원 정보
 				pwd = memberList.get(i).getPwd();
 			}
 		}
@@ -88,6 +90,15 @@ public class MemberController {
 	public Member nugu() {
 		return m;
 	}
-
-
+	
+	public int idCheck(JTextField id) {
+		
+		for(int i=0; i<memberList.size(); i++) {
+			if(memberList.get(i).getId().equals(id.getText())) {
+				return 1; // 동일한 아이디가 존재
+			}
+		}
+		return -1; // 동일한 아이디 없다
+		}
+	
 }

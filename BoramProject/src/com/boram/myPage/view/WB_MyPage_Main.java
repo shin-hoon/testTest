@@ -71,8 +71,7 @@ public class WB_MyPage_Main{
 		contentPane.add(lblMyCart);
 		
 		String st = mc.nugu().toString();
-		System.out.println(mc.nugu().toString());
-		JLabel lblNewLabel = new JLabel("님의 정보는"+st.toString());
+		JLabel lblNewLabel = new JLabel("님의 정보는"+st);
 		lblNewLabel.setBounds(78, 149, 507, 40);
 		contentPane.add(lblNewLabel);
 	}

@@ -60,7 +60,7 @@ public class WB_MyCartView {
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(Color.WHITE);
 		panel2.setForeground(Color.WHITE);
-		panel2.setBounds(0, 90, FWID, 710);
+		panel2.setBounds(0, 90, 718, 698);
 		panel2.setLayout(null);
 		myCartView.add(panel2);
 	
@@ -73,6 +73,12 @@ public class WB_MyCartView {
 		 */
 		// pNo, category, productName, price, size, stock, count(조회수)
 		// 1,1,"hat",35000,one,1,1.
+		
+		
+		
+		
+		
+		
 		// 현재 테이블 테스트불가.
 		// 현재 테이블에 CList들어있음.
 		// CList에서 뺴와서 새로구성해야함.
@@ -85,11 +91,12 @@ public class WB_MyCartView {
 		DefaultTableModel dtm = new DefaultTableModel(colName, 0);
 		// 값 넣어야함.
 		table = new JTable(dtm);
+		table.setBackground(Color.WHITE);
 //		sp.setViewportView(table);
 //		table.setBackground(Color.DARK_GRAY);
 		
 		JScrollPane sp = new JScrollPane(table);
-		sp.setBounds(74, 39, 579, 423);
+		sp.setBounds(14, 0, 676, 625);
 		panel2.add(sp);
 //		sp.add(table);
 		
@@ -138,15 +145,15 @@ public class WB_MyCartView {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(85, 637, 105, 27);
+		btnNewButton.setBounds(122, 637, 105, 27);
 		panel2.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("주문");
-		btnNewButton_1.setBounds(216, 637, 105, 27);
+		btnNewButton_1.setBounds(295, 637, 105, 27);
 		panel2.add(btnNewButton_1);
 		
 		JButton button = new JButton("이전메뉴");
-		button.setBounds(362, 636, 105, 27);
+		button.setBounds(489, 637, 105, 27);
 		panel2.add(button);
 				
 		
