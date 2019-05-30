@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -191,48 +189,29 @@ public class MemberView1{
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						 	// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
+					
+							// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
 							// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
-						
+							MemberController mc = new MemberController();
+							int result = mc.idCheck(id);
+					
+							//같은 아이디가 존재하면
+							if(result == 1) {
 							JFrame frame = new JFrame();
 							JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
 							joinPanel.setVisible(true);
-							
+							}
 				
 							// 저장된 아이디랑 다르면 사용가능
+							else {
+							JFrame frame2 = new JFrame();
+							JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
+							joinPanel.setVisible(true);
+							}
 						
-//							JFrame frame2 = new JFrame();
-//							JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
-//							joinPanel.setVisible(true);
-//							
 					}
 				});
-				/*
-				 * 	// 아이디 입력후 사용가능한 아이디인지 확인하는 버튼
-						// 아이디 입력후 아이디체크버튼 누르면 저장된 멤버 아이디 검색
-						JFrame frame1 = new JFrame();
-						JOptionPane.showMessageDialog(frame1, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
-						MemberController mc = new MemberController();
-						int result = mc.idCheck(id);
-				
-						//같은 아이디가 존재하면
-						if(result == 1) {
-						JFrame frame = new JFrame();
-						JOptionPane.showMessageDialog(frame, "같은 아이디가 존재합니다. 다른ID를 사용하세요.");
-						joinPanel.setVisible(true);
-						}
 			
-						// 저장된 아이디랑 다르면 사용가능
-						else {
-						JFrame frame2 = new JFrame();
-						JOptionPane.showMessageDialog(frame2, "사용가능한 ID입니다.");
-						joinPanel.setVisible(true);
-						}
-					
-				 * 
-				 * 
-				 * 
-				 */
 				
 				idcheckBtn.setBounds(500, 164, 150, 25);
 				joinPanel.add(idcheckBtn);
