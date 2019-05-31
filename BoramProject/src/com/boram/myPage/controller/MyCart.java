@@ -146,24 +146,14 @@ public class MyCart extends Product implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void loadCart() {// 잘 작동하는지 확인할것.
-		int result = 0;// 임시변수확인!!
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(m.getmNo() + "MyCart.txt"))) {
 			CList.clear();
 			while (true) {
 				// CList = (ArrayList<Product>) ois.readObject();
 				CList.add((Product) ois.readObject());
-				result = 1;
 			}
-		}catch (FileNotFoundException e) {
-			File f = new File(m.getmNo()+ "MyCart.txt");
-			try {
-				f.createNewFile();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			
+		
 		}
 		catch (EOFException e) {
 			// e.printStackTrace();
