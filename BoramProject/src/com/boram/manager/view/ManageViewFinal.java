@@ -243,37 +243,50 @@ public class ManageViewFinal {
 				MainView.setMainPage(manageMain());
 			}
 		});
+
+		update.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object a;
+				for (int i = 0; i < table.getRowCount(); i++) {
+					for (int k = 0; k < table.getColumnCount(); k++) {
+						a = table.getValueAt(i, k);
+
+						if (k == 1) {
+
+							String[] words = ((String) a).split("\\s");
+							int cat = Integer.parseInt(words[0]);
+							pArr.get(i).setCategory(cat);
+						} else if (k == 2) {
+							pArr.get(i).setProductName((String) a);
+						} else if (k == 3) {
+							pArr.get(i).setSize((String) a);
+						} else if (k == 4) {
+							pArr.get(i).setPrice(Integer.parseInt((String)a));
+						} else if (k == 5) {
+							pArr.get(i).setStock((int) a);
+						}
+					}
+				}
+				pDao.fileSave(pArr);
+
+				MainView.setMainPage(manageProduct());
+
+			}
+		});
+
 		delete.addMouseListener(new MouseAdapter() {
-			//여기부터
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			// 여기부터
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				pArr.get(0).setCategory(11);
 				Object a;
 				int temp = -1;
+				System.out.println(table.getSelectedColumn() + ":" + table.getSelectedRow());
 				try {
-					a = table.getValueAt(0, table.getSelectedColumn());
+					a = table.getValueAt(table.getSelectedRow(), 0);
 					for (int i = 0; i < pArr.size(); i++) {
-						if (pArr.get(i).getpNo() == (int)a) {
+						if (pArr.get(i).getpNo() == (int) a) {
 							temp = i;
 							break;
 						}
@@ -281,18 +294,16 @@ public class ManageViewFinal {
 				} catch (ArrayIndexOutOfBoundsException e2) {
 					temp = -1;
 				}
-				
-				
 
 				if (temp < 0) {
-					JOptionPane.showMessageDialog(null, "선택한 값이 없습니다","warning",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "선택한 값이 없습니다", "warning", JOptionPane.ERROR_MESSAGE);
 				} else {
 					int result = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "Confirm",
 							JOptionPane.YES_NO_OPTION);
 					if (result == JOptionPane.CLOSED_OPTION) {
 
 					} else if (result == JOptionPane.YES_OPTION) {
-						mc.deleteProduct(temp);
+						pArr.remove(temp);
 						pDao.fileSave(pArr);
 						MainView.setMainPage(manageProduct());
 					} else {
@@ -301,8 +312,6 @@ public class ManageViewFinal {
 				}
 			}
 		});
-		
-		
 
 		return manageProduct;
 	}
@@ -325,7 +334,7 @@ public class ManageViewFinal {
 		analyzeSale.add(lblNewLabel);
 
 		String[] kind = { "조회수 분석", " 판매율분석" };
-		JComboBox comboBox = new JComboBox(kind);
+		JComboBox<String> comboBox = new JComboBox<String>(kind);
 		comboBox.setBounds(138, 101, 198, 27);
 		analyzeSale.add(comboBox);
 
@@ -343,17 +352,24 @@ public class ManageViewFinal {
 		int iTemp = 0;
 		double dTemp = 0.0;
 		for (int i = 0; i < sales1.size(); i++) {
-			for (int j = 0; j < i; j++) {
-				if (pNo1.get(i) < pNo1.get(j)) {
-					iTemp = pNo1.get(i);
-					pNo1.set(i, pNo1.get(j));
-					pNo1.set(j, iTemp);
+			for (int k = 0; k < pArr.size(); k++) {
+				if (pNo1.get(i) == pArr.get(i).getpNo()) {
+					for (int j = 0; j < i; j++) {
 
-					dTemp = sales1.get(i);
-					sales1.set(i, sales1.get(j));
-					sales1.set(j, dTemp);
+						if (pArr.get(i).getCount() < pArr.get(j).getCount()) {
+							iTemp = pNo1.get(i);
+							pNo1.set(i, pNo1.get(j));
+							pNo1.set(j, iTemp);
+
+							dTemp = sales1.get(i);
+							sales1.set(i, sales1.get(j));
+							sales1.set(j, dTemp);
+						}
+					}
+
 				}
 			}
+
 		}
 
 		HashMap<Integer, Double> copy2 = mc.analysis();
@@ -449,11 +465,75 @@ public class ManageViewFinal {
 		analyzeSale.add(delete);
 
 		analyzeSale.setVisible(true);
+		lastPage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainView.setMainPage(manageMain());
+			}
+		});
 
+		update.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object a;
+				
+				int b = -1;
+				int x =table.getSelectedRow();
+				a = table.getValueAt(x, 0);
+				for (int i = 0; i < pArr.size(); i++) {
+					if(pArr.get(i).getpNo()==(int)a) {
+						b=i;
+						break;
+					}
+				}
+				
+				if(b==-1) {
+					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
+				}else {
+				MainView.setMainPage(updateProduct());
+			
+				}
+			}
+		});
+		delete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object a;
+				int temp = -1;
+				System.out.println(table.getSelectedColumn() + ":" + table.getSelectedRow());
+				try {
+					a = table.getValueAt(table.getSelectedRow(), 0);
+					for (int i = 0; i < pArr.size(); i++) {
+						if (pArr.get(i).getpNo() == (int) a) {
+							temp = i;
+							break;
+						}
+					}
+				} catch (ArrayIndexOutOfBoundsException e2) {
+					temp = -1;
+				}
+
+				if (temp < 0) {
+					JOptionPane.showMessageDialog(null, "선택한 값이 없습니다", "warning", JOptionPane.ERROR_MESSAGE);
+				} else {
+					int result = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "Confirm",
+							JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.CLOSED_OPTION) {
+
+					} else if (result == JOptionPane.YES_OPTION) {
+						mc.deleteProduct(temp);
+						pDao.fileSave(pArr);
+						MainView.setMainPage(manageProduct());
+					} else {
+
+					}
+				}
+			}
+		});
 		return analyzeSale;
 
 	}
-
+	//searchMember까지 보류
 	public JPanel saleState() {
 
 		String[] term = { "1개월", "2 개월", "3 개월", "4 개월", "5개월" };
@@ -491,6 +571,7 @@ public class ManageViewFinal {
 
 		graph.setVisible(true);
 		saleState.setVisible(true);
+
 		return saleState;
 	}
 
@@ -695,19 +776,79 @@ public class ManageViewFinal {
 		delete.setBounds(430, 517, 125, 29);
 		searchMember.add(delete);
 
-		delete.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
+		
 
 		JButton lastPage = new JButton("\uC774\uC804 \uD398\uC774\uC9C0");
 		lastPage.setBounds(101, 517, 137, 29);
 		searchMember.add(lastPage);
+		
+		/*
+		 * JButton update = new JButton("\uC218\uC815"); update.setBounds(268, 517, 125,
+		 * 29); searchMember.add(update);
+		 */
 
 		searchMember.setVisible(true);
+
+		lastPage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainView.setMainPage(manageMain());
+			}
+		});
+		/*
+		 * update.addMouseListener(new MouseAdapter() {
+		 * 
+		 * @Override public void mouseClicked(MouseEvent e) { Object a; for (int i = 0;
+		 * i < table_1.getRowCount(); i++) { for (int k = 0; k <
+		 * table_1.getColumnCount(); k++) { a = table_1.getValueAt(i, k);
+		 * 
+		 * if (k == 0) {
+		 * 
+		 * int cat = Integer.parseInt((String)a); mArr.get(i).setmNo(cat); } else if (k
+		 * == 1) { mArr.get(i).setId((String)a); } else if (k == 2) {
+		 * mArr.get(i).setName((String) a); } else if (k == 3) {
+		 * mArr.get(i).setPhone((String)a); } else if(k==4) {
+		 * mArr.get(i).setEmail((String)a); } } } mDao.fileSave(mArr);
+		 * 
+		 * MainView.setMainPage(searchMember());
+		 * 
+		 * } });
+		 */
+		delete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object a;
+				int temp = -1;
+				System.out.println(table_1.getSelectedColumn() + ":" + table_1.getSelectedRow());
+				try {
+					a = table_1.getValueAt(table_1.getSelectedRow(), 0);
+					for (int i = 0; i < mArr.size(); i++) {
+						if (mArr.get(i).getmNo() == (int) a) {
+							temp = i;
+							break;
+						}
+					}
+				} catch (ArrayIndexOutOfBoundsException e2) {
+					temp = -1;
+				}
+
+				if (temp < 0) {
+					JOptionPane.showMessageDialog(null, "선택한 값이 없습니다", "warning", JOptionPane.ERROR_MESSAGE);
+				} else {
+					int result = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "Confirm",
+							JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.CLOSED_OPTION) {
+
+					} else if (result == JOptionPane.YES_OPTION) {
+						mArr.remove(temp);
+						mDao.fileSave(mArr);
+						MainView.setMainPage(searchMember());
+					} else {
+
+					}
+				}
+			}
+		});
 
 		return searchMember;
 
