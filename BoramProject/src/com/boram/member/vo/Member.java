@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class Member implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2921538305338431959L;
 	
 	private int mNo; // 회원번호
@@ -20,6 +17,7 @@ public class Member implements Serializable{
 	
 	//private int grant; // 권한
 
+	
 	public Member() {
 		super();
 	}

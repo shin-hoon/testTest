@@ -16,7 +16,6 @@ public class MyCart extends Product implements Serializable {
 
 	// 로그인하면서 누가 로그인했는지 회원정보 가져옴.
 	MemberController mc = new MemberController();
-	Member m = mc.nugu();
 
 	// 초기 임시데이터
 	// {
@@ -95,8 +94,8 @@ public class MyCart extends Product implements Serializable {
 		} else {
 			// CList+Member => OList만들기.
 			int oNo = OList.size() + 1;// 마지막order번호 +1
-			String oId = m.getId();// 주문자 id
-			String oAdd = m.getAddress();// 주문자 주소.
+			String oId = MemberController.m.getId();// 주문자 id
+			String oAdd = MemberController.m.getAddress();// 주문자 주소.
 			// CList안 상품의 pNo목록을 ArrayList<Integer> pNo로 넣음.
 			for (Product i : CList) {
 				pNo.add(i.getpNo());
@@ -129,7 +128,7 @@ public class MyCart extends Product implements Serializable {
 	 * @return 실패0, 성공1
 	 */
 	public void saveCart(ArrayList<Product> CList) {// notSerializable exc
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(m.getmNo() + "MyCart.txt"))) {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(MemberController.m.getmNo() + "MyCart.txt"))) {
 			// oos.writeObject(null);
 			for (Product i : CList) {
 				oos.writeObject(i);
@@ -147,7 +146,7 @@ public class MyCart extends Product implements Serializable {
 	}
 
 	public void loadCart() {// 잘 작동하는지 확인할것.
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(m.getmNo() + "MyCart.txt"))) {
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(MemberController.m.getmNo() + "MyCart.txt"))) {
 			CList.clear();
 			while (true) {
 				// CList = (ArrayList<Product>) ois.readObject();

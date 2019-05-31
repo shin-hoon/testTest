@@ -73,7 +73,7 @@ public class WB_MyPage_Main{
 		lblMyCart.setFont(new Font("±¼¸²", Font.ITALIC, 50));
 		contentPane.add(lblMyCart);
 		
-		String st = mc.nugu().toString();
+		String st = MemberController.m.toString();
 		JLabel lblNewLabel = new JLabel("´ÔÀÇ Á¤º¸´Â"+st);
 		lblNewLabel.setBounds(78, 149, 507, 40);
 		contentPane.add(lblNewLabel);

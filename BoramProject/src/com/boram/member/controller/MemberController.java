@@ -15,22 +15,18 @@ public class MemberController {
 	// MyCart ca=new MyCart();
 
 	ArrayList<Member> memberList = md.fileRead();
-	static Member m ;
+	public static Member m ;
 	// md.fileSave(memberList);
-	// {//초기임시데이터 추가 : 용준
-	// //"name1",950417,"id1","pwd2","01029346330","seoul","email.com"
-	// memberList.add(new
-	// Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
-	// memberList.add(new
-	// Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
-	// memberList.add(new
-	// Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
-	// memberList.add(new
-	// Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
-	// memberList.add(new
-	// Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com"));
-	// }
-
+	
+//	{// 초기임시데이터 추가 : 용준
+//		// "name1",950417,"id1","pwd2","01029346330","seoul","email.com"
+//		memberList.add(new Member(1, "1", 1, "1", "1", "1", "1", "1"));
+//		memberList.add(new Member(2, "name1", 950411, "id1", "pwd1", "01029346331", "seoul", "1mail.com"));
+//		memberList.add(new Member(3, "name2", 950412, "id2", "pwd2", "01029346332", "seou1", "2mail.com"));
+//		memberList.add(new Member(4, "name3", 950413, "id3", "pwd3", "01029346333", "seou2", "3mail.com"));
+//		memberList.add(new Member(5, "name4", 950414, "id4", "pwd4", "01029346334", "seou3", "4mail.com"));
+//		memberList.add(new Member(6, "name5", 950415, "id5", "pwd5", "01029346335", "seou4", "5mail.com"));
+//	}
 	
 	/*
 	 * 회원가입
@@ -42,8 +38,10 @@ public class MemberController {
 		for (Member m : memberList) {
 			System.out.println( m.getName() + m.getAge() + m.getId() + m.getPwd() + m.getPhone()
 					+ m.getAddress() + m.getEmail()); // mNo로 1씩 증가
+			System.out.println("test : "+m.toString());
 		}
-		if(memberList.size()==0) {
+		if(memberList.size()==0) {//memberList 초기화 후 새로시작할때 mNo=0으로 변경해주세요.
+			//0번index에 mNo가 1 부터 시작하면 outofbound오류납니다.  
 			mNo=1;
 		}else {
 			mNo=memberList.get(memberList.size()-1).getmNo()+1; //제일마지막번호 +1
@@ -55,7 +53,10 @@ public class MemberController {
 		memberList.add(new Member(mNo, name, age, id, pwd, phone, address, email));
 		System.out.println(memberList.size());
 		for (int i = 0; i < memberList.size(); i++) {
+			System.out.println("===============");
+			System.out.println("i : "+i);
 			System.out.println(memberList.get(i));
+			
 		}
 
 		// 저장
@@ -74,10 +75,9 @@ public class MemberController {
 
 			if (memberList.get(i).getId().equals(id) && memberList.get(i).getPwd().equals(pwd)) {
 
-				System.out.println("success");
 				// memberList.get(i)를 리턴함과동시에 nugu메소드를통해 누가 로그인햇는지 알려줌.
 				m = memberList.get(i);
-
+				System.out.println("i : "+i);
 				System.out.println(m.toString());
 				System.out.println("성공");
 				

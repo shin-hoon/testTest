@@ -7,23 +7,20 @@ import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
 
 public class ChangeMember {
-	private ArrayList<Member> MemberList = new ArrayList<>();
 	private MemberDao md = new MemberDao();
-	private MemberController mc = new MemberController();
-	private Member chM = mc.nugu();
-	//private int mNo = m.getmNo();
-	private int mNo = mc.nugu().getmNo();
+	private ArrayList<Member> MemberList = md.fileRead();
+	private int mNo = MemberController.m.getmNo();
 
 	public ChangeMember() {
 	}
 
 //	{// 초기임시데이터 추가 : 용준
 //		// "name1",950417,"id1","pwd2","01029346330","seoul","email.com"
-//		MemberList.add(new Member("name1", 950411, "id1", "pwd1", "01029346331", "seoul", "1mail.com"));
-//		MemberList.add(new Member("name2", 950412, "id2", "pwd2", "01029346332", "seou1", "2mail.com"));
-//		MemberList.add(new Member("name3", 950413, "id3", "pwd3", "01029346333", "seou2", "3mail.com"));
-//		MemberList.add(new Member("name4", 950414, "id4", "pwd4", "01029346334", "seou3", "4mail.com"));
-//		MemberList.add(new Member("name5", 950415, "id5", "pwd5", "01029346335", "seou4", "5mail.com"));
+//		MemberList.add(new Member(1,"name1", 950411, "id1", "pwd1", "01029346331", "seoul", "1mail.com"));
+//		MemberList.add(new Member(2,"name2", 950412, "id2", "pwd2", "01029346332", "seou1", "2mail.com"));
+//		MemberList.add(new Member(3,"name3", 950413, "id3", "pwd3", "01029346333", "seou2", "3mail.com"));
+//		MemberList.add(new Member(4,"name4", 950414, "id4", "pwd4", "01029346334", "seou3", "4mail.com"));
+//		MemberList.add(new Member(5,"name5", 950415, "id5", "pwd5", "01029346335", "seou4", "5mail.com"));
 //	}
 
 	/**
@@ -39,10 +36,14 @@ public class ChangeMember {
 	public int idChange(String newId) {
 		int result = 0;
 		try {
+			for(Member i:MemberList) {
+				System.out.println(i);
+			}
 			MemberList.get(mNo).setId(newId);
 			result = 1;
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("잘못된 값입니다!");
+			
+			System.out.println("1잘못된 값입니다!");
 			result = 0;
 		}
 
@@ -56,7 +57,7 @@ public class ChangeMember {
 			MemberList.get(mNo).setPwd(newPw);
 			result = 1;
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("잘못된 값입니다!");
+			System.out.println("2잘못된 값입니다!");
 			result = 0;
 		}
 		return result;
@@ -69,7 +70,7 @@ public class ChangeMember {
 			MemberList.get(mNo).setPhone(newPhone);
 			result = 1;
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("잘못된 값입니다!");
+			System.out.println("3잘못된 값입니다!");
 			result = 0;
 		}
 		return result;
@@ -82,7 +83,7 @@ public class ChangeMember {
 			MemberList.get(mNo).setAddress(newAddress);
 			result = 1;
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("잘못된 값입니다!");
+			System.out.println("4잘못된 값입니다!");
 			result = 0;
 		}
 		return result;
@@ -95,7 +96,7 @@ public class ChangeMember {
 			MemberList.get(mNo).setEmail(newEmail);
 			result = 1;
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("잘못된 값입니다!");
+			System.out.println("5잘못된 값입니다!");
 			result = 0;
 		}
 		return result;
@@ -108,7 +109,7 @@ public class ChangeMember {
 			MemberList.get(mNo).setAge(newAge);
 			result = 1;
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("잘못된 값입니다!");
+			System.out.println("6잘못된 값입니다!");
 			result = 0;
 		}
 		return result;
