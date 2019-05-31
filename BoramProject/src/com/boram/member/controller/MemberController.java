@@ -163,9 +163,9 @@ public class MemberController {
 	/* 
 	 * ·Î±×¾Æ¿ô
 	 */
-	public void logOut(){
+	public void logOut(Member m){
 		
-		
+		m = null; 
 		
 		
 	}

@@ -10,9 +10,10 @@ import javax.swing.JScrollPane;
 import com.boram.manager.view.ManageViewFinal;
 import com.boram.member.controller.MemberController;
 import com.boram.member.view.MemberView1;
+import com.boram.member.vo.Member;
 import com.boram.myPage.view.WB_MyPage_Main;
-import com.boram.shopping.view.MainView;
 import com.boram.shopping.view.MainPanel;
+import com.boram.shopping.view.MainView;
 
 public class MainMouseEvent extends MouseAdapter{
 	private MemberController mc = new MemberController();
@@ -43,18 +44,17 @@ public class MainMouseEvent extends MouseAdapter{
 			MainView.setMainPage(new MainPanel().getMainPanel());
 		}
 		else if(what.equals("로그인")) {
-			// 로그인 되어있을 때 다시 로그인 버튼 누르면 로그아웃되고!
-			mc.logOut();
 			
-			// 메인뷰로 돌아가기
-			MainView.setMainPage(new MemberView1().getLoginView());
-			
-			
-//			if(mc.nugu()!=null) {
-//				JOptionPane.showMessageDialog(null, "이미 로그인되어 있습니다.");
-//			}else {
-//				MainView.setMainPage(new MemberView1().getLoginView());
-//			}
+			if(mc.nugu()!=null) {
+				// 로그인 되어있을 때 다시 로그인 버튼 누르면 로그아웃되고!
+				mc.logOut(mc.nugu());
+				System.out.println("logout");
+				
+				//로그아웃 팝업창
+				JOptionPane.showMessageDialog(null, "정상적으로 로그아웃 되었습니다.");
+			}else {
+				MainView.setMainPage(new MemberView1().getLoginView());
+			}
 			
 		}
 		else if(what.equals("마이페이지")) {
