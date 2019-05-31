@@ -214,6 +214,7 @@ public class MemberView1 {
 
 					public void actionPerformed(ActionEvent e) {
 						// 정보입력후 회원가입 버튼 누르면
+						int mNo = 1;
 						String name = nameText.getText();
 						int age = 0;
 						try {
@@ -235,7 +236,7 @@ public class MemberView1 {
 						} else {
 
 							MemberController mc = new MemberController();
-							mc.join(name, age, id, pwd, phone, address, email); // 멤버컨틀롤러 회원리스트에 추가
+							mc.join(mNo, name, age, id, pwd, phone, address, email); // 멤버컨트롤러 회원리스트에 추가
 
 							JFrame frame = new JFrame();
 							JOptionPane.showMessageDialog(frame, "회원가입이 완료 되었습니다.");
