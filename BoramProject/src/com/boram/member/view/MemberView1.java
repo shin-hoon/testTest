@@ -103,7 +103,7 @@ public class MemberView1 {
 				// 로그인 실패하면 확인 팝업창
 				if (result == null) {
 					JOptionPane.showMessageDialog(null, "잘못입력하셨습니다. 다시 입력해주세요.");
-					// Login.setVisible(true);
+					Login.setVisible(true);
 				}
 			}
 		});
@@ -360,6 +360,13 @@ public class MemberView1 {
 						// 팝업창뜨기
 						String i = (nametext.getText() + "님의 아이디 : " + id);
 						JOptionPane.showMessageDialog(null, i);
+						
+						// 아이디찾기창 끄기
+						idSearchPanel.setVisible(false);
+						
+						// 로그인창 뜨기
+						MainView.setMainPage(Login);
+						Login.add(panel);
  
 					}
 				});
@@ -432,6 +439,13 @@ public class MemberView1 {
 						// 팝업창 뜨기
 						String p = (nametext.getText() + "님의 비밀번호 : " + pwd);
 						JOptionPane.showMessageDialog(null, p);
+						
+						// 아이디찾기창 끄기
+						pwdSearchPanel.setVisible(false);
+						
+						// 로그인창 뜨기
+						MainView.setMainPage(Login);
+						Login.add(panel);
 
 					}
 				});
