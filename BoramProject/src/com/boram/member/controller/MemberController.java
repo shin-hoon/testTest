@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
-import com.boram.myPage.controller.MyCart;
+import com.boram.shopping.view.MainView;
 
 public class MemberController {
 
@@ -15,7 +15,7 @@ public class MemberController {
 	// MyCart ca=new MyCart();
 
 	ArrayList<Member> memberList = md.fileRead();
-	static Member m = new Member();
+	static Member m ;
 	// md.fileSave(memberList);
 	// {//초기임시데이터 추가 : 용준
 	// //"name1",950417,"id1","pwd2","01029346330","seoul","email.com"
@@ -31,14 +31,25 @@ public class MemberController {
 	// Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com"));
 	// }
 
-	public void join(int mNo, String name, int age, String id, String pwd, String phone, String address, String email) {
+	
+	/*
+	 * 회원가입
+	 */
+	public void join(String name, int age, String id, String pwd, String phone, String address, String email) {
 
 		// 회원번호 주기
-		mNo = 1;
+		int mNo;
 		for (Member m : memberList) {
-			System.out.println((mNo++) + m.getName() + m.getAge() + m.getId() + m.getPwd() + m.getPhone()
+			System.out.println( m.getName() + m.getAge() + m.getId() + m.getPwd() + m.getPhone()
 					+ m.getAddress() + m.getEmail()); // mNo로 1씩 증가
 		}
+		if(memberList.size()==0) {
+			mNo=1;
+		}else {
+			mNo=memberList.get(memberList.size()-1).getmNo()+1; //제일마지막번호 +1
+		}
+		   
+		
 
 		// 회원추가
 		memberList.add(new Member(mNo, name, age, id, pwd, phone, address, email));
@@ -51,6 +62,11 @@ public class MemberController {
 		md.fileSave(memberList);
 	}
 
+	
+	
+	/* 
+	 * 로그인
+	 */
 	public Member logIn(String id, String pwd) {
 
 		for (int i = 0; i < memberList.size(); i++) {
@@ -64,6 +80,7 @@ public class MemberController {
 
 				System.out.println(m.toString());
 				System.out.println("성공");
+				
 				// 로그인과 동시에 저장해놓앗던 장바구니 불러오기.
 				// ca.loadCart();
 				return m;
@@ -75,6 +92,10 @@ public class MemberController {
 		return null;
 	}
 
+	
+	/*
+	 * 아이디찾기
+	 */
 	public String searchId(JTextField nametext, JTextField emailtext) {
 
 		memberList = md.fileRead();
@@ -96,6 +117,10 @@ public class MemberController {
 
 	}
 
+	
+	/*
+	 * 비밀번호찾기
+	 */
 	public String searchPwd(JTextField nametext, JTextField emailtext) {
 
 		String pwd = null;
@@ -114,7 +139,11 @@ public class MemberController {
 	public Member nugu() {
 		return m;
 	}
-
+	
+	
+/*
+ * 아이디체크
+ */
 	public int idCheck(JTextField idtext) {
 
 		int result = 0;
@@ -127,6 +156,18 @@ public class MemberController {
 
 		}
 		return result;
+	}
+	
+	
+	
+	/* 
+	 * 로그아웃
+	 */
+	public void logOut(){
+		
+		
+		
+		
 	}
 
 }

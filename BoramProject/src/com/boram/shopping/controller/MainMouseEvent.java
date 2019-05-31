@@ -43,7 +43,19 @@ public class MainMouseEvent extends MouseAdapter{
 			MainView.setMainPage(new MainPanel().getMainPanel());
 		}
 		else if(what.equals("로그인")) {
+			// 로그인 되어있을 때 다시 로그인 버튼 누르면 로그아웃되고!
+			mc.logOut();
+			
+			// 메인뷰로 돌아가기
 			MainView.setMainPage(new MemberView1().getLoginView());
+			
+			
+//			if(mc.nugu()!=null) {
+//				JOptionPane.showMessageDialog(null, "이미 로그인되어 있습니다.");
+//			}else {
+//				MainView.setMainPage(new MemberView1().getLoginView());
+//			}
+			
 		}
 		else if(what.equals("마이페이지")) {
 			if(mc.nugu().getName()==null) {
