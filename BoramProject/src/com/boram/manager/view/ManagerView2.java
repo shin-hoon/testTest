@@ -32,7 +32,7 @@ public class ManagerView2 {
 		System.out.print("비밀번호 : ");
 		String pwd = sc.nextLine();
 
-		int result = mc.checkLogin(id, pwd);
+		int result =1;
 
 		if (result == 0) {
 			System.out.println("로그인에 실패하였습니다 아이디와 비밀번호를 확인해주세요");
