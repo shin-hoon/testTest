@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -18,6 +19,8 @@ import javax.swing.SwingConstants;
 import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
+import com.boram.myPage.controller.MyCart;
+import com.boram.shopping.view.MainPanel;
 import com.boram.shopping.view.MainView;
 
 public class MemberView1 {
@@ -94,17 +97,35 @@ public class MemberView1 {
 				for (int i = 0; i < pwd1.length; i++) {
 					userPwd += pwd1[i];
 				}
+				
+				if(userId.length()==0 || userPwd.length()==0) {
+					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 입력 하셔야 됩니다.", "입력을 확인하세요!", JOptionPane.DEFAULT_OPTION);
+					return;
+					}
 
 				MemberController mc = new MemberController();
 				Member result = mc.logIn(userId, userPwd);
 
+				
+				MyCart mct = new MyCart();
+				mct.loadCart();
+				
+				
 				Login.setVisible(false); // 로그인 창 끄기
-
-				// 로그인 실패하면 확인 팝업창
+				
+				
+				//메인창 띄우기
+				MainView.setMainPage(new MainPanel().getMainPanel());
+				
+				
+				// 로그인 실패하면 확인 팝업창 뜨고 다시 로그인하는 창 돌아가기
 				if (result == null) {
 					JOptionPane.showMessageDialog(null, "잘못입력하셨습니다. 다시 입력해주세요.");
 					Login.setVisible(true);
+					MainView.setMainPage(Login);
+					Login.add(panel);
 				}
+				
 			}
 		});
 
@@ -235,8 +256,7 @@ public class MemberView1 {
 						} else {
 
 							MemberController mc = new MemberController();
-							int mNo = 1;
-							mc.join(mNo, name, age, id, pwd, phone, address, email); // 멤버컨트롤러 회원리스트에 추가
+							mc.join(name, age, id, pwd, phone, address, email); // 멤버컨트롤러 회원리스트에 추가
 
 							JFrame frame = new JFrame();
 							JOptionPane.showMessageDialog(frame, "회원가입이 완료 되었습니다.");
@@ -355,18 +375,24 @@ public class MemberView1 {
 						// 아이디 찾기 확인 버튼 누르면
 
 						MemberController mc = new MemberController();
-						String id = mc.searchId(nametext, emailtext);
+						if(mc.searchId(nametext, emailtext)==null) {
+							JOptionPane.showMessageDialog(null, "일치하는 정보가 없습니다");
+						}else {
+							String id = mc.searchId(nametext, emailtext);
+							// 팝업창뜨기
+							String i = (nametext.getText() + "님의 아이디 : " + id);
+							JOptionPane.showMessageDialog(null, i);
+							// 아이디찾기창 끄기
+							idSearchPanel.setVisible(false);
+							panel.setVisible(true);
+				
+							// 로그인창 뜨기
+							MainView.setMainPage(Login);
+							Login.add(panel);
+						
+						}
+						
 
-						// 팝업창뜨기
-						String i = (nametext.getText() + "님의 아이디 : " + id);
-						JOptionPane.showMessageDialog(null, i);
-						
-						// 아이디찾기창 끄기
-						idSearchPanel.setVisible(false);
-						
-						// 로그인창 뜨기
-						MainView.setMainPage(Login);
-						Login.add(panel);
  
 					}
 				});
@@ -432,22 +458,24 @@ public class MemberView1 {
 				confirmBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// 비밀번호 찾기 확인버튼 누르면
-
+						
 						MemberController mc = new MemberController();
-						String pwd = mc.searchPwd(nametext, emailtext);
-
-						// 팝업창 뜨기
-						String p = (nametext.getText() + "님의 비밀번호 : " + pwd);
-						JOptionPane.showMessageDialog(null, p);
-						
-						// 아이디찾기창 끄기
-						pwdSearchPanel.setVisible(false);
-						
-						// 로그인창 뜨기
-						MainView.setMainPage(Login);
-						Login.add(panel);
-
-					}
+						if(mc.searchId(nametext, emailtext)==null) {
+							JOptionPane.showMessageDialog(null, "일치하는 정보가 없습니다");
+						}else {
+							String pwd = mc.searchId(nametext, emailtext);
+							// 팝업창뜨기
+							String i = (nametext.getText() + "님의 아이디 : " + pwd);
+							JOptionPane.showMessageDialog(null, i);
+							// 비밀번호찾기창 끄기
+							pwdSearchPanel.setVisible(false);
+							panel.setVisible(true);
+				
+							// 로그인창 뜨기
+							MainView.setMainPage(Login);
+							Login.add(panel);
+						}
+						}
 				});
 				confirmBtn.setBounds(217, 342, 119, 54);
 				pwdSearchPanel.add(confirmBtn);

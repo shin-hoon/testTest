@@ -254,7 +254,7 @@ public class ManageViewFinal {
 
 						if (k == 1) {
 
-							String[] words = ((String) a).split("\\s");
+							String[] words = (String.valueOf(a).split("\\s"));
 							int cat = Integer.parseInt(words[0]);
 							pArr.get(i).setCategory(cat);
 						} else if (k == 2) {
@@ -262,9 +262,11 @@ public class ManageViewFinal {
 						} else if (k == 3) {
 							pArr.get(i).setSize((String) a);
 						} else if (k == 4) {
-							pArr.get(i).setPrice(Integer.parseInt((String)a));
+							int cat = Integer.parseInt(String.valueOf(a));
+							pArr.get(i).setPrice(cat);
 						} else if (k == 5) {
-							pArr.get(i).setStock((int) a);
+							int cat = Integer.parseInt(String.valueOf(a));
+							pArr.get(i).setStock((int) cat);
 						}
 					}
 				}
@@ -476,22 +478,22 @@ public class ManageViewFinal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Object a;
-				
+
 				int b = -1;
-				int x =table.getSelectedRow();
+				int x = table.getSelectedRow();
 				a = table.getValueAt(x, 0);
 				for (int i = 0; i < pArr.size(); i++) {
-					if(pArr.get(i).getpNo()==(int)a) {
-						b=i;
+					if (pArr.get(i).getpNo() == (int) a) {
+						b = i;
 						break;
 					}
 				}
-				
-				if(b==-1) {
+
+				if (b == -1) {
 					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
-				}else {
-				MainView.setMainPage(updateProduct());
-			
+				} else {
+					MainView.setMainPage(updateProduct());
+
 				}
 			}
 		});
@@ -533,7 +535,8 @@ public class ManageViewFinal {
 		return analyzeSale;
 
 	}
-	//searchMember까지 보류
+
+	// searchMember까지 보류
 	public JPanel saleState() {
 
 		String[] term = { "1개월", "2 개월", "3 개월", "4 개월", "5개월" };
@@ -776,17 +779,14 @@ public class ManageViewFinal {
 		delete.setBounds(430, 517, 125, 29);
 		searchMember.add(delete);
 
-		
-
 		JButton lastPage = new JButton("\uC774\uC804 \uD398\uC774\uC9C0");
 		lastPage.setBounds(101, 517, 137, 29);
 		searchMember.add(lastPage);
-		
+
 		/*
 		 * JButton update = new JButton("\uC218\uC815"); update.setBounds(268, 517, 125,
 		 * 29); searchMember.add(update);
 		 */
-
 		searchMember.setVisible(true);
 
 		lastPage.addMouseListener(new MouseAdapter() {
@@ -795,6 +795,7 @@ public class ManageViewFinal {
 				MainView.setMainPage(manageMain());
 			}
 		});
+
 		/*
 		 * update.addMouseListener(new MouseAdapter() {
 		 * 
@@ -804,16 +805,17 @@ public class ManageViewFinal {
 		 * 
 		 * if (k == 0) {
 		 * 
-		 * int cat = Integer.parseInt((String)a); mArr.get(i).setmNo(cat); } else if (k
-		 * == 1) { mArr.get(i).setId((String)a); } else if (k == 2) {
+		 * int cat = Integer.parseInt(String.valueOf(a)); mArr.get(i).setmNo(cat); }
+		 * else if (k == 1) { mArr.get(i).setId((String) a); } else if (k == 2) {
 		 * mArr.get(i).setName((String) a); } else if (k == 3) {
-		 * mArr.get(i).setPhone((String)a); } else if(k==4) {
-		 * mArr.get(i).setEmail((String)a); } } } mDao.fileSave(mArr);
+		 * mArr.get(i).setPhone((String) a); } else if (k == 4) {
+		 * mArr.get(i).setEmail((String) a); } } } mDao.fileSave(mArr);
 		 * 
 		 * MainView.setMainPage(searchMember());
 		 * 
 		 * } });
 		 */
+
 		delete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
