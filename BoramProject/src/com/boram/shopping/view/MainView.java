@@ -3,47 +3,25 @@ package com.boram.shopping.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-import com.boram.member.controller.MemberController;
-import com.boram.member.view.MemberView1;
-import com.boram.myPage.view.WB_MyPage_Main;
 import com.boram.shopping.controller.MainMouseEvent;
-import com.boram.shopping.controller.ShoppingParsing;
-import com.boram.shopping.vo.ShoopingVO;
 
 public class MainView{
-	private MemberController mc = new MemberController();
+	// 메인 프레임
 	public static JFrame frame;
-/*   
-  	 menu          subMenu
-	JLabel         JPanel 
-	 outer       outerSubMenu
-	 top         topSubMenu
-	 shirt       shirtSubMenu
-	 pants       pantsSubMenu
-	 shoes       shoesSubMenu
-	 acc         accSubMenu
-	
- */
 	// 고정 페이지 JPanel(맨 위쪽)
 	JPanel mainMenu;
 	// 고정 페이지 JPanel에 담기는 JLabel(맨 위쪽 => 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
@@ -82,7 +60,7 @@ public class MainView{
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBackground(new Color(255, 255, 255));
 		frame.getContentPane().setLayout(null);
-        frame.setSize(718, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() );
+        frame.setSize(718, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()-43 );
 		frame.setLocationRelativeTo(null); 
 		
 		// 고정 페이지(위쪽, 서브 메뉴)
@@ -90,7 +68,7 @@ public class MainView{
 		// 고정 페이지 JPanel(위쪽, 서브메뉴, 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
 		this.fixedMainMenu();
 		// 바뀌는 페이지(아래쪽, JPanel)
-		this.changePage();
+		mainPage = new MainPanel().getMainPanel();
 		// 이벤트 처리 
 		this.mainMouseEvent();
 
@@ -101,7 +79,7 @@ public class MainView{
 		mainPageScroll.setBorder(null);
 		mainPageScroll.setBounds(0, 80, 700, 975);
 
-		mainPage.setPreferredSize(new Dimension(450, 3000));
+		mainPage.setPreferredSize(new Dimension(450, 3200));
 		mainPageScroll.setViewportView(mainPage);
 		frame.getContentPane().add(mainPageScroll); 
 		
@@ -134,7 +112,7 @@ public class MainView{
 		// OUTER 메뉴
 		outer = new JLabel("OUTER");
 		outer.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
-		outer.setBounds(40, 74, 125, 35); //109
+		outer.setBounds(40, 74, 125, 35);
 		subMenu.add(outer);
 		
 		// OUTER 서브메뉴
@@ -171,14 +149,14 @@ public class MainView{
 		// TOP 메뉴
 		top = new JLabel("TOP");
 		top.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
-		top.setBounds(40, 250, 91, 35); // 50, 15
+		top.setBounds(40, 260, 91, 35); // 50, 15
 		subMenu.add(top);
 		
 		// TOP 서브메뉴
 		topSubMenu = new JPanel();
 		topSubMenu.setBackground(Color.WHITE);
 		topSubMenu.setLayout(null);
-		topSubMenu.setBounds(40, 300, 133, 147);
+		topSubMenu.setBounds(40, 310, 133, 147);
 		subMenu.add(topSubMenu);
 		
 		JLabel LongSleeve = new JLabel("긴팔");
@@ -213,13 +191,13 @@ public class MainView{
 		// SHIRT 메뉴
 		shirt = new JLabel("SHIRT");
 		shirt.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
-		shirt.setBounds(40, 462, 116, 30); 
+		shirt.setBounds(40, 472, 116, 30); 
 		subMenu.add(shirt);
 		
 		// SHIRT 서브메뉴
 		JPanel shirtSubMenu = new JPanel();
 		shirtSubMenu.setBackground(Color.WHITE);
-		shirtSubMenu.setBounds(40, 504, 80, 84);
+		shirtSubMenu.setBounds(40, 522, 80, 84);
 		subMenu.add(shirtSubMenu);
 		shirtSubMenu.setLayout(null);
 		
@@ -245,13 +223,13 @@ public class MainView{
 		// PANTS 메뉴
 		JLabel PANTS = new JLabel("PANTS");
 		PANTS.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
-		PANTS.setBounds(40, 603, 116, 35);
+		PANTS.setBounds(40, 621, 116, 35);
 		subMenu.add(PANTS);
 		
 		// PANTS 서브메뉴
 		JPanel pantsSubMenu = new JPanel();
 		pantsSubMenu.setBackground(Color.WHITE);
-		pantsSubMenu.setBounds(40, 639, 125, 176);
+		pantsSubMenu.setBounds(40, 671, 125, 176);
 		subMenu.add(pantsSubMenu);
 		pantsSubMenu.setLayout(null);
 		
@@ -292,13 +270,13 @@ public class MainView{
 		// SHOES 메뉴
 		JLabel SHOES = new JLabel("SHOES");
 		SHOES.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
-		SHOES.setBounds(40, 830, 116, 35);
+		SHOES.setBounds(40, 862, 116, 35);
 		subMenu.add(SHOES);
 		
 		// SHOES 서브메뉴
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(40, 865, 140, 84);
+		panel.setBounds(40, 912, 140, 84);
 		subMenu.add(panel);
 		panel.setLayout(null);
 		
@@ -384,112 +362,15 @@ public class MainView{
 	
 	
 	
-	/**
-	 * 	바뀌는 페이지(아래쪽, JPanel)
-	 */
-	public JPanel changePage() {
-        mainPage = new JPanel();
-        mainPage.setBackground(new Color(255, 255, 255));
-		mainPage.setBounds(0, 259, 700, 490);
-		mainPage.setLayout(null);
-		mainPage.setVisible(true);
-		
-		//ShoppingParsing
-		List<ShoopingVO> list = new ShoppingParsing().testParsing();
-		int imgWidth = 15;
-		int imgHeight = 0;
-		int priceWidth_1 = 15;
-		int priceHeight_1 = 436;
-		int priceWidth_2 = 15;
-		int priceHeight_2 = 460;
-		
-		int cnt = 1;
-		
-		for(int i = 0 ; i < list.size(); i++) {
-			Image image = null;
-			
-			try {
-				System.out.println(list.get(i).getImage());
-				URL url = new URL(list.get(i).getImage());
-				image = ImageIO.read(url).getScaledInstance(325, 430, Image.SCALE_SMOOTH);
-			} catch (IOException e) {
-				System.out.println("이미지 불러오기 에러 : " + e.getMessage());
-			}
-			
-			if( cnt % 2 == 0 ) {
-				imgWidth += 344;
-				priceWidth_1 += 344;
-				priceWidth_2 += 344;
-			}
-			
-			JLabel mainImage1 = new JLabel(new ImageIcon(image));
-			mainImage1.setBounds(imgWidth, imgHeight, 325, 432);
-			mainPage.add(mainImage1);
-			
-			JLabel label_1 = new JLabel(list.get(i).getTitle());
-			label_1.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
-			label_1.setBounds(priceWidth_1, priceHeight_1, 150, 18);
-			mainPage.add(label_1);
-
-			JLabel label_2 = new JLabel(list.get(i).getPrice());
-			label_2.setForeground(new Color(255, 153, 0));
-			label_2.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));
-			label_2.setBounds(priceWidth_2, priceHeight_2, 87, 18);
-			mainPage.add(label_2);
-
-			if( cnt % 2 == 0 ) {
-				imgHeight += 500;
-				priceHeight_1 += 500;
-				priceHeight_2 += 500;
-				imgWidth = 15;
-				priceWidth_1 = 15;
-				priceWidth_2 = 15;
-			}
-			cnt++;
-		}
-		
-   
-        
-        return mainPage;
-	} // end changePage method
-
-	
-	
 	// 이벤트 처리
 	public void mainMouseEvent() {
 		
 		kategorie.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴열기") );	
 		subMenuClose.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴닫기") );	
-		logo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				mainPage.removeAll();
-
-				mainPageScroll.setViewportView(null);
-				mainPage = changePage();
-				mainPage.setPreferredSize(new Dimension(450, 3000));
-				mainPageScroll.setViewportView(mainPage);
-
-				frame.revalidate();
-				frame.repaint();
-			}
-		});
-		login.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setMainPage(new MemberView1().getLoginView());
-			}
-		});
-		myPage.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(mc.nugu().getName()==null) {
-					JOptionPane.showMessageDialog(null, "로그인 먼저 해주세요", "LogIn Error", JOptionPane.WARNING_MESSAGE);	
-				}else {
-				setMainPage(new WB_MyPage_Main().myPageMain());
-				}
-			}
-		});           
+		logo.addMouseListener(new MainMouseEvent("메인") );
+		login.addMouseListener(new MainMouseEvent("로그인") );
+		myPage.addMouseListener(new MainMouseEvent("마이페이지") );
+		adminPage.addMouseListener(new MainMouseEvent("관리자페이지"));
 
 	} // end mainMouseEvent method
 	
@@ -502,7 +383,7 @@ public class MainView{
 
 		mainPageScroll.setViewportView(null);
 		mainPage = panel;
-		mainPage.setPreferredSize(new Dimension(450, 3000));
+		mainPage.setPreferredSize(new Dimension(450, 3200));
 		mainPageScroll.setViewportView(mainPage);
 
 		frame.revalidate();

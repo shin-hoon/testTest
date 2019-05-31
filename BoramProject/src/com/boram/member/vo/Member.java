@@ -18,7 +18,7 @@ public class Member implements Serializable{
 	private String address;
 	private String email;
 	
-	private int grant = 0; // 권한
+	private int grant; // 권한
 
 	public Member() {
 		super();
