@@ -47,9 +47,9 @@ public class MainMouseEvent extends MouseAdapter{
 			
 			if(mc.nugu()!=null) {
 				// 로그인 되어있을 때 다시 로그인 버튼 누르면 로그아웃되고!
-				mc.logOut(mc.nugu());
+				mc.logOut();
 				System.out.println("logout");
-				
+				MainView.setMainPage(new MainPanel().getMainPanel());
 				//로그아웃 팝업창
 				JOptionPane.showMessageDialog(null, "정상적으로 로그아웃 되었습니다.");
 			}else {
@@ -58,7 +58,7 @@ public class MainMouseEvent extends MouseAdapter{
 			
 		}
 		else if(what.equals("마이페이지")) {
-			if(mc.nugu().getName()==null) {
+			if(mc.nugu()==null) {
 				JOptionPane.showMessageDialog(null, "로그인 먼저 해주세요", "LogIn Error", JOptionPane.WARNING_MESSAGE);	
 			}else {
 				MainView.setMainPage(new WB_MyPage_Main().myPageMain());

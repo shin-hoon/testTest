@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.SwingConstants;
 import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
+import com.boram.myPage.controller.MyCart;
 import com.boram.shopping.view.MainPanel;
 import com.boram.shopping.view.MainView;
 
@@ -104,7 +106,13 @@ public class MemberView1 {
 				MemberController mc = new MemberController();
 				Member result = mc.logIn(userId, userPwd);
 
+				
+				MyCart mct = new MyCart();
+				mct.loadCart();
+				
+				
 				Login.setVisible(false); // 로그인 창 끄기
+				
 				
 				//메인창 띄우기
 				MainView.setMainPage(new MainPanel().getMainPanel());
@@ -367,18 +375,24 @@ public class MemberView1 {
 						// 아이디 찾기 확인 버튼 누르면
 
 						MemberController mc = new MemberController();
-						String id = mc.searchId(nametext, emailtext);
+						if(mc.searchId(nametext, emailtext)==null) {
+							JOptionPane.showMessageDialog(null, "일치하는 정보가 없습니다");
+						}else {
+							String id = mc.searchId(nametext, emailtext);
+							// 팝업창뜨기
+							String i = (nametext.getText() + "님의 아이디 : " + id);
+							JOptionPane.showMessageDialog(null, i);
+							// 아이디찾기창 끄기
+							idSearchPanel.setVisible(false);
+							panel.setVisible(true);
+				
+							// 로그인창 뜨기
+							MainView.setMainPage(Login);
+							Login.add(panel);
+						
+						}
+						
 
-						// 팝업창뜨기
-						String i = (nametext.getText() + "님의 아이디 : " + id);
-						JOptionPane.showMessageDialog(null, i);
-						
-						// 아이디찾기창 끄기
-						idSearchPanel.setVisible(false);
-						
-						// 로그인창 뜨기
-						MainView.setMainPage(Login);
-						Login.add(panel);
  
 					}
 				});
@@ -444,22 +458,24 @@ public class MemberView1 {
 				confirmBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// 비밀번호 찾기 확인버튼 누르면
-
+						
 						MemberController mc = new MemberController();
-						String pwd = mc.searchPwd(nametext, emailtext);
-
-						// 팝업창 뜨기
-						String p = (nametext.getText() + "님의 비밀번호 : " + pwd);
-						JOptionPane.showMessageDialog(null, p);
-						
-						// 아이디찾기창 끄기
-						pwdSearchPanel.setVisible(false);
-						
-						// 로그인창 뜨기
-						MainView.setMainPage(Login);
-						Login.add(panel);
-
-					}
+						if(mc.searchId(nametext, emailtext)==null) {
+							JOptionPane.showMessageDialog(null, "일치하는 정보가 없습니다");
+						}else {
+							String pwd = mc.searchId(nametext, emailtext);
+							// 팝업창뜨기
+							String i = (nametext.getText() + "님의 아이디 : " + pwd);
+							JOptionPane.showMessageDialog(null, i);
+							// 비밀번호찾기창 끄기
+							pwdSearchPanel.setVisible(false);
+							panel.setVisible(true);
+				
+							// 로그인창 뜨기
+							MainView.setMainPage(Login);
+							Login.add(panel);
+						}
+						}
 				});
 				confirmBtn.setBounds(217, 342, 119, 54);
 				pwdSearchPanel.add(confirmBtn);
