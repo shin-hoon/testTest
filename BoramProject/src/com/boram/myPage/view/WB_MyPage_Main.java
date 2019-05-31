@@ -1,10 +1,8 @@
 package com.boram.myPage.view;
 
 import java.awt.Font;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,7 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.boram.member.controller.MemberController;
-import com.boram.shopping.view.*;
+import com.boram.shopping.view.MainView;
 public class WB_MyPage_Main{
 	public static final int FWID = 718;
 	public static final int FHIT = 500;
@@ -56,6 +54,11 @@ public class WB_MyPage_Main{
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("배송확인");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainView.setMainPage(new WB_MyDeliveryView().getMyDeliveryView());
+			}
+		});
 		button_1.setBounds(346, 371, 103, 94);
 		contentPane.add(button_1);
 		

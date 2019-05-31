@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import com.boram.manager.vo.Order;
 import com.boram.manager.vo.OrderDao;
 import com.boram.member.controller.MemberController;
+import com.boram.shopping.view.MainView;
 
 
 public class WB_MyDeliveryView{
@@ -26,8 +28,10 @@ public class WB_MyDeliveryView{
 	private JTable table;
 
 	private ArrayList<Order> order1 = new ArrayList<Order>();
-	
-	
+	//private ArrayList<Order> order1 = od.fileRead(); 
+			
+			
+			
 	public JPanel getMyDeliveryView() {
 		return this.myDeliveryView;
 	}
@@ -54,25 +58,61 @@ public class WB_MyDeliveryView{
 		panel2.setLayout(null);
 		myDeliveryView.add(panel2);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(14, 12, 690, 579);
-		panel2.add(scrollPane);
-		
+		//주문목록 보여주는 J테이블
+		String colName[]= {"index","pic","OrderNo","State","Payment","address"	};
+		DefaultTableModel dtm = new DefaultTableModel(colName,0);
+		table = new JTable(dtm);
+			
 		JScrollPane sp = new JScrollPane(table);
 		sp.setBounds(14,0,676,625);
 		panel2.add(sp,"Center");
 		
-		//주문목록 보여주는 J테이블
-		String colName[]= {"index","pic","cat","pName","Size","Amount","Price"	};
-		DefaultTableModel dtm = new DefaultTableModel(colName,0);
-		table = new JTable(dtm);
 		
 		
 		//오더리스트는 정제해서 본인것만 보여주어야함
 		//OList에서 본인 번호것만 다른 list에 넣어주자.
-		order1 = od.fileRead();
-		//mc.nugu().get
+		//정제시 본인것 + state가 int값이니까 String으로 변환해서 해주기.
+		//payment도 마찬가지.
 		
+		//order1에 오더목록 불러오기.
+		order1 = od.fileRead();
+		int who =mc.nugu().getmNo();
+		//order1.get(who);
+		
+		for(Order i: order1) {
+			System.out.println(i);
+		}
+		//order1(i).get(who)==null 로 변경해야함
+		//주문자가 주문한게없으면 실행하자.
+		if(order1==null) {
+			MainView.setMainPage(new WB_MyPage_Main().myPageMain());
+			JOptionPane.showMessageDialog(null, "주문목록이 없습니다.", "LogIn Error", JOptionPane.WARNING_MESSAGE);
+			
+		}
+		
+		String State;
+		if(order1.get(who).getState()==0) {
+			State ="배송준비중";
+		}else if(order1.get(who).getState()==1) {
+			State ="배송중";
+		}else {
+			State="배송완료";
+		}
+		
+		
+		for(int i=0;i<order1.size();i++) {
+			int index =i=1;
+			Object pic = new Object();
+			int oNo = order1.get(who).getOrderNo();
+			int Payment = order1.get(who).getPayment();//결제금액
+			String address = order1.get(who).getAddress();
+			
+			Object[] data= {index,pic,oNo,State,Payment,address};
+			dtm.addRow(data);
+			
+					
+			
+		}
 		
 		
 		
