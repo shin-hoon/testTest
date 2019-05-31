@@ -156,7 +156,16 @@ public class MyCart extends Product implements Serializable {
 				CList.add((Product) ois.readObject());
 				result = 1;
 			}
-		} catch (EOFException e) {
+		}catch (FileNotFoundException e) {
+			File f = new File(m.getmNo()+ "MyCart.txt");
+			try {
+				f.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		}
+		catch (EOFException e) {
 			// e.printStackTrace();
 			System.out.println("불러오기 완료.");
 		} catch (FileNotFoundException e) {
