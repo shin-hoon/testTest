@@ -16,7 +16,7 @@ public class MemberDao {
 	private ArrayList<Member> memberList = new ArrayList<Member>();
 	{
 		//관리자 계정 생성자  맨마지막 권한 1이면 관리자 ;
-		memberList.add(new Member(0, "관리자", "admin01", "pass01", 1));
+		//memberList.add(new Member(0, "관리자", "admin01", "pass01", 1));
 		
 	}
 	
@@ -53,7 +53,7 @@ public class MemberDao {
 
 		} catch (FileNotFoundException e) {
 			try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("memberList.txt"));) {
-				oos.writeObject(memberList.get(0));
+				//oos.writeObject(memberList.get(0));
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

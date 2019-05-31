@@ -78,7 +78,7 @@ public class MemberView {
 		System.out.print("이메일 : ");
 		String email = sc.nextLine();
 
-		mc.join(name, birth, id, pwd, phone, address, email);
+		//mc.join(name, birth, id, pwd, phone, address, email);
 
 		System.out.println("회원가입이 완료되었습니다.");
 

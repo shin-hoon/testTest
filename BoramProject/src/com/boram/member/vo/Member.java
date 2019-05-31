@@ -18,24 +18,23 @@ public class Member implements Serializable{
 	private String address;
 	private String email;
 	
-	private int grant; // 권한
+	//private int grant; // 권한
 
 	public Member() {
 		super();
 	}
 	
 	
-	public Member(int mNo, String name, String id, String pwd, int grant) {
+	public Member(int mNo, String name, String id, String pwd) {
 		super();
 		this.mNo = mNo;
 		this.name = name;
 		this.id = id;
 		this.pwd = pwd;
-		this.grant = mNo;
+		
 	}
-
-	public Member(String name, int birth, String id, String pwd, String phone, String address, String email) {
-		super();
+	public Member(int mNo, String name, int birth, String id, String pwd, String phone, String address, String email) {
+		this.mNo= mNo;
 		this.name = name;
 		this.birth = birth;
 		this.id = id;
@@ -109,18 +108,12 @@ public class Member implements Serializable{
 		this.email = email;
 	}
 
-	public int getGrant() {
-		return grant;
-	}
-
-	public void setGrant(int grant) {
-		this.grant = grant;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", name=" + name + ", birth=" + birth + ", id=" + id + ", pwd=" + pwd + ", phone="
-				+ phone + ", address=" + address + ", email=" + email + ", grant=" + grant + "]";
+				+ phone + ", address=" + address + ", email=" + email +  "]";
 	}
 
 	@Override
@@ -130,7 +123,6 @@ public class Member implements Serializable{
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + birth;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + grant;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + mNo;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -159,8 +151,6 @@ public class Member implements Serializable{
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
-			return false;
-		if (grant != other.grant)
 			return false;
 		if (id == null) {
 			if (other.id != null)
