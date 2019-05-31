@@ -44,18 +44,6 @@ public class Member implements Serializable{
 		this.email = email;
 	}
 
-	public Member(String name, int birth, String id, String pwd, String phone, String address, String email) {
-		super();
-		this.name = name;
-		this.birth = birth;
-		this.id = id;
-		this.pwd = pwd;
-		this.phone = phone;
-		this.address = address;
-		this.email = email;
-	}
-	
-
 	public int getmNo() {
 		return mNo;
 	}
