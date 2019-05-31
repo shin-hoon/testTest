@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class MainThreadEvent extends Thread{
-	int min, max;
-	String what;
-	JPanel subMenu;
-	JScrollPane subMenuScroll;
+	private int min, max;
+	private String what;
+	private JPanel subMenu;
+	private JScrollPane subMenuScroll;
 	
 	public MainThreadEvent(JPanel subMenu, JScrollPane subMenuScroll, int min, int max, String what) {
 		this.min = min;

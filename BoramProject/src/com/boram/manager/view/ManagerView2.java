@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -142,7 +143,7 @@ public class ManagerView2 {
 	}
 	public void updateProduct() {
 		
-		ArrayList<Product> pArr = mc.searchProduct();
+		List<Product> pArr = mc.searchProduct();
 		if (pArr.size() ==0) {
 			System.out.println("등록된 상품이 없습니다.");
 			return;

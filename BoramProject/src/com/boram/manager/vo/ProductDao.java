@@ -1,63 +1,59 @@
 package com.boram.manager.vo;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.boram.shopping.view.MainView;
 
 public class ProductDao {
 
-	private ArrayList<Product> productList = new ArrayList<Product>();
+	private List<Product> productList = new ArrayList<Product>();
 
-	public void fileSave(ArrayList<Product> list) {
+	public void fileSave(List<Product> list) {
 
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("productList.txt"));) {
+		try {
+			File fileDir = new File(MainView.PATH + "file\\product\\");
+			if(!fileDir.exists()) fileDir.mkdirs();
 
+			File imgFile = new File(fileDir,"productList.txt");
+
+			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(imgFile)));
+			
 			for (int i = 0; i < list.size(); i++) {
 				oos.writeObject(list.get(i));
 			}
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			oos.close();
+		} catch (Exception e) {
+			System.out.println("ProductDao클레스에서 fileSave() 에러 : " + e.getMessage());
 		}
 	}
 
-	public ArrayList<Product> fileRead() {
+	public List<Product> fileRead() {
 
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("productList.txt"));) {
-			while (true) {
-				try {
-					productList.add((Product) ois.readObject());
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-		} catch (FileNotFoundException e) {
-			File f = new File("productList.txt");
+		try {
+			File imgFile = new File(MainView.PATH + "file\\product\\","productList.txt");
+			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(imgFile)));
+			
 			try {
-				f.createNewFile();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				while(true) {
+					productList.add((Product)ois.readObject());
+				}				
+			} catch(EOFException eof) {
+				ois.close();
 			}
-		} catch (EOFException e) {
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				
+		} catch (Exception e) {
+			System.out.println("ProductDao클레스에서 fileRead() 에러 : " + e.getMessage());
 		}
-
+		
 		return productList;
 	}
 

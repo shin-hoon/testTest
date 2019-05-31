@@ -1,5 +1,7 @@
 package com.boram.manager.vo;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,9 +20,10 @@ public class CategoryDao {
 	}
 	
 	public void fileWrite() {
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("category.txt", true));) {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("category.txt")));) {
 
-			oos.writeObject(new Category(11, "코트"));
+			oos.writeObject(new Category(1, "Best Sellers")); 
+			oos.writeObject(new Category(11, "코트")); 
 			oos.writeObject(new Category(12, "자켓"));
 			oos.writeObject(new Category(13, "블레이저"));
 			oos.writeObject(new Category(14, "가디건"));
@@ -54,7 +57,7 @@ public class CategoryDao {
 	}
 	public ArrayList<Category> fileRead() {
 		int count=0;
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("category.txt"));) {
+		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("category.txt")));) {
 			while (true) {
 				try {
 					cArr.add((Category) ois.readObject());

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.DebugGraphics;
@@ -48,7 +49,7 @@ import com.boram.shopping.view.MainView;
 
 public class ManageViewFinal {
 	private ProductDao pDao = new ProductDao();
-	private ArrayList<Product> pArr = pDao.fileRead();
+	private List<Product> pArr = pDao.fileRead();
 	private OrderDao oDao = new OrderDao();
 	private ArrayList<Order> oArr = oDao.fileRead();
 	private ManagerController2 mc = new ManagerController2();

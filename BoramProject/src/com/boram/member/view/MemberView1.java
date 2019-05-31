@@ -115,7 +115,7 @@ public class MemberView1 {
 				
 				
 				//메인창 띄우기
-				MainView.setMainPage(new MainPanel().getMainPanel());
+				MainView.setMainPage(new MainPanel(1).getMainPanel());
 				
 				
 				// 로그인 실패하면 확인 팝업창 뜨고 다시 로그인하는 창 돌아가기

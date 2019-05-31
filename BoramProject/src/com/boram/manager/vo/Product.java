@@ -3,29 +3,27 @@ package com.boram.manager.vo;
 import java.io.Serializable;
 
 public class Product implements Serializable{
-	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9085575968485119138L;
 	
-	
-	private int pNo;
-	private int category;
-	private String productName;
-	private int price;
-	private String size;
-	private String explain;
-	
-	private int stock;
-	private int count; //조회수
-	
-	
+	private int pNo;				// 게시물번호
+	private int category;			// 카테고리
+	private String productName;		// 상품이름
+	private int price;				// 상품가격
+	private String size;			// 상품사이즈
+	private String explain;			// 상품설명
+	private String imgFilePath;		// 이미지경로
+	private int stock;				// 상품재고
+	private int count; 				// 조회수
 	
 	
 	
 	public Product() {
+	}
+	public String getImgFilePath() {
+		return imgFilePath;
+	}
+	public void setImgFilePath(String imgFilePath) {
+		this.imgFilePath = imgFilePath;
 	}
 	public Product(int pNo, int category, String productName, int price, String size, int stock, int count) {
 		super();
@@ -88,11 +86,21 @@ public class Product implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+/*	private int pNo;				// 게시물번호
+	private int category;			// 카테고리
+	private String productName;		// 상품이름
+	private int price;				// 상품가격
+	private String size;			// 상품사이즈
+	private String explain;			// 상품설명
+	private String imgFilePath;		// 이미지경로
 	
+	private int stock;				// 상품재고
+	private int count; 				// 조회수
+	*/
 	@Override
 	public String toString() {
 		return "Product [pNo=" + pNo + ", category=" + category + ", productName=" + productName + ", price=" + price
-				+ ", size=" + size + ", stock=" + stock + ", count=" + count + "]";
+				+ ", size=" + size + ", explain=" + explain + ", imgFilePath=" + imgFilePath + ", stock=" + stock + ", count=" + count + "]";
 	}
 	@Override
 	public int hashCode() {

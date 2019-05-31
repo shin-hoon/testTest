@@ -3,6 +3,7 @@ package com.boram.manager.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import com.boram.manager.vo.Order;
@@ -19,7 +20,7 @@ public class ManagerController2 {
 	private MemberDao md = new MemberDao();
 
 	private ArrayList<Order> oArr = od.fileRead();
-	private ArrayList<Product> pArr = pd.fileRead();
+	private List<Product> pArr = pd.fileRead();
 	private ArrayList<Member> mArr = md.fileRead();
 
 	
@@ -28,7 +29,7 @@ public class ManagerController2 {
 		return mArr;
 	}
 
-	public ArrayList<Product> searchProduct() {
+	public List<Product> searchProduct() {
 		return pArr;
 	}
 

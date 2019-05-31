@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -32,6 +30,10 @@ public class MainView{
 	JLabel outer, top, shirt, pants, shoes, acc;
 	// 서브메뉴 상세 분류 목록
 	JPanel outerSubMenu, topSubMenu, shirtSubMenu, pantsSubMenu, shoesSubMenu, accSubMenu;
+	// 서브메뉴 상세 카테고리
+	JLabel coat, jacket, blazer, cardigan, LongSleeve, ShortSleeves, hoodT, neat, overFit,
+		   nomalShirt, patternShirt, shortShirt, Slacks, cottonPants, blueJeans, shorts,
+		   training, upDenimPants, Sneakers, Walker, slipper;
 	// subMenu 닫기
 	JLabel subMenuClose;
 	// subMenu 스크롤
@@ -68,7 +70,7 @@ public class MainView{
 		// 고정 페이지 JPanel(위쪽, 서브메뉴, 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
 		this.fixedMainMenu();
 		// 바뀌는 페이지(아래쪽, JPanel)
-		mainPage = new MainPanel().getMainPanel();
+		mainPage = new MainPanel(1).getMainPanel();
 		// 이벤트 처리 
 		this.mainMouseEvent();
 
@@ -77,14 +79,14 @@ public class MainView{
 		mainPageScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		mainPageScroll.getVerticalScrollBar().setUnitIncrement(36);// 스크롤 속도 
 		mainPageScroll.setBorder(null);
-		mainPageScroll.setBounds(0, 80, 700, 975);
+		mainPageScroll.setBounds(0, 80, 715, 975);
 
 		mainPage.setPreferredSize(new Dimension(450, 3200));
 		mainPageScroll.setViewportView(mainPage);
 		frame.getContentPane().add(mainPageScroll); 
 		
 		frame.setVisible(true);
-		frame.setResizable(true);
+		frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -122,22 +124,22 @@ public class MainView{
 		outerSubMenu.setLayout(null);
 		subMenu.add(outerSubMenu);
 
-		JLabel coat = new JLabel("코트");
+		coat = new JLabel("코트");
 		coat.setFont(new Font("굴림", Font.BOLD, 18));
 		coat.setBounds(0, 0, 62, 21);
 		outerSubMenu.add(coat);
 
-		JLabel jacket = new JLabel("자켓");
+		jacket = new JLabel("자켓");
 		jacket.setFont(new Font("굴림", Font.BOLD, 18));
 		jacket.setBounds(0, 31, 62, 21);
 		outerSubMenu.add(jacket);
 
-		JLabel blazer = new JLabel("블레이저");
+		blazer = new JLabel("블레이저");
 		blazer.setFont(new Font("굴림", Font.BOLD, 18));
 		blazer.setBounds(0, 62, 76, 21);
 		outerSubMenu.add(blazer);
 
-		JLabel cardigan = new JLabel("가디건");
+		cardigan = new JLabel("가디건");
 		cardigan.setFont(new Font("굴림", Font.BOLD, 18));
 		cardigan.setBounds(0, 93, 62, 21);
 		outerSubMenu.add(cardigan);
@@ -159,27 +161,27 @@ public class MainView{
 		topSubMenu.setBounds(40, 310, 133, 147);
 		subMenu.add(topSubMenu);
 		
-		JLabel LongSleeve = new JLabel("긴팔");
+		LongSleeve = new JLabel("긴팔");
 		LongSleeve.setFont(new Font("굴림", Font.BOLD, 18));
 		LongSleeve.setBounds(0, 0, 62, 21);
 		topSubMenu.add(LongSleeve);
 		
-		JLabel ShortSleeves = new JLabel("반팔/조끼");
+		ShortSleeves = new JLabel("반팔/조끼");
 		ShortSleeves.setFont(new Font("굴림", Font.BOLD, 18));
 		ShortSleeves.setBounds(0, 31, 85, 21);
 		topSubMenu.add(ShortSleeves);
 		
-		JLabel hoodT = new JLabel("맨투맨/후드티");
+		hoodT = new JLabel("맨투맨/후드티");
 		hoodT.setFont(new Font("굴림", Font.BOLD, 18));
 		hoodT.setBounds(0, 62, 133, 21);
 		topSubMenu.add(hoodT);
 		
-		JLabel neat = new JLabel("니트");
+		neat = new JLabel("니트");
 		neat.setFont(new Font("굴림", Font.BOLD, 18));
 		neat.setBounds(0, 93, 62, 21);
 		topSubMenu.add(neat);
 		
-		JLabel overFit = new JLabel("오버핏");
+		overFit = new JLabel("오버핏");
 		overFit.setFont(new Font("굴림", Font.BOLD, 18));
 		overFit.setBounds(0, 124, 62, 21);
 		topSubMenu.add(overFit);
@@ -195,23 +197,23 @@ public class MainView{
 		subMenu.add(shirt);
 		
 		// SHIRT 서브메뉴
-		JPanel shirtSubMenu = new JPanel();
+		shirtSubMenu = new JPanel();
 		shirtSubMenu.setBackground(Color.WHITE);
 		shirtSubMenu.setBounds(40, 522, 80, 84);
 		subMenu.add(shirtSubMenu);
 		shirtSubMenu.setLayout(null);
 		
-		JLabel nomalShirt = new JLabel("기본셔츠");
+		nomalShirt = new JLabel("기본셔츠");
 		nomalShirt.setFont(new Font("굴림", Font.BOLD, 18));
 		nomalShirt.setBounds(0, 0, 84, 18);
 		shirtSubMenu.add(nomalShirt);
 		
-		JLabel patternShirt = new JLabel("패턴셔츠");
+		patternShirt = new JLabel("패턴셔츠");
 		patternShirt.setFont(new Font("굴림", Font.BOLD, 18));
 		patternShirt.setBounds(0, 31, 84, 18);
 		shirtSubMenu.add(patternShirt);
 		
-		JLabel shortShirt = new JLabel("반팔셔츠");
+		shortShirt = new JLabel("반팔셔츠");
 		shortShirt.setFont(new Font("굴림", Font.BOLD, 18));
 		shortShirt.setBounds(0, 62, 84, 18);
 		shirtSubMenu.add(shortShirt);
@@ -221,44 +223,44 @@ public class MainView{
 		
 		
 		// PANTS 메뉴
-		JLabel PANTS = new JLabel("PANTS");
-		PANTS.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
-		PANTS.setBounds(40, 621, 116, 35);
-		subMenu.add(PANTS);
+		pants = new JLabel("PANTS");
+		pants.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
+		pants.setBounds(40, 621, 116, 35);
+		subMenu.add(pants);
 		
 		// PANTS 서브메뉴
-		JPanel pantsSubMenu = new JPanel();
+		pantsSubMenu = new JPanel();
 		pantsSubMenu.setBackground(Color.WHITE);
 		pantsSubMenu.setBounds(40, 671, 125, 176);
 		subMenu.add(pantsSubMenu);
 		pantsSubMenu.setLayout(null);
 		
-		JLabel Slacks = new JLabel("슬랙스");
+		Slacks = new JLabel("슬랙스");
 		Slacks.setFont(new Font("굴림", Font.BOLD, 18));
 		Slacks.setBounds(0, 0, 62, 18);
 		pantsSubMenu.add(Slacks);
 		
-		JLabel cottonPants = new JLabel("면팬츠");
+		cottonPants = new JLabel("면팬츠");
 		cottonPants.setFont(new Font("굴림", Font.BOLD, 18));
 		cottonPants.setBounds(0, 31, 62, 18);
 		pantsSubMenu.add(cottonPants);
 		
-		JLabel blueJeans = new JLabel("청바지");
+		blueJeans = new JLabel("청바지");
 		blueJeans.setFont(new Font("굴림", Font.BOLD, 18));
 		blueJeans.setBounds(0, 62, 62, 18);
 		pantsSubMenu.add(blueJeans);
 		
-		JLabel shorts = new JLabel("반바지");
+		shorts = new JLabel("반바지");
 		shorts.setFont(new Font("굴림", Font.BOLD, 18));
 		shorts.setBounds(0, 93, 62, 18);
 		pantsSubMenu.add(shorts);
 		
-		JLabel training = new JLabel("트레이닝");
+		training = new JLabel("트레이닝");
 		training.setFont(new Font("굴림", Font.BOLD, 18));
 		training.setBounds(0, 124, 76, 18);
 		pantsSubMenu.add(training);
 		
-		JLabel upDenimPants = new JLabel("UP 데님팬츠");
+		upDenimPants = new JLabel("UP 데님팬츠");
 		upDenimPants.setFont(new Font("굴림", Font.BOLD, 18));
 		upDenimPants.setBounds(0, 155, 111, 18);
 		pantsSubMenu.add(upDenimPants);
@@ -268,32 +270,32 @@ public class MainView{
 		
 		
 		// SHOES 메뉴
-		JLabel SHOES = new JLabel("SHOES");
-		SHOES.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
-		SHOES.setBounds(40, 862, 116, 35);
-		subMenu.add(SHOES);
+		shoes = new JLabel("SHOES");
+		shoes.setFont(new Font("Bodoni MT Black", Font.PLAIN, 30));
+		shoes.setBounds(40, 862, 116, 35);
+		subMenu.add(shoes);
 		
 		// SHOES 서브메뉴
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(40, 912, 140, 84);
-		subMenu.add(panel);
-		panel.setLayout(null);
+		shoesSubMenu = new JPanel();
+		shoesSubMenu.setBackground(Color.WHITE);
+		shoesSubMenu.setBounds(40, 912, 140, 84);
+		subMenu.add(shoesSubMenu);
+		shoesSubMenu.setLayout(null);
 		
-		JLabel Sneakers = new JLabel("스니커즈");
+		Sneakers = new JLabel("스니커즈");
 		Sneakers.setFont(new Font("굴림", Font.BOLD, 18));
 		Sneakers.setBounds(0, 0, 76, 18);
-		panel.add(Sneakers);
+		shoesSubMenu.add(Sneakers);
 		
-		JLabel Walker = new JLabel("구두/워커");
+		Walker = new JLabel("구두/워커");
 		Walker.setFont(new Font("굴림", Font.BOLD, 18));
 		Walker.setBounds(0, 31, 85, 18);
-		panel.add(Walker);
+		shoesSubMenu.add(Walker);
 		
-		JLabel slipper = new JLabel("슬리퍼/샌들");
+		slipper = new JLabel("슬리퍼/샌들");
 		slipper.setFont(new Font("굴림", Font.BOLD, 18));
 		slipper.setBounds(0, 62, 104, 18);
-		panel.add(slipper);
+		shoesSubMenu.add(slipper);
 		// end SHOES 서브메뉴
 		
 		
@@ -323,7 +325,7 @@ public class MainView{
 		mainMenu.setBounds(-16, 0, 729, 79);
 		mainMenu.setLayout(null);
 		
-		kategorie = new JLabel(new ImageIcon(PATH + "Image\\MainImage\\kategorie.jpg"));
+		kategorie = new JLabel(new ImageIcon(PATH + "image\\MainImage\\kategorie.jpg"));
 		kategorie.setBackground(new Color(255, 204, 51));
 		kategorie.setBounds(30, 12, 55, 57);
 		mainMenu.add(kategorie);
@@ -333,20 +335,20 @@ public class MainView{
 		logo.setBounds(118, -2, 201, 79);
 		mainMenu.add(logo);
 		
-		search = new JLabel(new ImageIcon(PATH + "Image\\MainImage\\search.jpg"));
+		search = new JLabel(new ImageIcon(PATH + "image\\MainImage\\search.jpg"));
 		search.setBounds(583, 26, 30, 28);
 		mainMenu.add(search);
 		
-		login = new JLabel(new ImageIcon(PATH + "Image\\MainImage\\login.jpg"));
+		login = new JLabel(new ImageIcon(PATH + "image\\MainImage\\login.jpg"));
 		login.setBounds(627, 26, 30, 28);
 		mainMenu.add(login);
 		
 		
-		myPage = new JLabel(new ImageIcon(PATH + "Image\\MainImage\\myPage.jpg"));
+		myPage = new JLabel(new ImageIcon(PATH + "image\\MainImage\\myPage.jpg"));
 		myPage.setBounds(667, 26, 30, 28);
 		mainMenu.add(myPage);
 		
-		adminPage = new JLabel(new ImageIcon(PATH + "Image\\MainImage\\adminPage.jpg"));
+		adminPage = new JLabel(new ImageIcon(PATH + "image\\MainImage\\adminPage.jpg"));
 		adminPage.setBounds(540, 26, 30, 28);
 		mainMenu.add(adminPage);
 		
@@ -371,7 +373,27 @@ public class MainView{
 		login.addMouseListener(new MainMouseEvent("로그인") );
 		myPage.addMouseListener(new MainMouseEvent("마이페이지") );
 		adminPage.addMouseListener(new MainMouseEvent("관리자페이지"));
-
+		coat.addMouseListener(new MainMouseEvent("11"));
+		jacket.addMouseListener(new MainMouseEvent("12"));
+		blazer.addMouseListener(new MainMouseEvent("13"));
+		cardigan.addMouseListener(new MainMouseEvent("14"));
+		LongSleeve.addMouseListener(new MainMouseEvent("21"));
+		ShortSleeves.addMouseListener(new MainMouseEvent("22"));
+		hoodT.addMouseListener(new MainMouseEvent("23"));
+		neat.addMouseListener(new MainMouseEvent("24"));
+		overFit.addMouseListener(new MainMouseEvent("25"));
+		nomalShirt.addMouseListener(new MainMouseEvent("31"));
+		patternShirt.addMouseListener(new MainMouseEvent("32"));
+		shortShirt.addMouseListener(new MainMouseEvent("33"));
+		Slacks.addMouseListener(new MainMouseEvent("41"));
+		cottonPants.addMouseListener(new MainMouseEvent("42"));
+		blueJeans.addMouseListener(new MainMouseEvent("43"));
+		shorts.addMouseListener(new MainMouseEvent("44"));
+		training.addMouseListener(new MainMouseEvent("45"));
+		upDenimPants.addMouseListener(new MainMouseEvent("46"));
+		Sneakers.addMouseListener(new MainMouseEvent("51"));
+		Walker.addMouseListener(new MainMouseEvent("52"));
+		slipper.addMouseListener(new MainMouseEvent("53"));
 	} // end mainMouseEvent method
 	
 	
