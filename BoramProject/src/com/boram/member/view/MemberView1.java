@@ -81,7 +81,50 @@ public class MemberView1 {
 		pwd.setBounds(208, 302, 303, 39);
 		panel.add(pwd);
 		pwd.setColumns(10);
+		
+		pwd.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 로그인 버튼 클릭하면
+				String userId = id.getText();
+				String userPwd = "";
+				char[] pwd1 = pwd.getPassword();
+				for (int i = 0; i < pwd1.length; i++) {
+					userPwd += pwd1[i];
+				}
+				
+				if(userId.length()==0 || userPwd.length()==0) {
+					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 입력 하셔야 됩니다.", "입력을 확인하세요!", JOptionPane.DEFAULT_OPTION);
+					return;
+					}
+
+				MemberController mc = new MemberController();
+				Member result = mc.logIn(userId, userPwd);
+
+				
+				
+				Login.setVisible(false); // 로그인 창 끄기
+				
+				
+				// 로그인 실패하면 확인 팝업창 뜨고 다시 로그인하는 창 돌아가기
+				if (result == null) {
+					JOptionPane.showMessageDialog(null, "잘못입력하셨습니다. 다시 입력해주세요.");
+					Login.setVisible(true);
+					MainView.setMainPage(Login);
+					Login.add(panel);
+				}else {
+				
+				MyCart mct = new MyCart();
+				mct.loadCart();
+				
+				//메인창 띄우기
+				MainView.setMainPage(new MainPanel().getMainPanel());
+			}
+			}
+		});
+		
+		
 		/* 로그인 버튼 */
 		JButton logIn = new JButton("\uB85C\uADF8\uC778");
 		logIn.setForeground(Color.WHITE);
@@ -107,15 +150,8 @@ public class MemberView1 {
 				Member result = mc.logIn(userId, userPwd);
 
 				
-				MyCart mct = new MyCart();
-				mct.loadCart();
-				
 				
 				Login.setVisible(false); // 로그인 창 끄기
-				
-				
-				//메인창 띄우기
-				MainView.setMainPage(new MainPanel().getMainPanel());
 				
 				
 				// 로그인 실패하면 확인 팝업창 뜨고 다시 로그인하는 창 돌아가기
@@ -124,8 +160,14 @@ public class MemberView1 {
 					Login.setVisible(true);
 					MainView.setMainPage(Login);
 					Login.add(panel);
-				}
+				}else {
 				
+				MyCart mct = new MyCart();
+				mct.loadCart();
+				
+				//메인창 띄우기
+				MainView.setMainPage(new MainPanel().getMainPanel());
+			}
 			}
 		});
 
@@ -335,13 +377,14 @@ public class MemberView1 {
 
 				idSearchPanel.setBackground(Color.WHITE);
 				idSearchPanel.setLayout(null);
+				
 
 				JLabel lblIdpwFind = new JLabel("ID/PW FIND");
 				lblIdpwFind.setFont(new Font("굴림", Font.BOLD, 38));
 				lblIdpwFind.setHorizontalAlignment(SwingConstants.CENTER);
 				lblIdpwFind.setBounds(133, 55, 288, 54);
 				idSearchPanel.add(lblIdpwFind);
-
+				
 				JLabel searchLb = new JLabel("\uC544\uC774\uB514 \uCC3E\uAE30");
 				searchLb.setFont(new Font("굴림", Font.BOLD, 17));
 				searchLb.setBounds(64, 155, 98, 31);
