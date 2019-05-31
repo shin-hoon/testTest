@@ -3,6 +3,7 @@ package com.boram.shopping.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,6 +20,7 @@ public class MainMouseEvent extends MouseAdapter{
 	JPanel subMenu;
 	JScrollPane subMenuScroll;
 	String what;
+	JLabel mainImage;
 
 	public MainMouseEvent(JPanel subMenu, JScrollPane subMenuScroll,String what) {
 		this.subMenu= subMenu;
@@ -27,6 +29,11 @@ public class MainMouseEvent extends MouseAdapter{
 	}
 	
 	public MainMouseEvent(String what) {
+		this.what = what;
+	}
+	
+	public MainMouseEvent(JLabel mainImage, String what) {
+		this.mainImage = mainImage;
 		this.what = what;
 	}
 	
@@ -61,6 +68,9 @@ public class MainMouseEvent extends MouseAdapter{
 			}else {
 				MainView.setMainPage(new ManageViewFinal().manageMain());
 			}
+		}
+		else if(what.equals("상세페이지")) {
+			System.out.println(mainImage.getName());
 		}
 		
 	}
