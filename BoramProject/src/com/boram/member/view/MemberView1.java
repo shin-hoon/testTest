@@ -235,9 +235,20 @@ public class MemberView1{
 						String email = emailText.getText();
 						
 						System.out.println(age);
-						if(name == null || age == 0 || id == null || pwd == null || phone == null || address == null || email == null) {
-							JOptionPane.showMessageDialog(null, "정보를 모두 입력하세요.");
-							
+						if(name == null ) {
+							JOptionPane.showMessageDialog(null, "이름을 입력하세요.");
+						}else if(age == 0){
+							JOptionPane.showMessageDialog(null, "나이을 입력하세요.");
+						}else if(id == null) {
+							JOptionPane.showMessageDialog(null, "아이디을 입력하세요.");
+						}else if(pwd == null) {
+							JOptionPane.showMessageDialog(null, "비밀번호을 입력하세요.");
+						}else if(phone == null) {
+							JOptionPane.showMessageDialog(null, "핸드폰번호를 입력하세요.");
+						}else if(address == null) {
+							JOptionPane.showMessageDialog(null, "주소을 입력하세요.");
+						}else if(email == null) {
+							JOptionPane.showMessageDialog(null, "이메일을 입력하세요.");
 						}else {
 						
 						MemberController mc = new MemberController();
@@ -364,9 +375,11 @@ public class MemberView1{
 						// 아이디 찾기 확인 버튼 누르면
 	
 						MemberController mc = new MemberController();
-						mc.searchId(nametext, emailtext);
+						String id =mc.searchId(nametext, emailtext);
 						
-					
+						String s = (nametext.getText()+ "님의 아이디 : " + id);
+						JOptionPane.showMessageDialog(null, s);
+						
 						
 						
 					}

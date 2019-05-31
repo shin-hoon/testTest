@@ -65,10 +65,14 @@ public class MemberController {
 
 	public String searchId(JTextField nametext, JTextField emailtext) {
 
+		memberList = md.fileRead();
+		
 		String id = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
-
+			
+			System.out.println(memberList.get(i));
+			
 			if (memberList.get(i).getEmail().equals(emailtext.getText())
 					&& (memberList.get(i).getName().equals(nametext.getText()))) { // 저장된 회원 정보
 				
