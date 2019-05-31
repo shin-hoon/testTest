@@ -13,23 +13,23 @@ public class MyCart extends Product implements Serializable {
 	private static final long serialVersionUID = 4623389045564207219L;
 	static ArrayList<Product> CList = new ArrayList<>();// 장바구니리스트
 	ArrayList<Order> OList = new ArrayList<>();// 주문리스트
-	OrderDao od = new OrderDao();// 주문정보 Output
+
 	// 로그인하면서 누가 로그인했는지 회원정보 가져옴.
 	MemberController mc = new MemberController();
 	Member m = mc.nugu();
 
 	// 초기 임시데이터
-//	{
-//		// pNo, category, productName, price, size, stock, count(조회수)
-//		// 1,1,"hat",35000,one,1,1.
-//		CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
-//		CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
-//		CList.add(new Product(3, 3, "hat", 35003, "one3", 1, 1));
-//		CList.add(new Product(4, 1, "hat", 35004, "one4", 1, 1));
-//		CList.add(new Product(5, 2, "hat", 35005, "one5", 1, 1));
-//		CList.add(new Product(6, 3, "hat", 35006, "one6", 1, 1));
-//		CList.add(new Product(7, 4, "hat", 35007, "one7", 1, 1));
-//	}
+	// {
+	// // pNo, category, productName, price, size, stock, count(조회수)
+	// // 1,1,"hat",35000,one,1,1.
+	// CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
+	// CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
+	// CList.add(new Product(3, 3, "hat", 35003, "one3", 1, 1));
+	// CList.add(new Product(4, 1, "hat", 35004, "one4", 1, 1));
+	// CList.add(new Product(5, 2, "hat", 35005, "one5", 1, 1));
+	// CList.add(new Product(6, 3, "hat", 35006, "one6", 1, 1));
+	// CList.add(new Product(7, 4, "hat", 35007, "one7", 1, 1));
+	// }
 
 	public MyCart() {
 	}
@@ -45,6 +45,7 @@ public class MyCart extends Product implements Serializable {
 
 	/**
 	 * 전체조회
+	 * 
 	 * @return 전체리스트 리턴 후 View에서 출력.
 	 */
 	public ArrayList<Product> cartList() {
@@ -84,6 +85,7 @@ public class MyCart extends Product implements Serializable {
 	 * @return 실패0, 성공1
 	 */
 	public int cartOrder() {
+		OrderDao od = new OrderDao();// 주문정보 Output
 		ArrayList<Integer> pNo = new ArrayList<>();// 주문리스트속 상품번호들
 		ArrayList<Integer> amount = new ArrayList<>();// 주문리스트 속 주문수량
 		int result = 0;
@@ -123,7 +125,7 @@ public class MyCart extends Product implements Serializable {
 	 * 
 	 * @param CList
 	 *            MyCartView에서 CList받아서 저장.
-	 * @return 
+	 * @return
 	 * @return 실패0, 성공1
 	 */
 	public void saveCart(ArrayList<Product> CList) {// notSerializable exc
@@ -157,6 +159,11 @@ public class MyCart extends Product implements Serializable {
 		} catch (EOFException e) {
 			// e.printStackTrace();
 			System.out.println("불러오기 완료.");
+		} catch (FileNotFoundException e) {
+			// 장바구니 파일이 없을때 새로만들어주어야함.
+			CList.clear();
+			saveCart(CList);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -47,7 +47,6 @@ public class WB_MyCartView {
 		JPanel panel1 = new JPanel();
 
 		panel1.setBackground(Color.WHITE);
-		panel1.setForeground(Color.WHITE);
 		panel1.setBounds(0, 0, FWID, 90);
 		myCartView.add(panel1);
 
@@ -59,7 +58,6 @@ public class WB_MyCartView {
 
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(Color.WHITE);
-		panel2.setForeground(Color.WHITE);
 		panel2.setBounds(0, 90, 718, 698);
 		panel2.setLayout(null);
 		myCartView.add(panel2);
