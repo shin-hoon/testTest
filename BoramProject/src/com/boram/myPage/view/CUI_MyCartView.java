@@ -48,7 +48,7 @@ public class CUI_MyCartView {
 				cartOrder();
 				break;
 			case 5:
-				saveCart();
+				//saveCart();
 				break;
 			case 6:
 				loadCart();
@@ -142,30 +142,31 @@ public class CUI_MyCartView {
 		}
 	}
 
-	public void saveCart() {
-		System.out.println("장바구니를 저장하시겠습니까?");
-		System.out.println("현재 장바구니목록으로 덮어씌워집니다.");
-		System.out.print("입력(Y/N) : ");
-		char inp = sc.nextLine().charAt(0);
-		switch(inp) {
-		case 'y':
-		case 'Y':int result=mc.saveCart();
-		if(result==0) {
-			System.out.println("저장실패");
-			System.out.println(result);//실패원인리턴.//임시.
-		}else {
-			System.out.println("저장성공");
-		}
-			return;
-		case 'n':
-		case 'N':System.out.println("이전메뉴로");
-			return;
-		default:
-			System.out.println("잘못입력하셨습니다.");
-			System.out.println("이전메뉴로.");
-			return;
-		}
-	}
+//	mc.saveCart 반환값 없어짐.
+//	public void saveCart() {
+//		System.out.println("장바구니를 저장하시겠습니까?");
+//		System.out.println("현재 장바구니목록으로 덮어씌워집니다.");
+//		System.out.print("입력(Y/N) : ");
+//		char inp = sc.nextLine().charAt(0);
+//		switch(inp) {
+//		case 'y':
+//		case 'Y':int result=mc.saveCart();
+//		if(result==0) {
+//			System.out.println("저장실패");
+//			System.out.println(result);//실패원인리턴.//임시.
+//		}else {
+//			System.out.println("저장성공");
+//		}
+//			return;
+//		case 'n':
+//		case 'N':System.out.println("이전메뉴로");
+//			return;
+//		default:
+//			System.out.println("잘못입력하셨습니다.");
+//			System.out.println("이전메뉴로.");
+//			return;
+//		}
+//	}
 
 	public void addCart() {
 		//mc.addCart(product);

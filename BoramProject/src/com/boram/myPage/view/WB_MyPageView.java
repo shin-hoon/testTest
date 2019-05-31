@@ -2,12 +2,10 @@ package com.boram.myPage.view;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 
 import com.boram.myPage.controller.*;
 import com.boram.shopping.view.MainView;
-import com.boram.member.vo.Member;
 
 public class WB_MyPageView {
 	ChangeMember cm = new ChangeMember();
@@ -23,20 +21,15 @@ public class WB_MyPageView {
 	private static JTextArea ta;
 //	private ta = new JTextArea();
 	//private int gran = /* mem.getGrant() */0;
-	// 초기 임시데이터.
-	/*
-	 * { //0,"name1",950417,"id1","pwd2","01029346330","seoul","email.com"
-	 * MemberList.add(new
-	 * Member("name1",950411,"id1","pwd1","01029346331","seoul","1mail.com"));
-	 * MemberList.add(new
-	 * Member("name2",950412,"id2","pwd2","01029346332","seou1","2mail.com"));
-	 * MemberList.add(new
-	 * Member("name3",950413,"id3","pwd3","01029346333","seou2","3mail.com"));
-	 * MemberList.add(new
-	 * Member("name4",950414,"id4","pwd4","01029346334","seou3","4mail.com"));
-	 * MemberList.add(new
-	 * Member("name5",950415,"id5","pwd5","01029346335","seou4","5mail.com")); }
-	 */
+//	{// 초기임시데이터 추가 : 용준
+//	// "name1",950417,"id1","pwd2","01029346330","seoul","email.com"
+//	memberList.add(new Member(1, "1", 1, "1", "1", "1", "1", "1"));
+//	memberList.add(new Member(2, "name1", 950411, "id1", "pwd1", "01029346331", "seoul", "1mail.com"));
+//	memberList.add(new Member(3, "name2", 950412, "id2", "pwd2", "01029346332", "seou1", "2mail.com"));
+//	memberList.add(new Member(4, "name3", 950413, "id3", "pwd3", "01029346333", "seou2", "3mail.com"));
+//	memberList.add(new Member(5, "name4", 950414, "id4", "pwd4", "01029346334", "seou3", "4mail.com"));
+//	memberList.add(new Member(6, "name5", 950415, "id5", "pwd5", "01029346335", "seou4", "5mail.com"));
+//}
 
 	// 메인 페이지 호출을 위한 JPanel 반환
 	public JPanel getmyPageView() {

@@ -76,9 +76,6 @@ public class CUI_MyPageView {
 	// 본인것만 변경할수 있도록 수정시에 mNo대신
 	// 회원번호입력란 삭제후 고유번호 넘겨줄것.
 	public void idChange() {
-		System.out.print("변경할 회원의 회원번호를 입력해주세요 : ");
-		int mNo = sc.nextInt();
-		sc.nextLine();
 		System.out.print("변경할  id를 입력해주세요 : ");
 		String newinp = sc.nextLine();
 		int result = cm.idChange(newinp);
@@ -90,9 +87,6 @@ public class CUI_MyPageView {
 	}
 
 	public void pwChange() {
-		System.out.print("변경할 회원의 회원번호를 입력해주세요 : ");
-		int mNo = sc.nextInt();
-		sc.nextLine();
 		System.out.print("변경할  비밀번호를 입력해주세요 : ");
 		String newinp = sc.nextLine();
 		int result = cm.pwChange(newinp);
@@ -104,9 +98,6 @@ public class CUI_MyPageView {
 	}
 
 	public void phoneChange() {
-		System.out.print("변경할 회원의 회원번호를 입력해주세요 : ");
-		int mNo = sc.nextInt();
-		sc.nextLine();
 		System.out.print("변경할  휴대폰번호를 입력해주세요 : ");
 		String newinp = sc.nextLine();
 		int result = cm.phoneChange(newinp);
@@ -118,9 +109,6 @@ public class CUI_MyPageView {
 	}
 
 	public void addressChange() {
-		System.out.print("변경할 회원의 회원번호를 입력해주세요 : ");
-		int mNo = sc.nextInt();
-		sc.nextLine();
 		System.out.print("변경할  주소를 입력해주세요 : ");
 		String newinp = sc.nextLine();
 		int result = cm.addressChange(newinp);
@@ -132,9 +120,6 @@ public class CUI_MyPageView {
 	}
 
 	public void emailChange() {
-		System.out.print("변경할 회원의 회원번호를 입력해주세요 : ");
-		int mNo = sc.nextInt();
-		sc.nextLine();
 		System.out.print("변경할  이메일을 입력해주세요 : ");
 		String newinp = sc.nextLine();
 		int result = cm.emailChange(newinp);
@@ -146,9 +131,6 @@ public class CUI_MyPageView {
 	}
 
 	public void ageChange() {
-		System.out.print("변경할 회원의 회원번호를 입력해주세요 : ");
-		int mNo = sc.nextInt();
-		sc.nextLine();
 		System.out.print("변경할  나이를 입력해주세요 : ");
 		int newinp = sc.nextInt();
 		sc.nextLine();

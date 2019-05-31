@@ -7,8 +7,6 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import com.boram.manager.vo.Product;
-import com.boram.member.controller.MemberController;
-import com.boram.member.vo.Member;
 import com.boram.myPage.controller.*;
 import com.boram.shopping.view.MainView;
 
@@ -21,9 +19,7 @@ public class WB_MyCartView {
 	private MyCart ca = new MyCart();
 	private ArrayList<Product> CList = ca.cartList();
 	
-	private MemberController mc = new MemberController();
-	Member m = mc.nugu();
-	private JTable table_1;
+	
 
 	/**
 	 * Launch the application.
@@ -36,7 +32,6 @@ public class WB_MyCartView {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("null")
 	public WB_MyCartView() {
 		myCartView = new JPanel();
 		myCartView.setBackground(Color.white);
@@ -47,7 +42,6 @@ public class WB_MyCartView {
 		JPanel panel1 = new JPanel();
 
 		panel1.setBackground(Color.WHITE);
-		panel1.setForeground(Color.WHITE);
 		panel1.setBounds(0, 0, FWID, 90);
 		myCartView.add(panel1);
 
@@ -59,7 +53,6 @@ public class WB_MyCartView {
 
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(Color.WHITE);
-		panel2.setForeground(Color.WHITE);
 		panel2.setBounds(0, 90, 718, 698);
 		panel2.setLayout(null);
 		myCartView.add(panel2);

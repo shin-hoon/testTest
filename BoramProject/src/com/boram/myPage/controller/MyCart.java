@@ -13,23 +13,22 @@ public class MyCart extends Product implements Serializable {
 	private static final long serialVersionUID = 4623389045564207219L;
 	static ArrayList<Product> CList = new ArrayList<>();// 장바구니리스트
 	ArrayList<Order> OList = new ArrayList<>();// 주문리스트
-	OrderDao od = new OrderDao();// 주문정보 Output
+
 	// 로그인하면서 누가 로그인했는지 회원정보 가져옴.
 	MemberController mc = new MemberController();
-	Member m = mc.nugu();
 
 	// 초기 임시데이터
-//	{
-//		// pNo, category, productName, price, size, stock, count(조회수)
-//		// 1,1,"hat",35000,one,1,1.
-//		CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
-//		CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
-//		CList.add(new Product(3, 3, "hat", 35003, "one3", 1, 1));
-//		CList.add(new Product(4, 1, "hat", 35004, "one4", 1, 1));
-//		CList.add(new Product(5, 2, "hat", 35005, "one5", 1, 1));
-//		CList.add(new Product(6, 3, "hat", 35006, "one6", 1, 1));
-//		CList.add(new Product(7, 4, "hat", 35007, "one7", 1, 1));
-//	}
+	// {
+	// // pNo, category, productName, price, size, stock, count(조회수)
+	// // 1,1,"hat",35000,one,1,1.
+	// CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
+	// CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
+	// CList.add(new Product(3, 3, "hat", 35003, "one3", 1, 1));
+	// CList.add(new Product(4, 1, "hat", 35004, "one4", 1, 1));
+	// CList.add(new Product(5, 2, "hat", 35005, "one5", 1, 1));
+	// CList.add(new Product(6, 3, "hat", 35006, "one6", 1, 1));
+	// CList.add(new Product(7, 4, "hat", 35007, "one7", 1, 1));
+	// }
 
 	public MyCart() {
 	}
@@ -45,6 +44,7 @@ public class MyCart extends Product implements Serializable {
 
 	/**
 	 * 전체조회
+	 * 
 	 * @return 전체리스트 리턴 후 View에서 출력.
 	 */
 	public ArrayList<Product> cartList() {
@@ -84,6 +84,7 @@ public class MyCart extends Product implements Serializable {
 	 * @return 실패0, 성공1
 	 */
 	public int cartOrder() {
+		OrderDao od = new OrderDao();// 주문정보 Output
 		ArrayList<Integer> pNo = new ArrayList<>();// 주문리스트속 상품번호들
 		ArrayList<Integer> amount = new ArrayList<>();// 주문리스트 속 주문수량
 		int result = 0;
@@ -93,8 +94,8 @@ public class MyCart extends Product implements Serializable {
 		} else {
 			// CList+Member => OList만들기.
 			int oNo = OList.size() + 1;// 마지막order번호 +1
-			String oId = m.getId();// 주문자 id
-			String oAdd = m.getAddress();// 주문자 주소.
+			String oId = MemberController.m.getId();// 주문자 id
+			String oAdd = MemberController.m.getAddress();// 주문자 주소.
 			// CList안 상품의 pNo목록을 ArrayList<Integer> pNo로 넣음.
 			for (Product i : CList) {
 				pNo.add(i.getpNo());
@@ -123,11 +124,11 @@ public class MyCart extends Product implements Serializable {
 	 * 
 	 * @param CList
 	 *            MyCartView에서 CList받아서 저장.
-	 * @return 
+	 * @return
 	 * @return 실패0, 성공1
 	 */
 	public void saveCart(ArrayList<Product> CList) {// notSerializable exc
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(m.getmNo() + "MyCart.txt"))) {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(MemberController.m.getmNo() + "MyCart.txt"))) {
 			// oos.writeObject(null);
 			for (Product i : CList) {
 				oos.writeObject(i);
@@ -144,28 +145,23 @@ public class MyCart extends Product implements Serializable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void loadCart() {// 잘 작동하는지 확인할것.
-		int result = 0;// 임시변수확인!!
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(m.getmNo() + "MyCart.txt"))) {
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(MemberController.m.getmNo() + "MyCart.txt"))) {
 			CList.clear();
 			while (true) {
 				// CList = (ArrayList<Product>) ois.readObject();
 				CList.add((Product) ois.readObject());
-				result = 1;
 			}
-		}catch (FileNotFoundException e) {
-			File f = new File(m.getmNo()+ "MyCart.txt");
-			try {
-				f.createNewFile();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			
+		
 		}
 		catch (EOFException e) {
 			// e.printStackTrace();
 			System.out.println("불러오기 완료.");
+		} catch (FileNotFoundException e) {
+			// 장바구니 파일이 없을때 새로만들어주어야함.
+			CList.clear();
+			saveCart(CList);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

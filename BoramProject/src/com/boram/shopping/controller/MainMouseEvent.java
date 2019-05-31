@@ -65,7 +65,7 @@ public class MainMouseEvent extends MouseAdapter{
 		}
 		else if(what.equals("마이페이지")) {
 			if(mc.nugu()==null) {
-				JOptionPane.showMessageDialog(null, "로그인 먼저 해주세요", "LogIn Error", JOptionPane.WARNING_MESSAGE);	
+				JOptionPane.showMessageDialog(null, "로그인 해주세요", "LogIn Error", JOptionPane.WARNING_MESSAGE);	
 			}else {
 				MainView.setMainPage(new WB_MyPage_Main().myPageMain());
 			}
