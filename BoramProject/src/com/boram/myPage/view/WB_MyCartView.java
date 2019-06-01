@@ -9,6 +9,7 @@ import javax.swing.table.*;
 import com.boram.manager.vo.Product;
 import com.boram.myPage.controller.*;
 import com.boram.shopping.view.MainView;
+import com.boram.manager.vo.*;
 
 public class WB_MyCartView {
 	public static final int FWID = 718;
@@ -40,12 +41,14 @@ public class WB_MyCartView {
 		// getContentPane().add(myCartView);
 
 		JPanel panel1 = new JPanel();
-
 		panel1.setBackground(Color.WHITE);
 		panel1.setBounds(0, 0, FWID, 90);
+		//panel1.setLayout(null);
 		myCartView.add(panel1);
+		panel1.setLayout(null);
 
 		JLabel lblMyCart = new JLabel("My Cart ");
+		lblMyCart.setBounds(0, 22, 197, 58);
 		panel1.add(lblMyCart);
 		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMyCart.setFont(new Font("굴림", Font.ITALIC, 50));
@@ -141,7 +144,7 @@ public class WB_MyCartView {
 
 		// 삭제버튼을 누르면 JTable의 row삭제.
 		//삭제한것을 CList에 다시 넣어주어야함.
-		JButton btnNewButton = new JButton("삭제");
+		JButton btnNewButton = new JButton("저장");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int row =0;
@@ -164,12 +167,11 @@ public class WB_MyCartView {
 		JButton btnNewButton_1 = new JButton("주문");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//주문시 CList를 주문목록으로 저장하고
-				//CList 클리어
-				
+				int i =ca.cartOrder();
+				System.out.println(i);
 			}
 		});
-		btnNewButton_1.setBounds(295, 637, 105, 27);
+		btnNewButton_1.setBounds(303, 637, 105, 27);
 		panel2.add(btnNewButton_1);
 
 		JButton button = new JButton("이전메뉴");

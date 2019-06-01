@@ -120,15 +120,22 @@ public class ChangeMember {
 		// *Change 에서 nugu.get(i).*change 에서 본인이 로그인한 것만 변경해놓음.
 		//그렇기때문에 MemberList를 dao를 통해 그냥 덮어씌워주면됨.
 		md.fileSave(MemberList);
-	
 	}
 
 	/**
 	 * 조회용 임시메뉴
 	 */
 	public String printMem() {
-		String r = MemberList.get(mNo).toString();
-
-		return r;
+		return MemberList.get(mNo).toString();
 	}
+	public void printAllMem() {
+		System.out.println("MemberList 전체출력");
+		System.out.println("dao통해서 바로 읽어온값.");
+		MemberList.clear();
+		ArrayList<Member> MemberList = md.fileRead();
+		for(Member i:MemberList) {
+			System.out.println(i.toString());
+		}
+	}
+	
 }

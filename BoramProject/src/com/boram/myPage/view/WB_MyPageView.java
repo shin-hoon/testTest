@@ -47,8 +47,10 @@ public class WB_MyPageView {
 		panel.setForeground(Color.WHITE);
 		panel.setBounds(0, 0, FWID, 90);
 		myPageView.add(panel);
+		panel.setLayout(null);
 
 		JLabel lblMyPage = new JLabel("My Page ");
+		lblMyPage.setBounds(0, 32, 218, 58);
 		lblMyPage.setBackground(Color.BLACK);
 		lblMyPage.setForeground(Color.BLACK);
 		lblMyPage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -56,7 +58,7 @@ public class WB_MyPageView {
 		panel.add(lblMyPage);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.LIGHT_GRAY);
+		panel_2.setBackground(Color.WHITE);
 		panel_2.setBounds(0, 90, 718, 955);
 
 		myPageView.add(panel_2);
@@ -64,64 +66,64 @@ public class WB_MyPageView {
 
 		JLabel label = new JLabel("아이디 변경 :");
 		label.setFont(new Font("굴림", Font.PLAIN, 20));
-		label.setBounds(138, 51, 121, 27);
+		label.setBounds(50, 51, 121, 27);
 		panel_2.add(label);
 
 		JLabel label_0 = new JLabel("비밀번호 변경 :");
-		label_0.setBounds(159, 137, 80, 15);
+		label_0.setBounds(71, 137, 80, 15);
 		panel_2.add(label_0);
 
 		JLabel label_1 = new JLabel("나이 변경 :");
-		label_1.setBounds(159, 209, 80, 15);
+		label_1.setBounds(71, 209, 80, 15);
 		panel_2.add(label_1);
 
 		JLabel label_2 = new JLabel("주소 변경 :");
-		label_2.setBounds(159, 282, 80, 15);
+		label_2.setBounds(71, 282, 80, 15);
 		panel_2.add(label_2);
 
 		JLabel label_3 = new JLabel("이메일 변경 :");
-		label_3.setBounds(159, 337, 80, 15);
+		label_3.setBounds(71, 337, 80, 15);
 		panel_2.add(label_3);
 
 		JLabel label_4 = new JLabel("전화번호 변경 :");
-		label_4.setBounds(159, 405, 80, 15);
+		label_4.setBounds(71, 405, 80, 15);
 		panel_2.add(label_4);
 
 		// id
 		textField = new JTextField("");
 		textField.setBackground(Color.WHITE);
-		textField.setBounds(268, 46, 220, 40);
+		textField.setBounds(180, 46, 220, 40);
 		panel_2.add(textField);
 		textField.setColumns(10);
 
 		// pw
 		textField_1 = new JTextField("");
 		textField_1.setColumns(10);
-		textField_1.setBounds(268, 112, 220, 40);
+		textField_1.setBounds(180, 112, 220, 40);
 		panel_2.add(textField_1);
 
 		// age
 		textField_2 = new JTextField("");
 		textField_2.setColumns(10);
-		textField_2.setBounds(268, 184, 220, 40);
+		textField_2.setBounds(180, 184, 220, 40);
 		panel_2.add(textField_2);
 
 		// address
 		textField_3 = new JTextField("");
 		textField_3.setColumns(10);
-		textField_3.setBounds(268, 257, 220, 40);
+		textField_3.setBounds(180, 257, 220, 40);
 		panel_2.add(textField_3);
 
 		// email
 		textField_4 = new JTextField("");
 		textField_4.setColumns(10);
-		textField_4.setBounds(268, 324, 220, 40);
+		textField_4.setBounds(180, 324, 220, 40);
 		panel_2.add(textField_4);
 
 		// phone
 		textField_5 = new JTextField("");
 		textField_5.setColumns(10);
-		textField_5.setBounds(268, 392, 220, 40);
+		textField_5.setBounds(180, 392, 220, 40);
 		panel_2.add(textField_5);
 
 		JButton btnChange = new JButton("Change!");
@@ -132,11 +134,11 @@ public class WB_MyPageView {
 				btnChange1();
 			}
 		});
-		btnChange.setBounds(81, 711, 97, 23);
+		btnChange.setBounds(81, 636, 97, 23);
 		panel_2.add(btnChange);
 
-		JLabel lblResult = new JLabel("Result : ");
-		lblResult.setBounds(14, 444, 57, 15);
+		JLabel lblResult = new JLabel("결과 : ");
+		lblResult.setBounds(12, 470, 57, 15);
 		panel_2.add(lblResult);
 
 		// 사용자가 수정불가능하게 수정할것.
@@ -147,11 +149,11 @@ public class WB_MyPageView {
 		//ta.setBounds(14, 472, 690, 170);
 		
 		JScrollPane sp = new JScrollPane(ta);
-		sp.setBounds(14, 470, 662, 172);
+		sp.setBounds(12, 495, 679, 106);
 		panel_2.add(sp);
 
 		
-		JButton btnPre = new JButton("Pre");
+		JButton btnPre = new JButton("이전화면");
 		btnPre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			MainView.setMainPage(new WB_MyPage_Main().myPageMain());
@@ -159,18 +161,18 @@ public class WB_MyPageView {
 			
 			}
 		});
-		btnPre.setBounds(252, 709, 105, 27);
+		btnPre.setBounds(252, 634, 105, 27);
 		panel_2.add(btnPre);
 
 		// 회원정보 출력 temp
-		JButton btnTemp_1 = new JButton("Temp");
+		JButton btnTemp_1 = new JButton("정보조회");
 		btnTemp_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String member = cm.printMem();
-				ta.append(member+"\n");
+				ta.append(cm.printMem()+"\n");
+				cm.printAllMem();
 			}
 		});
-		btnTemp_1.setBounds(416, 709, 105, 27);
+		btnTemp_1.setBounds(416, 634, 105, 27);
 		panel_2.add(btnTemp_1);
 
 	}

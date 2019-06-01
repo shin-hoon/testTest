@@ -22,22 +22,16 @@ public class WB_MyDeliveryView {
 	public static final int FHIT = 500;
 	private OrderDao od = new OrderDao();
 	private MemberController mc = new MemberController();
-
 	private JPanel myDeliveryView;
 	private JTable table;
-
 //	private ArrayList<Order> order1 = od.fileRead();
 	private ArrayList<Order> order1 = new ArrayList<Order>();
-
 
 	public JPanel getMyDeliveryView() {
 		return this.myDeliveryView;
 	}
 
 	public WB_MyDeliveryView() {
-		
-		
-
 			myDeliveryView = new JPanel();
 			myDeliveryView.setBackground(Color.white);
 			myDeliveryView.setBounds(0, 0, FWID, 800);
@@ -47,8 +41,10 @@ public class WB_MyDeliveryView {
 			panel1.setBackground(Color.WHITE);
 			panel1.setBounds(0, 0, FWID, 90);
 			myDeliveryView.add(panel1);
+			panel1.setLayout(null);
 
 			JLabel label1 = new JLabel("My Delivery ");
+			label1.setBounds(12, 10, 283, 58);
 			panel1.add(label1);
 			label1.setHorizontalAlignment(SwingConstants.CENTER);
 			label1.setFont(new Font("굴림", Font.ITALIC, 50));
@@ -98,6 +94,7 @@ public class WB_MyDeliveryView {
 			} else {
 				State = "배송완료";
 			}
+			
 			for (int i = 0; i < order1.size(); i++) {
 				int index = i = 1;
 				Object pic = new Object();

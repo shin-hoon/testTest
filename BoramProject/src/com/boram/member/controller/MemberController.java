@@ -42,7 +42,7 @@ public class MemberController {
 		}
 		if(memberList.size()==0) {//memberList 초기화 후 새로시작할때 mNo=0으로 변경해주세요.
 			//0번index에 mNo가 1 부터 시작하면 outofbound오류납니다.  
-			mNo=1;
+			mNo=0;
 		}else {
 			mNo=memberList.get(memberList.size()-1).getmNo()+1; //제일마지막번호 +1
 		}

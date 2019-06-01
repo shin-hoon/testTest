@@ -23,8 +23,6 @@ public class OrderDao {
 			for (int i = 0; i < list.size(); i++) {
 						oos.writeObject(list.get(i));
 			}	
-			
-			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +33,7 @@ public class OrderDao {
 	}
 
 	public ArrayList<Order> fileRead() {
-		int count=0;
+		//int count=0;
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("orderList.txt"));) {
 			while (true) {
 				try {
@@ -45,7 +43,6 @@ public class OrderDao {
 					e.printStackTrace();
 				}
 			}
-
 		} catch (FileNotFoundException e) {
 			File f = new File("orderList.txt");
 			try {

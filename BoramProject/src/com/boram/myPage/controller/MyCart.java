@@ -18,17 +18,17 @@ public class MyCart extends Product implements Serializable {
 	MemberController mc = new MemberController();
 
 	// 초기 임시데이터
-	// {
-	// // pNo, category, productName, price, size, stock, count(조회수)
-	// // 1,1,"hat",35000,one,1,1.
-	// CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
-	// CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
-	// CList.add(new Product(3, 3, "hat", 35003, "one3", 1, 1));
-	// CList.add(new Product(4, 1, "hat", 35004, "one4", 1, 1));
-	// CList.add(new Product(5, 2, "hat", 35005, "one5", 1, 1));
-	// CList.add(new Product(6, 3, "hat", 35006, "one6", 1, 1));
-	// CList.add(new Product(7, 4, "hat", 35007, "one7", 1, 1));
-	// }
+//	 {
+//	 // pNo, category, productName, price, size, stock, count(조회수)
+//	 // 1,1,"hat",35000,one,1,1.
+//	 CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
+//	 CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
+//	 CList.add(new Product(3, 3, "hat", 35003, "one3", 1, 1));
+//	 CList.add(new Product(4, 1, "hat", 35004, "one4", 1, 1));
+//	 CList.add(new Product(5, 2, "hat", 35005, "one5", 1, 1));
+//	 CList.add(new Product(6, 3, "hat", 35006, "one6", 1, 1));
+//	 CList.add(new Product(7, 4, "hat", 35007, "one7", 1, 1));
+//	 }
 
 	public MyCart() {
 	}
@@ -93,7 +93,10 @@ public class MyCart extends Product implements Serializable {
 			result = 0;
 		} else {
 			// CList+Member => OList만들기.
-			int oNo = OList.size() + 1;// 마지막order번호 +1
+			int oNo =0; // 마지막order번호 +1
+			if (OList.size() != 0) {
+				oNo = OList.size()+1;
+			}
 			String oId = MemberController.m.getId();// 주문자 id
 			String oAdd = MemberController.m.getAddress();// 주문자 주소.
 			// CList안 상품의 pNo목록을 ArrayList<Integer> pNo로 넣음.
@@ -109,13 +112,10 @@ public class MyCart extends Product implements Serializable {
 			for (Product i : CList) {
 				payment += i.getPrice();
 			}
-
 			OList.add(new Order(oNo, oId, oAdd, pNo, amount, state, payment));
-
 			od.fileSave(OList);
 			result = 1;
 		}
-
 		return result;
 	}
 
