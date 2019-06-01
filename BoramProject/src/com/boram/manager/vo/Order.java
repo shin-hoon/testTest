@@ -24,6 +24,17 @@ public class Order implements Serializable {
 	private int orderDate =Integer.parseInt(sdf.format(date));
 	
 	
+	public Order(String orderId, String address, ArrayList<Integer> pNo, ArrayList<Integer> amount, int state,
+			int payment, int orderDate) {
+		super();
+		this.orderId = orderId;
+		this.address = address;
+		this.pNo = pNo;
+		this.amount = amount;
+		this.state = state;
+		this.payment = payment;
+		this.orderDate = orderDate;
+	}
 	public Order(int orderNo, String orderId, String address, ArrayList<Integer> pNo, ArrayList<Integer> amount, int state, int payment) {
 		this.orderNo = orderNo;
 		this.orderId = orderId;
