@@ -71,7 +71,7 @@ public class MainMouseEvent extends MouseAdapter{
 			}
 		}
 		else if(what.equals("관리자페이지")) {
-			System.out.println(mc.nugu().getmNo());
+			//System.out.println(mc.nugu().getmNo());
 			/*if(mc.nugu().getName()==null ) {
 				JOptionPane.showMessageDialog(null, "로그인 먼저 해주세요", "LogIn Error", JOptionPane.WARNING_MESSAGE);
 			}else if(mc.nugu().getmNo() != 0) {

@@ -483,8 +483,9 @@ public class ManageViewFinal {
 				int b = -1;
 				int x = table.getSelectedRow();
 				a = table.getValueAt(x, 0);
+				String value = String.valueOf(a);
 				for (int i = 0; i < pArr.size(); i++) {
-					if (pArr.get(i).getpNo() == (int) a) {
+					if (pArr.get(i).getpNo() == Integer.parseInt(value)) {
 						b = i;
 						break;
 					}
@@ -493,7 +494,7 @@ public class ManageViewFinal {
 				if (b == -1) {
 					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
 				} else {
-					MainView.setMainPage(updateProduct());
+					MainView.setMainPage(manageProduct());
 
 				}
 			}
@@ -655,7 +656,7 @@ public class ManageViewFinal {
 		return InsertProduct;
 	}
 
-	public JPanel updateProduct() {
+	public JPanel updateProduct(Product p) {
 
 		JPanel updateProduct = new JPanel();
 		updateProduct.setBounds(64, 75, 506, 511);
@@ -691,17 +692,17 @@ public class ManageViewFinal {
 		label_4.setBounds(35, 265, 78, 21);
 		updateProduct.add(label_4);
 
-		JTextField productName = new JTextField();
+		JTextField productName = new JTextField(p.getProductName());
 		productName.setBounds(130, 80, 156, 27);
 		updateProduct.add(productName);
 		productName.setColumns(10);
 
-		JTextField stock = new JTextField();
+		JTextField stock = new JTextField(p.getStock());
 		stock.setColumns(10);
 		stock.setBounds(130, 188, 156, 27);
 		updateProduct.add(stock);
 
-		JTextField price = new JTextField();
+		JTextField price = new JTextField(p.getPrice());
 		price.setColumns(10);
 		price.setBounds(130, 226, 156, 27);
 		updateProduct.add(price);
