@@ -19,6 +19,21 @@ public class Product implements Serializable{
 	
 	public Product() {
 	}
+	
+	public Product(int pNo, int category, String productName, int price, String size, String explain,
+			String imgFilePath, int stock, int count) {
+		super();
+		this.pNo = pNo;
+		this.category = category;
+		this.productName = productName;
+		this.price = price;
+		this.size = size;
+		this.explain = explain;
+		this.imgFilePath = imgFilePath;
+		this.stock = stock;
+		this.count = count;
+	}
+
 	public String getImgFilePath() {
 		return imgFilePath;
 	}

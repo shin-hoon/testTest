@@ -156,14 +156,31 @@ public class ManagerController2 {
 
 		ArrayList<Integer> sumArr = new ArrayList<Integer>();
 		int count;
-		for (int i = term; i > 0; i--) {
+		
+		int a = (month/100)%100;
+		//month의 형태 'yyyyMMdd'
+		// 월을 나타냄
+		
+		for (int i = 0; i < term; i++) {
 			count = 0;
-			for (int j = 0; j < oArr.size(); j++) {
-				if ((month / 100 - i) == oArr.get(j).getOrderDate() / 100) {
-					count += oArr.get(j).getPayment();
+			if(a==0) {
+				for (int j = 0; j < oArr.size(); j++) {
+					if ((month / 100 - i-100) == (oArr.get(j).getOrderDate() / 100)) {
+						count += oArr.get(j).getPayment();
+					}
 				}
+				
+				sumArr.add(count);
+			}else {
+				for (int j = 0; j < oArr.size(); j++) {
+					if ((month / 100 - i) == (oArr.get(j).getOrderDate() / 100)) {
+						count += oArr.get(j).getPayment();
+					}
+				}
+				a--;
+				sumArr.add(count);
 			}
-			sumArr.add(count);
+			
 
 		}
 
