@@ -66,7 +66,7 @@ public class ShoppingParsing {
 	
 	/**
 	 *  웹주소에 해당하는
-	 *  HTML태그를 끌어와서 원하는 이미지와 데이터를 가져오는 기능
+	 *  HTML태그를 끌어와서 원하는 이미지 및 데이터를 가져오는 기능
 	 *  초기화 하고싶을 때는 삭제 했다가 다시 파싱
 	 *  단, 파싱 작업은 몇 분정도 소요시간 있음
 	 *  파싱이 끝났거나 파일 삭제가 끝나면
@@ -75,7 +75,6 @@ public class ShoppingParsing {
 	 */
 	public static void main(String[] args) {
 		ShoppingParsing sp = new ShoppingParsing();
-		
 		// 파싱 start
 		//sp.fileSave();
 		
@@ -87,8 +86,7 @@ public class ShoppingParsing {
 		System.out.println("category 폴더가 삭제 되었습니다.");
 	*/	
 	}
-
-
+	
 	
 	public void fileSave() {
 		productDao.fileSave(parsingStart());
@@ -145,17 +143,24 @@ public class ShoppingParsing {
 							Element contentExplainTmp2 = contentExplain2.get(k);
 							sb.append(contentExplainTmp2.text());
 						}
+						if(sb.toString().equals("")) {
+							sb.append("상품 설명이 등록되지 않았습니다.");
+						}
 					}
 					
 					Product vo = new Product();
-					
-					vo.setpNo(pNo++);        
-					vo.setCategory(category[m]); 
-					vo.setProductName(titleTmp.text());
-					String replace = priceTmp.text().replaceAll(",", "");
-					vo.setPrice(Integer.parseInt(replace.substring(0, replace.lastIndexOf("원"))));
-					vo.setSize("free");
-					vo.setExplain(sb.toString());
+					try {
+						vo.setpNo(pNo++);        
+						vo.setCategory(category[m]); 
+						vo.setProductName(titleTmp.text());
+						String replace = priceTmp.text().replaceAll(",", "");
+						vo.setPrice(Integer.parseInt(replace.substring(0, replace.lastIndexOf("원"))));
+						vo.setSize("free");
+						vo.setExplain(sb.toString());
+						
+					}catch(Exception ex) {
+						System.out.println("여기서 에러 : " + ex.getMessage());
+					}
 					
 					
 					File fileDir = new File(MainView.PATH + "image\\category\\"+categoryEng[m]+"\\");
@@ -179,7 +184,7 @@ public class ShoppingParsing {
 					dataList.add(vo);
 					cnt += 2;
 					System.out.println(vo.toString());
-					if(i == 11) break;
+					if(i == 21) break;
 				} // end for
 				cnt=0;
 			} // end for

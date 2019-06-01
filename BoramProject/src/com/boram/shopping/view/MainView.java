@@ -25,7 +25,7 @@ public class MainView{
 	// 고정 페이지 JPanel에 담기는 JLabel(맨 위쪽 => 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
 	JLabel kategorie, logo, search, login, myPage, adminPage;	
 	// 서브메뉴 목록과 서브메뉴 상세 분류를 담고있는 JPanel. kategorie를 누르면 나오는 메뉴
-	JPanel subMenu;
+	public static JPanel subMenu;
 	// 서브메뉴 목록
 	JLabel outer, top, shirt, pants, shoes, acc;
 	// 서브메뉴 상세 분류 목록
@@ -37,7 +37,7 @@ public class MainView{
 	// subMenu 닫기
 	JLabel subMenuClose;
 	// subMenu 스크롤
-	JScrollPane subMenuScroll;
+	public static JScrollPane subMenuScroll;
 	// 바뀌는 페이지 
 	public static JPanel mainPage;
 	// 바뀌는 페이지 스크롤
@@ -77,11 +77,11 @@ public class MainView{
 		
         mainPageScroll = new JScrollPane();
 		mainPageScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		mainPageScroll.getVerticalScrollBar().setUnitIncrement(36);// 스크롤 속도 
+		mainPageScroll.getVerticalScrollBar().setUnitIncrement(50);// 스크롤 속도 
 		mainPageScroll.setBorder(null);
 		mainPageScroll.setBounds(0, 80, 715, 975);
 
-		mainPage.setPreferredSize(new Dimension(450, 3200));
+		mainPage.setPreferredSize(new Dimension(450, mainPage.getHeight()));
 		mainPageScroll.setViewportView(mainPage);
 		frame.getContentPane().add(mainPageScroll); 
 		
@@ -367,8 +367,8 @@ public class MainView{
 	// 이벤트 처리
 	public void mainMouseEvent() {
 		
-		kategorie.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴열기") );	
-		subMenuClose.addMouseListener(new MainMouseEvent(subMenu, subMenuScroll, "서브메뉴닫기") );	
+		kategorie.addMouseListener(new MainMouseEvent("서브메뉴열기") );	
+		subMenuClose.addMouseListener(new MainMouseEvent("서브메뉴닫기") );	
 		logo.addMouseListener(new MainMouseEvent("메인") );
 		login.addMouseListener(new MainMouseEvent("로그인") );
 		myPage.addMouseListener(new MainMouseEvent("마이페이지") );
@@ -405,7 +405,7 @@ public class MainView{
 
 		mainPageScroll.setViewportView(null);
 		mainPage = panel;
-		mainPage.setPreferredSize(new Dimension(450, 3200));
+		mainPage.setPreferredSize(new Dimension(450, panel.getHeight()));
 		mainPageScroll.setViewportView(mainPage);
 
 		frame.revalidate();

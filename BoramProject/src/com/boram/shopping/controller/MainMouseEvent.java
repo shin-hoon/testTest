@@ -17,17 +17,9 @@ import com.boram.shopping.view.MainView;
 
 public class MainMouseEvent extends MouseAdapter{
 	private MemberController mc = new MemberController();
-	private JPanel subMenu;
-	private JScrollPane subMenuScroll;
 	private String what;
 	private JLabel mainImage;
 
-	public MainMouseEvent(JPanel subMenu, JScrollPane subMenuScroll,String what) {
-		this.subMenu= subMenu;
-		this.subMenuScroll = subMenuScroll;
-		this.what = what;
-	}
-	
 	public MainMouseEvent(String what) {
 		this.what = what;
 	}
@@ -41,10 +33,10 @@ public class MainMouseEvent extends MouseAdapter{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(what.equals("서브메뉴닫기")) {
-			new MainThreadEvent(subMenu,subMenuScroll,-376,0,"서브메뉴닫기").start();
+			new MainThreadEvent(-376,0,"서브메뉴닫기").start();
 		}
 		else if(what.equals("서브메뉴열기")) {
-			new MainThreadEvent(subMenu,subMenuScroll,-376,0,"서브메뉴열기").start();
+			new MainThreadEvent(-376,0,"서브메뉴열기").start();
 		}
 		else if(what.equals("메인")) {
 			MainView.setMainPage(new MainPanel(1).getMainPanel());

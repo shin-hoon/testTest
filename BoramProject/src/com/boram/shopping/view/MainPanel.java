@@ -14,6 +14,7 @@ import com.boram.manager.vo.CategoryDao;
 import com.boram.manager.vo.Product;
 import com.boram.manager.vo.ProductDao;
 import com.boram.shopping.controller.MainMouseEvent;
+import com.boram.shopping.controller.MainThreadEvent;
 
 public class MainPanel{
 	private JPanel mainPage;
@@ -23,9 +24,9 @@ public class MainPanel{
 	private int priceHeight_1 = 536;
 	private int priceWidth_2 = 15;
 	private int priceHeight_2 = 560;
-	private JLabel[] mainImage;
-	private JLabel[] productName;
-	private JLabel[] price;
+	private JLabel mainImage;
+	private JLabel productName;
+	private JLabel price;
 
 	public JPanel getMainPanel() {
 		return mainPage;
@@ -35,16 +36,18 @@ public class MainPanel{
 	 *  ¸ÞÀÎ ÆäÀÌÁö
 	 */
 	public MainPanel(int num) {
+		if(num != 1)
+			new MainThreadEvent(-376,0,"¼­ºê¸Þ´º´Ý±â").start();
 		mainPage = new JPanel();
 		mainPage.setBackground(new Color(255, 255, 255));
-		mainPage.setBounds(0, 259, 700, 490);
+		mainPage.setBounds(0, 259, 450, 490);
 		mainPage.setLayout(null);
 		mainPage.setVisible(true);
 
 		List<Product> ProductList = new ProductDao().fileRead();
-		mainImage = new JLabel[ProductList.size()];
-		JLabel[] productName = new JLabel[ProductList.size()];
-		JLabel[] price = new JLabel[ProductList.size()];
+		mainImage = new JLabel();
+		productName = new JLabel();
+		price = new JLabel();
 		
 		List<Category> categoryChk = new CategoryDao().fileRead();
 		for(int i = 0; i < categoryChk.size(); i++) {
@@ -60,7 +63,7 @@ public class MainPanel{
 		
 		DecimalFormat comma = new DecimalFormat("###,###");
 		int cnt = 1;
-		for(int i = 0 ; i < ProductList.size(); i++) {
+		for(int i = ProductList.size()-1 ; i >= 0; i--) {
 			if( num == ProductList.get(i).getCategory() ) {
 				if( cnt % 2 == 0 ) {
 					imgWidth += 344;
@@ -68,23 +71,23 @@ public class MainPanel{
 					priceWidth_2 += 344;
 				}
 				
-				mainImage[i] = new JLabel(new ImageIcon(MainView.PATH + ProductList.get(i).getImgFilePath()));
-				mainImage[i].setName(String.valueOf(ProductList.get(i).getpNo()));
-				mainImage[i].setBounds(imgWidth, imgHeight, 325, 432);
-				mainPage.add(mainImage[i]);
+				mainImage = new JLabel(new ImageIcon(MainView.PATH + ProductList.get(i).getImgFilePath()));
+				mainImage.setName(String.valueOf(ProductList.get(i).getpNo()));
+				mainImage.setBounds(imgWidth, imgHeight, 325, 432);
+				mainPage.add(mainImage);
 				
-				mainImage[i].addMouseListener(new MainMouseEvent(mainImage[i],"»ó¼¼ÆäÀÌÁö"));
+				mainImage.addMouseListener(new MainMouseEvent(mainImage,"»ó¼¼ÆäÀÌÁö"));
 				
-				productName[i] = new JLabel(ProductList.get(i).getProductName());
-				productName[i].setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
-				productName[i].setBounds(priceWidth_1, priceHeight_1, 260, 18);
-				mainPage.add(productName[i]);
+				productName = new JLabel(ProductList.get(i).getProductName());
+				productName.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
+				productName.setBounds(priceWidth_1, priceHeight_1, 300, 18);
+				mainPage.add(productName);
 				
-				price[i] = new JLabel(comma.format(ProductList.get(i).getPrice())+"¿ø" );
-				price[i].setForeground(new Color(255, 153, 0));
-				price[i].setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
-				price[i].setBounds(priceWidth_2, priceHeight_2, 87, 18);
-				mainPage.add(price[i]);
+				price = new JLabel(comma.format(ProductList.get(i).getPrice())+"¿ø" );
+				price.setForeground(new Color(255, 153, 0));
+				price.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
+				price.setBounds(priceWidth_2, priceHeight_2, 87, 18);
+				mainPage.add(price);
 				
 				if( cnt % 2 == 0 ) {
 					imgHeight += 500;
@@ -97,6 +100,7 @@ public class MainPanel{
 				cnt++;
 			} // end if
 		} // end for
+		mainPage.setSize(450, priceHeight_2-400);
 	} // end method
 } // end class
 
