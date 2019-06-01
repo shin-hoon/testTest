@@ -100,7 +100,7 @@ public class MainPanel{
 				cnt++;
 			} // end if
 		} // end for
-		mainPage.setSize(450, priceHeight_2-400);
+		mainPage.setSize(450, ((cnt-1)%2 != 0 ? priceHeight_2+100 : priceHeight_2-400));
 	} // end method
 } // end class
 
