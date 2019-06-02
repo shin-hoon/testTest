@@ -80,7 +80,7 @@ public class MainPanel{
 				mainImage.setBounds(imgWidth, imgHeight, 325, 432);
 				mainPage.add(mainImage);
 				
-				mainImage.addMouseListener(new MainMouseEvent(mainImage,"상세페이지"));
+				mainImage.addMouseListener(new MainMouseEvent(ProductList.get(i),"상세페이지"));
 				
 				productName = new JLabel(ProductList.get(i).getProductName());
 				productName.setFont(new Font("휴먼엑스포", Font.PLAIN, 15));

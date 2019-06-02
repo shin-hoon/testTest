@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.boram.manager.view.ManageViewFinal;
+import com.boram.manager.vo.Product;
 import com.boram.member.controller.MemberController;
 import com.boram.member.view.MemberView1;
 import com.boram.myPage.view.WB_MyPage_Main;
@@ -19,13 +20,14 @@ public class MainMouseEvent extends MouseAdapter{
 	private MemberController mc = new MemberController();
 	private String what;
 	private JLabel mainImage;
+	private Product product;
 
 	public MainMouseEvent(String what) {
 		this.what = what;
 	}
 	
-	public MainMouseEvent(JLabel mainImage, String what) {
-		this.mainImage = mainImage;
+	public MainMouseEvent(Product product, String what) {
+		this.product = product;
 		this.what = what;
 	}
 	
@@ -75,7 +77,7 @@ public class MainMouseEvent extends MouseAdapter{
 			/* } */
 		}
 		else if(what.equals("상세페이지")) {
-			MainView.setMainPage(new ContentPanel(mainImage.getName()).getContent());
+			MainView.setMainPage(new ContentPanel(product).getContent());
 //			System.out.println(mainImage.getName());
 		}
 		else if(what.equals("11")) {
