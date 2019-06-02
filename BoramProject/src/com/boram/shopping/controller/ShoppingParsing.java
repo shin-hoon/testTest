@@ -149,23 +149,18 @@ public class ShoppingParsing {
 					}
 					
 					Product vo = new Product();
-					try {
-						vo.setpNo(pNo++);        
-						vo.setCategory(category[m]); 
-						vo.setProductName(titleTmp.text());
-						String replace = priceTmp.text().replaceAll(",", "");
-						vo.setPrice(Integer.parseInt(replace.substring(0, replace.lastIndexOf("원"))));
-						vo.setSize("free");
-						vo.setExplain(sb.toString());
-						
-					}catch(Exception ex) {
-						System.out.println("여기서 에러 : " + ex.getMessage());
-					}
 					
-					
+					vo.setpNo(pNo++);        
+					vo.setCategory(category[m]); 
+					vo.setProductName(titleTmp.text());
+					String replace = priceTmp.text().replaceAll(",", "");
+					vo.setPrice(Integer.parseInt(replace.substring(0, replace.lastIndexOf("원"))));
+					vo.setSize("free");
+					vo.setExplain(sb.toString());
+
 					File fileDir = new File(MainView.PATH + "image\\category\\"+categoryEng[m]+"\\");
 					if(!fileDir.exists()) fileDir.mkdirs();
-					
+
 					String fileName = imgTmp.attr("src").substring(imgTmp.attr("src").lastIndexOf("/")+1, imgTmp.attr("src").length());
 					File imgFile = new File(fileDir,fileName);
 					URL url = null;

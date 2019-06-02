@@ -5,13 +5,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import com.boram.manager.view.ManageViewFinal;
 import com.boram.member.controller.MemberController;
 import com.boram.member.view.MemberView1;
 import com.boram.myPage.view.WB_MyPage_Main;
+import com.boram.shopping.view.ContentPanel;
+import com.boram.shopping.view.FixedMainMenu;
 import com.boram.shopping.view.MainPanel;
 import com.boram.shopping.view.MainView;
 
@@ -47,9 +47,11 @@ public class MainMouseEvent extends MouseAdapter{
 				// 로그인 되어있을 때 다시 로그인 버튼 누르면 로그아웃되고!
 				mc.logOut();
 				System.out.println("logout");
-				MainView.setMainPage(new MainPanel(1).getMainPanel());
 				//로그아웃 팝업창
 				JOptionPane.showMessageDialog(null, "정상적으로 로그아웃 되었습니다.");
+				MainView.setMainPage(new MainPanel(1).getMainPanel());
+				// 로그인 아이콘 바꾸기
+				MainView.setMainMenu(new FixedMainMenu().getMainMenu());
 			}else {
 				MainView.setMainPage(new MemberView1().getLoginView());
 			}
@@ -73,7 +75,8 @@ public class MainMouseEvent extends MouseAdapter{
 			/* } */
 		}
 		else if(what.equals("상세페이지")) {
-			System.out.println(mainImage.getName());
+			MainView.setMainPage(new ContentPanel(mainImage.getName()).getContent());
+//			System.out.println(mainImage.getName());
 		}
 		else if(what.equals("11")) {
 			MainView.setMainPage(new MainPanel(11).getMainPanel());

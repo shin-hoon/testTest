@@ -40,7 +40,7 @@ public class MainPanel{
 			new MainThreadEvent(-376,0,"¼­ºê¸Þ´º´Ý±â").start();
 		mainPage = new JPanel();
 		mainPage.setBackground(new Color(255, 255, 255));
-		mainPage.setBounds(0, 259, 450, 490);
+		mainPage.setBounds(0, 259, 718, 890);
 		mainPage.setLayout(null);
 		mainPage.setVisible(true);
 
@@ -50,16 +50,20 @@ public class MainPanel{
 		price = new JLabel();
 		
 		List<Category> categoryChk = new CategoryDao().fileRead();
+		
 		for(int i = 0; i < categoryChk.size(); i++) {
 			if(num == categoryChk.get(i).getNum()) {
-				JLabel category = new JLabel(categoryChk.get(i).getKind());
-				category.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 40));
+				int pageWidth = mainPage.getWidth()/2;
+				String kind = categoryChk.get(i).getKind();
+				int labelWidth = kind.length() < 4 ? pageWidth-50 : pageWidth-80;
+				JLabel category = new JLabel(kind);
 				category.setLayout(null);
-				category.setBounds(285, 20, 280, 58);
+				category.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 30));
+				category.setBounds(labelWidth, 20, 258, 58);
 				mainPage.add(category);
 				break;
 			}
-		}
+		}	
 		
 		DecimalFormat comma = new DecimalFormat("###,###");
 		int cnt = 1;
@@ -86,7 +90,7 @@ public class MainPanel{
 				price = new JLabel(comma.format(ProductList.get(i).getPrice())+"¿ø" );
 				price.setForeground(new Color(255, 153, 0));
 				price.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
-				price.setBounds(priceWidth_2, priceHeight_2, 87, 18);
+				price.setBounds(priceWidth_2, priceHeight_2, 127, 18);
 				mainPage.add(price);
 				
 				if( cnt % 2 == 0 ) {
@@ -100,7 +104,7 @@ public class MainPanel{
 				cnt++;
 			} // end if
 		} // end for
-		mainPage.setSize(450, ((cnt-1)%2 != 0 ? priceHeight_2+100 : priceHeight_2-400));
+		mainPage.setSize(718, ((cnt-1)%2 != 0 ? priceHeight_2+100 : priceHeight_2-400));
 	} // end method
 } // end class
 
