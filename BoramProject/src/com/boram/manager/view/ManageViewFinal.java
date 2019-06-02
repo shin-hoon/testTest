@@ -1,13 +1,12 @@
 package com.boram.manager.view;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -18,8 +17,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.BorderFactory;
 import javax.swing.DebugGraphics;
 import javax.swing.DropMode;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -33,12 +34,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -72,53 +75,42 @@ public class ManageViewFinal {
 		JPanel manageMain = new JPanel();
 		manageMain.setBounds(100, 100, 745, 691);
 		manageMain.setLayout(null);
-
+		manageMain.setBackground(Color.WHITE);
+		
+		
 		JLabel label_1 = new JLabel("\uAD00\uB9AC\uC790 \uD398\uC774\uC9C0");
 		label_1.setFont(new Font("굴림체", Font.BOLD | Font.ITALIC, 20));
 		label_1.setBounds(249, 34, 153, 67);
 		manageMain.add(label_1);
 
-		JPanel searchMember = new JPanel();
+		JButton searchMember = new JButton("1. \uD68C\uC6D0\uC815\uBCF4 \uC870\uD68C");
 		searchMember.setBounds(155, 100, 343, 67);
 		manageMain.add(searchMember);
 
-		JLabel LsearchMember = new JLabel("1. \uD68C\uC6D0\uC815\uBCF4 \uC870\uD68C");
-		searchMember.add(LsearchMember);
 
-		JPanel insertProduct = new JPanel();
+		JButton insertProduct = new JButton("2. \uBB3C\uD488\uB4F1\uB85D");
 		insertProduct.setBounds(155, 179, 343, 67);
 		manageMain.add(insertProduct);
 
-		JLabel LinsertProduct = new JLabel("2. \uBB3C\uD488\uB4F1\uB85D");
-		insertProduct.add(LinsertProduct);
 
-		JPanel manageProduct = new JPanel();
+		JButton manageProduct = new JButton("3.\uC81C\uD488\uAD00\uB9AC");
 		manageProduct.setBounds(155, 261, 343, 67);
 		manageMain.add(manageProduct);
 
-		JLabel LmanageProduct = new JLabel("3.\uC81C\uD488\uAD00\uB9AC");
-		manageProduct.add(LmanageProduct);
-
-		JPanel analysis = new JPanel();
+		JButton analysis = new JButton("4. \uD310\uB9E4 \uBD84\uC11D");
 		analysis.setBounds(155, 343, 343, 67);
 		manageMain.add(analysis);
 
-		JLabel Lanalysis = new JLabel("4. \uD310\uB9E4 \uBD84\uC11D");
-		analysis.add(Lanalysis);
 
-		JPanel salesState = new JPanel();
+		JButton salesState = new JButton("5. \uD310\uB9E4\uD604\uD669");
 		salesState.setBounds(155, 425, 343, 67);
 		manageMain.add(salesState);
 
-		JLabel LsalesState = new JLabel("5. \uD310\uB9E4\uD604\uD669");
-		salesState.add(LsalesState);
 
-		JPanel inforDelivery = new JPanel();
+		JButton inforDelivery = new JButton("6. \uBC30\uC1A1\uC815\uBCF4");
 		inforDelivery.setBounds(155, 507, 343, 67);
 		manageMain.add(inforDelivery);
 
-		JLabel label = new JLabel("6. \uBC30\uC1A1\uC815\uBCF4");
-		inforDelivery.add(label);
 
 		manageMain.setVisible(true);
 
@@ -167,13 +159,14 @@ public class ManageViewFinal {
 		return manageMain;
 	}
 
-	// 상품관리페이지-------------------------------------------------------------
 	public JPanel manageProduct() {
 
 		JPanel manageProduct = new JPanel();
 		manageProduct.setBounds(62, 15, 772, 585);
 		manageProduct.setLayout(null);
-
+		manageProduct.setBackground(Color.WHITE);
+		
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(92, 76, 562, 438);
 		manageProduct.add(scrollPane);
@@ -244,8 +237,9 @@ public class ManageViewFinal {
 		manageProduct.add(lastPage);
 
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uC815\uBCF4");
-		lblNewLabel.setBounds(297, 15, 91, 27);
+		lblNewLabel.setBounds(312, 25, 91, 27);
 		manageProduct.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("굴림체", Font.BOLD | Font.ITALIC, 20));
 
 		JButton update = new JButton("\uC218\uC815");
 		update.setBounds(308, 529, 125, 29);
@@ -254,7 +248,8 @@ public class ManageViewFinal {
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setBounds(529, 529, 125, 29);
 		manageProduct.add(delete);
-
+		table.setAutoCreateRowSorter(true);
+		
 		manageProduct.setVisible(true);
 
 		lastPage.addMouseListener(new MouseAdapter() {
@@ -333,13 +328,13 @@ public class ManageViewFinal {
 		return manageProduct;
 	}
 
-	
 	public JPanel analyzeSale() {
 
 		JPanel analyzeSale = new JPanel();
 		analyzeSale.setBounds(17, 15, 747, 675);
 		analyzeSale.setLayout(null);
-
+		analyzeSale.setBackground(Color.WHITE);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(138, 143, 452, 438);
 		analyzeSale.add(scrollPane);
@@ -348,9 +343,11 @@ public class ManageViewFinal {
 		scrollPane.setViewportView(table);
 
 		JLabel lblNewLabel = new JLabel("\uD310\uB9E4\uBD84\uC11D");
-		lblNewLabel.setBounds(207, 15, 222, 36);
+		lblNewLabel.setBounds(138, 30, 222, 36);
+		lblNewLabel.setFont(new Font("굴림체", Font.BOLD | Font.ITALIC, 20));
 		analyzeSale.add(lblNewLabel);
 
+		
 		String[] kind = { "조회수 분석", " 판매율분석" };
 		JComboBox<String> comboBox = new JComboBox<String>(kind);
 		comboBox.setBounds(138, 101, 198, 27);
@@ -526,10 +523,11 @@ public class ManageViewFinal {
 		for (int j = 0; j < table.getRowCount(); j++) {
 			table.isCellEditable(j, 0);
 		}
-		table.getTableHeader().setReorderingAllowed(false);
-		table.getTableHeader().setResizingAllowed(false);
+		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setRowSelectionAllowed(true);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
 		
 		JButton lastPage = new JButton("\uC774\uC804 \uD398\uC774\uC9C0");
 		lastPage.setBounds(138, 612, 125, 29);
@@ -618,7 +616,6 @@ public class ManageViewFinal {
 
 	}
 
-	// 한글바꾸는거 남음
 	public JPanel saleState() {
 
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -626,24 +623,40 @@ public class ManageViewFinal {
 		result = mc.salesState(date, 2);
 		for (int i = 0; i < result.size(); i++) {
 			// i+1한 곳에 result.get(i)로 바꿔줘야함
-			dataset.addValue(result.get(i), (date / 100 - i) + "", "Value");
+			dataset.addValue(result.get(i), (date / 100 - i) + "", "판매액");
 		}
-		chart = ChartFactory.createBarChart("판매현황", "Category", "Value", dataset, PlotOrientation.VERTICAL, true, true,
+		chart = ChartFactory.createBarChart("판매현황", "월", "판매액", dataset, PlotOrientation.VERTICAL, true, true,
 				true);
-
+		chart.getTitle().setFont(new Font("굴림", Font.BOLD, 18));
+		
+		CategoryPlot plot = chart.getCategoryPlot();
+		plot.setBackgroundPaint(Color.WHITE);
+		plot.setRangeGridlinePaint(Color.white);
+		plot.getDomainAxis().setLabelFont(new Font("굴림",Font.BOLD,13));
+		plot.getDomainAxis().setTickLabelFont(new Font("굴림",Font.BOLD,13));
+		plot.getRangeAxis().setLabelFont(new Font("굴림",Font.BOLD,13));
+		plot.getRangeAxis().setTickLabelFont(new Font("굴림",Font.BOLD,13));
+		
+		chart.setBackgroundPaint(Color.WHITE);
+		
 		JPanel saleState = new JPanel();
 		saleState.setBounds(32, 50, 779, 649);
 		saleState.setLayout(null);
-
+		saleState.setBackground(Color.WHITE);
+		
 		JLabel label = new JLabel("\uD310\uB9E4\uD604\uD669");
-		label.setBounds(324, 29, 78, 21);
+		label.setBounds(324, 29, 100, 21);
+		label.setFont(new Font("굴림체", Font.BOLD | Font.ITALIC, 20));
 		saleState.add(label);
 
 		JPanel graph = new JPanel();
 		graph.setBounds(0, 106, 779, 461);
+		graph.setBackground(Color.white);
 		saleState.add(graph);
+		
 
 		ChartPanel cp = new ChartPanel(chart);
+		cp.setBackground(Color.WHITE);
 		graph.add(cp);
 		JLabel label_1 = new JLabel("\uBD84\uC11D\uAE30\uAC04(\uC6D4)");
 		label_1.setBounds(57, 79, 114, 21);
@@ -705,9 +718,11 @@ public class ManageViewFinal {
 		JPanel insertProduct = new JPanel();
 		insertProduct.setBounds(101, 41, 465, 558);
 		insertProduct.setLayout(null);
+		insertProduct.setBackground(Color.WHITE);
 
 		JLabel label = new JLabel("\uC0C1\uD488 \uB4F1\uB85D");
-		label.setBounds(193, 5, 78, 21);
+		label.setBounds(193, 20, 100, 21);
+		label.setFont(new Font("굴림체", Font.BOLD | Font.ITALIC, 20));
 		insertProduct.add(label);
 
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uBA85");
@@ -747,11 +762,39 @@ public class ManageViewFinal {
 		JTextArea explain = new JTextArea();
 		explain.setAlignmentY(Component.TOP_ALIGNMENT);
 		explain.setAlignmentX(Component.LEFT_ALIGNMENT);
-		explain.setBounds(33, 334, 350, 144);
+		explain.setBounds(33, 334, 350, 200);
+		explain.setLineWrap(true);
+		
+		
+		Border lineBorder = BorderFactory.createLineBorder(Color.black, 1);
+		Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+		explain.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
+		
 		insertProduct.add(explain);
+		/*// TextArea 설정 및 추가
+	    // TextArea에 content가 가리키는 문자열을 표시하고 50행, 50열로 설정합니다.      
+	    JTextArea ta = new JTextArea(content, 50, 50);
+	    //행 넘기기 기능 켜기
+	    ta.setLineWrap(true);
+	    //행 넘길 때 행의 마지막 단어가 두행에 걸쳐 나뉘지 않도록 하기
+	    ta.setWrapStyleWord(true);
+	    // TextArea의 테두리선의 색을 검정 두깨를 3px로 설정합니다.
+	    Border lineBorder = BorderFactory.createLineBorder(Color.black, 3);
+	    // 텍스트와 TextArea 경계 사이에 여백을 두기 위해서 emptyBorder를 생성합니다. 
+	    Border emptyBorder = BorderFactory.createEmptyBorder(7, 7, 7, 7);
+	    //TextArea에 lineBorder(검정테두리), emptyBorder(여백)로 구성된 복합 경계선을 설정합니다.
+	    ta.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
+	    // TextArea에 스크롤 기능을 추가한 후 Panel안에 집어 넣습니다.
+	    upperPanel.add(new JScrollPane(ta));*/
+		
+		
+		
+		
+		
+		
 		// JComboBox<String> combox = new JComboBox<String>(array .toArray(new
 		// String[array .size()]));
-
+		
 		// JComboBox size = new JComboBox<String>();
 		String[] sArr = { "free" };
 		JComboBox<String> size = new JComboBox<String>(sArr);
@@ -770,11 +813,11 @@ public class ManageViewFinal {
 		insertProduct.add(price);
 
 		JButton button = new JButton("\uB4F1\uB85D");
-		button.setBounds(256, 514, 150, 29);
+		button.setBounds(256, 570, 150, 29);
 		insertProduct.add(button);
 
 		JButton lastPage = new JButton("\uC774\uC804\uD398\uC774\uC9C0\uB85C");
-		lastPage.setBounds(47, 514, 150, 29);
+		lastPage.setBounds(47, 570, 150, 29);
 		insertProduct.add(lastPage);
 
 		JLabel fileChoose = new JLabel("\uD30C\uC77C\uC120\uD0DD");
@@ -789,6 +832,9 @@ public class ManageViewFinal {
 		// fileSave.setIcon(new
 		// ImageIcon("C:\\Users\\jeniu\\Desktop\\mini_project\\fileIcon.png"));
 		fileSave.setBounds(140, 237, 30, 30);
+		Icon i=new ImageIcon("fileIcon.png"); 
+		fileSave.setIcon(i);
+		fileSave.setBorderPainted(false);
 		insertProduct.add(fileSave);
 
 		JFileChooser jfc = new JFileChooser();
@@ -876,9 +922,11 @@ public class ManageViewFinal {
 		JPanel updateProduct = new JPanel();
 		updateProduct.setBounds(64, 75, 506, 564);
 		updateProduct.setLayout(null);
-
+		updateProduct.setBackground(Color.white);
+		
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uC218\uC815");
-		lblNewLabel.setBounds(177, 28, 78, 21);
+		lblNewLabel.setBounds(177, 28, 100, 21);
+		lblNewLabel.setFont(new Font("굴림체", Font.BOLD | Font.ITALIC, 20));
 		updateProduct.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("\uC0C1\uD488\uBA85");
@@ -942,16 +990,26 @@ public class ManageViewFinal {
 		JTextArea explain = new JTextArea(p.getExplain());
 		explain.setAlignmentY(Component.TOP_ALIGNMENT);
 		explain.setAlignmentX(Component.LEFT_ALIGNMENT);
-		explain.setBounds(45, 351, 383, 149);
+		explain.setBounds(45, 351, 383, 200);
+		explain.setLineWrap(true);
+		
+		
+		Border lineBorder = BorderFactory.createLineBorder(Color.black, 1);
+		Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+		explain.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 		updateProduct.add(explain);
 		explain.setColumns(10);
 
+		
 		JLabel label_5 = new JLabel("\uC0AC\uC9C4 \uCD94\uAC00");
 		label_5.setBounds(35, 265, 78, 21);
 		updateProduct.add(label_5);
 
 		JButton file = new JButton("");
 		file.setBounds(130, 256, 30, 30);
+		Icon i=new ImageIcon("fileIcon.png"); 
+		file.setIcon(i);
+		file.setBorderPainted(false);
 		updateProduct.add(file);
 
 		JLabel fileName = new JLabel("fileName");
@@ -960,11 +1018,11 @@ public class ManageViewFinal {
 		fileName.setText(p.getImgFilePath());
 
 		JButton update = new JButton("\uC218\uC815");
-		update.setBounds(303, 515, 125, 29);
+		update.setBounds(303, 570, 125, 29);
 		updateProduct.add(update);
 
 		JButton lastPage = new JButton("\uC774\uC804\uC73C\uB85C");
-		lastPage.setBounds(55, 515, 125, 29);
+		lastPage.setBounds(55, 570, 125, 29);
 		updateProduct.add(lastPage);
 
 		updateProduct.setVisible(true);
@@ -1055,12 +1113,18 @@ public class ManageViewFinal {
 		JPanel searchMember = new JPanel();
 		searchMember.setBounds(51, 38, 664, 551);
 		searchMember.setLayout(null);
+		searchMember.setBackground(Color.white);
 
 		String[] list = { "회원번호", "아이디", "이름", "휴대폰번호", "이메일" };
 
 		DefaultTableModel model = new DefaultTableModel(list, 0);
 
-		JTable table_1 = new JTable(model);
+		JTable table_1 = new JTable(model) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
 		table_1.setFillsViewportHeight(true);
 		table_1.setDropMode(DropMode.ON_OR_INSERT_ROWS);
@@ -1071,6 +1135,10 @@ public class ManageViewFinal {
 		table_1.setIgnoreRepaint(true);
 		table_1.setVerifyInputWhenFocusTarget(false);
 		table_1.setUpdateSelectionOnSort(false);
+		table_1.setRowSelectionAllowed(true);
+		table_1.getTableHeader().setReorderingAllowed(false);
+		table_1.getTableHeader().setResizingAllowed(false);
+		
 		for (int i = 0; i < mArr.size(); i++) {
 			int no = mArr.get(i).getmNo();
 			String id = mArr.get(i).getId();
@@ -1097,6 +1165,7 @@ public class ManageViewFinal {
 		
 		JLabel label = new JLabel("\uD68C\uC6D0\uC815\uBCF4");
 		label.setBounds(107, 15, 96, 34);
+		label.setFont(new Font("굴림체", Font.BOLD | Font.ITALIC, 20));
 		searchMember.add(label);
 
 		JButton delete = new JButton("\uD0C8\uD1F4");
