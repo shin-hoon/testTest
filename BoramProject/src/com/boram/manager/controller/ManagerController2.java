@@ -23,8 +23,6 @@ public class ManagerController2 {
 	private List<Product> pArr = pd.fileRead();
 	private ArrayList<Member> mArr = md.fileRead();
 
-	
-
 	public ArrayList<Member> searchMember() {
 		return mArr;
 	}
@@ -89,6 +87,7 @@ public class ManagerController2 {
 	public void deleteProduct(int result) {
 		pArr.remove(result);
 	}
+
 	public void deleteMember(int result) {
 		mArr.remove(result);
 	}
@@ -99,55 +98,25 @@ public class ManagerController2 {
 
 	public HashMap<Integer, Double> analysis() {
 		HashMap<Integer, Double> anl = new HashMap<Integer, Double>();
-		try {
-			int sales;
 
-			for (int i = 0; i < pArr.size(); i++) {
-				sales = 0;
-				ArrayList<Integer> pNo = oArr.get(i).getpNo();
-				for (int j = 0; j < oArr.size(); j++) {
-					for (int j2 = 0; j2 < pNo.size(); j2++) {
-						if (pArr.get(i).getpNo() == oArr.get(j).getpNo().get(j2)) {
-							sales += oArr.get(j).getAmount().get(j2);
-						}
-					}
+		ArrayList<Integer> pNo = new ArrayList<>();
 
-				}
-				double result = sales / (double)pArr.get(i).getCount();
-				anl.put(pArr.get(i).getpNo(), result);
-			}
-			ArrayList<Integer> keyValue = new ArrayList<Integer>();
-			ArrayList<Double> result = new ArrayList<Double>();
-			Set<Integer> key = anl.keySet();
-			Iterator<Integer> itKey = key.iterator();
-			while (itKey.hasNext()) {
-				int value = itKey.next();
-				keyValue.add(value);
-				result.add(anl.get(value));
-			}
-			int temp1 = 0;
-			double temp2 = 0.0;
-
-			for (int i = 0; i < result.size(); i++) {
-				for (int j = 0; j < i; j++) {
-					if (result.get(i) > result.get(j)) {
-						temp2 = result.get(i);
-						result.set(i, result.get(j));
-						result.set(j, temp2);
-						temp1 = keyValue.get(i);
-						keyValue.set(i, keyValue.get(j));
-						keyValue.set(j, temp1);
-
+		int count[] = new int[pArr.size()];
+		for (int i = 0; i < oArr.size(); i++) {
+			pNo = oArr.get(i).getpNo();
+			for (int j = 0; j < pArr.size(); j++) {
+				for (int k = 0; k < pNo.size(); k++) {
+					if (pNo.get(k) == pArr.get(j).getpNo()) {
+						count[j] += oArr.get(i).getAmount().get(k);
 					}
 				}
+				try {
+					anl.put(pArr.get(j).getpNo(), (double) (count[j] / pArr.get(j).getCount()));
+				} catch (ArithmeticException e) {
+					anl.put(pArr.get(j).getpNo(), 0.0);
+				}
 			}
-			for (int i = 0; i < result.size(); i++) {
-				anl.put(keyValue.get(i), result.get(i));
-			}
-		} catch (IndexOutOfBoundsException e) {
-			anl.put(0, 0.0);
 		}
-
 		return anl;
 
 	}
@@ -156,22 +125,22 @@ public class ManagerController2 {
 
 		ArrayList<Integer> sumArr = new ArrayList<Integer>();
 		int count;
-		
-		int a = (month/100)%100;
-		//month의 형태 'yyyyMMdd'
+
+		int a = (month / 100) % 100;
+		// month의 형태 'yyyyMMdd'
 		// 월을 나타냄
-		
+
 		for (int i = 0; i < term; i++) {
 			count = 0;
-			if(a==0) {
+			if (a == 0) {
 				for (int j = 0; j < oArr.size(); j++) {
-					if ((month / 100 - i-100) == (oArr.get(j).getOrderDate() / 100)) {
+					if ((month / 100 - i - 100) == (oArr.get(j).getOrderDate() / 100)) {
 						count += oArr.get(j).getPayment();
 					}
 				}
-				
+
 				sumArr.add(count);
-			}else {
+			} else {
 				for (int j = 0; j < oArr.size(); j++) {
 					if ((month / 100 - i) == (oArr.get(j).getOrderDate() / 100)) {
 						count += oArr.get(j).getPayment();
@@ -180,7 +149,6 @@ public class ManagerController2 {
 				a--;
 				sumArr.add(count);
 			}
-			
 
 		}
 
