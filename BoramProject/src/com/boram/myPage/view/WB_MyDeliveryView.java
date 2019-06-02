@@ -59,7 +59,8 @@ public class WB_MyDeliveryView {
 		String colName[] = { "index"/* , "pic" */, "OrderNo", "State", "Payment", "address" };
 		DefaultTableModel dtm = new DefaultTableModel(colName, 0);
 		table = new JTable(dtm);
-
+		table.setBackground(Color.WHITE);
+		
 		JScrollPane sp = new JScrollPane(table);
 		sp.setBounds(14, 0, 676, 625);
 		panel2.add(sp, "Center");
