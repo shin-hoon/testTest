@@ -25,7 +25,7 @@ public class ProductDao {
 
 			File imgFile = new File(fileDir,"productList.txt");
 
-			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(imgFile,true)));
+			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(imgFile)));
 			
 			for (int i = 0; i < list.size(); i++) {
 				oos.writeObject(list.get(i));

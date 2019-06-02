@@ -31,6 +31,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -66,7 +67,7 @@ public class ManageViewFinal {
 	private MemberDao mDao = new MemberDao();
 	private ArrayList<Member> mArr = mDao.fileRead();
 	private JFreeChart chart;
-	
+
 	public JPanel manageMain() {
 		JPanel manageMain = new JPanel();
 		manageMain.setBounds(100, 100, 745, 691);
@@ -223,7 +224,19 @@ public class ManageViewFinal {
 		JTable table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(o, new String[] { "\uC0C1\uD488\uBC88\uD638", "\uCE74\uD14C\uACE0\uB9AC",
-				"\uC81C\uD488\uBA85", "\uC0AC\uC774\uC988", "\uAC00\uACA9", "\uC7AC\uACE0" }));
+				"\uC81C\uD488\uBA85", "\uC0AC\uC774\uC988", "\uAC00\uACA9", "\uC7AC\uACE0" }) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		});
+		for (int j = 0; j < table.getRowCount(); j++) {
+			table.isCellEditable(j, 0);
+		}
+		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		table.setRowSelectionAllowed(true);
 		JButton lastPage = new JButton("\uC774\uC804\uD398\uC774\uC9C0");
@@ -255,32 +268,27 @@ public class ManageViewFinal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Object a;
-				for (int i = 0; i < table.getRowCount(); i++) {
-					for (int k = 0; k < table.getColumnCount(); k++) {
-						a = table.getValueAt(i, k);
 
-						if (k == 1) {
-
-							String[] words = (String.valueOf(a).split("\\s"));
-							int cat = Integer.parseInt(words[0]);
-							pArr.get(i).setCategory(cat);
-						} else if (k == 2) {
-							pArr.get(i).setProductName((String) a);
-						} else if (k == 3) {
-							pArr.get(i).setSize((String) a);
-						} else if (k == 4) {
-							int cat = Integer.parseInt(String.valueOf(a));
-							pArr.get(i).setPrice(cat);
-						} else if (k == 5) {
-							int cat = Integer.parseInt(String.valueOf(a));
-							pArr.get(i).setStock((int) cat);
-						}
+				int b = -1;
+				int x = table.getSelectedRow();
+				a = table.getValueAt(x, 0);
+				String value = String.valueOf(a);
+				for (int i = 0; i < pArr.size(); i++) {
+					if (pArr.get(i).getpNo() == Integer.parseInt(value)) {
+						b = i;
+						break;
 					}
 				}
-				pDao.fileSave(pArr);
 
-				MainView.setMainPage(manageProduct());
+				if (b == -1) {
+					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
+				} else {
+					Product p = new Product();
 
+					p = pArr.get(b);
+
+					MainView.setMainPage(updateProduct(p, b));
+				}
 			}
 		});
 
@@ -325,7 +333,7 @@ public class ManageViewFinal {
 		return manageProduct;
 	}
 
-	//테이블값이랑 컬럼 고정시키는거남음
+	
 	public JPanel analyzeSale() {
 
 		JPanel analyzeSale = new JPanel();
@@ -351,23 +359,38 @@ public class ManageViewFinal {
 		HashMap<Integer, Double> copy1 = mc.analysis();
 		Set<Integer> key = copy1.keySet();
 		Iterator<Integer> itKey = key.iterator();
-		ArrayList<Integer> pNo1 = new ArrayList<Integer>();
-		ArrayList<Double> sales1 = new ArrayList<Double>();
+		ArrayList<Integer> kpNo1 = new ArrayList<Integer>();
+		ArrayList<Double> ksales1 = new ArrayList<Double>();
 		while (itKey.hasNext()) {
 			int value = itKey.next();
 			double result = copy1.get(value);
-			pNo1.add(value);
-			sales1.add(result);
+
+			kpNo1.add(value);
+			ksales1.add(result);
+
 		}
+		ArrayList<Integer> pNo1 = new ArrayList<>();
+		ArrayList<Double> sales1 = new ArrayList<>();
+
+		for (int i = 0; i < pArr.size(); i++) {
+			pNo1.add(pArr.get(i).getpNo());
+			sales1.add(0.0);
+			for (int j = 0; j < kpNo1.size(); j++) {
+				if (pArr.get(i).getpNo() == kpNo1.get(j)) {
+					sales1.set(i, ksales1.get(j));
+					break;
+				}
+			}
+		}
+
 		int iTemp = 0;
 		double dTemp = 0.0;
 		for (int i = 0; i < sales1.size(); i++) {
 			for (int k = 0; k < pArr.size(); k++) {
-				if (pNo1.get(i) == pArr.get(i).getpNo()) {
+				if (pNo1.get(i) == pArr.get(k).getpNo()) {
 					for (int j = 0; j < i; j++) {
-
 						if (pArr.get(i).getCount() < pArr.get(j).getCount()) {
-							iTemp = pNo1.get(i);
+							iTemp = (int) kpNo1.get(i);
 							pNo1.set(i, pNo1.get(j));
 							pNo1.set(j, iTemp);
 
@@ -385,16 +408,32 @@ public class ManageViewFinal {
 		HashMap<Integer, Double> copy2 = mc.analysis();
 		Set<Integer> key2 = copy2.keySet();
 		Iterator<Integer> itKey2 = key2.iterator();
-		ArrayList<Integer> pNo2 = new ArrayList<Integer>();
-		ArrayList<Double> sales2 = new ArrayList<Double>();
+		ArrayList<Integer> kpNo2 = new ArrayList<Integer>();
+		ArrayList<Double> ksales2 = new ArrayList<Double>();
+
 		while (itKey2.hasNext()) {
 			int value = itKey2.next();
 			double result = copy2.get(value);
-			pNo2.add(value);
-			sales2.add(result);
+
+			kpNo2.add(value);
+			ksales2.add(result);
 		}
 		iTemp = 0;
 		dTemp = 0.0;
+
+		ArrayList<Integer> pNo2 = new ArrayList<Integer>();
+		ArrayList<Double> sales2 = new ArrayList<Double>();
+		for (int i = 0; i < pArr.size(); i++) {
+			pNo2.add(pArr.get(i).getpNo());
+			sales2.add(0.0);
+			for (int j = 0; j < kpNo2.size(); j++) {
+				if (pArr.get(i).getpNo() == kpNo2.get(j)) {
+					sales2.set(i, ksales2.get(j));
+					break;
+				}
+			}
+		}
+
 		for (int i = 0; i < sales1.size(); i++) {
 			for (int j = 0; j < i; j++) {
 				if (sales2.get(i) < sales2.get(j)) {
@@ -425,18 +464,24 @@ public class ManageViewFinal {
 				}
 			}
 		}
-//		table.setModel(new DefaultTableModel(o,
-//				new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }));
+		// table.setModel(new DefaultTableModel(o,
+		// new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218",
+		// "\uD310\uB9E4\uC728" }));
 
 		comboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
-				String index = (String.valueOf(cb.getSelectedItem())); 
+				String index = (String.valueOf(cb.getSelectedItem()));
 				if (index.equals(kind[0])) {
 					table.setModel(new DefaultTableModel(o,
-							new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }));
+							new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }) {
+						@Override
+						public boolean isCellEditable(int row, int column) {
+							return false;
+						}
+					});
 				} else {
 					Object[][] o2 = new Object[pNo2.size()][3];
 					for (int i = 0; i < o2.length; i++) {
@@ -453,19 +498,39 @@ public class ManageViewFinal {
 							} else {
 								o2[i][j] = sales2.get(i);
 							}
-							
+
 						}
 					}
 					table.setModel(new DefaultTableModel(o2,
-							new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }));
+							new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }) {
+						@Override
+						public boolean isCellEditable(int row, int column) {
+							return false;
+						}
+					});
 				}
+				
 
 			}
 		});
 
+		
 		table.setModel(new DefaultTableModel(o,
-				new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }));
-
+				new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		});
+		
+		for (int j = 0; j < table.getRowCount(); j++) {
+			table.isCellEditable(j, 0);
+		}
+		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setRowSelectionAllowed(true);
+		
 		JButton lastPage = new JButton("\uC774\uC804 \uD398\uC774\uC9C0");
 		lastPage.setBounds(138, 612, 125, 29);
 		analyzeSale.add(lastPage);
@@ -506,13 +571,10 @@ public class ManageViewFinal {
 					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
 				} else {
 					Product p = new Product();
-					for (int j = 0; j < pArr.size(); j++) {
-						if(pArr.get(j).getpNo() == b) {
-							p= pArr.get(j);
-							break;
-						}
-					}
-					MainView.setMainPage(updateProduct(p));
+
+					p = pArr.get(b);
+
+					MainView.setMainPage(updateProduct(p, b));
 
 				}
 			}
@@ -551,98 +613,90 @@ public class ManageViewFinal {
 				}
 			}
 		});
+
 		return analyzeSale;
 
 	}
 
 	// 한글바꾸는거 남음
 	public JPanel saleState() {
-		
-		
-		
+
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		result = mc.salesState(date, 2);
 		for (int i = 0; i < result.size(); i++) {
-			//i+1한 곳에 result.get(i)로 바꿔줘야함
-			dataset.addValue(result.get(i), (date/100-i)+"", "Value");
+			// i+1한 곳에 result.get(i)로 바꿔줘야함
+			dataset.addValue(result.get(i), (date / 100 - i) + "", "Value");
 		}
-		chart = ChartFactory.createBarChart("판매현황", "Category", "Value"
-				, dataset, PlotOrientation.VERTICAL, true,true,true);
-		
-		
-		
-		
-		
-		JPanel saleState= new JPanel();
+		chart = ChartFactory.createBarChart("판매현황", "Category", "Value", dataset, PlotOrientation.VERTICAL, true, true,
+				true);
+
+		JPanel saleState = new JPanel();
 		saleState.setBounds(32, 50, 779, 649);
 		saleState.setLayout(null);
-		
+
 		JLabel label = new JLabel("\uD310\uB9E4\uD604\uD669");
 		label.setBounds(324, 29, 78, 21);
 		saleState.add(label);
-		
+
 		JPanel graph = new JPanel();
 		graph.setBounds(0, 106, 779, 461);
 		saleState.add(graph);
-		
-		
+
 		ChartPanel cp = new ChartPanel(chart);
 		graph.add(cp);
 		JLabel label_1 = new JLabel("\uBD84\uC11D\uAE30\uAC04(\uC6D4)");
 		label_1.setBounds(57, 79, 114, 21);
 		saleState.add(label_1);
 		String[] term = { "2개월", "3 개월", "4 개월", "5 개월", "6개월" };
-		JComboBox<String> comboBox = new JComboBox<String>( term );
+		JComboBox<String> comboBox = new JComboBox<String>(term);
 		comboBox.setBounds(188, 76, 93, 27);
 		saleState.add(comboBox);
-		
+
 		comboBox.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cb = (JComboBox) e.getSource();
-				String index = (String.valueOf(cb.getSelectedItem())); 
-				int temp =0;
-				if(index.equals(term[0])) {
-					temp=2;
-				}else if (index.equals(term[1])) {
-					temp=3;
-				}else if(index.equals(term[2])){
-					temp=4;
-				}else if(index.equals(term[3])){
-					temp=5;
-				}else if (index.equals(term[4])) {
-					temp=6;
+				String index = (String.valueOf(cb.getSelectedItem()));
+				int temp = 0;
+				if (index.equals(term[0])) {
+					temp = 2;
+				} else if (index.equals(term[1])) {
+					temp = 3;
+				} else if (index.equals(term[2])) {
+					temp = 4;
+				} else if (index.equals(term[3])) {
+					temp = 5;
+				} else if (index.equals(term[4])) {
+					temp = 6;
 				}
-				
+
 				dataset.clear();
 				ArrayList<Integer> result = mc.salesState(date, temp);
 				for (int i = 0; i < result.size(); i++) {
-					//i+1한 곳에 result.get(i)로 바꿔줘야함
-					dataset.addValue(result.get(i), (date/100-i)+"", "Value");
+					// i+1한 곳에 result.get(i)로 바꿔줘야함
+					dataset.addValue(result.get(i), (date / 100 - i) + "", "Value");
 				}
-				chart = ChartFactory.createBarChart("판매현황", "Category", "Value"
-						, dataset, PlotOrientation.VERTICAL,true,true,true);
+				chart = ChartFactory.createBarChart("판매현황", "Category", "Value", dataset, PlotOrientation.VERTICAL,
+						true, true, true);
 			}
 		});
-		
-		
+
 		JButton lastPage = new JButton("\uC774\uC804\uC73C\uB85C");
 		lastPage.setBounds(305, 582, 125, 29);
 		saleState.add(lastPage);
-	
 
 		graph.setVisible(true);
 		saleState.setVisible(true);
-		
+
 		lastPage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				MainView.setMainPage(manageMain());
 			}
 		});
-		
+
 		return saleState;
 	}
 
@@ -651,339 +705,344 @@ public class ManageViewFinal {
 		JPanel insertProduct = new JPanel();
 		insertProduct.setBounds(101, 41, 465, 558);
 		insertProduct.setLayout(null);
-		
+
 		JLabel label = new JLabel("\uC0C1\uD488 \uB4F1\uB85D");
 		label.setBounds(193, 5, 78, 21);
 		insertProduct.add(label);
-		
+
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uBA85");
 		lblNewLabel.setBounds(33, 60, 78, 21);
 		insertProduct.add(lblNewLabel);
-		
+
 		JLabel label_1 = new JLabel("\uCE74\uD14C\uACE0\uB9AC");
 		label_1.setBounds(33, 97, 78, 21);
 		insertProduct.add(label_1);
-		
-		
-		
 
-		//JComboBox category = new JComboBox();
+		// JComboBox category = new JComboBox();
 		JComboBox<Category> category = new JComboBox<Category>(cArr.toArray(new Category[cArr.size()]));
 		category.setBounds(140, 94, 115, 27);
 		insertProduct.add(category);
-		
+
 		JTextField productName = new JTextField();
 		productName.setBounds(140, 57, 156, 27);
 		insertProduct.add(productName);
 		productName.setColumns(10);
-		
+
 		JLabel label_2 = new JLabel("\uC0AC\uC774\uC988");
 		label_2.setBounds(33, 133, 78, 21);
 		insertProduct.add(label_2);
-		
+
 		JLabel label_3 = new JLabel("\uC7AC\uACE0");
 		label_3.setBounds(33, 169, 78, 21);
 		insertProduct.add(label_3);
-		
+
 		JLabel label_4 = new JLabel("\uAC00\uACA9");
 		label_4.setBounds(33, 205, 78, 21);
 		insertProduct.add(label_4);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("\uC0C1\uC138\uC124\uBA85");
 		lblNewLabel_1.setBounds(33, 295, 78, 21);
 		insertProduct.add(lblNewLabel_1);
-		
+
 		JTextArea explain = new JTextArea();
 		explain.setAlignmentY(Component.TOP_ALIGNMENT);
 		explain.setAlignmentX(Component.LEFT_ALIGNMENT);
 		explain.setBounds(33, 334, 350, 144);
 		insertProduct.add(explain);
-		//JComboBox<String> combox = new JComboBox<String>(array .toArray(new String[array .size()]));
-		
-		//JComboBox size = new JComboBox<String>();
-		String[] sArr = {"free"};
+		// JComboBox<String> combox = new JComboBox<String>(array .toArray(new
+		// String[array .size()]));
+
+		// JComboBox size = new JComboBox<String>();
+		String[] sArr = { "free" };
 		JComboBox<String> size = new JComboBox<String>(sArr);
-		
+
 		size.setBounds(140, 130, 115, 27);
 		insertProduct.add(size);
-		
+
 		JTextField stock = new JTextField();
 		stock.setBounds(140, 166, 156, 27);
 		insertProduct.add(stock);
 		stock.setColumns(10);
-		
+
 		JTextField price = new JTextField();
 		price.setColumns(10);
 		price.setBounds(140, 202, 156, 27);
 		insertProduct.add(price);
-		
+
 		JButton button = new JButton("\uB4F1\uB85D");
 		button.setBounds(256, 514, 150, 29);
 		insertProduct.add(button);
-		
+
 		JButton lastPage = new JButton("\uC774\uC804\uD398\uC774\uC9C0\uB85C");
 		lastPage.setBounds(47, 514, 150, 29);
 		insertProduct.add(lastPage);
-		
+
 		JLabel fileChoose = new JLabel("\uD30C\uC77C\uC120\uD0DD");
 		fileChoose.setBounds(33, 241, 78, 21);
 		insertProduct.add(fileChoose);
-		
+
 		JLabel fileName = new JLabel("\uD30C\uC77C\uBA85");
 		fileName.setBounds(33, 272, 403, 21);
 		insertProduct.add(fileName);
-		
+
 		JButton fileSave = new JButton();
-		//fileSave.setIcon(new ImageIcon("C:\\Users\\jeniu\\Desktop\\mini_project\\fileIcon.png"));
+		// fileSave.setIcon(new
+		// ImageIcon("C:\\Users\\jeniu\\Desktop\\mini_project\\fileIcon.png"));
 		fileSave.setBounds(140, 237, 30, 30);
 		insertProduct.add(fileSave);
-		
-		
-		
+
 		JFileChooser jfc = new JFileChooser();
-		
-		
+
 		fileSave.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(jfc.showSaveDialog(insertProduct) == JFileChooser.APPROVE_OPTION){
-                    // showSaveDialog 저장 창을 열고 확인 버튼을 눌렀는지 확인
-                    fileName.setText( jfc.getSelectedFile().toString());
-            }
-				
-				
-				
+				if (jfc.showSaveDialog(insertProduct) == JFileChooser.APPROVE_OPTION) {
+					// showSaveDialog 저장 창을 열고 확인 버튼을 눌렀는지 확인
+					fileName.setText(jfc.getSelectedFile().toString());
+				}
+
 			}
 		});
 		jfc.setFileFilter(new FileNameExtensionFilter("png file", "png"));
 		jfc.setFileFilter(new FileNameExtensionFilter("JPEG file", "jpg", "jpeg"));
-		
-		jfc.setMultiSelectionEnabled(false); //다중선택불가
-		
+
+		jfc.setMultiSelectionEnabled(false); // 다중선택불가
+
 		lastPage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int result =JOptionPane.showConfirmDialog(null, "제품이 추가되지 않았습니다 \n 이 페이지에서  나가시겠습니까?","Confirm", JOptionPane.YES_NO_OPTION);
-				if(result == JOptionPane.CLOSED_OPTION) {
-					
-				}else if( result ==JOptionPane.YES_OPTION) {
-					MainView.setMainPage(manageMain());	
+				int result = JOptionPane.showConfirmDialog(null, "제품이 추가되지 않았습니다 \n 이 페이지에서  나가시겠습니까?", "Confirm",
+						JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.CLOSED_OPTION) {
+
+				} else if (result == JOptionPane.YES_OPTION) {
+					MainView.setMainPage(manageMain());
 				}
 			}
 		});
 		price.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 			}
 		});
-		
-		
+
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(productName.getText().equals("") || price.getText().equals("") || stock.getText().equals("") || fileName.getText().equals("") || explain.getText().equals("")) {
+				if (productName.getText().equals("") || price.getText().equals("") || stock.getText().equals("")
+						|| fileName.getText().equals("") || explain.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "값을 모두 입력해주세요", "warning", JOptionPane.WARNING_MESSAGE);
-				}else {
-				try {
-					int pNo1 = pArr.get(pArr.size()-1).getpNo() -1; 
-					String[] cat = (String.valueOf(category.getSelectedItem())).split("\\s");
-					int category1 = Integer.parseInt(cat[0]);
-					String productName1 = productName.getText();
-					int price1 =Integer.parseInt(price.getText());
-					String size1 = String.valueOf(size.getSelectedItem());
-					int stock1 = Integer.parseInt(stock.getText());
-					String filePath = fileName.getText();
-					String explain1 = explain.getText();
-					
-					
-					
-					int result =JOptionPane.showConfirmDialog(null, "입력하신 제품을 등록하시겠습니까?","Confirm", JOptionPane.YES_NO_OPTION);
-					if(result == JOptionPane.CLOSED_OPTION) {
-						
-					}else if( result ==JOptionPane.YES_OPTION) {
-						pArr.add(new Product(pNo1, category1, productName1, price1, size1, explain1, filePath, stock1, 0));
-						pDao.fileSave(pArr);
-						MainView.setMainPage(manageMain());	
+				} else {
+					try {
+						int pNo1 = pArr.get(pArr.size() - 1).getpNo() - 1;
+						String[] cat = (String.valueOf(category.getSelectedItem())).split("\\s");
+						int category1 = Integer.parseInt(cat[0]);
+						String productName1 = productName.getText();
+						int price1 = Integer.parseInt(price.getText());
+						String size1 = String.valueOf(size.getSelectedItem());
+						int stock1 = Integer.parseInt(stock.getText());
+						String filePath = fileName.getText();
+						String explain1 = explain.getText();
+
+						int result = JOptionPane.showConfirmDialog(null, "입력하신 제품을 등록하시겠습니까?", "Confirm",
+								JOptionPane.YES_NO_OPTION);
+						if (result == JOptionPane.CLOSED_OPTION) {
+
+						} else if (result == JOptionPane.YES_OPTION) {
+							pArr.add(new Product(pNo1, category1, productName1, price1, size1, explain1, filePath,
+									stock1, 0));
+							pDao.fileSave(pArr);
+							MainView.setMainPage(manageMain());
+						}
+
+					} catch (NumberFormatException e2) {
+						JOptionPane.showMessageDialog(null, "재고와 가격은 숫자만 넣어 주세요", "warning", JOptionPane.ERROR_MESSAGE);
 					}
-						
-				} catch (NumberFormatException e2) {
-					JOptionPane.showMessageDialog(null, "재고와 가격은 숫자만 넣어 주세요", "warning", JOptionPane.ERROR_MESSAGE);
-				}
-				
+
 				}
 			}
 		});
-		
-		
-		
+
 		insertProduct.setVisible(true);
-		
+
 		return insertProduct;
 	}
 
-	public JPanel updateProduct(Product p) {
+	public JPanel updateProduct(Product p, int index) {
 
 		JPanel updateProduct = new JPanel();
 		updateProduct.setBounds(64, 75, 506, 564);
 		updateProduct.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uC218\uC815");
 		lblNewLabel.setBounds(177, 28, 78, 21);
 		updateProduct.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("\uC0C1\uD488\uBA85");
 		lblNewLabel_1.setBounds(35, 83, 78, 21);
 		updateProduct.add(lblNewLabel_1);
-		
+
 		JLabel label = new JLabel("\uCE74\uD14C\uACE0\uB9AC");
 		label.setBounds(35, 119, 78, 21);
 		updateProduct.add(label);
-		
+
 		JLabel label_1 = new JLabel("\uC0AC\uC774\uC988");
 		label_1.setBounds(35, 155, 78, 21);
 		updateProduct.add(label_1);
-		
+
 		JLabel label_2 = new JLabel("\uC7AC\uACE0");
 		label_2.setBounds(35, 191, 78, 21);
 		updateProduct.add(label_2);
-		
+
 		JLabel label_3 = new JLabel("\uAC00\uACA9");
 		label_3.setBounds(35, 229, 78, 21);
 		updateProduct.add(label_3);
-		
+
 		JLabel label_4 = new JLabel("\uC0C1\uC138\uC124\uBA85");
 		label_4.setBounds(35, 315, 78, 21);
 		updateProduct.add(label_4);
-		
+
 		JTextField productName = new JTextField(p.getProductName());
 		productName.setBounds(130, 80, 156, 27);
 		updateProduct.add(productName);
 		productName.setColumns(10);
-		
+
 		JTextField stock = new JTextField(String.valueOf(p.getStock()));
 		stock.setColumns(10);
 		stock.setBounds(130, 188, 156, 27);
 		updateProduct.add(stock);
-		
+
 		JTextField price = new JTextField(String.valueOf(p.getPrice()));
 		price.setColumns(10);
 		price.setBounds(130, 226, 156, 27);
 		updateProduct.add(price);
-		
-		JComboBox<Category> size = new JComboBox<Category>(cArr.toArray(new Category[cArr.size()]));//이부분주석하면 빌더동작
+
+		JComboBox<Category> size = new JComboBox<Category>(cArr.toArray(new Category[cArr.size()]));// 이부분주석하면 빌더동작
 		size.setBounds(130, 116, 156, 27);
 		updateProduct.add(size);
-		String[] s = {"free"};
+		int[] totalCat = { 1, 11, 12, 13, 14, 21, 22, 23, 24, 25, 31, 32, 33, 41, 42, 43, 44, 45, 46, 51, 52, 53 };
+		int a = 0;
+		for (int i = 0; i < totalCat.length; i++) {
+			if (totalCat[i] == p.getCategory()) {
+				a = i;
+				break;
+			}
+		}
+
+		size.setSelectedIndex(a);
+
+		String[] s = { "free" };
 		JComboBox<String> comboBox_1 = new JComboBox<String>(s);
 		comboBox_1.setBounds(130, 152, 156, 27);
 		updateProduct.add(comboBox_1);
-		
-		JTextField explain = new JTextField(p.getExplain());
+
+		JTextArea explain = new JTextArea(p.getExplain());
 		explain.setAlignmentY(Component.TOP_ALIGNMENT);
 		explain.setAlignmentX(Component.LEFT_ALIGNMENT);
 		explain.setBounds(45, 351, 383, 149);
 		updateProduct.add(explain);
 		explain.setColumns(10);
-		
+
 		JLabel label_5 = new JLabel("\uC0AC\uC9C4 \uCD94\uAC00");
 		label_5.setBounds(35, 265, 78, 21);
 		updateProduct.add(label_5);
-		
+
 		JButton file = new JButton("");
 		file.setBounds(130, 256, 30, 30);
 		updateProduct.add(file);
-		
+
 		JLabel fileName = new JLabel("fileName");
 		fileName.setBounds(35, 290, 329, 21);
 		updateProduct.add(fileName);
-		
+		fileName.setText(p.getImgFilePath());
+
 		JButton update = new JButton("\uC218\uC815");
 		update.setBounds(303, 515, 125, 29);
 		updateProduct.add(update);
-		
+
 		JButton lastPage = new JButton("\uC774\uC804\uC73C\uB85C");
 		lastPage.setBounds(55, 515, 125, 29);
 		updateProduct.add(lastPage);
-		
+
 		updateProduct.setVisible(true);
-		
-JFileChooser jfc = new JFileChooser();
-		
-		
+
+		JFileChooser jfc = new JFileChooser();
+
 		file.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(jfc.showSaveDialog(updateProduct) == JFileChooser.APPROVE_OPTION){
-                    // showSaveDialog 저장 창을 열고 확인 버튼을 눌렀는지 확인
-                    fileName.setText( jfc.getSelectedFile().toString());
-            }
-				
-				
-				
+				if (jfc.showSaveDialog(updateProduct) == JFileChooser.APPROVE_OPTION) {
+					// showSaveDialog 저장 창을 열고 확인 버튼을 눌렀는지 확인
+					fileName.setText(jfc.getSelectedFile().toString());
+				}
+
 			}
 		});
 		jfc.setFileFilter(new FileNameExtensionFilter("png file", "png"));
 		jfc.setFileFilter(new FileNameExtensionFilter("JPEG file", "jpg", "jpeg"));
-		
-		jfc.setMultiSelectionEnabled(false); //다중선택불가
-		
+
+		jfc.setMultiSelectionEnabled(false); // 다중선택불가
+
 		lastPage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int result =JOptionPane.showConfirmDialog(null, "제품이 수정되지 않았습니다 \n 이 페이지에서  나가시겠습니까?","Confirm", JOptionPane.YES_NO_OPTION);
-				if(result == JOptionPane.CLOSED_OPTION) {
-					
-				}else if( result ==JOptionPane.YES_OPTION) {
-					MainView.setMainPage(analyzeSale());	
+				int result = JOptionPane.showConfirmDialog(null, "제품이 수정되지 않았습니다 \n 이 페이지에서  나가시겠습니까?", "Confirm",
+						JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.CLOSED_OPTION) {
+
+				} else if (result == JOptionPane.YES_OPTION) {
+					MainView.setMainPage(analyzeSale());
 				}
 			}
 		});
-		
-		
+
 		update.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(productName.getText().equals("") || price.getText().equals("") || stock.getText().equals("") || fileName.getText().equals("") || explain.getText().equals("")) {
+				if (productName.getText().equals("") || price.getText().equals("") || stock.getText().equals("")
+						|| fileName.getText().equals("") || explain.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "값을 모두 입력해주세요", "warning", JOptionPane.WARNING_MESSAGE);
-				}else {
-				try {
-					int pNo1 = pArr.get(pArr.size()-1).getpNo() -1; 
-					String[] cat = (String.valueOf(size.getSelectedItem())).split("\\s");
-					int category1 = Integer.parseInt(cat[0]);
-					String productName1 = productName.getText();
-					int price1 =Integer.parseInt(price.getText());
-					String size1 = String.valueOf(size.getSelectedItem());
-					int stock1 = Integer.parseInt(stock.getText());
-					String filePath = fileName.getText();
-					String explain1 = explain.getText();
-					
-					
-					
-					int result =JOptionPane.showConfirmDialog(null, "입력하신 제품을 등록하시겠습니까?","Confirm", JOptionPane.YES_NO_OPTION);
-					if(result == JOptionPane.CLOSED_OPTION) {
-						
-					}else if( result ==JOptionPane.YES_OPTION) {
-						pArr.add(new Product(pNo1, category1, productName1, price1, size1, explain1, filePath, stock1, 0));
-						pDao.fileSave(pArr);
-						MainView.setMainPage(manageMain());	
+				} else {
+					try {
+						int pNo1 = p.getpNo();
+						String[] cat = (String.valueOf(size.getSelectedItem())).split("\\s");
+						int category1 = Integer.parseInt(cat[0]);
+						String productName1 = productName.getText();
+						int price1 = Integer.parseInt(price.getText());
+						String size1 = String.valueOf(size.getSelectedItem());
+						int stock1 = Integer.parseInt(stock.getText());
+						String filePath = fileName.getText();
+						String explain1 = explain.getText();
+
+						int result = JOptionPane.showConfirmDialog(null, "입력하신 제품을 등록하시겠습니까?", "Confirm",
+								JOptionPane.YES_NO_OPTION);
+						if (result == JOptionPane.CLOSED_OPTION) {
+
+						} else if (result == JOptionPane.YES_OPTION) {
+							pArr.get(index).setpNo(pNo1);
+							pArr.get(index).setCategory(category1);
+							pArr.get(index).setProductName(productName1);
+							pArr.get(index).setPrice(price1);
+							pArr.get(index).setSize("free");
+							pArr.get(index).setExplain(explain1);
+							pArr.get(index).setImgFilePath(filePath);
+							pArr.get(index).setStock(stock1);
+
+							pDao.fileSave(pArr);
+							MainView.setMainPage(manageMain());
+						}
+
+					} catch (NumberFormatException e2) {
+						JOptionPane.showMessageDialog(null, "재고와 가격은 숫자만 넣어 주세요", "warning", JOptionPane.ERROR_MESSAGE);
 					}
-						
-				} catch (NumberFormatException e2) {
-					JOptionPane.showMessageDialog(null, "재고와 가격은 숫자만 넣어 주세요", "warning", JOptionPane.ERROR_MESSAGE);
-				}
-				
+
 				}
 			}
 		});
-		
-		
-		
-		
 
 		return updateProduct;
 
@@ -1029,12 +1088,13 @@ JFileChooser jfc = new JFileChooser();
 		searchMember.add(scrollPane);
 		scrollPane.setViewportView(table_1);
 		table_1.setShowGrid(true);
-//			table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//			table_1.setColumnSelectionAllowed(true);
+		// table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		// table_1.setColumnSelectionAllowed(true);
 		table_1.setRowSelectionAllowed(true);
-//			table_1.setCellSelectionEnabled(false);
+		// table_1.setCellSelectionEnabled(false);
 		table_1.setBorder(UIManager.getBorder("ComboBox.border"));
 
+		
 		JLabel label = new JLabel("\uD68C\uC6D0\uC815\uBCF4");
 		label.setBounds(107, 15, 96, 34);
 		searchMember.add(label);
