@@ -1,8 +1,5 @@
 package com.boram.shopping.controller;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import com.boram.shopping.view.MainView;
 
 public class MainThreadEvent extends Thread{

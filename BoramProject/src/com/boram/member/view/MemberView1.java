@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -20,6 +19,7 @@ import com.boram.member.controller.MemberController;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
 import com.boram.myPage.controller.MyCart;
+import com.boram.shopping.view.FixedMainMenu;
 import com.boram.shopping.view.MainPanel;
 import com.boram.shopping.view.MainView;
 
@@ -106,24 +106,22 @@ public class MemberView1 {
 				MemberController mc = new MemberController();
 				Member result = mc.logIn(userId, userPwd);
 
-				
-				MyCart mct = new MyCart();
-				mct.loadCart();
-				
-				
-				Login.setVisible(false); // 로그인 창 끄기
-				
-				
-				//메인창 띄우기
-				MainView.setMainPage(new MainPanel(1).getMainPanel());
-				
-				
 				// 로그인 실패하면 확인 팝업창 뜨고 다시 로그인하는 창 돌아가기
 				if (result == null) {
 					JOptionPane.showMessageDialog(null, "잘못입력하셨습니다. 다시 입력해주세요.");
 					Login.setVisible(true);
 					MainView.setMainPage(Login);
 					Login.add(panel);
+				}
+				else {
+					MyCart mct = new MyCart();
+					mct.loadCart();
+					Login.setVisible(false); // 로그인 창 끄기
+					
+					// 메인창 띄우기
+					MainView.setMainPage(new MainPanel(1).getMainPanel());
+					// 아이콘 바꾸기
+					MainView.setMainMenu(new FixedMainMenu().getMainMenu());
 				}
 				
 			}

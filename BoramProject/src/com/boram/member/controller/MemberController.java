@@ -6,7 +6,6 @@ import javax.swing.JTextField;
 
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
-import com.boram.shopping.view.MainView;
 
 public class MemberController {
 
@@ -87,8 +86,6 @@ public class MemberController {
 			}
 
 		}
-
-		System.out.println("fail");
 		return null;
 	}
 

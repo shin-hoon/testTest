@@ -6,14 +6,11 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.File;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 
 import com.boram.shopping.controller.MainMouseEvent;
 
@@ -21,9 +18,7 @@ public class MainView{
 	// 메인 프레임
 	public static JFrame frame;
 	// 고정 페이지 JPanel(맨 위쪽)
-	JPanel mainMenu;
-	// 고정 페이지 JPanel에 담기는 JLabel(맨 위쪽 => 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
-	JLabel kategorie, logo, search, login, myPage, adminPage;	
+	public static JPanel mainMenu;
 	// 서브메뉴 목록과 서브메뉴 상세 분류를 담고있는 JPanel. kategorie를 누르면 나오는 메뉴
 	public static JPanel subMenu;
 	// 서브메뉴 목록
@@ -68,7 +63,7 @@ public class MainView{
 		// 고정 페이지(위쪽, 서브 메뉴)
 		this.fixedSubMenu();
 		// 고정 페이지 JPanel(위쪽, 서브메뉴, 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
-		this.fixedMainMenu();
+		mainMenu = new FixedMainMenu().getMainMenu();
 		// 바뀌는 페이지(아래쪽, JPanel)
 		mainPage = new MainPanel(1).getMainPanel();
 		// 이벤트 처리 
@@ -83,6 +78,7 @@ public class MainView{
 
 		mainPage.setPreferredSize(new Dimension(450, mainPage.getHeight()));
 		mainPageScroll.setViewportView(mainPage);
+		frame.getContentPane().add(mainMenu);
 		frame.getContentPane().add(mainPageScroll); 
 		
 		frame.setVisible(true);
@@ -313,66 +309,10 @@ public class MainView{
 	} // end fixedSubMenu method
 	
 	
-	
-	/**
-	 *   고정 페이지 JPanel(맨 위쪽, 서브메뉴, 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
-	 *   고정 페이지 JPanel에 담기는 JLabel(맨 위쪽 => 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
-	 */
-	public void fixedMainMenu() {
-		mainMenu = new JPanel();
-		mainMenu.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		mainMenu.setBackground(new Color(255, 255, 255));
-		mainMenu.setBounds(-16, 0, 729, 79);
-		mainMenu.setLayout(null);
-		
-		kategorie = new JLabel(new ImageIcon(PATH + "image\\MainImage\\kategorie.jpg"));
-		kategorie.setBackground(new Color(255, 204, 51));
-		kategorie.setBounds(30, 12, 55, 57);
-		mainMenu.add(kategorie);
-		
-		logo = new JLabel("Boram");
-		logo.setFont(new Font("Broadway", Font.BOLD, 50));
-		logo.setBounds(118, -2, 201, 79);
-		mainMenu.add(logo);
-		
-		search = new JLabel(new ImageIcon(PATH + "image\\MainImage\\search.jpg"));
-		search.setBounds(583, 26, 30, 28);
-		mainMenu.add(search);
-		
-		login = new JLabel(new ImageIcon(PATH + "image\\MainImage\\login.jpg"));
-		login.setBounds(627, 26, 30, 28);
-		mainMenu.add(login);
-		
-		
-		myPage = new JLabel(new ImageIcon(PATH + "image\\MainImage\\myPage.jpg"));
-		myPage.setBounds(667, 26, 30, 28);
-		mainMenu.add(myPage);
-		
-		adminPage = new JLabel(new ImageIcon(PATH + "image\\MainImage\\adminPage.jpg"));
-		adminPage.setBounds(540, 26, 30, 28);
-		mainMenu.add(adminPage);
-		
-		JPanel boderPanel = new JPanel();
-		boderPanel.setBackground(new Color(255, 255, 255));
-		boderPanel.setBorder(new MatteBorder(1, 1, 1, 2, (Color) new Color(0, 0, 0)));
-		boderPanel.setBounds(0, 2, 102, 75);
-		mainMenu.add(boderPanel);
-		
-		frame.getContentPane().add(mainMenu);
-	} // end fixedMainMenu method
-	
-	
-	
-	
 	// 이벤트 처리
 	public void mainMouseEvent() {
 		
-		kategorie.addMouseListener(new MainMouseEvent("서브메뉴열기") );	
 		subMenuClose.addMouseListener(new MainMouseEvent("서브메뉴닫기") );	
-		logo.addMouseListener(new MainMouseEvent("메인") );
-		login.addMouseListener(new MainMouseEvent("로그인") );
-		myPage.addMouseListener(new MainMouseEvent("마이페이지") );
-		adminPage.addMouseListener(new MainMouseEvent("관리자페이지"));
 		coat.addMouseListener(new MainMouseEvent("11"));
 		jacket.addMouseListener(new MainMouseEvent("12"));
 		blazer.addMouseListener(new MainMouseEvent("13"));
@@ -397,6 +337,18 @@ public class MainView{
 	} // end mainMouseEvent method
 	
 	
+
+	// 로그인에 따라 보이는 아이콘이 다르게 세팅해주는 메소드
+	public static void setMainMenu(JPanel panel) {
+		frame.remove(mainMenu);
+		
+		mainMenu = panel;
+		mainMenu.setVisible(true);
+		frame.getContentPane().add(mainMenu);
+		
+		frame.revalidate();
+		frame.repaint();
+	}
 	
 	
 	// 바뀌는 페이지를 세팅 해주는 메소드
@@ -405,7 +357,7 @@ public class MainView{
 
 		mainPageScroll.setViewportView(null);
 		mainPage = panel;
-		mainPage.setPreferredSize(new Dimension(450, panel.getHeight()));
+		mainPage.setPreferredSize(new Dimension(718, panel.getHeight()));
 		mainPageScroll.setViewportView(mainPage);
 
 		frame.revalidate();
