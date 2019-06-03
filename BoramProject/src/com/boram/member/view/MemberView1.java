@@ -287,7 +287,7 @@ public class MemberView1 {
 						} else {
 
 							MemberController mc = new MemberController();
-							mc.join(name, year, month, day, id, pwd, phone, address, email); // 입력한거 멤버컨트롤러 회원리스트에 추가
+							mc.join(name, year.getSelectedItem(), month.getSelectedItem(), day.getSelectedItem(), id, pwd, phone, address, email); // 입력한거 멤버컨트롤러 회원리스트에 추가
 
 							JFrame frame = new JFrame();
 							JOptionPane.showMessageDialog(frame, "회원가입이 완료 되었습니다."); // 완료되면 완료 팝업창

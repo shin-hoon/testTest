@@ -104,9 +104,11 @@ public class ChangeMember {
 	}
 
 	// age
-	public Choice ageChange(Choice year, Choice month, Choice day) {
+	public void ageChange(String newyear, String newmonth, String newday) {
 		
-		
+		MemberList.get(mNo).setYear(newyear);
+		MemberList.get(mNo).setMonth(newmonth);
+		MemberList.get(mNo).setDay(newday);
 		
 //		int=0;
 //		try {
@@ -132,9 +134,9 @@ public class ChangeMember {
 	public String printMem() {
 		String name=MemberList.get(mNo).getName();
 		String id=MemberList.get(mNo).getId();
-		Choice year = MemberList.get(mNo).getYear();
-		Choice month = MemberList.get(mNo).getMonth();
-		Choice day = MemberList.get(mNo).getDay();
+		String year = MemberList.get(mNo).getYear();
+		String month = MemberList.get(mNo).getMonth();
+		String day = MemberList.get(mNo).getDay();
 		String phone=MemberList.get(mNo).getPhone();
 		int address=MemberList.get(mNo).getmNo();
 		String email=MemberList.get(mNo).getEmail();

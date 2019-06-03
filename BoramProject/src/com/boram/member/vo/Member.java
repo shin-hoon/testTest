@@ -9,43 +9,46 @@ public class Member implements Serializable{
 	
 	private int mNo; // 회원번호
 	private String name;
-	private Choice year;
-	private Choice month;
-	private Choice day;
-	public Choice getYear() {
-		return year;
-	}
-
-
-	public void setYear(Choice year) {
-		this.year = year;
-	}
-
-
-	public Choice getMonth() {
-		return month;
-	}
-
-
-	public void setMonth(Choice month) {
-		this.month = month;
-	}
-
-
-	public Choice getDay() {
-		return day;
-	}
-
-
-	public void setDay(Choice day) {
-		this.day = day;
-	}
-
+	private String year;
+	private String month;
+	private String day;
+	
 	private String id;
 	private String pwd;
 	private String phone;
 	private String address;
 	private String email;
+	
+	public String getYear() {
+		return year;
+	}
+
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+
+	public String getMonth() {
+		return month;
+	}
+
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+
+	public String getDay() {
+		return day;
+	}
+
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	
 	
 	//private int grant; // 권한
 
@@ -63,7 +66,7 @@ public class Member implements Serializable{
 		this.pwd = pwd;
 		
 	}
-	public Member(int mNo, String name, Choice year, Choice month, Choice day, String id, String pwd, String phone, String address, String email) {
+	public Member(int mNo, String name, String year, String month, String day, String id, String pwd, String phone, String address, String email) {
 		this.mNo= mNo;
 		this.name = name;
 		this.id = id;

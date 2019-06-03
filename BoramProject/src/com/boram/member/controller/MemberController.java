@@ -31,7 +31,7 @@ public class MemberController {
 	/*
 	 * 회원가입
 	 */
-	public void join(String name, Choice year, Choice month, Choice day, String id, String pwd, String phone, String address, String email) {
+	public void join(String name, String year, String month, String day, String id, String pwd, String phone, String address, String email) {
 
 		// 회원번호 주기
 		int mNo;

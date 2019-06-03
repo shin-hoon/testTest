@@ -19,6 +19,10 @@ public class WB_MyPageView {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private static JTextArea ta;
+	
+	private Choice year;
+	private Choice month;
+	private Choice day;
 //	private ta = new JTextArea();
 	//private int gran = /* mem.getGrant() */0;
 //	{// 초기임시데이터 추가 : 용준
@@ -103,7 +107,7 @@ public class WB_MyPageView {
 		panel_2.add(textField_1);
 
 		// age
-		Choice year = new Choice(); // 태어난 연도
+		year = new Choice(); // 태어난 연도
 		year.setBounds(180, 200, 80, 36);
 		int y = 0;
 		for(y = 1900; y < 2011; y++) {
@@ -111,7 +115,7 @@ public class WB_MyPageView {
 		}
 		panel_2.add(year);
 		
-		Choice month = new Choice(); // 태어난 달
+		month = new Choice(); // 태어난 달
 		month.setBounds(270, 200, 45, 36);
 		int m = 0;
 		for(m = 0; m< 13; m++) {
@@ -119,7 +123,7 @@ public class WB_MyPageView {
 		}
 		panel_2.add(month);
 		
-		Choice day = new Choice(); // 태어난 일
+		day = new Choice(); // 태어난 일
 		day.setBounds(320, 200, 45, 36);
 		int d = 0;
 		for(d = 0; d < 32; d++) {
@@ -200,11 +204,15 @@ public class WB_MyPageView {
 	 * 입력한 항목만 수정진행. 수정된 갯수 textArea에 출력 수정할 사항이없으면textArea에 수정사항없음출력. 밑에 변경메소드에서
 	 * textArea에 무엇이 변경되엇는지 출력.
 	 */
+	@SuppressWarnings("null")
 	public void btnChange1() {
 		String nId = textField.getText();
 		String nPw = textField_1.getText();
+//		Choice nYear = new Choice();
+//		Choice nMonth = new Choice();
+//		Choice nDay = new Choice();
 		// int nAge = Integer.parseInt( textField_2.getText());
-		String nAge = textField_2.getText();
+		//String nAge = textField_2.getText();
 		String nAdd = textField_3.getText();
 		String nEmail = textField_4.getText();
 		String nPh = textField_5.getText();
@@ -218,17 +226,26 @@ public class WB_MyPageView {
 			pwChange(nPw);
 			count++;
 		}
-		if (!(nAge.equals(""))) {
-			int nAgeI = 0;
+		if(!year.getSelectedItem().equals("1900") && !month.getSelectedItem().equals("0") && !day.getSelectedItem().equals("0")) {
+//		if(nMonth.getSelectedIndex()==0 && nYear.getSelectedIndex()==0 && nDay.getSelectedIndex()==0) {
 			try {
-				nAgeI = Integer.parseInt(nAge);
-				ageChange(nAgeI);
+			ageChange(year.getSelectedItem(), month.getSelectedItem(), day.getSelectedItem());
 			} catch (NullPointerException | IndexOutOfBoundsException e) {
-				// 정수만입력.출력
+				
 			}
-			// ageChange(nAge);
 			count++;
 		}
+//		if (!(nAge.equals(""))) {
+//			int nAgeI = 0;
+//			try {
+//				nAgeI = Integer.parseInt(nAge);
+//				ageChange(nAgeI);
+//			} catch (NullPointerException | IndexOutOfBoundsException e) {
+//				// 정수만입력.출력
+//			}
+//			// ageChange(nAge);
+//			count++;
+//		}
 		if (!(nAdd.equals(""))) {
 			addressChange(nAdd);
 			count++;
@@ -329,13 +346,13 @@ public class WB_MyPageView {
 	 * @param newId 바꿀나이
 	 * 성공/실패 ta(TextArea)에 기록
 	 */
-	public void ageChange(int newAge) {
-		int result = cm.ageChange(newAge);
-		if (result == 0) {
-			ta.append("나이 변경에 실패하였습니다.\n");
-		} else {
-			ta.append("나이 변경에 성공하였습니다.\n");
-		}
+	public void ageChange(String newyear, String newmonth, String newday) {
+		cm.ageChange(newyear, newmonth, newday);
+//		if (result == 0) {
+//			ta.append("나이 변경에 실패하였습니다.\n");
+//		} else {
+			ta.append("생년월일 변경에 성공하였습니다.\n");
+//		}
 	}
 	public void totResult() {
 		cm.saveChange();
