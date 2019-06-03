@@ -9,10 +9,47 @@ public class Member implements Serializable{
 	
 	private int mNo; // 회원번호
 	private String name;
+<<<<<<< HEAD
 	private String year;
 	private String month;
 	private String day;
 	
+=======
+	
+	private Choice year;
+	private Choice month;
+	private Choice day;
+//	private int age = Integer.parseInt(String.valueOf(year)+String.valueOf(month)+String.valueOf(da)day);
+	public Choice getYear() {
+		return year;
+	}
+
+
+	public void setYear(Choice year) {
+		this.year = year;
+	}
+
+
+	public Choice getMonth() {
+		return month;
+	}
+
+
+	public void setMonth(Choice month) {
+		this.month = month;
+	}
+
+
+	public Choice getDay() {
+		return day;
+	}
+
+
+	public void setDay(Choice day) {
+		this.day = day;
+	}
+
+>>>>>>> branch 'master' of https://github.com/shin-hoon/BoramProject
 	private String id;
 	private String pwd;
 	private String phone;
