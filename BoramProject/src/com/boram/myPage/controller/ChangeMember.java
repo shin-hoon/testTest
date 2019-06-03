@@ -104,18 +104,21 @@ public class ChangeMember {
 	}
 
 	// age
-	public int ageChange(int newAge) {
-		int result = 0;
-		try {
-			MemberList.get(mNo).setAge(newAge);
-			result = 1;
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			System.out.println("6잘못된 값입니다!");
-			result = 0;
-		}
-		return result;
-	}
-
+//	public Choice ageChange(Choice year, Choice month, Choice day) {
+		
+		
+		
+//		int=0;
+//		try {
+//			MemberList.get(mNo).setAge(newAge);
+//			result = 1;
+//		} catch (NullPointerException | IndexOutOfBoundsException e) {
+//			System.out.println("6잘못된 값입니다!");
+//			result = 0;
+//		}
+//		return result;
+// }
+	
 	public void saveChange() {
 		//MemberList는 이미 변경되어있음.
 		// *Change 에서 nugu.get(i).*change 에서 본인이 로그인한 것만 변경해놓음.

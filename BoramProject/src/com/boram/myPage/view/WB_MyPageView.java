@@ -103,10 +103,29 @@ public class WB_MyPageView {
 		panel_2.add(textField_1);
 
 		// age
-		textField_2 = new JTextField("");
-		textField_2.setColumns(10);
-		textField_2.setBounds(180, 184, 220, 40);
-		panel_2.add(textField_2);
+		Choice year = new Choice(); // 태어난 연도
+		year.setBounds(180, 200, 80, 36);
+		int y = 0;
+		for(y = 1900; y < 2011; y++) {
+			year.add(String.valueOf(y));
+		}
+		panel_2.add(year);
+		
+		Choice month = new Choice(); // 태어난 달
+		month.setBounds(270, 200, 45, 36);
+		int m = 0;
+		for(m = 0; m< 13; m++) {
+			month.add(String.valueOf(m));
+		}
+		panel_2.add(month);
+		
+		Choice day = new Choice(); // 태어난 일
+		day.setBounds(320, 200, 45, 36);
+		int d = 0;
+		for(d = 0; d < 32; d++) {
+			day.add(String.valueOf(d));
+		}
+		panel_2.add(day);
 
 		// address
 		textField_3 = new JTextField("");
