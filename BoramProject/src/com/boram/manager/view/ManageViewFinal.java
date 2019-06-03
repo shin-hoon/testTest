@@ -19,6 +19,7 @@ import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.DebugGraphics;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DropMode;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -37,6 +38,7 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -152,7 +154,7 @@ public class ManageViewFinal {
 		inforDelivery.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// MainView.setMainPage();
+				MainView.setMainPage(cartView());
 			}
 		});
 
@@ -1246,6 +1248,186 @@ public class ManageViewFinal {
 		});
 
 		return searchMember;
+
+	}
+	public JPanel cartView() {
+
+		JPanel cartView = new JPanel();
+		cartView.setBounds(135, 63, 689, 541);
+		cartView.setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(64, 95, 569, 384);
+		cartView.add(scrollPane);
+
+		// 주문번호, 주문상품, 상품갯수, 주문가격, 배송상태
+
+		String[] list = { "주문번호", "주문상품", "주문가격", "배송상태" };
+
+		DefaultTableModel model = new DefaultTableModel(list, 0);
+
+		JTable table = new JTable(model);
+		scrollPane.add(table);
+		scrollPane.setViewportView(table);
+
+		TableColumn column1 = table.getColumnModel().getColumn(3);
+
+//		JComboBox<Category> size = new JComboBox<Category>(cArr.toArray(new Category[cArr.size()]));// 이부분주석하면 빌더동작
+//		size.setBounds(130, 116, 156, 27);
+//		updateProduct.add(size);
+//		int[] totalCat = { 1, 11, 12, 13, 14, 21, 22, 23, 24, 25, 31, 32, 33, 41, 42, 43, 44, 45, 46, 51, 52, 53 };
+//		int a = 0;
+//		for (int i = 0; i < totalCat.length; i++) {
+//			if (totalCat[i] == p.getCategory()) {
+//				a = i;
+//				break;
+//			}
+//		}
+//
+//		size.setSelectedIndex(a);
+		int[] st = { 0, 1, 2 };
+		
+		int sum;
+		int index;
+
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(230);
+		ArrayList<String> a = new ArrayList<>();
+		ArrayList<Integer> b = new ArrayList<>();
+		String stat[] = { "결재완료", "배송시작", "배송종료" };
+		for (int i = 0; i < oArr.size(); i++) {
+			sum = 0;
+			index = 0;
+			for (int j = 0; j < st.length; j++) {
+				if (st[j] == oArr.get(i).getState()) {
+					index = j;
+				}
+			}
+			b.add(oArr.get(i).getpNo().size());
+			for (int j = 0; j < oArr.get(i).getpNo().size(); j++) {
+				for (int k = 0; k < pArr.size(); k++) {
+					if (oArr.get(i).getpNo().get(j) == pArr.get(k).getpNo()) {
+
+						a.add(pArr.get(k).getProductName() + " : " + (oArr.get(i).getAmount().get(j)) + "개");
+						sum = (oArr.get(i).getAmount().size() - 1);
+						break;
+					}
+				}
+
+			}
+			int oNo = oArr.get(i).getOrderNo();
+
+			int price = oArr.get(i).getPayment();
+
+			
+			JComboBox<String> state = new JComboBox<>(stat);
+			System.out.println(sum);
+			Object[] cart = { oNo, a.get(sum) + " 외 " + (oArr.get(i).getpNo().size() - 1) + "품목", price, stat[index] };
+
+			model.addRow(cart);
+			sum += b.get(i);
+			column1.setCellEditor(new DefaultCellEditor(state));
+		}
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+
+		JLabel lblNewLabel = new JLabel("\uBC30\uC1A1\uC0C1\uD0DC");
+		lblNewLabel.setBounds(64, 29, 100, 21);
+		cartView.add(lblNewLabel);
+
+		JButton lastPage = new JButton("\uC774\uC804\uD398\uC774\uC9C0");
+		lastPage.setBounds(64, 494, 125, 29);
+		cartView.add(lastPage);
+
+		JButton search = new JButton("조회");
+		search.setBounds(280, 494, 125, 29);
+		cartView.add(search);
+
+		JButton update = new JButton("\uC218\uC815");
+		update.setBounds(506, 494, 125, 29);
+		cartView.add(update);
+		
+		cartView.setVisible(true);
+		
+		lastPage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainView.setMainMenu(manageMain());
+			}
+		});
+		
+		search.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String message="";
+				//table.getValueAt(table.getSelectedRow(), column);
+				message += ("주문번호 : "+String.valueOf(table.getValueAt(table.getSelectedRow(), 0)) + "\n 주문상품 \n");
+					
+				for (int j = 0; j < oArr.get(table.getSelectedRow()).getpNo().size(); j++) {
+						
+					for (int l = 0; l < pArr.size(); l++) {
+						if(pArr.get(l).getpNo() == oArr.get(table.getSelectedRow()).getpNo().get(j)) {
+							message+= pArr.get(l).getProductName()+" : " + oArr.get(table.getSelectedRow()).getAmount().get(j) + "개\n";
+						}
+					}
+					
+					
+				}
+				message +="주문가격 : " + oArr.get(table.getSelectedRow()).getPayment() + "\n";
+				if(oArr.get(table.getSelectedRow()).getState()==0) {
+					message +="배송상태 : " + stat[0];
+				}else if(oArr.get(table.getSelectedRow()).getState()==1) {
+					message +="배송상태 : " + stat[1];
+				}else {
+					message += "배송상태 : " + stat[2];
+				}
+				
+					
+				
+				
+				
+				JOptionPane.showMessageDialog(null, message);
+				
+			}
+		});
+		
+		
+		
+		update.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				String s[] = new String[table.getRowCount()];
+				for (int i = 0; i < s.length; i++) {
+					s[i] = String.valueOf(table.getValueAt(i, 3));
+				}
+				
+				
+				int result = JOptionPane.showConfirmDialog(null, "배송상태를 등록하시겠습니까?", "Confirm",
+						JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.CLOSED_OPTION) {
+
+				} else if (result == JOptionPane.YES_OPTION) {
+					
+					for (int j = 0; j < s.length; j++) {
+						if(s[j].equals(stat[0])) {
+							oArr.get(j).setState(0);
+						}else if(s[j].equals(stat[1])) {
+							oArr.get(j).setState(1);
+						}else {
+							oArr.get(j).setState(2);
+						}
+					}
+					System.out.println(oArr);
+					oDao.fileSave(oArr);
+					//MainView.setMainPage(manageMain());
+				}
+
+			}
+		});
+		
+		return cartView;
 
 	}
 
