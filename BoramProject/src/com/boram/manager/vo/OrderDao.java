@@ -18,8 +18,11 @@ public class OrderDao {
 	public void fileSave(ArrayList<Order> list) {
 		
 		
-		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("orderList.txt",true));){
+		
+		
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("orderList.txt"));){
 			
+//			oos.reset();
 			for (int i = 0; i < list.size(); i++) {
 						oos.writeObject(list.get(i));
 			}	
