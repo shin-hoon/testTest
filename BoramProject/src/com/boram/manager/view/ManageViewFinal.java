@@ -89,6 +89,7 @@ public class ManageViewFinal {
 		searchMember.setBounds(155, 100, 343, 67);
 		searchMember.setForeground(Color.WHITE);
 		searchMember.setBackground(Color.BLACK);
+		searchMember.setFont(new Font("±¼¸²", Font.PLAIN, 18));
 		manageMain.add(searchMember);
 
 
@@ -96,6 +97,7 @@ public class ManageViewFinal {
 		insertProduct.setBounds(155, 179, 343, 67);
 		insertProduct.setForeground(Color.WHITE);
 		insertProduct.setBackground(Color.BLACK);
+		insertProduct.setFont(new Font("±¼¸²", Font.PLAIN, 18));
 		manageMain.add(insertProduct);
 
 
@@ -103,12 +105,14 @@ public class ManageViewFinal {
 		manageProduct.setBounds(155, 261, 343, 67);
 		manageProduct.setForeground(Color.WHITE);
 		manageProduct.setBackground(Color.BLACK);
+		manageProduct.setFont(new Font("±¼¸²", Font.PLAIN, 18));
 		manageMain.add(manageProduct);
 
 		JButton analysis = new JButton("4. \uD310\uB9E4 \uBD84\uC11D");
 		analysis.setBounds(155, 343, 343, 67);
 		analysis.setForeground(Color.WHITE);
 		analysis.setBackground(Color.BLACK);
+		analysis.setFont(new Font("±¼¸²", Font.PLAIN, 18));
 		manageMain.add(analysis);
 
 
@@ -116,6 +120,7 @@ public class ManageViewFinal {
 		salesState.setBounds(155, 425, 343, 67);
 		salesState.setForeground(Color.WHITE);
 		salesState.setBackground(Color.BLACK);
+		salesState.setFont(new Font("±¼¸²", Font.PLAIN, 18));
 		manageMain.add(salesState);
 
 
@@ -123,6 +128,7 @@ public class ManageViewFinal {
 		inforDelivery.setBounds(155, 507, 343, 67);
 		inforDelivery.setForeground(Color.WHITE);
 		inforDelivery.setBackground(Color.BLACK);
+		inforDelivery.setFont(new Font("±¼¸²", Font.PLAIN, 18));
 		manageMain.add(inforDelivery);
 
 
@@ -247,20 +253,26 @@ public class ManageViewFinal {
 
 		table.setRowSelectionAllowed(true);
 		JButton lastPage = new JButton("\uC774\uC804\uD398\uC774\uC9C0");
+		lastPage.setForeground(Color.WHITE);
+		lastPage.setBackground(Color.BLACK);
 		lastPage.setBounds(92, 529, 125, 29);
 		manageProduct.add(lastPage);
 
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uC815\uBCF4");
 		lblNewLabel.setBounds(312, 25, 91, 27);
 		manageProduct.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("±¼¸²Ã¼", Font.BOLD | Font.ITALIC, 20));
+		lblNewLabel.setFont(new Font("±¼¸²", Font.BOLD, 20));
 
 		JButton update = new JButton("\uC218\uC815");
 		update.setBounds(308, 529, 125, 29);
+		update.setForeground(Color.WHITE);
+		update.setBackground(Color.BLACK);
 		manageProduct.add(update);
 
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setBounds(529, 529, 125, 29);
+		delete.setForeground(Color.WHITE);
+		delete.setBackground(Color.BLACK);
 		manageProduct.add(delete);
 		table.setAutoCreateRowSorter(true);
 		
@@ -358,7 +370,7 @@ public class ManageViewFinal {
 
 		JLabel lblNewLabel = new JLabel("\uD310\uB9E4\uBD84\uC11D");
 		lblNewLabel.setBounds(138, 30, 222, 36);
-		lblNewLabel.setFont(new Font("±¼¸²Ã¼", Font.BOLD | Font.ITALIC, 20));
+		lblNewLabel.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		analyzeSale.add(lblNewLabel);
 
 		
@@ -545,14 +557,20 @@ public class ManageViewFinal {
 		
 		JButton lastPage = new JButton("\uC774\uC804 \uD398\uC774\uC9C0");
 		lastPage.setBounds(138, 612, 125, 29);
+		lastPage.setForeground(Color.WHITE);
+		lastPage.setBackground(Color.BLACK);
 		analyzeSale.add(lastPage);
 
 		JButton update = new JButton("\uC218\uC815");
 		update.setBounds(465, 612, 125, 29);
+		update.setForeground(Color.WHITE);
+		update.setBackground(Color.BLACK);
 		analyzeSale.add(update);
 
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setBounds(304, 612, 125, 29);
+		delete.setForeground(Color.WHITE);
+		delete.setBackground(Color.BLACK);
 		analyzeSale.add(delete);
 
 		analyzeSale.setVisible(true);
@@ -660,7 +678,7 @@ public class ManageViewFinal {
 		
 		JLabel label = new JLabel("\uD310\uB9E4\uD604\uD669");
 		label.setBounds(324, 29, 100, 21);
-		label.setFont(new Font("±¼¸²Ã¼", Font.BOLD | Font.ITALIC, 20));
+		label.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		saleState.add(label);
 
 		JPanel graph = new JPanel();
@@ -712,6 +730,8 @@ public class ManageViewFinal {
 
 		JButton lastPage = new JButton("\uC774\uC804\uC73C\uB85C");
 		lastPage.setBounds(305, 582, 125, 29);
+		lastPage.setForeground(Color.WHITE);
+		lastPage.setBackground(Color.BLACK);
 		saleState.add(lastPage);
 
 		graph.setVisible(true);
@@ -736,15 +756,17 @@ public class ManageViewFinal {
 
 		JLabel label = new JLabel("\uC0C1\uD488 \uB4F1\uB85D");
 		label.setBounds(193, 20, 100, 21);
-		label.setFont(new Font("±¼¸²Ã¼", Font.BOLD | Font.ITALIC, 20));
+		label.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		insertProduct.add(label);
 
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uBA85");
 		lblNewLabel.setBounds(33, 60, 78, 21);
+		lblNewLabel.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(lblNewLabel);
 
 		JLabel label_1 = new JLabel("\uCE74\uD14C\uACE0\uB9AC");
 		label_1.setBounds(33, 97, 78, 21);
+		label_1.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(label_1);
 
 		// JComboBox category = new JComboBox();
@@ -759,18 +781,22 @@ public class ManageViewFinal {
 
 		JLabel label_2 = new JLabel("\uC0AC\uC774\uC988");
 		label_2.setBounds(33, 133, 78, 21);
+		label_2.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(label_2);
 
 		JLabel label_3 = new JLabel("\uC7AC\uACE0");
 		label_3.setBounds(33, 169, 78, 21);
+		label_3.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(label_3);
 
 		JLabel label_4 = new JLabel("\uAC00\uACA9");
 		label_4.setBounds(33, 205, 78, 21);
+		label_4.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(label_4);
 
 		JLabel lblNewLabel_1 = new JLabel("\uC0C1\uC138\uC124\uBA85");
 		lblNewLabel_1.setBounds(33, 295, 78, 21);
+		lblNewLabel_1.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(lblNewLabel_1);
 
 		JTextArea explain = new JTextArea();
@@ -828,24 +854,32 @@ public class ManageViewFinal {
 
 		JButton button = new JButton("\uB4F1\uB85D");
 		button.setBounds(256, 570, 150, 29);
+		button.setForeground(Color.WHITE);
+		button.setBackground(Color.BLACK);
 		insertProduct.add(button);
 
 		JButton lastPage = new JButton("\uC774\uC804\uD398\uC774\uC9C0\uB85C");
 		lastPage.setBounds(47, 570, 150, 29);
+		lastPage.setForeground(Color.WHITE);
+		lastPage.setBackground(Color.BLACK);
 		insertProduct.add(lastPage);
 
 		JLabel fileChoose = new JLabel("\uD30C\uC77C\uC120\uD0DD");
 		fileChoose.setBounds(33, 241, 78, 21);
+		fileChoose.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(fileChoose);
 
 		JLabel fileName = new JLabel("\uD30C\uC77C\uBA85");
 		fileName.setBounds(33, 272, 403, 21);
+		fileChoose.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(fileName);
 
 		JButton fileSave = new JButton();
 		// fileSave.setIcon(new
 		// ImageIcon("C:\\Users\\jeniu\\Desktop\\mini_project\\fileIcon.png"));
 		fileSave.setBounds(140, 237, 30, 30);
+		fileSave.setForeground(Color.WHITE);
+		fileSave.setBackground(Color.BLACK);
 		Icon i=new ImageIcon("fileIcon.png"); 
 		fileSave.setIcon(i);
 		fileSave.setBorderPainted(false);
@@ -940,31 +974,37 @@ public class ManageViewFinal {
 		
 		JLabel lblNewLabel = new JLabel("\uC0C1\uD488\uC218\uC815");
 		lblNewLabel.setBounds(177, 28, 100, 21);
-		lblNewLabel.setFont(new Font("±¼¸²Ã¼", Font.BOLD | Font.ITALIC, 20));
+		lblNewLabel.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		updateProduct.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("\uC0C1\uD488\uBA85");
 		lblNewLabel_1.setBounds(35, 83, 78, 21);
+		lblNewLabel_1.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(lblNewLabel_1);
 
 		JLabel label = new JLabel("\uCE74\uD14C\uACE0\uB9AC");
 		label.setBounds(35, 119, 78, 21);
+		label.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(label);
 
 		JLabel label_1 = new JLabel("\uC0AC\uC774\uC988");
 		label_1.setBounds(35, 155, 78, 21);
+		label_1.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(label_1);
 
 		JLabel label_2 = new JLabel("\uC7AC\uACE0");
 		label_2.setBounds(35, 191, 78, 21);
+		label_2.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(label_2);
 
 		JLabel label_3 = new JLabel("\uAC00\uACA9");
 		label_3.setBounds(35, 229, 78, 21);
+		label_3.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(label_3);
 
 		JLabel label_4 = new JLabel("\uC0C1\uC138\uC124\uBA85");
 		label_4.setBounds(35, 315, 78, 21);
+		label_4.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(label_4);
 
 		JTextField productName = new JTextField(p.getProductName());
@@ -1017,10 +1057,13 @@ public class ManageViewFinal {
 		
 		JLabel label_5 = new JLabel("\uC0AC\uC9C4 \uCD94\uAC00");
 		label_5.setBounds(35, 265, 78, 21);
+		label_5.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(label_5);
 
 		JButton file = new JButton("");
 		file.setBounds(130, 256, 30, 30);
+		file.setForeground(Color.WHITE);
+		file.setBackground(Color.BLACK);
 		Icon i=new ImageIcon("fileIcon.png"); 
 		file.setIcon(i);
 		file.setBorderPainted(false);
@@ -1033,10 +1076,16 @@ public class ManageViewFinal {
 
 		JButton update = new JButton("\uC218\uC815");
 		update.setBounds(303, 570, 125, 29);
+		update.setForeground(Color.WHITE);
+		update.setBackground(Color.BLACK);
+		update.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(update);
 
 		JButton lastPage = new JButton("\uC774\uC804\uC73C\uB85C");
 		lastPage.setBounds(55, 570, 125, 29);
+		lastPage.setForeground(Color.WHITE);
+		lastPage.setBackground(Color.BLACK);
+		lastPage.setFont(new Font("Gulim", Font.PLAIN, 15));
 		updateProduct.add(lastPage);
 
 		updateProduct.setVisible(true);
@@ -1179,15 +1228,19 @@ public class ManageViewFinal {
 		
 		JLabel label = new JLabel("\uD68C\uC6D0\uC815\uBCF4");
 		label.setBounds(107, 15, 96, 34);
-		label.setFont(new Font("±¼¸²Ã¼", Font.BOLD | Font.ITALIC, 20));
+		label.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		searchMember.add(label);
 
 		JButton delete = new JButton("\uD0C8\uD1F4");
 		delete.setBounds(430, 517, 125, 29);
+		delete.setForeground(Color.WHITE);
+		delete.setBackground(Color.BLACK);
 		searchMember.add(delete);
 
 		JButton lastPage = new JButton("\uC774\uC804 \uD398\uC774\uC9C0");
 		lastPage.setBounds(101, 517, 137, 29);
+		lastPage.setForeground(Color.WHITE);
+		lastPage.setBackground(Color.BLACK);
 		searchMember.add(lastPage);
 
 		/*
@@ -1349,14 +1402,20 @@ public class ManageViewFinal {
 
 		JButton lastPage = new JButton("\uC774\uC804\uD398\uC774\uC9C0");
 		lastPage.setBounds(64, 494, 125, 29);
+		lastPage.setForeground(Color.WHITE);
+		lastPage.setBackground(Color.BLACK);
 		cartView.add(lastPage);
 
 		JButton search = new JButton("Á¶È¸");
 		search.setBounds(280, 494, 125, 29);
+		search.setForeground(Color.WHITE);
+		search.setBackground(Color.BLACK);
 		cartView.add(search);
 
 		JButton update = new JButton("\uC218\uC815");
 		update.setBounds(506, 494, 125, 29);
+		update.setForeground(Color.WHITE);
+		update.setBackground(Color.BLACK);
 		cartView.add(update);
 		
 		cartView.setVisible(true);
