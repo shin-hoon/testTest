@@ -130,7 +130,7 @@ public class WB_MyCartView {
 		}
 		System.out.println("==========================");
 		// 콤보박스
-		TableColumn comm = table.getColumnModel().getColumn(5);
+		TableColumn comm = table.getColumnModel().getColumn(4);
 		JComboBox<Integer> cb1 = new JComboBox<>();
 		cb1.addItem(1);
 		cb1.addItem(2);
@@ -144,7 +144,7 @@ public class WB_MyCartView {
 
 		// 삭제버튼을 누르면 JTable의 row삭제.
 		//삭제한것을 CList에 다시 넣어주어야함.
-		JButton btnNewButton = new JButton("저장");
+		JButton btnNewButton = new JButton("삭제 후 저장");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int row =0;

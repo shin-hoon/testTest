@@ -14,19 +14,16 @@ public class MyCart {
 
 	// 로그인하면서 누가 로그인했는지 회원정보 가져옴.
 	MemberController mc = new MemberController();
-
-	// 초기 임시데이터
-//	 {
-//	 // pNo, category, productName, price, size, stock, count(조회수)
-//	 // 1,1,"hat",35000,one,1,1.
-//	 CList.add(new Product(1, 1, "hat", 35001, "one1", 1, 1));
-//	 CList.add(new Product(2, 2, "hat", 35002, "one2", 1, 1));
-//	 CList.add(new Product(3, 3, "hat", 35003, "one3", 1, 1));
-//	 CList.add(new Product(4, 1, "hat", 35004, "one4", 1, 1));
-//	 CList.add(new Product(5, 2, "hat", 35005, "one5", 1, 1));
-//	 CList.add(new Product(6, 3, "hat", 35006, "one6", 1, 1));
-//	 CList.add(new Product(7, 4, "hat", 35007, "one7", 1, 1));
-//	 }
+//	{
+//		CList.add(new Product(1,1,"name",32001,"free","discripe","img",1,1));
+//		CList.add(new Product(2,1,"name",32002,"free","discripe","img",2,1));
+//		CList.add(new Product(3,1,"name",32003,"free","discripe","img",3,1));
+//		CList.add(new Product(4,1,"name",32004,"free","discripe","img",4,1));
+//		CList.add(new Product(5,1,"name",32005,"free","discripe","img",5,1));
+//		CList.add(new Product(6,1,"name",32006,"free","discripe","img",6,1));
+//		CList.add(new Product(7,1,"name",32007,"free","discripe","img",7,1));
+//	}
+	
 
 	public MyCart() {
 	}
@@ -91,7 +88,7 @@ public class MyCart {
 			// CList+Member => OList만들기.
 			int oNo =0; // 마지막order번호 +1
 			if (OList.size() != 0) {
-				oNo = OList.size()+1;
+				oNo = OList.size();
 			}
 			String oId = MemberController.m.getId();// 주문자 id
 			String oAdd = MemberController.m.getAddress();// 주문자 주소.
@@ -126,7 +123,7 @@ public class MyCart {
 	 */
 	public void saveCart(ArrayList<Product> CList) {// notSerializable exc
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(MemberController.m.getmNo() + "MyCart.txt"))) {
-			//oos.reset();
+			oos.reset();
 			// oos.writeObject(null);
 			for (Product i : CList) {
 				oos.writeObject(i);
