@@ -44,9 +44,9 @@ public class CUI_MyCartView {
 			case 3:
 				cartDeleteAll();
 				break;
-			case 4:
-				cartOrder();
-				break;
+//			case 4:
+//				cartOrder();
+//				break;
 			case 5:
 				//saveCart();
 				break;
@@ -76,7 +76,6 @@ public class CUI_MyCartView {
 				System.out.print(i.getSize()+"\t");
 				System.out.print(i.getPrice()+"\t");
 				System.out.println();
-
 			}
 		}
 
@@ -126,21 +125,21 @@ public class CUI_MyCartView {
 	 *  주문파일 생성완료 되었으나 장바구니 파일 또는 리스트 삭제되지않음 1
 	 *  주문파일생성완료후 장바구니파일 및 장바구니리스트 삭제완료 =2 (완전성공) 
 	 */
-	public void cartOrder() {
-		int result = mc.cartOrder();
-		switch (result) {
-		case 1:System.out.println("주문파일만생성완료.");
-		System.out.println("파일 또는 리스트 삭제실패");
-			break;
-		case 2:System.out.println("주문성공 및 장바구니파일,리스트삭제 성공!");
-			break;
-		case 0:System.out.println("주문파일 생성실패, 장바구니파일및 리스트 삭제하지않음.");
-			break;
-		default:
-			System.out.println("????");
-			break;
-		}
-	}
+//	public void cartOrder() {
+//		int result = mc.cartOrder();
+//		switch (result) {
+//		case 1:System.out.println("주문파일만생성완료.");
+//		System.out.println("파일 또는 리스트 삭제실패");
+//			break;
+//		case 2:System.out.println("주문성공 및 장바구니파일,리스트삭제 성공!");
+//			break;
+//		case 0:System.out.println("주문파일 생성실패, 장바구니파일및 리스트 삭제하지않음.");
+//			break;
+//		default:
+//			System.out.println("????");
+//			break;
+//		}
+//	}
 
 //	mc.saveCart 반환값 없어짐.
 //	public void saveCart() {

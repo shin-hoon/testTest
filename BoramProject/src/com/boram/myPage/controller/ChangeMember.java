@@ -141,7 +141,7 @@ public class ChangeMember {
 		int address=MemberList.get(mNo).getmNo();
 		String email=MemberList.get(mNo).getEmail();
 		
-		return name+"님의 정보입니다.\n";
+		return name+"님의 정보입니다.\nid : "+id+"\n생년월일 : "+year+month+day+"\n전화번호 : "+phone+"\n이메일 : "+email;
 	}
 	public void printAllMem() {
 		System.out.println("MemberList 전체출력");

@@ -91,6 +91,7 @@ public class MemberView1 {
 		 * 로그인 버튼
 		 */
 		JButton logIn = new JButton("\uB85C\uADF8\uC778");
+		logIn.setFont(new Font("굴림", Font.PLAIN, 18));
 		logIn.setForeground(Color.WHITE);
 		logIn.setBackground(Color.BLACK);
 		logIn.addActionListener(new ActionListener() {
@@ -143,6 +144,7 @@ public class MemberView1 {
 		 * 회원가입 버튼
 		 */
 		JButton join = new JButton("\uD68C\uC6D0\uAC00\uC785");
+		join.setFont(new Font("굴림", Font.PLAIN, 18));
 		join.setForeground(Color.WHITE);
 		join.setBackground(Color.BLACK);
 		join.addActionListener(new ActionListener() {
@@ -354,6 +356,7 @@ public class MemberView1 {
 		 * 아이디 찾기 버튼 
 		 */
 		JButton searchId = new JButton("\uC544\uC774\uB514 \uCC3E\uAE30");
+		searchId.setFont(new Font("Gulim", Font.PLAIN, 15));
 		searchId.setForeground(Color.WHITE);
 		searchId.setBackground(Color.BLACK);
 		searchId.addActionListener(new ActionListener() {
@@ -402,6 +405,7 @@ public class MemberView1 {
 				 * 아이디 찾기 내용 입력후 확인 버튼 
 				 */
 				JButton confirmBtn = new JButton("\uD655  \uC778");
+				confirmBtn.setFont(new Font("굴림", Font.PLAIN, 18));
 //		        JButton confirmBtn = new JButton(new ImageIcon("confirm.png"));
 				confirmBtn.setForeground(Color.WHITE);
 				confirmBtn.setBackground(Color.BLACK);
@@ -449,6 +453,7 @@ public class MemberView1 {
 		 * 비밀번호 찾기 버튼
 		 */
 		JButton searchPwd = new JButton("\uBE44\uBC00\uBC88\uD638 \uCC3E\uAE30");
+		searchPwd.setFont(new Font("Gulim", Font.PLAIN, 15));
 		searchPwd.setBackground(Color.BLACK);
 		searchPwd.setForeground(Color.WHITE);
 		searchPwd.addActionListener(new ActionListener() {
@@ -494,9 +499,10 @@ public class MemberView1 {
 				pwdSearchPanel.add(phonetext);
 
 				/*
-				 * 비밀번호찾기 이름과 이메일 입력후 확인버튼
+				 * 비밀번호찾기 이름과 폰번호 입력후 확인버튼
 				 */
 				JButton confirmBtn = new JButton("\uD655  \uC778");
+				confirmBtn.setFont(new Font("굴림", Font.PLAIN, 18));
 				confirmBtn.setForeground(Color.WHITE);
 				confirmBtn.setBackground(Color.BLACK);
 				confirmBtn.addActionListener(new ActionListener() {
