@@ -233,7 +233,6 @@ public class ManageViewFinal {
 				}
 			}
 		}
-
 		JTable table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(o, new String[] { "\uC0C1\uD488\uBC88\uD638", "\uCE74\uD14C\uACE0\uB9AC",
@@ -289,27 +288,31 @@ public class ManageViewFinal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Object a;
+				try {
+					int b = -1;
+					int x = table.getSelectedRow();
+					a = table.getValueAt(x, 0);
+					String value = String.valueOf(a);
+					b = mc.indexProduct(Integer.parseInt(value));
+//					for (int i = 0; i < pArr.size(); i++) {
+//						if (pArr.get(i).getpNo() == Integer.parseInt(value)) {
+//							b = i;
+//							break;
+//						}
+//					}
 
-				int b = -1;
-				int x = table.getSelectedRow();
-				a = table.getValueAt(x, 0);
-				String value = String.valueOf(a);
-				for (int i = 0; i < pArr.size(); i++) {
-					if (pArr.get(i).getpNo() == Integer.parseInt(value)) {
-						b = i;
-						break;
+					if (b == -1) {
+					} else {
+						Product p = new Product();
+
+						p = pArr.get(b);
+
+						MainView.setMainPage(updateProduct(p, b, manageProduct()));
 					}
+				} catch (IndexOutOfBoundsException e3) {
+					JOptionPane.showMessageDialog(null, "선택한 값이 없습니다", "warning", JOptionPane.ERROR_MESSAGE);
 				}
 
-				if (b == -1) {
-					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
-				} else {
-					Product p = new Product();
-
-					p = pArr.get(b);
-
-					MainView.setMainPage(updateProduct(p, b));
-				}
 			}
 		});
 
@@ -317,24 +320,24 @@ public class ManageViewFinal {
 			// 여기부터
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				pArr.get(0).setCategory(11);
 				Object a;
 				int temp = -1;
-				System.out.println(table.getSelectedColumn() + ":" + table.getSelectedRow());
 				try {
 					a = table.getValueAt(table.getSelectedRow(), 0);
-					for (int i = 0; i < pArr.size(); i++) {
-						if (pArr.get(i).getpNo() == (int) a) {
-							temp = i;
-							break;
-						}
-					}
+					temp = mc.indexProduct(Integer.parseInt(String.valueOf(a)));
+//					for (int i = 0; i < pArr.size(); i++) {
+//						if (pArr.get(i).getpNo() == (int) a) {
+//							temp = i;
+//							break;
+//						}
+//					}
 				} catch (ArrayIndexOutOfBoundsException e2) {
 					temp = -1;
+				} catch (IndexOutOfBoundsException e3) {
+					JOptionPane.showMessageDialog(null, "선택한 값이 없습니다", "warning", JOptionPane.ERROR_MESSAGE);
 				}
 
 				if (temp < 0) {
-					JOptionPane.showMessageDialog(null, "선택한 값이 없습니다", "warning", JOptionPane.ERROR_MESSAGE);
 				} else {
 					int result = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?", "Confirm",
 							JOptionPane.YES_NO_OPTION);
@@ -404,16 +407,18 @@ public class ManageViewFinal {
 					break;
 				}
 			}
+			//System.out.println(pNo1);
 		}
 
 		int iTemp = 0;
 		double dTemp = 0.0;
+		
 		for (int i = 0; i < sales1.size(); i++) {
 			for (int k = 0; k < pArr.size(); k++) {
 				if (pNo1.get(i) == pArr.get(k).getpNo()) {
 					for (int j = 0; j < i; j++) {
 						if (pArr.get(i).getCount() < pArr.get(j).getCount()) {
-							iTemp = (int) kpNo1.get(i);
+							iTemp = pNo1.get(i);
 							pNo1.set(i, pNo1.get(j));
 							pNo1.set(j, iTemp);
 
@@ -425,7 +430,7 @@ public class ManageViewFinal {
 
 				}
 			}
-
+			//System.out.println(pNo1);
 		}
 
 		HashMap<Integer, Double> copy2 = mc.analysis();
@@ -456,20 +461,23 @@ public class ManageViewFinal {
 				}
 			}
 		}
-
-		for (int i = 0; i < sales1.size(); i++) {
+		for (int i = 0; i < sales2.size(); i++) {
 			for (int j = 0; j < i; j++) {
 				if (sales2.get(i) < sales2.get(j)) {
 					iTemp = pNo2.get(i);
 					pNo2.set(i, pNo2.get(j));
 					pNo2.set(j, iTemp);
-
+					
+					
+					
 					dTemp = sales2.get(i);
 					sales2.set(i, sales2.get(j));
 					sales2.set(j, dTemp);
 				}
 			}
 		}
+		System.out.println(pNo2);
+		
 		Object[][] o = new Object[pNo1.size()][3];
 		for (int i = 0; i < o.length; i++) {
 			for (int j = 0; j < o[i].length; j++) {
@@ -486,6 +494,7 @@ public class ManageViewFinal {
 					o[i][j] = sales1.get(i);
 				}
 			}
+			System.out.println(o[i][0]);
 		}
 		// table.setModel(new DefaultTableModel(o,
 		// new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218",
@@ -506,6 +515,8 @@ public class ManageViewFinal {
 						}
 					});
 				} else {
+					
+					//count도 순서변경 다바뀌고넣기
 					Object[][] o2 = new Object[pNo2.size()][3];
 					for (int i = 0; i < o2.length; i++) {
 						for (int j = 0; j < o2[i].length; j++) {
@@ -513,7 +524,7 @@ public class ManageViewFinal {
 								o2[i][j] = pNo2.get(i);
 							} else if (j == 1) {
 								for (int k = 0; k < pArr.size(); k++) {
-									if (pNo1.get(i) == pArr.get(k).getpNo()) {
+									if (pNo2.get(i) == pArr.get(k).getpNo()) {
 										o2[i][j] = pArr.get(k).getCount();
 										break;
 									}
@@ -532,12 +543,10 @@ public class ManageViewFinal {
 						}
 					});
 				}
-				
 
 			}
 		});
 
-		
 		table.setModel(new DefaultTableModel(o,
 				new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218", "\uD310\uB9E4\uC728" }) {
 			@Override
@@ -545,11 +554,11 @@ public class ManageViewFinal {
 				return false;
 			}
 		});
-		
+
 		for (int j = 0; j < table.getRowCount(); j++) {
 			table.isCellEditable(j, 0);
 		}
-		
+
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setRowSelectionAllowed(true);
 		table.getTableHeader().setReorderingAllowed(false);
@@ -585,28 +594,32 @@ public class ManageViewFinal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Object a;
+				try {
+					int b = -1;
+					int x = table.getSelectedRow();
+					a = table.getValueAt(x, 0);
+					String value = String.valueOf(a);
+					b= mc.indexProduct(Integer.parseInt(value));
+//					for (int i = 0; i < pArr.size(); i++) {
+//						if (pArr.get(i).getpNo() == Integer.parseInt(value)) {
+//							b = i;
+//							break;
+//						}
+//					}
 
-				int b = -1;
-				int x = table.getSelectedRow();
-				a = table.getValueAt(x, 0);
-				String value = String.valueOf(a);
-				for (int i = 0; i < pArr.size(); i++) {
-					if (pArr.get(i).getpNo() == Integer.parseInt(value)) {
-						b = i;
-						break;
+					if (b == -1) {
+					} else {
+						Product p = new Product();
+
+						p = pArr.get(b);
+
+						MainView.setMainPage(updateProduct(p, b, analyzeSale()));
+
 					}
-				}
-
-				if (b == -1) {
+				}catch(ArrayIndexOutOfBoundsException e2) {
 					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
-				} else {
-					Product p = new Product();
-
-					p = pArr.get(b);
-
-					MainView.setMainPage(updateProduct(p, b));
-
 				}
+				
 			}
 		});
 		delete.addMouseListener(new MouseAdapter() {
@@ -616,12 +629,13 @@ public class ManageViewFinal {
 				int temp = -1;
 				try {
 					a = table.getValueAt(table.getSelectedRow(), 0);
-					for (int i = 0; i < pArr.size(); i++) {
-						if (pArr.get(i).getpNo() == Integer.parseInt(String.valueOf(a))) {
-							temp = i;
-							break;
-						}
-					}
+					temp = mc.indexProduct(Integer.parseInt(String.valueOf(a)));
+//					for (int i = 0; i < pArr.size(); i++) {
+//						if (pArr.get(i).getpNo() == Integer.parseInt(String.valueOf(a))) {
+//							temp = i;
+//							break;
+//						}
+//					}
 				} catch (ArrayIndexOutOfBoundsException e2) {
 					temp = -1;
 				}
@@ -804,13 +818,15 @@ public class ManageViewFinal {
 		explain.setAlignmentX(Component.LEFT_ALIGNMENT);
 		explain.setBounds(33, 334, 350, 200);
 		explain.setLineWrap(true);
-		
-		
+
+		JScrollPane scrollPane = new JScrollPane(explain);
+		scrollPane.setBounds(33, 334, 350, 200);
+
 		Border lineBorder = BorderFactory.createLineBorder(Color.black, 1);
 		Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		explain.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
-		
-		insertProduct.add(explain);
+
+		insertProduct.add(scrollPane);
 		/*// TextArea 설정 및 추가
 	    // TextArea에 content가 가리키는 문자열을 표시하고 50행, 50열로 설정합니다.      
 	    JTextArea ta = new JTextArea(content, 50, 50);
@@ -931,7 +947,7 @@ public class ManageViewFinal {
 					JOptionPane.showMessageDialog(null, "값을 모두 입력해주세요", "warning", JOptionPane.WARNING_MESSAGE);
 				} else {
 					try {
-						int pNo1 = pArr.get(pArr.size() - 1).getpNo() - 1;
+						int pNo1 = pArr.get(pArr.size() - 1).getpNo() + 1;
 						String[] cat = (String.valueOf(category.getSelectedItem())).split("\\s");
 						int category1 = Integer.parseInt(cat[0]);
 						String productName1 = productName.getText();
@@ -965,7 +981,7 @@ public class ManageViewFinal {
 		return insertProduct;
 	}
 
-	public JPanel updateProduct(Product p, int index) {
+	public JPanel updateProduct(Product p, int index, JPanel panel) {
 
 		JPanel updateProduct = new JPanel();
 		updateProduct.setBounds(64, 75, 506, 564);
@@ -1116,7 +1132,7 @@ public class ManageViewFinal {
 				if (result == JOptionPane.CLOSED_OPTION) {
 
 				} else if (result == JOptionPane.YES_OPTION) {
-					MainView.setMainPage(analyzeSale());
+					MainView.setMainPage(panel);
 				}
 			}
 		});
@@ -1281,16 +1297,18 @@ public class ManageViewFinal {
 			public void mouseClicked(MouseEvent e) {
 				Object a;
 				int temp = -1;
-				System.out.println(table_1.getSelectedColumn() + ":" + table_1.getSelectedRow());
 				try {
 					a = table_1.getValueAt(table_1.getSelectedRow(), 0);
-					for (int i = 0; i < mArr.size(); i++) {
-						if (mArr.get(i).getmNo() == (int) a) {
-							temp = i;
-							break;
-						}
-					}
+					temp = mc.indexMember(Integer.parseInt(String.valueOf(a)));
+//					for (int i = 0; i < mArr.size(); i++) {
+//						if (mArr.get(i).getmNo() == (int) a) {
+//							temp = i;
+//							break;
+//						}
+//					}
 				} catch (ArrayIndexOutOfBoundsException e2) {
+					temp = -1;
+				} catch (IndexOutOfBoundsException e3) {
 					temp = -1;
 				}
 
@@ -1320,6 +1338,7 @@ public class ManageViewFinal {
 		JPanel cartView = new JPanel();
 		cartView.setBounds(135, 63, 689, 541);
 		cartView.setLayout(null);
+		cartView.setBackground(Color.white);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(64, 95, 569, 384);
@@ -1360,8 +1379,9 @@ public class ManageViewFinal {
 		ArrayList<String> a = new ArrayList<>();
 		ArrayList<Integer> b = new ArrayList<>();
 		String stat[] = { "결재완료", "배송시작", "배송종료" };
+		sum = 0;
 		for (int i = 0; i < oArr.size(); i++) {
-			sum = 0;
+			
 			index = 0;
 			for (int j = 0; j < st.length; j++) {
 				if (st[j] == oArr.get(i).getState()) {
@@ -1374,7 +1394,6 @@ public class ManageViewFinal {
 					if (oArr.get(i).getpNo().get(j) == pArr.get(k).getpNo()) {
 
 						a.add(pArr.get(k).getProductName() + " : " + (oArr.get(i).getAmount().get(j)) + "개");
-						sum = (oArr.get(i).getAmount().size() - 1);
 						break;
 					}
 				}
@@ -1423,48 +1442,48 @@ public class ManageViewFinal {
 		lastPage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainView.setMainMenu(manageMain());
+				MainView.setMainPage(manageMain());
 			}
 		});
-		
+
 		search.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				String message="";
-				//table.getValueAt(table.getSelectedRow(), column);
-				message += ("주문번호 : "+String.valueOf(table.getValueAt(table.getSelectedRow(), 0)) + "\n 주문상품 \n");
-					
-				for (int j = 0; j < oArr.get(table.getSelectedRow()).getpNo().size(); j++) {
-						
-					for (int l = 0; l < pArr.size(); l++) {
-						if(pArr.get(l).getpNo() == oArr.get(table.getSelectedRow()).getpNo().get(j)) {
-							message+= pArr.get(l).getProductName()+" : " + oArr.get(table.getSelectedRow()).getAmount().get(j) + "개\n";
-						}
-					}
-					
-					
+				try {
+					String message = mc.orderInfo(oArr.get(table.getSelectedRow()));
+//					String message = "";
+//					// table.getValueAt(table.getSelectedRow(), column);
+//					message += ("주문번호 : " + String.valueOf(table.getValueAt(table.getSelectedRow(), 0)) + "\n 주문상품 \n");
+//
+//					for (int j = 0; j < oArr.get(table.getSelectedRow()).getpNo().size(); j++) {
+//
+//						for (int l = 0; l < pArr.size(); l++) {
+//							if (pArr.get(l).getpNo() == oArr.get(table.getSelectedRow()).getpNo().get(j)) {
+//								message += pArr.get(l).getProductName() + " : "
+//										+ oArr.get(table.getSelectedRow()).getAmount().get(j) + "개\n";
+//							}
+//						}
+//
+//					}
+//					message += "주문가격 : " + oArr.get(table.getSelectedRow()).getPayment() + "\n";
+//					if (oArr.get(table.getSelectedRow()).getState() == 0) {
+//						message += "배송상태 : 결재완료";
+//					} else if (oArr.get(table.getSelectedRow()).getState() == 1) {
+//						message += "배송상태 : 배송 중";
+//					} else {
+//						message += "배송상태 : 배송완료";
+//					}
+
+					JOptionPane.showMessageDialog(null, message);
+				}catch(ArrayIndexOutOfBoundsException e2) {
+					JOptionPane.showMessageDialog(null, "값을 선택해주세요", "Error", JOptionPane.WARNING_MESSAGE);
 				}
-				message +="주문가격 : " + oArr.get(table.getSelectedRow()).getPayment() + "\n";
-				if(oArr.get(table.getSelectedRow()).getState()==0) {
-					message +="배송상태 : " + stat[0];
-				}else if(oArr.get(table.getSelectedRow()).getState()==1) {
-					message +="배송상태 : " + stat[1];
-				}else {
-					message += "배송상태 : " + stat[2];
-				}
 				
-					
-				
-				
-				
-				JOptionPane.showMessageDialog(null, message);
-				
+
 			}
 		});
-		
-		
-		
+
 		update.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1473,31 +1492,29 @@ public class ManageViewFinal {
 				for (int i = 0; i < s.length; i++) {
 					s[i] = String.valueOf(table.getValueAt(i, 3));
 				}
-				
-				
+
 				int result = JOptionPane.showConfirmDialog(null, "배송상태를 등록하시겠습니까?", "Confirm",
 						JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.CLOSED_OPTION) {
 
 				} else if (result == JOptionPane.YES_OPTION) {
-					
+
 					for (int j = 0; j < s.length; j++) {
-						if(s[j].equals(stat[0])) {
+						if (s[j].equals(stat[0])) {
 							oArr.get(j).setState(0);
-						}else if(s[j].equals(stat[1])) {
+						} else if (s[j].equals(stat[1])) {
 							oArr.get(j).setState(1);
-						}else {
+						} else {
 							oArr.get(j).setState(2);
 						}
 					}
-					System.out.println(oArr);
 					oDao.fileSave(oArr);
-					//MainView.setMainPage(manageMain());
+					// MainView.setMainPage(manageMain());
 				}
 
 			}
 		});
-		
+
 		return cartView;
 
 	}

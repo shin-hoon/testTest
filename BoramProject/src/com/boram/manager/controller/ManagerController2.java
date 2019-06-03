@@ -30,71 +30,117 @@ public class ManagerController2 {
 	public List<Product> searchProduct() {
 		return pArr;
 	}
-
-	public void insertProduct(int category, String productName, int price, String size, String explain, int stock) {
-
-		int pNo = 1;
-		try {
-			if (pArr != null) {
-				pNo = pArr.get(pArr.size() - 1).getpNo() + 1;
-			}
-		} catch (ArrayIndexOutOfBoundsException e) {
-			pNo = 1;
-		}
-
-		pArr.add(new Product(pNo, category, productName, price, size, stock, 0));
+	public ArrayList<Order> searchOrder(){
+		return oArr;
 	}
-
-	public int searchpNo(int pNo) {
-		// pNo일치하는 인덱스 반환
+	
+	/**
+	 * 사용 메소드 manageProduct, analyzeSale
+	 * 용도 프로덕트 번호값을 입력받고 그 인덱스의 값을 반환한다.
+	 */
+	public int indexProduct(int pNo) {
+		int b=-1;
 		for (int i = 0; i < pArr.size(); i++) {
 			if (pArr.get(i).getpNo() == pNo) {
-				return i;
+				b = i;
+				break;
 			}
 		}
-		return -1;
-
+		return b;
 	}
-
-	public void updateProduct(int index, int menu, String update) {
-
-		int result = Integer.parseInt(update);
-
-		switch (menu) {
-		case 1:
-
-			pArr.get(index).setCategory(result);
-			break;
-		case 2:
-			pArr.get(index).setProductName(update);
-			break;
-		case 3:
-			pArr.get(index).setPrice(result);
-			break;
-		case 4:
-			pArr.get(index).setSize(update);
-			break;
-		case 5:
-			pArr.get(index).setExplain(update);
-			break;
-
-		default:
-			break;
+	
+	public int indexMember(int mNo) {
+		int temp = -1;
+		for (int i = 0; i < mArr.size(); i++) {
+			if (mArr.get(i).getmNo() == (int) mNo) {
+				temp = i;
+				break;
+			}
 		}
-
+		return temp;
 	}
+	
+	public String orderInfo(Order o) {
+		String message = "";
+		// table.getValueAt(table.getSelectedRow(), column);
+		message += ("주문번호 : " + o.getOrderNo()) + "\n 주문상품 \n";
+
+		for (int j = 0; j < o.getpNo().size(); j++) {
+
+			for (int l = 0; l < pArr.size(); l++) {
+				if (pArr.get(l).getpNo() == o.getpNo().get(j)) {
+					message += pArr.get(l).getProductName() + " : "
+							+ o.getAmount().get(j) + "개\n";
+				}
+			}
+
+		}
+		message += "주문가격 : " + o.getPayment() + "\n";
+		if (o.getState() == 0) {
+			message += "배송상태 : 결재완료";
+		} else if (o.getState() == 1) {
+			message += "배송상태 : 배송 중";
+		} else {
+			message += "배송상태 : 배송종료";
+		}
+		return message;
+	}
+	
+	
+//	public void insertProduct(int category, String productName, int price, String size, String explain, int stock) {
+//
+//		int pNo = 1;
+//		try {
+//			if (pArr != null) {
+//				pNo = pArr.get(pArr.size() - 1).getpNo() + 1;
+//			}
+//		} catch (ArrayIndexOutOfBoundsException e) {
+//			pNo = 1;
+//		}
+//
+//		pArr.add(new Product(pNo, category, productName, price, size, stock, 0));
+//	}
+
+
+//	public void updateProduct(int index, int menu, String update) {
+//
+//		int result = Integer.parseInt(update);
+//
+//		switch (menu) {
+//		case 1:
+//
+//			pArr.get(index).setCategory(result);
+//			break;
+//		case 2:
+//			pArr.get(index).setProductName(update);
+//			break;
+//		case 3:
+//			pArr.get(index).setPrice(result);
+//			break;
+//		case 4:
+//			pArr.get(index).setSize(update);
+//			break;
+//		case 5:
+//			pArr.get(index).setExplain(update);
+//			break;
+//
+//		default:
+//			break;
+//		}
+//
+//	}
 
 	public void deleteProduct(int result) {
 		pArr.remove(result);
 	}
 
-	public void deleteMember(int result) {
-		mArr.remove(result);
-	}
+//	public void deleteMember(int result) {
+//		mArr.remove(result);
+//	}
 
-	public void updateProduct(int result, int stock) {
-		pArr.get(result).setStock(stock);
-	}
+//	public void updateProduct(int result, int stock) {
+//		pArr.get(result).setStock(stock);
+//	}
 
 	public HashMap<Integer, Double> analysis() {
 		HashMap<Integer, Double> anl = new HashMap<Integer, Double>();
