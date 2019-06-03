@@ -1,5 +1,6 @@
 package com.boram.member.controller;
 
+import java.awt.Choice;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -30,12 +31,12 @@ public class MemberController {
 	/*
 	 * 회원가입
 	 */
-	public void join(String name, int age, String id, String pwd, String phone, String address, String email) {
+	public void join(String name, Choice year, Choice month, Choice day, String id, String pwd, String phone, String address, String email) {
 
 		// 회원번호 주기
 		int mNo;
 		for (Member m : memberList) {
-			System.out.println( m.getName() + m.getAge() + m.getId() + m.getPwd() + m.getPhone()
+			System.out.println( m.getName() + m.getYear() + m.getMonth() + m.getDay() + m.getId() + m.getPwd() + m.getPhone()
 					+ m.getAddress() + m.getEmail()); // mNo로 1씩 증가
 			System.out.println("test : "+m.toString());
 		}
@@ -45,11 +46,9 @@ public class MemberController {
 		}else {
 			mNo=memberList.get(memberList.size()-1).getmNo()+1; //제일마지막번호 +1
 		}
-		   
-		
 
 		// 회원추가
-		memberList.add(new Member(mNo, name, age, id, pwd, phone, address, email));
+		memberList.add(new Member(mNo, name, year, month, day, id, pwd, phone, address, email));
 		System.out.println(memberList.size());
 		for (int i = 0; i < memberList.size(); i++) {
 			System.out.println("===============");

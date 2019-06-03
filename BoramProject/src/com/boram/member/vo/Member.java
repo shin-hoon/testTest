@@ -1,5 +1,6 @@
 package com.boram.member.vo;
 
+import java.awt.Choice;
 import java.io.Serializable;
 
 public class Member implements Serializable{
@@ -8,7 +9,38 @@ public class Member implements Serializable{
 	
 	private int mNo; // 회원번호
 	private String name;
-	private int birth;
+	private Choice year;
+	private Choice month;
+	private Choice day;
+	public Choice getYear() {
+		return year;
+	}
+
+
+	public void setYear(Choice year) {
+		this.year = year;
+	}
+
+
+	public Choice getMonth() {
+		return month;
+	}
+
+
+	public void setMonth(Choice month) {
+		this.month = month;
+	}
+
+
+	public Choice getDay() {
+		return day;
+	}
+
+
+	public void setDay(Choice day) {
+		this.day = day;
+	}
+
 	private String id;
 	private String pwd;
 	private String phone;
@@ -31,11 +63,13 @@ public class Member implements Serializable{
 		this.pwd = pwd;
 		
 	}
-	public Member(int mNo, String name, int birth, String id, String pwd, String phone, String address, String email) {
+	public Member(int mNo, String name, Choice year, Choice month, Choice day, String id, String pwd, String phone, String address, String email) {
 		this.mNo= mNo;
 		this.name = name;
-		this.birth = birth;
 		this.id = id;
+		this.day = day;
+		this.month = month;
+		this.year = year;
 		this.pwd = pwd;
 		this.phone = phone;
 		this.address = address;
@@ -58,13 +92,6 @@ public class Member implements Serializable{
 		this.name = name;
 	}
 
-	public int getAge() {
-		return birth;
-	}
-
-	public void setAge(int birth) {
-		this.birth = birth;
-	}
 
 	public String getId() {
 		return id;
@@ -110,8 +137,9 @@ public class Member implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Member [mNo=" + mNo + ", name=" + name + ", birth=" + birth + ", id=" + id + ", pwd=" + pwd + ", phone="
-				+ phone + ", address=" + address + ", email=" + email +  "]";
+		return "Member [mNo=" + mNo + ", name=" + name + ", year=" + year + ", month=" + month + ", day=" + day
+				+ ", id=" + id + ", pwd=" + pwd + ", phone=" + phone + ", address=" + address + ", email=" + email
+				+ "]";
 	}
 
 	@Override
@@ -119,13 +147,15 @@ public class Member implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + birth;
+		result = prime * result + ((day == null) ? 0 : day.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + mNo;
+		result = prime * result + ((month == null) ? 0 : month.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((pwd == null) ? 0 : pwd.hashCode());
+		result = prime * result + ((year == null) ? 0 : year.hashCode());
 		return result;
 	}
 
@@ -143,7 +173,10 @@ public class Member implements Serializable{
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (birth != other.birth)
+		if (day == null) {
+			if (other.day != null)
+				return false;
+		} else if (!day.equals(other.day))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -156,6 +189,11 @@ public class Member implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		if (mNo != other.mNo)
+			return false;
+		if (month == null) {
+			if (other.month != null)
+				return false;
+		} else if (!month.equals(other.month))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -171,6 +209,11 @@ public class Member implements Serializable{
 			if (other.pwd != null)
 				return false;
 		} else if (!pwd.equals(other.pwd))
+			return false;
+		if (year == null) {
+			if (other.year != null)
+				return false;
+		} else if (!year.equals(other.year))
 			return false;
 		return true;
 	}
