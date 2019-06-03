@@ -81,36 +81,48 @@ public class ManageViewFinal {
 		
 		
 		JLabel label_1 = new JLabel("\uAD00\uB9AC\uC790 \uD398\uC774\uC9C0");
-		label_1.setFont(new Font("±¼¸²Ã¼", Font.BOLD | Font.ITALIC, 20));
+		label_1.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		label_1.setBounds(249, 34, 153, 67);
 		manageMain.add(label_1);
 
 		JButton searchMember = new JButton("1. \uD68C\uC6D0\uC815\uBCF4 \uC870\uD68C");
 		searchMember.setBounds(155, 100, 343, 67);
+		searchMember.setForeground(Color.WHITE);
+		searchMember.setBackground(Color.BLACK);
 		manageMain.add(searchMember);
 
 
 		JButton insertProduct = new JButton("2. \uBB3C\uD488\uB4F1\uB85D");
 		insertProduct.setBounds(155, 179, 343, 67);
+		insertProduct.setForeground(Color.WHITE);
+		insertProduct.setBackground(Color.BLACK);
 		manageMain.add(insertProduct);
 
 
 		JButton manageProduct = new JButton("3.\uC81C\uD488\uAD00\uB9AC");
 		manageProduct.setBounds(155, 261, 343, 67);
+		manageProduct.setForeground(Color.WHITE);
+		manageProduct.setBackground(Color.BLACK);
 		manageMain.add(manageProduct);
 
 		JButton analysis = new JButton("4. \uD310\uB9E4 \uBD84\uC11D");
 		analysis.setBounds(155, 343, 343, 67);
+		analysis.setForeground(Color.WHITE);
+		analysis.setBackground(Color.BLACK);
 		manageMain.add(analysis);
 
 
 		JButton salesState = new JButton("5. \uD310\uB9E4\uD604\uD669");
 		salesState.setBounds(155, 425, 343, 67);
+		salesState.setForeground(Color.WHITE);
+		salesState.setBackground(Color.BLACK);
 		manageMain.add(salesState);
 
 
 		JButton inforDelivery = new JButton("6. \uBC30\uC1A1\uC815\uBCF4");
 		inforDelivery.setBounds(155, 507, 343, 67);
+		inforDelivery.setForeground(Color.WHITE);
+		inforDelivery.setBackground(Color.BLACK);
 		manageMain.add(inforDelivery);
 
 
