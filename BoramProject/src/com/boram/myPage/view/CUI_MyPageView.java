@@ -44,9 +44,9 @@ public class CUI_MyPageView {
 				case 2:
 					pwChange();
 					break;
-				case 3:
-					ageChange();
-					break;
+//				case 3:
+//					ageChange();
+//					break;
 				case 4:
 					addressChange();
 					break;
@@ -130,17 +130,17 @@ public class CUI_MyPageView {
 		}
 	}
 
-	public void ageChange() {
-		System.out.print("변경할  나이를 입력해주세요 : ");
-		int newinp = sc.nextInt();
-		sc.nextLine();
-		int result = cm.ageChange(newinp);
-		if (result == 0) {
-			System.out.println("나이 변경에 실패하였습니다.");
-		} else {
-			System.out.println("나이 변경에 성공하였습니다.");
-		}
-	}
+//	public void ageChange() {
+//		System.out.print("변경할  나이를 입력해주세요 : ");
+//		int newinp = sc.nextInt();
+//		sc.nextLine();
+//		int result = cm.ageChange(newinp);
+//		if (result == 0) {
+//			System.out.println("나이 변경에 실패하였습니다.");
+//		} else {
+//			System.out.println("나이 변경에 성공하였습니다.");
+//		}
+//	}
 	/**
 	 * 조회용 임시메뉴.
 	 */
