@@ -3,13 +3,13 @@ package com.boram.shopping.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.boram.manager.view.ManageViewFinal;
 import com.boram.manager.vo.Product;
 import com.boram.member.controller.MemberController;
 import com.boram.member.view.MemberView1;
+import com.boram.myPage.controller.MyCart;
 import com.boram.myPage.view.WB_MyPage_Main;
 import com.boram.shopping.view.ContentPanel;
 import com.boram.shopping.view.FixedMainMenu;
@@ -19,15 +19,20 @@ import com.boram.shopping.view.MainView;
 public class MainMouseEvent extends MouseAdapter{
 	private MemberController mc = new MemberController();
 	private String what;
-	private JLabel mainImage;
 	private Product product;
-
+	private int category;
+	
 	public MainMouseEvent(String what) {
 		this.what = what;
 	}
 	
 	public MainMouseEvent(Product product, String what) {
 		this.product = product;
+		this.what = what;
+	}
+	
+	public MainMouseEvent(int category, String what) {
+		this.category = category;
 		this.what = what;
 	}
 	
@@ -78,7 +83,18 @@ public class MainMouseEvent extends MouseAdapter{
 		}
 		else if(what.equals("상세페이지")) {
 			MainView.setMainPage(new ContentPanel(product).getContent());
-//			System.out.println(mainImage.getName());
+		}
+		else if(what.equals("장바구니")) {
+			if(mc.nugu()!=null) {
+				JOptionPane.showMessageDialog(null, "장바구니에 추가 되었습니다. 마이페이지에서 확인 가능합니다.", "LogIn Error", JOptionPane.WARNING_MESSAGE);
+				new MyCart().addCart(product);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "로그인 후 이용 가능합니다.", "LogIn Error", JOptionPane.WARNING_MESSAGE);
+			}
+		}
+		else if(what.equals("뒤로가기")) {
+			MainView.setMainPage(new MainPanel(category).getMainPanel());
 		}
 		else if(what.equals("11")) {
 			MainView.setMainPage(new MainPanel(11).getMainPanel());

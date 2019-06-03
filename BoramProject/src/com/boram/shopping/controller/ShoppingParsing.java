@@ -135,13 +135,13 @@ public class ShoppingParsing {
 					StringBuilder sb = new StringBuilder();
 					for (int j = 0; j < contentExplain.size(); j++) {
 						Element contentExplainTmp = contentExplain.get(j);
-						sb.append(contentExplainTmp.text());
+							sb.append(contentExplainTmp.text()+"\n");
 					}
 					if(sb.toString().equals("")) {
 						Elements contentExplain2 = contentDoc.select("div#prdDetailContent ul li");
 						for(int k = 0; k < contentExplain2.size(); k++) {
 							Element contentExplainTmp2 = contentExplain2.get(k);
-							sb.append(contentExplainTmp2.text());
+								sb.append(contentExplainTmp2.text()+"\n");
 						}
 						if(sb.toString().equals("")) {
 							sb.append("상품 설명이 등록되지 않았습니다.");

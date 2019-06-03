@@ -10,11 +10,14 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import com.boram.manager.vo.Product;
 import com.boram.manager.vo.ProductDao;
+import com.boram.shopping.controller.MainMouseEvent;
 
 public class ContentPanel{
 	private JPanel content;
@@ -32,12 +35,10 @@ public class ContentPanel{
 		content.setLayout(null);
 		content.setVisible(true);
 		
-		//List<Product> ProductList = new ProductDao().fileRead();
-		
 		Image image = null;
 		try {
 			File file = new File(MainView.PATH + product.getImgFilePath());
-			image = ImageIO.read(file).getScaledInstance(718 , 630, Image.SCALE_SMOOTH);
+			image = ImageIO.read(file).getScaledInstance(700 , 630, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			System.out.println("이미지 불러오기 에러 : " + e.getMessage());
 		}
@@ -46,36 +47,100 @@ public class ContentPanel{
 		contentImage.setBounds(0, 0, 700, 630);
 		content.add(contentImage);
 		
+		ProductDao pd = new ProductDao();
+		List<Product> productList = pd.fileRead();
 		
-	/*	
-		private int pNo;				// 게시물번호
-		private int category;			// 카테고리
-		private String productName;		// 상품이름
-		private int price;				// 상품가격
-		private String size;			// 상품사이즈
-		private String explain;			// 상품설명
-		private String imgFilePath;		// 이미지경로
-		private int stock;				// 상품재고
-		private int count; 				// 조회수
+		for (int i = 0; i < productList.size(); i++) {
+			if(productList.get(i).getpNo() == product.getpNo()) {
+				productList.get(i).setCount(productList.get(i).getCount()+1);
+				break;
+			}
+		}
 		
-	*/	
+		pd.fileSave(productList);
+		
+		
 		DecimalFormat df = new DecimalFormat("###,###");
 		JLabel productName = new JLabel(product.getProductName());
 		productName.setFont(new Font("굴림", Font.BOLD, 25));
 		productName.setBounds(14, 637, 631, 44);
 		content.add(productName);
 		
-		JLabel price = new JLabel("판매가");
-		price.setForeground(Color.GRAY);
-		price.setFont(new Font("굴림", Font.BOLD, 20));
-		price.setBounds(14, 696, 133, 44);
-		content.add(price);
+		JLabel priceTitle = new JLabel("판매가");
+		priceTitle.setForeground(Color.GRAY);
+		priceTitle.setFont(new Font("굴림", Font.BOLD, 20));
+		priceTitle.setBounds(14, 696, 133, 44);
+		content.add(priceTitle);
 		
-		JLabel label_1 = new JLabel(df.format(product.getPrice())+"원");
-		label_1.setForeground(Color.GRAY);
-		label_1.setFont(new Font("굴림", Font.BOLD, 20));
-		label_1.setBounds(141, 696, 133, 44);
-		content.add(label_1);
+		JLabel price = new JLabel("55,300원");
+		price.setForeground(Color.BLACK);
+		price.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		price.setBounds(141, 696, 133, 44);
+		content.add(price);
+
+		JLabel savings = new JLabel("적립금");
+		savings.setForeground(Color.GRAY);
+		savings.setFont(new Font("굴림", Font.BOLD, 20));
+		savings.setBounds(14, 738, 133, 44);
+		content.add(savings);
+		
+		JLabel savingsPay = new JLabel("420원");
+		savingsPay.setForeground(Color.GRAY);
+		savingsPay.setFont(new Font("굴림", Font.BOLD, 20));
+		savingsPay.setBounds(141, 738, 133, 44);
+		content.add(savingsPay);
+		
+		JLabel shippingFee = new JLabel("배송비");
+		shippingFee.setForeground(Color.GRAY);
+		shippingFee.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		shippingFee.setBounds(14, 780, 133, 44);
+		content.add(shippingFee);
+		
+		JLabel shippingFeePay = new JLabel("2,000원 (50,000 이상 구매 시 무료)");
+		shippingFeePay.setForeground(Color.GRAY);
+		shippingFeePay.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		shippingFeePay.setBounds(141, 780, 356, 44);
+		content.add(shippingFeePay);
+		
+		JLabel size = new JLabel("사이즈");
+		size.setForeground(Color.GRAY);
+		size.setFont(new Font("굴림", Font.BOLD, 20));
+		size.setBounds(14, 822, 133, 44);
+		content.add(size);
+		
+		JLabel free = new JLabel("Free");
+		free.setForeground(Color.BLACK);
+		free.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		free.setBounds(141, 822, 133, 44);
+		content.add(free);
+		
+		JButton cart = new JButton("장바구니");
+		cart.setFont(new Font("맑은 고딕", Font.BOLD, 26));
+		cart.setForeground(Color.WHITE);
+		cart.setBackground(Color.BLACK);
+		cart.setEnabled(false);
+		cart.setBounds(0, 887, 700, 61);
+		content.add(cart);
+		
+		JButton back = new JButton("뒤로가기");
+		back.setForeground(Color.BLACK);
+		back.setFont(new Font("맑은 고딕", Font.BOLD, 26));
+		back.setEnabled(false);
+		back.setBackground(Color.WHITE);
+		back.setBounds(0, 960, 700, 61);
+		content.add(back);
+		
+		JTextArea explain = new JTextArea();
+		explain.setFont(new Font("굴림", Font.BOLD, 20));
+		explain.setEditable(false);
+		explain.setLineWrap(true);
+		explain.setText(product.getExplain());
+		explain.setBounds(67, 1091, 565, 2099);
+		content.add(explain);
+		
+		cart.addMouseListener(new MainMouseEvent(product,"장바구니"));
+		back.addMouseListener(new MainMouseEvent(product.getCategory(),"뒤로가기"));
+		content.setSize(718, 2290);
 	}
 
 }
