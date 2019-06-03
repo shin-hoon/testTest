@@ -1,6 +1,5 @@
 package com.boram.member.vo;
 
-import java.awt.Choice;
 import java.io.Serializable;
 
 public class Member implements Serializable{
