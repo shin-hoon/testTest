@@ -93,6 +93,12 @@ public class MainMouseEvent extends MouseAdapter{
 				JOptionPane.showMessageDialog(null, "로그인 후 이용 가능합니다.", "LogIn Error", JOptionPane.WARNING_MESSAGE);
 			}
 		}
+		else if(what.equals("검색")) {
+			if(FixedMainMenu.searchChk)	FixedMainMenu.searchChk = false;
+			else 						FixedMainMenu.searchChk = true;
+			MainView.setMainMenu(new FixedMainMenu().getMainMenu());
+			
+		}
 		else if(what.equals("뒤로가기")) {
 			MainView.setMainPage(new MainPanel(category).getMainPanel());
 		}

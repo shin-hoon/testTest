@@ -18,6 +18,7 @@ import com.boram.manager.vo.ProductDao;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Temp extends JFrame {
 	private JPanel content;
@@ -26,6 +27,7 @@ public class Temp extends JFrame {
 	 */
 	private static final long serialVersionUID = -8447375608770781274L;
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -68,109 +70,15 @@ public class Temp extends JFrame {
 		content.setVisible(true);
 		
 		
-		List<Product> productList = new ProductDao().fileRead();
 		
-		Image image = null;
-		try {
-			File file = new File(MainView.PATH + productList.get(2).getImgFilePath());
-			image = ImageIO.read(file).getScaledInstance(718 , 630, Image.SCALE_SMOOTH);
-		} catch (IOException e) {
-			System.out.println("ÀÌ¹ÌÁö ºÒ·¯¿À±â ¿¡·¯ : " + e.getMessage());
-		}
-		
-		JLabel contentImage = new JLabel(new ImageIcon(image));
-		contentImage.setBounds(0, 0, 700, 630);
-		content.add(contentImage);
-		
-		JLabel productName = new JLabel("[MUTNAM] ÇÏÀÌÄ÷¸®Æ¼ ¶óÀÌ´õ ÀÚÄÏ");
-		productName.setFont(new Font("±¼¸²", Font.BOLD, 25));
-		productName.setBounds(14, 637, 631, 44);
-		content.add(productName);
-			
-		
-		JLabel priceTitle = new JLabel("ÆÇ¸Å°¡");
-		priceTitle.setForeground(Color.GRAY);
-		priceTitle.setFont(new Font("±¼¸²", Font.BOLD, 20));
-		priceTitle.setBounds(14, 696, 133, 44);
-		content.add(priceTitle);
-		
-		JLabel price = new JLabel("55,300¿ø");
-		price.setForeground(Color.BLACK);
-		price.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		price.setBounds(141, 696, 133, 44);
-		content.add(price);
-		JLabel savings = new JLabel("Àû¸³±Ý");
-		savings.setForeground(Color.GRAY);
-		savings.setFont(new Font("±¼¸²", Font.BOLD, 20));
-		savings.setBounds(14, 738, 133, 44);
-		content.add(savings);
-		
-		JLabel savingsPay = new JLabel("420¿ø");
-		savingsPay.setForeground(Color.GRAY);
-		savingsPay.setFont(new Font("±¼¸²", Font.BOLD, 20));
-		savingsPay.setBounds(141, 738, 133, 44);
-		content.add(savingsPay);
-		
-		JLabel shippingFee = new JLabel("¹è¼Ûºñ");
-		shippingFee.setForeground(Color.GRAY);
-		shippingFee.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
-		shippingFee.setBounds(14, 780, 133, 44);
-		content.add(shippingFee);
-		
-		JLabel shippingFeePay = new JLabel("2,000¿ø (50,000 ÀÌ»ó ±¸¸Å ½Ã ¹«·á)");
-		shippingFeePay.setForeground(Color.GRAY);
-		shippingFeePay.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 20));
-		shippingFeePay.setBounds(141, 780, 356, 44);
-		content.add(shippingFeePay);
-		
-		JLabel size = new JLabel("»çÀÌÁî");
-		size.setForeground(Color.GRAY);
-		size.setFont(new Font("±¼¸²", Font.BOLD, 20));
-		size.setBounds(14, 822, 133, 44);
-		content.add(size);
-		
-		JLabel free = new JLabel("Free");
-		free.setForeground(Color.BLACK);
-		free.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		free.setBounds(141, 822, 133, 44);
-		content.add(free);
-		
-		JButton buyNow = new JButton("BUY NOW");
-		buyNow.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 26));
-		buyNow.setForeground(Color.WHITE);
-		buyNow.setBackground(Color.BLACK);
-		buyNow.setEnabled(false);
-		buyNow.setBounds(0, 887, 700, 61);
-		content.add(buyNow);
-		
-		JButton cart = new JButton("CART");
-		cart.setForeground(Color.BLACK);
-		cart.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 26));
-		cart.setEnabled(false);
-		cart.setBackground(Color.WHITE);
-		cart.setBounds(0, 960, 700, 61);
-		content.add(cart);
 		
 		
 		setContentPane(content);
-		/*
-		JTextArea sdfdsf = new JTextArea();
-		sdfdsf.setFont(new Font("±¼¸²", Font.BOLD, 20));
-		sdfdsf.setEditable(false);
-		sdfdsf.setLineWrap(true);
-		sdfdsf.setText(productList.get(2).getExplain());
-		sdfdsf.setBounds(0, 0, 700, 625);
-		content.add(sdfdsf);
-		*/
-//		String aa = productList.get(2).getExplain();
-	/*	JLabel sdfdsf = new JLabel();
-		sdfdsf.setForeground(Color.BLACK);
-		sdfdsf.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		sdfdsf.setText(productList.get(2).getExplain());
-		sdfdsf.setBounds(25, 12, 640, 622);
-		content.add(sdfdsf);*/
 		
-//		System.out.println(productList.get(2).getExplain());
+		textField = new JTextField();
+		textField.setBounds(56, 64, 212, 24);
+		content.add(textField);
+		textField.setColumns(10);
 		
 	}
 }

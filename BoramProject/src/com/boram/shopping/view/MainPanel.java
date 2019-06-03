@@ -24,6 +24,8 @@ public class MainPanel{
 	private int priceHeight_1 = 536;
 	private int priceWidth_2 = 15;
 	private int priceHeight_2 = 560;
+	private int cnt = 1;
+	List<Product> productList;
 	private JLabel mainImage;
 	private JLabel productName;
 	private JLabel price;
@@ -44,11 +46,72 @@ public class MainPanel{
 		mainPage.setLayout(null);
 		mainPage.setVisible(true);
 
-		List<Product> ProductList = new ProductDao().fileRead();
+		productList = new ProductDao().fileRead();
 		mainImage = new JLabel();
 		productName = new JLabel();
 		price = new JLabel();
 		
+		
+		if(num < 0) {
+			searchList();
+		}
+		else {
+			categoryList(num);
+		}
+
+		mainPage.setSize(718, ((cnt-1)%2 != 0 ? priceHeight_2+100 : priceHeight_2-400));
+	} // end method
+	
+	public void searchList() {
+		int pageWidth = mainPage.getWidth()/2;
+		JLabel category = new JLabel("°Ë»ö°á°ú");
+		category.setLayout(null);
+		category.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 30));
+		category.setBounds(pageWidth-80, 20, 258, 58);
+		mainPage.add(category);
+		
+		List<Product> searchList = FixedMainMenu.searchList;
+		DecimalFormat comma = new DecimalFormat("###,###");
+		
+		for(int i = searchList.size()-1 ; i >= 0; i--) {
+				if( cnt % 2 == 0 ) {
+					imgWidth += 344;
+					priceWidth_1 += 344;
+					priceWidth_2 += 344;
+				}
+				
+				mainImage = new JLabel(new ImageIcon(MainView.PATH + searchList.get(i).getImgFilePath()));
+				mainImage.setName(String.valueOf(searchList.get(i).getpNo()));
+				mainImage.setBounds(imgWidth, imgHeight, 325, 432);
+				mainPage.add(mainImage);
+				
+				mainImage.addMouseListener(new MainMouseEvent(searchList.get(i),"»ó¼¼ÆäÀÌÁö"));
+				
+				productName = new JLabel(searchList.get(i).getProductName());
+				productName.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
+				productName.setBounds(priceWidth_1, priceHeight_1, 300, 18);
+				mainPage.add(productName);
+				
+				price = new JLabel(comma.format(searchList.get(i).getPrice())+"¿ø" );
+				price.setForeground(new Color(255, 153, 0));
+				price.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
+				price.setBounds(priceWidth_2, priceHeight_2, 127, 18);
+				mainPage.add(price);
+				
+				if( cnt % 2 == 0 ) {
+					imgHeight += 500;
+					priceHeight_1 += 500;
+					priceHeight_2 += 500;
+					imgWidth = 15;
+					priceWidth_1 = 15;
+					priceWidth_2 = 15;
+				}
+				cnt++;
+		} // end for
+	} // end searchList method
+	
+	
+	public void categoryList(int num) {
 		List<Category> categoryChk = new CategoryDao().fileRead();
 		
 		for(int i = 0; i < categoryChk.size(); i++) {
@@ -66,28 +129,27 @@ public class MainPanel{
 		}	
 		
 		DecimalFormat comma = new DecimalFormat("###,###");
-		int cnt = 1;
-		for(int i = ProductList.size()-1 ; i >= 0; i--) {
-			if( num == ProductList.get(i).getCategory() ) {
+		for(int i = productList.size()-1 ; i >= 0; i--) {
+			if( num == productList.get(i).getCategory() ) {
 				if( cnt % 2 == 0 ) {
 					imgWidth += 344;
 					priceWidth_1 += 344;
 					priceWidth_2 += 344;
 				}
 				
-				mainImage = new JLabel(new ImageIcon(MainView.PATH + ProductList.get(i).getImgFilePath()));
-				mainImage.setName(String.valueOf(ProductList.get(i).getpNo()));
+				mainImage = new JLabel(new ImageIcon(MainView.PATH + productList.get(i).getImgFilePath()));
+				mainImage.setName(String.valueOf(productList.get(i).getpNo()));
 				mainImage.setBounds(imgWidth, imgHeight, 325, 432);
 				mainPage.add(mainImage);
 				
-				mainImage.addMouseListener(new MainMouseEvent(ProductList.get(i),"»ó¼¼ÆäÀÌÁö"));
+				mainImage.addMouseListener(new MainMouseEvent(productList.get(i),"»ó¼¼ÆäÀÌÁö"));
 				
-				productName = new JLabel(ProductList.get(i).getProductName());
+				productName = new JLabel(productList.get(i).getProductName());
 				productName.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
 				productName.setBounds(priceWidth_1, priceHeight_1, 300, 18);
 				mainPage.add(productName);
 				
-				price = new JLabel(comma.format(ProductList.get(i).getPrice())+"¿ø" );
+				price = new JLabel(comma.format(productList.get(i).getPrice())+"¿ø" );
 				price.setForeground(new Color(255, 153, 0));
 				price.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.PLAIN, 15));
 				price.setBounds(priceWidth_2, priceHeight_2, 127, 18);
@@ -104,8 +166,7 @@ public class MainPanel{
 				cnt++;
 			} // end if
 		} // end for
-		mainPage.setSize(718, ((cnt-1)%2 != 0 ? priceHeight_2+100 : priceHeight_2-400));
-	} // end method
+	} // end categoryList method
 } // end class
 
 /*	

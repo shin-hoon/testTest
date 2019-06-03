@@ -2,13 +2,20 @@ package com.boram.shopping.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import com.boram.manager.vo.Product;
+import com.boram.manager.vo.ProductDao;
 import com.boram.member.controller.MemberController;
 import com.boram.shopping.controller.MainMouseEvent;
 
@@ -16,6 +23,9 @@ public class FixedMainMenu {
 	private JPanel mainMenu;
 	// 고정 페이지 JPanel에 담기는 JLabel(맨 위쪽 => 메인 베너, 검색, 로그인, 마이 페이지, 관리자 페이지)
 	private JLabel kategorie, logo, search, login, myPage, adminPage;	
+	private JTextField textField;
+	public static List<Product> searchList;
+	public static boolean searchChk = false; 
 	
 	public JPanel getMainMenu() {
 		return this.mainMenu;
@@ -44,13 +54,20 @@ public class FixedMainMenu {
 		logo.setBounds(118, -2, 201, 79);
 		mainMenu.add(logo);
 		
+		textField = new JTextField();
+		textField.setBounds(350, 34, 172, 24);
+		textField.setColumns(10);
+		mainMenu.add(textField);
+		if(searchChk) textField.setVisible(true);
+		else		  textField.setVisible(false);
+		
 		adminPage = new JLabel(new ImageIcon(MainView.PATH + "image\\MainImage\\adminPage.jpg"));
 		adminPage.setBounds(540, 26, 30, 32);
 		adminPage.setVisible(false);
 		mainMenu.add(adminPage);
 		
 		if(MemberController.m != null) {
-			if(MemberController.m.getId().equals("admin") ) {
+			if(MemberController.m.getId().equals("admin") && MemberController.m.getPwd().equals("1234")) {
 				adminPage.setVisible(true);
 			}
 			else {
@@ -80,10 +97,31 @@ public class FixedMainMenu {
 		boderPanel.setBounds(0, 2, 102, 75);
 		mainMenu.add(boderPanel);
 		
-		kategorie.addMouseListener(new MainMouseEvent("서브메뉴열기") );	
-		logo.addMouseListener(new MainMouseEvent("메인") );
-		login.addMouseListener(new MainMouseEvent("로그인") );
-		myPage.addMouseListener(new MainMouseEvent("마이페이지") );
+		kategorie.addMouseListener(new MainMouseEvent("서브메뉴열기"));	
+		logo.addMouseListener(new MainMouseEvent("메인"));
 		adminPage.addMouseListener(new MainMouseEvent("관리자페이지"));
+		search.addMouseListener(new MainMouseEvent("검색"));
+		login.addMouseListener(new MainMouseEvent("로그인"));
+		myPage.addMouseListener(new MainMouseEvent("마이페이지"));
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(textField.getText().length() == 0) {
+					MainView.setMainPage(new MainPanel(1).getMainPanel());
+				}
+				else {
+					List<Product> productList = new ProductDao().fileRead();
+					searchList = new ArrayList<>();
+					for (int i = 0; i < productList.size(); i++) {
+						if(productList.get(i).getProductName().contains(textField.getText())) {
+							Product p = new Product();
+							p = productList.get(i);
+							searchList.add(p);
+						}
+					}
+					MainView.setMainPage(new MainPanel(-1).getMainPanel());
+				}
+			}
+		});
 	}
 }

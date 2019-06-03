@@ -72,7 +72,7 @@ public class ContentPanel{
 		priceTitle.setBounds(14, 696, 133, 44);
 		content.add(priceTitle);
 		
-		JLabel price = new JLabel("55,300¿ø");
+		JLabel price = new JLabel(df.format(product.getPrice())+"¿ø");
 		price.setForeground(Color.BLACK);
 		price.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		price.setBounds(141, 696, 133, 44);
@@ -108,7 +108,7 @@ public class ContentPanel{
 		size.setBounds(14, 822, 133, 44);
 		content.add(size);
 		
-		JLabel free = new JLabel("Free");
+		JLabel free = new JLabel(product.getSize());
 		free.setForeground(Color.BLACK);
 		free.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		free.setBounds(141, 822, 133, 44);
