@@ -104,7 +104,7 @@ public class ChangeMember {
 	}
 
 	// age
-//	public Choice ageChange(Choice year, Choice month, Choice day) {
+	public Choice ageChange(Choice year, Choice month, Choice day) {
 		
 		
 		
@@ -117,7 +117,7 @@ public class ChangeMember {
 //			result = 0;
 //		}
 //		return result;
-// }
+ }
 	
 	public void saveChange() {
 		//MemberList는 이미 변경되어있음.
