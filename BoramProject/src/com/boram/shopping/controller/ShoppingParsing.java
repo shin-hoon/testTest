@@ -188,4 +188,26 @@ public class ShoppingParsing {
 		} // end try-catch
 		return dataList;
 	}
+
+
+	public int[] getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(int[] category) {
+		this.category = category;
+	}
+
+
+	public String[] getCategoryEng() {
+		return categoryEng;
+	}
+
+
+	public void setCategoryEng(String[] categoryEng) {
+		this.categoryEng = categoryEng;
+	}
+	
+	
 } // end class

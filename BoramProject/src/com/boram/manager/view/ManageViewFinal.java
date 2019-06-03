@@ -5,10 +5,20 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DebugGraphics;
 import javax.swing.DefaultCellEditor;
@@ -56,6 +67,7 @@ import com.boram.manager.vo.Product;
 import com.boram.manager.vo.ProductDao;
 import com.boram.member.vo.Member;
 import com.boram.member.vo.MemberDao;
+import com.boram.shopping.controller.ShoppingParsing;
 import com.boram.shopping.view.MainView;
 
 public class ManageViewFinal {
@@ -962,6 +974,43 @@ public class ManageViewFinal {
 						if (result == JOptionPane.CLOSED_OPTION) {
 
 						} else if (result == JOptionPane.YES_OPTION) {
+							ShoppingParsing sp = new ShoppingParsing(); 
+							
+							int[] getCategory = sp.getCategory();
+							String[] getCategoryEng = sp.getCategoryEng();
+							
+							String categoryEng = null;
+							for (int i = 0; i < getCategory.length; i++) {
+								if(getCategory[i] == category1) {
+									categoryEng = getCategoryEng[i];
+									break;
+								}
+							}
+							
+							File uploadFile = new File(filePath);
+							String uploadFileName = filePath.substring(filePath.lastIndexOf("\\")+1, filePath.length());
+							
+							File saveDir = new File(MainView.PATH + "image\\category\\"+categoryEng+"\\");
+							if(!saveDir.exists()) saveDir.mkdirs();
+							
+							File saveFile = new File(saveDir,uploadFileName);
+							
+							BufferedInputStream inBuffer = null;
+							BufferedOutputStream outBuffer = null;
+							try {
+								inBuffer = new BufferedInputStream(new FileInputStream(uploadFile));
+								outBuffer = new BufferedOutputStream(new FileOutputStream(saveFile));
+								
+								int readBuffer = 0;
+								while((readBuffer = inBuffer.read()) != -1) {
+									outBuffer.write(readBuffer);
+								}
+								inBuffer.close();
+								outBuffer.close();
+							} catch (Exception e2) {
+								System.out.println("파일 업로드 에러 : " + e2.getMessage());
+							}
+							filePath = "image\\category\\"+categoryEng+"\\" + uploadFileName;
 							pArr.add(new Product(pNo1, category1, productName1, price1, size1, explain1, filePath,
 									stock1, 0));
 							pDao.fileSave(pArr);
