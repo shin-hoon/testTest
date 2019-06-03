@@ -9,9 +9,11 @@ public class Member implements Serializable{
 	
 	private int mNo; // 회원번호
 	private String name;
+	
 	private Choice year;
 	private Choice month;
 	private Choice day;
+//	private int age = Integer.parseInt(String.valueOf(year)+String.valueOf(month)+String.valueOf(da)day);
 	public Choice getYear() {
 		return year;
 	}
