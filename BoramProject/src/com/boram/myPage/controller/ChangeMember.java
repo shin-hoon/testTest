@@ -126,7 +126,14 @@ public class ChangeMember {
 	 * 조회용 임시메뉴
 	 */
 	public String printMem() {
-		return MemberList.get(mNo).toString();
+		String name=MemberList.get(mNo).getName();
+		String id=MemberList.get(mNo).getId();
+		int birth=MemberList.get(mNo).getAge();
+		String phone=MemberList.get(mNo).getPhone();
+		int address=MemberList.get(mNo).getmNo();
+		String email=MemberList.get(mNo).getEmail();
+		
+		return name+"님의 정보입니다.\n";
 	}
 	public void printAllMem() {
 		System.out.println("MemberList 전체출력");

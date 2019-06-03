@@ -126,7 +126,7 @@ public class WB_MyPageView {
 		textField_5.setBounds(180, 392, 220, 40);
 		panel_2.add(textField_5);
 
-		JButton btnChange = new JButton("Change!");
+		JButton btnChange = new JButton("º¯°æ");
 
 		btnChange.addActionListener(new ActionListener() {
 

@@ -16,6 +16,9 @@ import com.boram.manager.vo.Order;
 import com.boram.manager.vo.OrderDao;
 import com.boram.member.controller.MemberController;
 import com.boram.shopping.view.MainView;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class WB_MyDeliveryView {
 	public static final int FWID = 718;
@@ -64,6 +67,15 @@ public class WB_MyDeliveryView {
 		JScrollPane sp = new JScrollPane(table);
 		sp.setBounds(14, 0, 676, 625);
 		panel2.add(sp, "Center");
+		
+		JButton button = new JButton("이전페이지");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainView.setMainPage(new WB_MyPage_Main().myPageMain());
+			}
+		});
+		button.setBounds(283, 647, 105, 27);
+		panel2.add(button);
 
 		// 오더리스트는 정제해서 본인것만 보여주어야함
 		// OList에서 본인 번호것만 다른 list에 넣어주자.

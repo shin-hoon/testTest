@@ -7,10 +7,8 @@ import com.boram.manager.vo.Order;
 import com.boram.manager.vo.OrderDao;
 import com.boram.manager.vo.Product;
 import com.boram.member.controller.MemberController;
-import com.boram.member.vo.Member;
 
-public class MyCart extends Product implements Serializable {
-	private static final long serialVersionUID = 4623389045564207219L;
+public class MyCart {
 	static ArrayList<Product> CList = new ArrayList<>();// 장바구니리스트
 	ArrayList<Order> OList = new ArrayList<>();// 주문리스트
 
@@ -34,8 +32,7 @@ public class MyCart extends Product implements Serializable {
 	}
 
 	/**
-	 * @param product
-	 *            장바구니 추가될 product객체리스트.
+	 * @param product 장바구니 추가될 product객체리스트.
 	 */
 	// 중복시 수량증가 해야되나?
 	public void addCart(Product product) {
@@ -44,7 +41,6 @@ public class MyCart extends Product implements Serializable {
 
 	/**
 	 * 전체조회
-	 * 
 	 * @return 전체리스트 리턴 후 View에서 출력.
 	 */
 	public ArrayList<Product> cartList() {
@@ -53,9 +49,7 @@ public class MyCart extends Product implements Serializable {
 
 	/**
 	 * 안쓰는코드!!!!!!!!!!!!! 삭제품목번호 받아서 삭제..
-	 * 
-	 * @param delete
-	 *            삭제할 품목번호
+	 * @param delete 삭제할 품목번호
 	 * @return 삭제성공1/실패0
 	 */
 	public int cartDelete(int delete) {
@@ -87,9 +81,11 @@ public class MyCart extends Product implements Serializable {
 		OrderDao od = new OrderDao();// 주문정보 Output
 		ArrayList<Integer> pNo = new ArrayList<>();// 주문리스트속 상품번호들
 		ArrayList<Integer> amount = new ArrayList<>();// 주문리스트 속 주문수량
+		ArrayList<Order> OList = od.fileRead();
 		int result = 0;
 		// 장바구니 비어있으면 0리턴.
 		if (CList.isEmpty()) {
+			System.out.println("장바구니 비어있음!");
 			result = 0;
 		} else {
 			// CList+Member => OList만들기.
@@ -115,6 +111,7 @@ public class MyCart extends Product implements Serializable {
 			OList.add(new Order(oNo, oId, oAdd, pNo, amount, state, payment));
 			od.fileSave(OList);
 			result = 1;
+			CList.clear();
 		}
 		return result;
 	}
@@ -129,6 +126,7 @@ public class MyCart extends Product implements Serializable {
 	 */
 	public void saveCart(ArrayList<Product> CList) {// notSerializable exc
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(MemberController.m.getmNo() + "MyCart.txt"))) {
+			//oos.reset();
 			// oos.writeObject(null);
 			for (Product i : CList) {
 				oos.writeObject(i);
@@ -152,7 +150,6 @@ public class MyCart extends Product implements Serializable {
 				// CList = (ArrayList<Product>) ois.readObject();
 				CList.add((Product) ois.readObject());
 			}
-		
 		}
 		catch (EOFException e) {
 			// e.printStackTrace();

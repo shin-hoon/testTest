@@ -77,7 +77,7 @@ public class WB_MyCartView {
 		// String col[] = { "pNo", "Cat", "pName", "Price", "Size", "Stock", "Count" };
 		// 실제사용
 
-		String colName[] = { "index", "Pic", "Cat", "pName", "Size", "Amount", "Price" };
+		String colName[] = { "index"/*, "Pic"*/, "Cat", "pName", "Size", "Amount", "Price" };
 		DefaultTableModel dtm = new DefaultTableModel(colName, 0);
 		// 값 넣어야함.
 		table = new JTable(dtm);
@@ -111,7 +111,7 @@ public class WB_MyCartView {
 			// chk[i]= new JCheckBox();
 			// 사진넣기 다시.
 			// 사진 사이즈 원래 325*430
-			Object image = new Object();
+			//Object image = new Object();
 			int index = i+1;
 			int cat = CList.get(i).getCategory();
 			String pName = CList.get(i).getProductName();
@@ -120,7 +120,7 @@ public class WB_MyCartView {
 			int amount = 1;
 			int price = CList.get(i).getPrice();
 
-			Object[] data = { /* chk */index, image, cat, pName, size, amount, price };
+			Object[] data = { /* chk */index/*, image*/, cat, pName, size, amount, price };
 			dtm.addRow(data);
 			// dtm.add(data);
 		}
@@ -130,7 +130,7 @@ public class WB_MyCartView {
 		}
 		System.out.println("==========================");
 		// 콤보박스
-		TableColumn comm = table.getColumnModel().getColumn(6);
+		TableColumn comm = table.getColumnModel().getColumn(5);
 		JComboBox<Integer> cb1 = new JComboBox<>();
 		cb1.addItem(1);
 		cb1.addItem(2);
@@ -169,6 +169,8 @@ public class WB_MyCartView {
 			public void actionPerformed(ActionEvent e) {
 				int i =ca.cartOrder();
 				System.out.println(i);
+				JOptionPane.showMessageDialog(null, "주문되었습니다.","Order Complete!",JOptionPane.DEFAULT_OPTION);
+				MainView.setMainPage(new WB_MyDeliveryView().getMyDeliveryView());
 			}
 		});
 		btnNewButton_1.setBounds(303, 637, 105, 27);

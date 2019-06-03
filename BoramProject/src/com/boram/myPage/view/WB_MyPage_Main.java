@@ -78,6 +78,6 @@ public class WB_MyPage_Main{
 		JLabel lblNewLabel = new JLabel(st+"¥‘¿« MyPage¿‘¥œ¥Ÿ.");
 		lblNewLabel.setFont(new Font("±º∏≤", Font.ITALIC, 15));
 		lblNewLabel.setBounds(25, 104, 325, 40);
-		contentPane.add(lblNewLabel);
+		//contentPane.add(lblNewLabel);
 	}
 }
