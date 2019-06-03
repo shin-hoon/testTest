@@ -74,16 +74,14 @@ public class MyCart {
 	/**
 	 * @return 실패0, 성공1
 	 */
-	public int cartOrder() {
+	public void cartOrder(int cb1) {
 		OrderDao od = new OrderDao();// 주문정보 Output
 		ArrayList<Integer> pNo = new ArrayList<>();// 주문리스트속 상품번호들
 		ArrayList<Integer> amount = new ArrayList<>();// 주문리스트 속 주문수량
 		ArrayList<Order> OList = od.fileRead();
-		int result = 0;
 		// 장바구니 비어있으면 0리턴.
 		if (CList.isEmpty()) {
 			System.out.println("장바구니 비어있음!");
-			result = 0;
 		} else {
 			// CList+Member => OList만들기.
 			int oNo =0; // 마지막order번호 +1
@@ -96,9 +94,10 @@ public class MyCart {
 			for (Product i : CList) {
 				pNo.add(i.getpNo());
 			}
-			// pNo별 수량체크 손볼것!!
+			
+			// pNo별 수량체크 손볼것!! -> 손봄.
 			for (Product i : CList) {
-				amount.add(i.getpNo());
+				amount.add(cb1);
 			}
 			int state = 0;
 			int payment = 0;
@@ -107,10 +106,9 @@ public class MyCart {
 			}
 			OList.add(new Order(oNo, oId, oAdd, pNo, amount, state, payment));
 			od.fileSave(OList);
-			result = 1;
 			CList.clear();
+			saveCart(CList);
 		}
-		return result;
 	}
 
 	/**

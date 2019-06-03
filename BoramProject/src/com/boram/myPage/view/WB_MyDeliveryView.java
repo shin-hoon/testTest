@@ -33,6 +33,7 @@ public class WB_MyDeliveryView {
 
 	public WB_MyDeliveryView() {
 		// 테스트출력문
+		String who = null;
 		order1 = od.fileRead();
 		for (Order i : order1) {
 			System.out.println(i);
@@ -40,7 +41,7 @@ public class WB_MyDeliveryView {
 
 		try {
 			// order1.get(who).getOrderNo();
-			String who = mc.nugu().getName();
+			who = mc.nugu().getId();
 			for (Order i : order1) {
 				if (i.getOrderId() == who) {
 					System.out.println("주문목록 있음. 진행함!");
@@ -97,7 +98,11 @@ public class WB_MyDeliveryView {
 		button.setBounds(283, 647, 105, 27);
 		panel2.add(button);
 
-		// table.getColumnModel().getColumn(0).setPreferredWidth(3);
+		 table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		 table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		 table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		 table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		 table.getColumnModel().getColumn(4).setPreferredWidth(200);
 
 		// 오더리스트는 정제해서 본인것만 보여주어야함
 		// OList에서 본인 번호것만 다른 list에 넣어주자.
@@ -105,9 +110,11 @@ public class WB_MyDeliveryView {
 		// payment도 마찬가지.
 
 		for (int i = 0; i < order1.size(); i++) {
-			order2.add(order1.get(i));
+			if(order1.get(i).getOrderId().equals(who)) {
+				order2.add(order1.get(i));
+			}
 		}
-
+		System.out.println(who);
 		// 오더 넘버, 배송상태, 주문목록(btn), 주소, 결제 금액
 		for (int i = 0; i < order2.size(); i++) {
 
@@ -131,8 +138,7 @@ public class WB_MyDeliveryView {
 			String address = order2.get(i).getAddress();
 
 			// System.out.println(index + " " + oNo + " " + state + " " + payment);
-
-			Object[] data = { oNo, state, payment, address };
+			Object[] data = { oNo, state,state, payment, address };
 			table.getColumnModel().getColumn(2).setCellRenderer(new TableCell());
 			table.getColumnModel().getColumn(2).setCellEditor(new TableCell());
 			dtm.addRow(data);
@@ -145,7 +151,7 @@ public class WB_MyDeliveryView {
 		public TableCell() {
 			jb = new JButton("주문목록");
 			jb.addActionListener(e -> {
-				pang=new StringBuilder();
+				pang = new StringBuilder();
 				for (int i = 0; i < order2.get(gsno).getpNo().size(); i++) {
 					int temp = order2.get(gsno).getpNo().get(i);
 					int temp2 = order2.get(gsno).getAmount().get(i);

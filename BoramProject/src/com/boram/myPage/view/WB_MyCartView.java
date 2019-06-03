@@ -167,8 +167,7 @@ public class WB_MyCartView {
 		JButton btnNewButton_1 = new JButton("주문");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int i =ca.cartOrder();
-				System.out.println(i);
+				ca.cartOrder(cb1.getSelectedIndex()+1);
 				JOptionPane.showMessageDialog(null, "주문되었습니다.","Order Complete!",JOptionPane.DEFAULT_OPTION);
 				MainView.setMainPage(new WB_MyDeliveryView().getMyDeliveryView());
 			}
