@@ -92,7 +92,7 @@ public class MemberController {
 	/*
 	 * 아이디찾기
 	 */
-	public String searchId(JTextField nametext, JTextField emailtext) {
+	public String searchId(JTextField nametext, JTextField phonetext) {
 
 		memberList = md.fileRead();
 
@@ -102,7 +102,7 @@ public class MemberController {
 
 			System.out.println(memberList.get(i));
 
-			if (memberList.get(i).getEmail().equals(emailtext.getText())
+			if (memberList.get(i).getPhone().equals(phonetext.getText())
 					&& (memberList.get(i).getName().equals(nametext.getText()))) { // 저장된 회원 정보
 
 				id = memberList.get(i).getId();

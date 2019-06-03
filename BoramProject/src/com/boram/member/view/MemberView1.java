@@ -158,40 +158,45 @@ public class MemberView1 {
 				memberjoinLb.setBounds(155, 39, 222, 72);
 				joinPanel.add(memberjoinLb);
 
-				JLabel idLb = new JLabel("\uC544\uC774\uB514 * "); 
-				idLb.setFont(new Font("굴림", Font.PLAIN, 18));
+				JLabel idLb = new JLabel("* \uC544\uC774\uB514"); 
+				idLb.setFont(new Font("굴림", Font.BOLD, 18));
 				idLb.setBounds(41, 164, 102, 28);
 				joinPanel.add(idLb);
 
-				JLabel pwdLb = new JLabel("\uBE44\uBC00\uBC88\uD638 * "); 
-				pwdLb.setFont(new Font("굴림", Font.PLAIN, 18));
+				JLabel pwdLb = new JLabel("* \uBE44\uBC00\uBC88\uD638"); 
+				pwdLb.setFont(new Font("굴림", Font.BOLD, 18));
 				pwdLb.setBounds(40, 217, 103, 36);
 				joinPanel.add(pwdLb);
 
-				JLabel nameLb = new JLabel("\uC774\uB984 *"); 
-				nameLb.setFont(new Font("굴림", Font.PLAIN, 18));
+				JLabel nameLb = new JLabel("* \uC774\uB984"); 
+				nameLb.setFont(new Font("굴림", Font.BOLD, 18));
 				nameLb.setBounds(41, 287, 62, 18);
 				joinPanel.add(nameLb);
 
-				JLabel birthLb = new JLabel("\uC0DD\uB144\uC6D4\uC77C *"); 
+				JLabel birthLb = new JLabel("\uC0DD\uB144\uC6D4\uC77C "); 
 				birthLb.setFont(new Font("굴림", Font.PLAIN, 18));
 				birthLb.setBounds(41, 342, 191, 28);
 				joinPanel.add(birthLb);
 
-				JLabel addressLb = new JLabel("\uC8FC\uC18C *"); 
-				addressLb.setFont(new Font("굴림", Font.PLAIN, 18));
+				JLabel addressLb = new JLabel("* \uC8FC\uC18C"); 
+				addressLb.setFont(new Font("굴림", Font.BOLD, 18));
 				addressLb.setBounds(41, 409, 62, 18);
 				joinPanel.add(addressLb);
 
-				JLabel phoneLb = new JLabel("\uD578\uB4DC\uD3F0 \uBC88\uD638 *"); 
-				phoneLb.setFont(new Font("굴림", Font.PLAIN, 18));
-				phoneLb.setBounds(41, 463, 118, 28);
+				JLabel phoneLb = new JLabel("* \uD578\uB4DC\uD3F0 \uBC88\uD638"); 
+				phoneLb.setFont(new Font("굴림", Font.BOLD, 18));
+				phoneLb.setBounds(41, 463, 150, 28);
 				joinPanel.add(phoneLb);
 
-				JLabel emailLb = new JLabel("\uC774\uBA54\uC77C *");
+				JLabel emailLb = new JLabel("\uC774\uBA54\uC77C ");
 				emailLb.setFont(new Font("굴림", Font.PLAIN, 18));
 				emailLb.setBounds(41, 526, 80, 28);
 				joinPanel.add(emailLb);
+				
+				JLabel starLb = new JLabel("'*'는 모두 입력해 주세요.");
+				starLb.setFont(new Font("굴림", Font.BOLD, 15));
+				starLb.setBounds(160, 560, 200, 80);
+				joinPanel.add(starLb);
 
 				JTextField idText = new JTextField(); // 아이디입력
 				idText.setBounds(301, 162, 176, 36);
@@ -260,7 +265,6 @@ public class MemberView1 {
 					public void actionPerformed(ActionEvent e) {
 						// 정보입력후 회원가입 버튼 누르면
 						String name = nameText.getText();
-						
 //						int age = 0;
 //						try {
 //							age = Integer.parseInt(birthText.getText());
@@ -273,8 +277,7 @@ public class MemberView1 {
 						String address = addressText.getText();
 						String email = emailText.getText();
 
-						if (name == null || id == null || pwd == null || phone == null || address == null
-								|| email == null) {
+						if (name == null || id == null || pwd == null || phone == null || address == null) {
 							JOptionPane.showMessageDialog(null, "정보를 모두 입력하세요."); // 하나라도 입력안하고 가입누르면 뜨는 팝업창
 
 						} else {
@@ -295,7 +298,7 @@ public class MemberView1 {
 						}
 					}
 				});
-				joinBtn.setBounds(202, 609, 160, 52);
+				joinBtn.setBounds(252, 650, 160, 52);
 				joinPanel.add(joinBtn);
 
 				/*
@@ -376,20 +379,20 @@ public class MemberView1 {
 				nameLb.setBounds(100, 214, 62, 49);
 				idSearchPanel.add(nameLb);
 
-				JLabel emailLb = new JLabel("\uC774\uBA54\uC77C : ");
-				emailLb.setFont(new Font("굴림", Font.PLAIN, 19));
-				emailLb.setBounds(100, 275, 78, 31);
-				idSearchPanel.add(emailLb);
+				JLabel phoneLb = new JLabel("핸드폰 번호('-'빼고 입력) : ");
+				phoneLb.setFont(new Font("굴림", Font.PLAIN, 19));
+				phoneLb.setBounds(100, 275, 250, 30);
+				idSearchPanel.add(phoneLb);
 
 				JTextField nametext = new JTextField(); // 이름입력
-				nametext.setBounds(173, 218, 248, 38);
+				nametext.setBounds(350, 218, 248, 38);
 				idSearchPanel.add(nametext);
 				nametext.setColumns(10);
 
-				JTextField emailtext = new JTextField(); // 이메일입력
-				emailtext.setColumns(10);
-				emailtext.setBounds(174, 273, 248, 38);
-				idSearchPanel.add(emailtext);
+				JTextField phonetext = new JTextField(); // 폰번호입력
+				phonetext.setColumns(10);
+				phonetext.setBounds(350, 273, 248, 38);
+				idSearchPanel.add(phonetext);
 
 				/* 
 				 * 아이디 찾기 내용 입력후 확인 버튼 
@@ -403,13 +406,13 @@ public class MemberView1 {
 						// 아이디 찾기 확인 버튼 누르면
 						MemberController mc = new MemberController();
 						
-						// 찾는 이름과 이메일이 없으면
-						if(mc.searchId(nametext, emailtext)==null) {
+						// 찾는 이름과 번호가 없으면
+						if(mc.searchId(nametext, phonetext)==null) {
 							JOptionPane.showMessageDialog(null, "일치하는 정보가 없습니다"); // 불일치 팝업창
 							
-						// 이름과 이메일에 맞는 저장된 아이디를 찾으면
+						// 이름과 번호에 맞는 저장된 아이디를 찾으면
 						}else {
-							String id = mc.searchId(nametext, emailtext);
+							String id = mc.searchId(nametext, phonetext);
 							// 찾은 id 팝업창뜨기
 							String i = (nametext.getText() + "님의 아이디 : " + id);
 							JOptionPane.showMessageDialog(null, i);
@@ -468,21 +471,21 @@ public class MemberView1 {
 				nameLb.setFont(new Font("굴림", Font.PLAIN, 19));
 				nameLb.setBounds(100, 214, 62, 49);
 				pwdSearchPanel.add(nameLb);
-
-				JLabel emailLb = new JLabel("\uC774\uBA54\uC77C : ");
-				emailLb.setFont(new Font("굴림", Font.PLAIN, 19));
-				emailLb.setBounds(100, 275, 78, 31);
-				pwdSearchPanel.add(emailLb);
+				
+				JLabel phoneLb = new JLabel("핸드폰 번호('-'빼고 입력) : ");
+				phoneLb.setFont(new Font("굴림", Font.PLAIN, 19));
+				phoneLb.setBounds(100, 275, 250, 30);
+				pwdSearchPanel.add(phoneLb);
 
 				JTextField nametext = new JTextField(); // 이름입력
-				nametext.setBounds(173, 218, 248, 38);
+				nametext.setBounds(350, 218, 248, 38);
 				pwdSearchPanel.add(nametext);
 				nametext.setColumns(10);
 
-				JTextField emailtext = new JTextField(); // 이메일 입력
-				emailtext.setColumns(10);
-				emailtext.setBounds(174, 273, 248, 38);
-				pwdSearchPanel.add(emailtext);
+				JTextField phonetext = new JTextField(); // 폰번호입력
+				phonetext.setColumns(10);
+				phonetext.setBounds(350, 273, 248, 38);
+				pwdSearchPanel.add(phonetext);
 
 				/*
 				 * 비밀번호찾기 이름과 이메일 입력후 확인버튼
@@ -495,13 +498,13 @@ public class MemberView1 {
 						// 비밀번호 찾기 확인버튼 누르면
 						MemberController mc = new MemberController();
 						
-						// 이름과 이메일을 찾을수 없으면
-						if(mc.searchId(nametext, emailtext)==null) {
+						// 이름과 번호를 찾을수 없으면
+						if(mc.searchId(nametext, phonetext)==null) {
 							JOptionPane.showMessageDialog(null, "일치하는 정보가 없습니다"); // 불일치 팝업창
 							
-						// 이름과 이메일이 일치하는 비밀번호찾으면
+						// 이름과 번호가 일치하는 비밀번호찾으면
 						}else {
-							String pwd = mc.searchId(nametext, emailtext);
+							String pwd = mc.searchId(nametext, phonetext);
 							// 찾은 pwd 팝업창뜨기
 							String i = (nametext.getText() + "님의 아이디 : " + pwd);
 							JOptionPane.showMessageDialog(null, i);
