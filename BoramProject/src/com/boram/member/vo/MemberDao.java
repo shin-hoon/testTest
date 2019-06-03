@@ -18,9 +18,10 @@ public class MemberDao {
 	
 	public void fileSave(ArrayList<Member> list) {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("memberList.txt"));) {
+//			oos.reset();
 			for (int i = 0; i < list.size(); i++) {
 				oos.writeObject(list.get(i));
-	}	
+			}	
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
