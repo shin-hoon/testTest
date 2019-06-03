@@ -5,8 +5,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -398,6 +402,7 @@ public class MemberView1 {
 				 * 아이디 찾기 내용 입력후 확인 버튼 
 				 */
 				JButton confirmBtn = new JButton("\uD655  \uC778");
+//		        JButton confirmBtn = new JButton(new ImageIcon("confirm.png"));
 				confirmBtn.setForeground(Color.WHITE);
 				confirmBtn.setBackground(Color.BLACK);
 				confirmBtn.addActionListener(new ActionListener() {
@@ -429,14 +434,15 @@ public class MemberView1 {
 			
 					}
 				});
-				confirmBtn.setBounds(217, 342, 119, 54);
+				confirmBtn.setBounds(280, 342, 119, 54);
 				idSearchPanel.add(confirmBtn);
 
 				MainView.setMainPage(idSearchPanel);
 
 			}
+
 		});
-		searchId.setBounds(144, 496, 130, 27);
+		searchId.setBounds(130, 496, 130, 27);
 		panel.add(searchId);
 
 		/* 
@@ -519,13 +525,13 @@ public class MemberView1 {
 						}
 						}
 				});
-				confirmBtn.setBounds(217, 342, 119, 54);
+				confirmBtn.setBounds(290, 342, 119, 54);
 				pwdSearchPanel.add(confirmBtn);
 
 				MainView.setMainPage(pwdSearchPanel);
 			}
 		});
-		searchPwd.setBounds(287, 496, 130, 27);
+		searchPwd.setBounds(300, 496, 130, 27);
 		panel.add(searchPwd);
 
 	}

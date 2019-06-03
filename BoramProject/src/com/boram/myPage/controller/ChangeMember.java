@@ -1,5 +1,6 @@
 package com.boram.myPage.controller;
 
+import java.awt.Choice;
 import java.util.ArrayList;
 
 import com.boram.member.controller.MemberController;
@@ -128,7 +129,9 @@ public class ChangeMember {
 	public String printMem() {
 		String name=MemberList.get(mNo).getName();
 		String id=MemberList.get(mNo).getId();
-		int birth=MemberList.get(mNo).getAge();
+		Choice year = MemberList.get(mNo).getYear();
+		Choice month = MemberList.get(mNo).getMonth();
+		Choice day = MemberList.get(mNo).getDay();
 		String phone=MemberList.get(mNo).getPhone();
 		int address=MemberList.get(mNo).getmNo();
 		String email=MemberList.get(mNo).getEmail();
