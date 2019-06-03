@@ -38,7 +38,7 @@ public class MainPanel{
 	 *  메인 페이지
 	 */
 	public MainPanel(int num) {
-		if(num != 1)
+		if(num != 1 && num > 0)
 			new MainThreadEvent(-376,0,"서브메뉴닫기").start();
 		mainPage = new JPanel();
 		mainPage.setBackground(new Color(255, 255, 255));
