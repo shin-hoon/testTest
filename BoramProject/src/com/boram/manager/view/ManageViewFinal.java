@@ -5,20 +5,15 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DebugGraphics;
 import javax.swing.DefaultCellEditor;
@@ -1010,6 +1004,22 @@ public class ManageViewFinal {
 							} catch (Exception e2) {
 								System.out.println("파일 업로드 에러 : " + e2.getMessage());
 							}
+							/*BufferedInputStream in = null;
+							BufferedOutputStream out = null;
+							try {
+								in = new BufferedInputStream(new FileInputStream(uploadFile));
+								out = new BufferedOutputStream(new FileOutputStream(saveFile));
+								
+								int read = 0;
+								byte[] byteBuffer = new byte[(int)uploadFile.length()];
+								while((read = in.read(byteBuffer)) != -1) {
+									out.write(byteBuffer, 0, read);
+								}
+								in.close();
+								out.close();
+							} catch (Exception e2) {
+								System.out.println("파일 업로드 에러 : " + e2.getMessage());
+							}*/
 							filePath = "image\\category\\"+categoryEng+"\\" + uploadFileName;
 							pArr.add(new Product(pNo1, category1, productName1, price1, size1, explain1, filePath,
 									stock1, 0));
