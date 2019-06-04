@@ -48,10 +48,10 @@ public class WB_MyCartView {
 		panel1.setLayout(null);
 
 		JLabel lblMyCart = new JLabel("My Cart ");
-		lblMyCart.setBounds(0, 22, 197, 58);
+		lblMyCart.setBounds(14, 20, 260, 74);
 		panel1.add(lblMyCart);
 		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMyCart.setFont(new Font("굴림", Font.ITALIC, 50));
+		lblMyCart.setFont(new Font("굴림", Font.BOLD, 50));
 		// lblMyCart.setBounds(0,0,55,100);
 
 		JPanel panel2 = new JPanel();
@@ -145,6 +145,9 @@ public class WB_MyCartView {
 		// 삭제버튼을 누르면 JTable의 row삭제.
 		//삭제한것을 CList에 다시 넣어주어야함.
 		JButton btnNewButton = new JButton("삭제 후 저장");
+		btnNewButton.setBackground(Color.BLACK);
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setFont(new Font("굴림", Font.PLAIN, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int row =0;
@@ -161,10 +164,13 @@ public class WB_MyCartView {
 				ca.saveCart(CList);
 			}
 		});
-		btnNewButton.setBounds(122, 637, 105, 27);
+		btnNewButton.setBounds(50, 637, 180, 45);
 		panel2.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("주문");
+		btnNewButton_1.setBackground(Color.BLACK);
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("굴림", Font.PLAIN, 15));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ca.cartOrder(cb1.getSelectedIndex()+1);
@@ -172,16 +178,19 @@ public class WB_MyCartView {
 				MainView.setMainPage(new WB_MyDeliveryView().getMyDeliveryView());
 			}
 		});
-		btnNewButton_1.setBounds(303, 637, 105, 27);
+		btnNewButton_1.setBounds(265, 637, 180, 45);
 		panel2.add(btnNewButton_1);
 
 		JButton button = new JButton("이전메뉴");
+		button.setBackground(Color.BLACK);
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("굴림", Font.PLAIN, 15));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainView.setMainPage(new WB_MyPage_Main().myPageMain());
 			}
 		});
-		button.setBounds(489, 637, 105, 27);
+		button.setBounds(489, 637, 180, 45);
 		panel2.add(button);
 
 	}

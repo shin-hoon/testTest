@@ -53,12 +53,12 @@ public class WB_MyPageView {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setForeground(Color.WHITE);
-		panel.setBounds(0, 0, FWID, 90);
+		panel.setBounds(0, 0, 718, 106);
 		myPageView.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblMyPage = new JLabel("My Page ");
-		lblMyPage.setBounds(14, 20, 260, 58);
+		lblMyPage.setBounds(14, 20, 260, 74);
 		lblMyPage.setBackground(Color.BLACK);
 		lblMyPage.setForeground(Color.BLACK);
 		lblMyPage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -161,6 +161,7 @@ public class WB_MyPageView {
 		JButton btnChange = new JButton("변경");
 		btnChange.setForeground(Color.WHITE);
 		btnChange.setBackground(Color.BLACK);
+		btnChange.setFont(new Font("굴림", Font.PLAIN, 18));
 
 		btnChange.addActionListener(new ActionListener() {
 
@@ -180,6 +181,7 @@ public class WB_MyPageView {
 		JButton btnPre = new JButton("이전화면");
 		btnPre.setForeground(Color.WHITE);
 		btnPre.setBackground(Color.BLACK);
+		btnPre.setFont(new Font("굴림", Font.PLAIN, 18));
 		btnPre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MainView.setMainPage(new WB_MyPage_Main().myPageMain());
@@ -193,6 +195,7 @@ public class WB_MyPageView {
 		JButton btnTemp_1 = new JButton("정보조회");
 		btnTemp_1.setForeground(Color.WHITE);
 		btnTemp_1.setBackground(Color.BLACK);
+		btnTemp_1.setFont(new Font("굴림", Font.PLAIN, 18));
 		btnTemp_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ta.append(cm.printMem() + "\n");
