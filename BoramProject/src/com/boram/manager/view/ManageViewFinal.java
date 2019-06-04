@@ -98,14 +98,12 @@ public class ManageViewFinal {
 		searchMember.setFont(new Font("굴림", Font.PLAIN, 18));
 		manageMain.add(searchMember);
 
-
 		JButton insertProduct = new JButton("2. \uBB3C\uD488\uB4F1\uB85D");
 		insertProduct.setBounds(155, 179, 343, 67);
 		insertProduct.setForeground(Color.WHITE);
 		insertProduct.setBackground(Color.BLACK);
 		insertProduct.setFont(new Font("굴림", Font.PLAIN, 18));
 		manageMain.add(insertProduct);
-
 
 		JButton manageProduct = new JButton("3.\uC81C\uD488\uAD00\uB9AC");
 		manageProduct.setBounds(155, 261, 343, 67);
@@ -121,22 +119,19 @@ public class ManageViewFinal {
 		analysis.setFont(new Font("굴림", Font.PLAIN, 18));
 		manageMain.add(analysis);
 
-
 		JButton salesState = new JButton("5. \uD310\uB9E4\uD604\uD669");
 		salesState.setBounds(155, 425, 343, 67);
 		salesState.setForeground(Color.WHITE);
 		salesState.setBackground(Color.BLACK);
 		salesState.setFont(new Font("굴림", Font.PLAIN, 18));
 		manageMain.add(salesState);
-
-
+		
 		JButton inforDelivery = new JButton("6. \uBC30\uC1A1\uC815\uBCF4");
 		inforDelivery.setBounds(155, 507, 343, 67);
 		inforDelivery.setForeground(Color.WHITE);
 		inforDelivery.setBackground(Color.BLACK);
 		inforDelivery.setFont(new Font("굴림", Font.PLAIN, 18));
 		manageMain.add(inforDelivery);
-
 
 		manageMain.setVisible(true);
 
@@ -485,7 +480,6 @@ public class ManageViewFinal {
 				}
 			}
 		}
-		System.out.println(pNo2);
 		
 		Object[][] o = new Object[pNo1.size()][3];
 		for (int i = 0; i < o.length; i++) {
@@ -503,7 +497,6 @@ public class ManageViewFinal {
 					o[i][j] = sales1.get(i);
 				}
 			}
-			System.out.println(o[i][0]);
 		}
 		// table.setModel(new DefaultTableModel(o,
 		// new String[] { "\uC0C1\uD488\uBC88\uD638", "\uC870\uD68C\uC218",
@@ -796,7 +789,6 @@ public class ManageViewFinal {
 		label_1.setFont(new Font("Gulim", Font.PLAIN, 15));
 		insertProduct.add(label_1);
 
-		// JComboBox category = new JComboBox();
 		JComboBox<Category> category = new JComboBox<Category>(cArr.toArray(new Category[cArr.size()]));
 		category.setBounds(140, 94, 115, 27);
 		insertProduct.add(category);
@@ -857,14 +849,6 @@ public class ManageViewFinal {
 	    upperPanel.add(new JScrollPane(ta));*/
 		
 		
-		
-		
-		
-		
-		// JComboBox<String> combox = new JComboBox<String>(array .toArray(new
-		// String[array .size()]));
-		
-		// JComboBox size = new JComboBox<String>();
 		String[] sArr = { "free" };
 		JComboBox<String> size = new JComboBox<String>(sArr);
 
@@ -906,8 +890,6 @@ public class ManageViewFinal {
 		insertProduct.add(fileName);
 
 		JButton fileSave = new JButton();
-		// fileSave.setIcon(new
-		// ImageIcon("C:\\Users\\jeniu\\Desktop\\mini_project\\fileIcon.png"));
 		fileSave.setBounds(140, 237, 30, 30);
 		fileSave.setForeground(Color.WHITE);
 		fileSave.setBackground(Color.BLACK);
@@ -924,12 +906,12 @@ public class ManageViewFinal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (jfc.showSaveDialog(insertProduct) == JFileChooser.APPROVE_OPTION) {
-					// showSaveDialog 저장 창을 열고 확인 버튼을 눌렀는지 확인
 					fileName.setText(jfc.getSelectedFile().toString());
 				}
 
 			}
 		});
+		
 		jfc.setFileFilter(new FileNameExtensionFilter("png file", "png"));
 		jfc.setFileFilter(new FileNameExtensionFilter("JPEG file", "jpg", "jpeg"));
 
@@ -1012,24 +994,8 @@ public class ManageViewFinal {
 								inBuffer.close();
 								outBuffer.close();
 							} catch (Exception e2) {
-								System.out.println("파일 업로드 에러 : " + e2.getMessage());
 							}
-							/*BufferedInputStream in = null;
-							BufferedOutputStream out = null;
-							try {
-								in = new BufferedInputStream(new FileInputStream(uploadFile));
-								out = new BufferedOutputStream(new FileOutputStream(saveFile));
-								
-								int read = 0;
-								byte[] byteBuffer = new byte[(int)uploadFile.length()];
-								while((read = in.read(byteBuffer)) != -1) {
-									out.write(byteBuffer, 0, read);
-								}
-								in.close();
-								out.close();
-							} catch (Exception e2) {
-								System.out.println("파일 업로드 에러 : " + e2.getMessage());
-							}*/
+							
 							filePath = "image\\category\\"+categoryEng+"\\" + uploadFileName;
 							pArr.add(new Product(pNo1, category1, productName1, price1, size1, explain1, filePath,
 									stock1, 0));
@@ -1404,6 +1370,7 @@ public class ManageViewFinal {
 		return searchMember;
 
 	}
+	
 	public JPanel cartView() {
 
 		JPanel cartView = new JPanel();
@@ -1476,7 +1443,6 @@ public class ManageViewFinal {
 
 			
 			JComboBox<String> state = new JComboBox<>(stat);
-			System.out.println(sum);
 			Object[] cart = { oNo, a.get(sum) + " 외 " + (oArr.get(i).getpNo().size() - 1) + "품목", price, stat[index] };
 
 			model.addRow(cart);
