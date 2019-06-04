@@ -67,11 +67,11 @@ public class WB_MyDeliveryView {
 		myDeliveryView.add(panel1);
 		panel1.setLayout(null);
 
-		JLabel label1 = new JLabel("My Delivery ");
-		label1.setBounds(12, 10, 283, 58);
+		JLabel label1 = new JLabel("My Delivery");
+		label1.setBounds(20, 20, 400, 70);
 		panel1.add(label1);
-		label1.setHorizontalAlignment(SwingConstants.CENTER);
-		label1.setFont(new Font("±º∏≤", Font.ITALIC, 50));
+		//label1.setHorizontalAlignment(SwingConstants.CENTER);
+		label1.setFont(new Font("±º∏≤", Font.BOLD, 50));
 
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(Color.WHITE);
@@ -90,12 +90,15 @@ public class WB_MyDeliveryView {
 		panel2.add(sp, "Center");
 
 		JButton button = new JButton("¿Ã¿¸∆‰¿Ã¡ˆ");
+		button.setBackground(Color.BLACK);
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("±º∏≤", Font.PLAIN, 18));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainView.setMainPage(new WB_MyPage_Main().myPageMain());
 			}
 		});
-		button.setBounds(283, 647, 105, 27);
+		button.setBounds(283, 647, 180, 45);
 		panel2.add(button);
 
 		 table.getColumnModel().getColumn(0).setPreferredWidth(30);

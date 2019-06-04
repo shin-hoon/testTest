@@ -35,7 +35,9 @@ public class WB_MyPage_Main{
 		contentPane.setVisible(true);
 		
 		JButton btnNewButton = new JButton("<HTML><font face = ><Center> »∏ø¯¡§∫∏<br>ºˆ¡§</HTML>");
-		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBackground(Color.BLACK);
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setFont(new Font("±º∏≤", Font.PLAIN, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MainView.setMainPage(new WB_MyPageView().getmyPageView());
@@ -47,7 +49,9 @@ public class WB_MyPage_Main{
 		
 		
 		JButton button = new JButton("¿ÂπŸ±∏¥œ");
-		button.setBackground(Color.WHITE);
+		button.setBackground(Color.BLACK);
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("±º∏≤", Font.PLAIN, 15));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainView.setMainPage(new WB_MyCartView().getMyCartView());
@@ -58,7 +62,9 @@ public class WB_MyPage_Main{
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("<html><center>±∏∏≈ ≥ªø™ π◊ <br>πËº€»Æ¿Œ</html>");
-		button_1.setBackground(Color.WHITE);
+		button_1.setBackground(Color.BLACK);
+		button_1.setForeground(Color.WHITE);
+		button_1.setFont(new Font("±º∏≤", Font.PLAIN, 15));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MainView.setMainPage(new WB_MyDeliveryView().getMyDeliveryView());
@@ -69,15 +75,16 @@ public class WB_MyPage_Main{
 		contentPane.add(button_1);
 		
 		JLabel lblMyCart = new JLabel("<html><left>My Page</html>");
-		lblMyCart.setBounds(0,20, 223,74);
+		lblMyCart.setBounds(14, 20, 260, 74);
 		lblMyCart.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMyCart.setFont(new Font("±º∏≤", Font.ITALIC, 50));
+		lblMyCart.setFont(new Font("±º∏≤", Font.BOLD, 50));
 		contentPane.add(lblMyCart);
 		
 		String st = MemberController.m.getName();
-		JLabel lblNewLabel = new JLabel(st+"¥‘¿« MyPage¿‘¥œ¥Ÿ.");
-		lblNewLabel.setFont(new Font("±º∏≤", Font.ITALIC, 15));
-		lblNewLabel.setBounds(25, 104, 325, 40);
-		//contentPane.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel(st+" ¥‘¿« MyPage¿‘¥œ¥Ÿ.");
+		lblNewLabel.setFont(new Font("±º∏≤", Font.PLAIN, 25));
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setBounds(210, 200, 325, 40);
+		contentPane.add(lblNewLabel);
 	}
 }

@@ -278,12 +278,14 @@ public class ManageViewFinal {
 		update.setBounds(308, 529, 125, 29);
 		update.setForeground(Color.WHITE);
 		update.setBackground(Color.BLACK);
+		update.setFont(new Font("±¼¸²", Font.PLAIN, 15));
 		manageProduct.add(update);
 
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setBounds(529, 529, 125, 29);
 		delete.setForeground(Color.WHITE);
 		delete.setBackground(Color.BLACK);
+		delete.setFont(new Font("±¼¸²", Font.PLAIN, 15));
 		manageProduct.add(delete);
 		table.setAutoCreateRowSorter(true);
 		
